@@ -1,14 +1,21 @@
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap");
 @import url('https://fonts.googleapis.com/css2?family=Shantell+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
 
 html {
-    font-family: sans-serif;
+    font-family: "Klee", sans-serif;  /* fallback */
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%
 }
 
 body {
     margin: 0
+}
+
+*,
+*:before,
+*:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 article,aside,details,figcaption,figure,footer,header,hgroup,main,menu,nav,section,summary {
@@ -41,6 +48,8 @@ h2.page-tagline {
 code {
     font-family: monospace, monospace;
     font-size: 1em;
+    color: #0A369D;
+    background-color: transparent
 }
 
 /** Hyperlinks **/
@@ -116,6 +125,10 @@ a:hover {
     text-align: center;
     background-color: #F9F8FF;
     background-image: linear-gradient(120deg, #0A369D, #CFDEE7)
+}
+
+.page-header {
+    margin: 0 auto;
 }
 
 /* rules for different screens */
@@ -229,4 +242,40 @@ h6:hover a.header-link {
     .page-footer {
         padding: 1rem 1rem
     }
+}
+
+/** Table summaries **/
+table,thead,tbody,tr {
+    width: 100%
+}
+
+table {
+    display: table;
+    border-collapse: collapse;
+    margin: 1rem auto;
+
+    border-color: #CFDEE7;
+    border-spacing: 2px;
+    border-width: 1px;
+}
+
+table.doc-table-summary {
+    line-height: 1rem;
+    max-width: 85%;
+    overflow-x: scroll;
+}
+
+table.doc-table-summary td,
+table.doc-table-summary th {
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    padding-right: 0.5rem;
+}
+
+table.doc-table-summary p {
+    margin: 0.5rem 0.5rem;
+}
+
+table.doc-table-summary tr:nth-child(odd) {
+    background-color: #F6F9FE;
 }
