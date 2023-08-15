@@ -1,0 +1,232 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Shantell+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+
+html {
+    font-family: sans-serif;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%
+}
+
+body {
+    margin: 0
+}
+
+article,aside,details,figcaption,figure,footer,header,hgroup,main,menu,nav,section,summary {
+    display: block
+}
+
+/** Fonts **/
+header,h1,h2,h3,h4,h5,h6 {
+    font-family: 'Shantell Sans', cursive;
+}
+
+h1.page-name {
+    text-transform: uppercase;
+    font-size: 50px;
+    font-weight: 700;
+    font-style: italic;
+}
+
+h2.page-tagline {
+    font-size: 30px;
+    font-weight: 400;
+    font-style: italic;
+}
+
+#header-ref, .page-footer {
+    font-family: 'Shantell Sans', cursive;
+    color: white
+}
+
+code {
+    font-family: monospace, monospace;
+    font-size: 1em;
+}
+
+/** Hyperlinks **/
+a {
+    background-color: transparent;
+    color: #006BC8;
+    text-decoration: none;
+    word-wrap: break-word;
+}
+
+a:hover {
+    text-decoration: underline
+}
+
+/** Button **/
+.btn {
+    display: inline-block;
+    margin-bottom: 1rem;
+    color: rgba(255,255,255,0.7);
+    background-color: rgba(255,255,255,0.08);
+    border-color: rgba(255,255,255,0.2);
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 0.3rem;
+    transition: color 0.2s, background-color 0.2s, border-color 0.2s
+}
+
+.btn:hover {
+    color: rgba(255,255,255,0.8);
+    text-decoration: none;
+    background-color: rgba(255,255,255,0.2);
+    border-color: rgba(255,255,255,0.3)
+}
+
+.btn+.btn {
+    margin-left: 1rem
+}
+
+.btn+.btn {
+    margin-left: 1rem
+}
+
+@media screen and (min-width: 64em) {
+    .btn {
+        padding:0.75rem 1rem
+    }
+}
+
+@media screen and (min-width: 42em) and (max-width: 64em) {
+    .btn {
+        padding: 0.6rem 0.9rem;
+        font-size: 0.9rem
+    }
+}
+
+@media screen and (max-width: 42em) {
+    .btn {
+        display: block;
+        width: 100%;
+        padding: 0.75rem;
+        font-size: 0.9rem
+    }
+
+    .btn+.btn {
+        margin-top: 1rem;
+        margin-left: 0
+    }
+}
+
+/** Header **/
+.page-header {
+    color: #fff;
+    text-align: center;
+    background-color: #F9F8FF;
+    background-image: linear-gradient(120deg, #0A369D, #CFDEE7)
+}
+
+/* rules for different screens */
+@media screen and (min-width: 64em) {
+    .page-header {
+        padding: 5rem 6rem
+    }
+}
+
+@media screen and (min-width: 42em) and (max-width: 64em) {
+    .page-header {
+        padding: 3rem 4rem
+    }
+}
+
+@media screen and (max-width: 42em) {
+    .page-header {
+        padding: 2rem 1rem
+    }
+}
+
+
+/** General page structure **/
+div.page-content {
+    margin: 0 auto;
+    width: 140vh;
+}
+
+/** Subheaders **/
+
+div.page-content h2 {
+    display: block;
+    padding: 0.7rem;
+    background-color: #b9d8dc;
+    border-radius: 0.3rem;
+    margin-top: calc(max(2rem, 0.7vh));
+    margin-bottom: 1rem;
+    word-wrap: break-word;
+}
+
+div.page-content h2 {
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+div.page-content h3 {
+    padding: 0.5rem;
+    background-color: #e9f2f4;
+    border-radius: 0.3rem;
+    margin-top: calc(max(2rem, 0.7vh));
+    margin-bottom: 1rem;
+    word-wrap: break-word;
+}
+
+div.page-content h3 {
+    font-size: 1.5rem;
+    font-weight: 400;
+}
+
+a.header-link { /* for the hyperlink symbols */
+    font-family: sans-serif;
+    color: #006BC8;
+    font-size: 0.8em;
+    padding: 0 4px 0 4px;
+    text-decoration: none;
+    visibility: hidden;
+}
+
+a.header-link:hover {
+    background-color: #488690;
+    color: white;
+}
+
+h1:hover a.header-link,
+h2:hover a.header-link,
+h3:hover a.header-link,
+h4:hover a.header-link,
+h5:hover a.header-link,
+h6:hover a.header-link {
+    visibility: visible;
+}
+
+/** Footer **/
+.page-footer {
+    display: block;
+    color: white;
+    text-align: center;
+    background-color: #F9F8FF;
+    background-image: linear-gradient(120deg, #0A369D, #CFDEE7);
+}
+
+.page-footer a {
+    text-decoration: underline;
+    color: white
+}
+
+/* rules for different screens */
+@media screen and (min-width: 64em) {
+    .page-footer {
+        padding: 3rem 6rem
+    }
+}
+
+@media screen and (min-width: 42em) and (max-width: 64em) {
+    .page-footer {
+        padding: 2rem 4rem
+    }
+}
+
+@media screen and (max-width: 42em) {
+    .page-footer {
+        padding: 1rem 1rem
+    }
+}

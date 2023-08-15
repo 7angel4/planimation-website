@@ -2,125 +2,137 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.2">
     <title>Planimation Documentation</title>
+    <link rel="stylesheet" type="text/css" href="assets/stylesheets/documentation-style.css"/>
+
+    <!-- From the original Planimation page source -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+
 </head>
 <body>
     <!-- Header at the top -->
     <header class="page-header" role="banner">
-        <h1 class="page-name">Getting Started with PDDL</h1>
+        <h1 class="page-name">Get Started with Planimation</h1>
         <h2 class="page-tagline">A guide to writing animation profiles in Planimation</h2>
         <!-- Link to GitHub documentation -->
         <a href="https://github.com/planimation/documentation" class="btn">View original GitHub documentation</a>
-        <aside>Please refer to other online <a class="header-link" href="#reference">resources</a> for more information on the PDDL syntax.</aside>
+        <aside>Please refer to other <a class="reference external" href="#reference" id="header-ref"><u>resources</u></a> for more information on the PDDL syntax.</aside>
     </header>
 
     <!-- General Structure -->
-    <section id="ap-structure">
-        <h2>General structure of an Animation Profile<a class="header-link" href="#ap-structure" title="Permalink to this heading">¶</a></h2>
-    </section>
-
-    <!-- Functions -->
-    <section id="effect-functions">
-        <h2><code>:effect</code> Functions<a class="header-link" href="#effect-functions" title="Permalink to this heading">¶</a></h2>
-
-        <!-- Distribution functions -->
-        <section id="distribution-functions">
-            <h3>Distribution of objects<a class="header-link" href="#distribution-functions" title="Permalink to this heading">¶</a></h3>
-            <p>Distribution functions 'distribute' objects in a certain manner. They are used to lay objects out on the screen.
-                All objects for which the same parameters of 'distribute' are called will be included in the distribution.
-                Distribution works such that objects will be placed in a certain area without overlapping.
-                Between animation frames, objects will not move (unless their positions are reset).
-            </p>
-            <table class="documentation-table-summary">
-                <tbody>
-                    <tr class="row-odd">
-                        <td><p>
-                            <a class="reference internal" href="" title="distributex"><code class="table-keyword">distributex</code></a>
-                        </p></td>
-                        <td><p>Distributes objects along a horizontal plane.</p></td>
-                    </tr>
-                    <tr class="row-even">
-                        <td><p>
-                            <a class="reference internal" href="" title="distributey"><code class="table-keyword">distributey</code></a>
-                        </p></td>
-                        <td><p>Distributes objects along a vertical plane.</p></td>
-                    </tr>
-                    <tr class="row-odd">
-                        <td><p>
-                            <a class="reference internal" href="" title="distribute_grid_around_point"><code class="table-keyword">distribute_grid_around_point</code></a>
-                        </p></td>
-                        <td><p>Distributes objects within a grid-like structure.</p></td>
-                    </tr>
-                    <tr class="row-even">
-                        <td><p>
-                            <a class="reference internal" href="" title="distribute_within_objects_vertical"><code class="table-keyword">distribute_within_objects_vertical</code></a>
-                        </p></td>
-                        <td><p>Distributes objects vertically within the bounds of another object.</p></td>
-                    </tr>
-                    <tr class="row-odd">
-                        <td><p>
-                            <a class="reference internal" href="" title="distribute_within_objects_horizontal"><code class="table-keyword">distribute_within_objects_horizontal</code></a>
-                        </p></td>
-                        <td><p>Distributes inner objects horizontally within the bounds of another outer object.
-                            <br>Objects will shift to the left when an empty space is made available.
-                        </p></td>
-                    </tr>
-                    <tr class="row-even">
-                        <td><p>
-                            <a class="reference internal" href="" title="distribute_within_objects_horizontal_v2"><code class="table-keyword">distribute_within_objects_horizontal_v2</code></a>
-                        </p></td>
-                        <td><p>Distributes inner objects horizontally within the bounds of another outer object.
-                            <br>When an inner object leaves, the space is reserved and will be allocated to the same object upon return.
-                        </p></td>
-                    </tr>
-                </tbody>
-            </table>
+    <div class="page-content">
+        <section id="ap-structure">
+            <h2>General structure of an Animation Profile<a class="header-link" href="#ap-structure" title="Permalink to this heading">¶</a></h2>
         </section>
 
-        <!-- Other functions -->
-        <section id="other-functions">
-            <h3>Other functions<a class="header-link" href="#other-functions" title="Permalink to this heading">¶</a></h3>
-            <table class="documentation-table-summary">
-                <tbody>
-                <tr class="row-odd">
-                    <td><p>
-                        <a class="reference internal" href="" title="calculate_label"><code class="table-keyword">calculate_label</code></a>
-                    </p></td>
-                    <td><p>Counts the number of objects being 'labelled' by this function for another object.</p></td>
-                </tr>
-                <tr class="row-even">
-                    <td><p>
-                        <a class="reference internal" href="" title="align_middle"><code class="table-keyword">align_middle</code></a>
-                    </p></td>
-                    <td><p>Aligns an object to the middle of another.</p></td>
-                </tr>
-                <tr class="row-odd">
-                    <td><p>
-                        <a class="reference internal" href="" title="apply_smaller"><code class="table-keyword">apply_smaller</code></a>
-                    </p></td>
-                    <td><p>Sets <code>y</code> to be displayed smaller than <code>x</code>.</p></td>
-                </tr>
-                <tr class="row-even">
-                    <td><p>
-                        <a class="reference internal" href="" title="draw_line"><code class="table-keyword">draw_line</code></a>
-                    </p></td>
-                    <td><p>Draws a line between two objects.</p></td>
-                </tr>
-                </tbody>
-            </table>
+        <!-- Functions -->
+        <section id="effect-functions">
+            <h2><code>:effect</code> Functions<a class="header-link" href="#effect-functions" title="Permalink to this heading">¶</a></h2>
+
+            <!-- Distribution functions -->
+            <section id="distribution-functions">
+                <h3>Distribution of objects<a class="header-link" href="#distribution-functions" title="Permalink to this heading">¶</a></h3>
+                <p>Distribution functions 'distribute' objects in a certain manner. They are used to lay objects out on the screen.
+                    All objects for which the same parameters of 'distribute' are called will be included in the distribution.
+                    Distribution works such that objects will be placed in a certain area without overlapping.
+                    Between animation frames, objects will not move (unless their positions are reset).
+                </p>
+                <table class="documentation-table-summary">
+                    <tbody>
+                        <tr class="row-odd">
+                            <td><p>
+                                <a class="reference internal" href="" title="distributex"><code class="table-keyword">distributex</code></a>
+                            </p></td>
+                            <td><p>Distributes objects along a horizontal plane.</p></td>
+                        </tr>
+                        <tr class="row-even">
+                            <td><p>
+                                <a class="reference internal" href="" title="distributey"><code class="table-keyword">distributey</code></a>
+                            </p></td>
+                            <td><p>Distributes objects along a vertical plane.</p></td>
+                        </tr>
+                        <tr class="row-odd">
+                            <td><p>
+                                <a class="reference internal" href="" title="distribute_grid_around_point"><code class="table-keyword">distribute_grid_around_point</code></a>
+                            </p></td>
+                            <td><p>Distributes objects within a grid-like structure.</p></td>
+                        </tr>
+                        <tr class="row-even">
+                            <td><p>
+                                <a class="reference internal" href="" title="distribute_within_objects_vertical"><code class="table-keyword">distribute_within_objects_vertical</code></a>
+                            </p></td>
+                            <td><p>Distributes objects vertically within the bounds of another object.</p></td>
+                        </tr>
+                        <tr class="row-odd">
+                            <td><p>
+                                <a class="reference internal" href="" title="distribute_within_objects_horizontal"><code class="table-keyword">distribute_within_objects_horizontal</code></a>
+                            </p></td>
+                            <td><p>Distributes inner objects horizontally within the bounds of another outer object.
+                                <br>Objects will shift to the left when an empty space is made available.
+                            </p></td>
+                        </tr>
+                        <tr class="row-even">
+                            <td><p>
+                                <a class="reference internal" href="" title="distribute_within_objects_horizontal_v2"><code class="table-keyword">distribute_within_objects_horizontal_v2</code></a>
+                            </p></td>
+                            <td><p>Distributes inner objects horizontally within the bounds of another outer object.
+                                <br>When an inner object leaves, the space is reserved and will be allocated to the same object upon return.
+                            </p></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Other functions -->
+            <section id="other-functions">
+                <h3>Other functions<a class="header-link" href="#other-functions" title="Permalink to this heading">¶</a></h3>
+                <table class="documentation-table-summary">
+                    <tbody>
+                    <tr class="row-odd">
+                        <td><p>
+                            <a class="reference internal" href="" title="calculate_label"><code class="table-keyword">calculate_label</code></a>
+                        </p></td>
+                        <td><p>Counts the number of objects being 'labelled' by this function for another object.</p></td>
+                    </tr>
+                    <tr class="row-even">
+                        <td><p>
+                            <a class="reference internal" href="" title="align_middle"><code class="table-keyword">align_middle</code></a>
+                        </p></td>
+                        <td><p>Aligns an object to the middle of another.</p></td>
+                    </tr>
+                    <tr class="row-odd">
+                        <td><p>
+                            <a class="reference internal" href="" title="apply_smaller"><code class="table-keyword">apply_smaller</code></a>
+                        </p></td>
+                        <td><p>Sets <code>y</code> to be displayed smaller than <code>x</code>.</p></td>
+                    </tr>
+                    <tr class="row-even">
+                        <td><p>
+                            <a class="reference internal" href="" title="draw_line"><code class="table-keyword">draw_line</code></a>
+                        </p></td>
+                        <td><p>Draws a line between two objects.</p></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </section>
         </section>
-    </section>
 
-    <!-- Other sections in its own row -->
-    <section id="visual-properties">
+        <!-- Other sections in its own row -->
+        <section id="visual-properties">
 
-    </section>
+        </section>
+    </div>
 
     <!-- Footer -->
-    <footer class="site-footer">
-        <span class="site-footer-owner">This page is maintained by <a href="https://github.com/7angel4">Angel He</a>.</span>
-        <span>Last updated: <time>15/08/2023</time></span>
-        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a>.</span>
+    <footer class="page-footer">
+        <span>
+            This page is maintained by <a href="https://github.com/7angel4">Angel He</a>.<br>
+            Last updated: <time>15/08/2023</time><br><br>
+            This page was generated by <a href="https://pages.github.com">GitHub Pages</a>.
+        </span>
     </footer>
 
 </body>
