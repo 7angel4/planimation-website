@@ -62,7 +62,7 @@
                 : "https://us-central1-planimation-staging-181bc.cloudfunctions.net/submitSuggestion";
 
             // Send the form data to the Cloud Function
-            fetch(CLOUD_FUNCTION_URL, {
+            fetch(cloudFunctionURL, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
