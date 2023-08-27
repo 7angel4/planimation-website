@@ -19,6 +19,21 @@
             margin: 20px auto;
             max-width: 800px;
         }
+        a {
+            color: #007BFF; /* Change to your preferred link color */
+            text-decoration: none;
+            padding: 5px 10px;
+            border: 1px solid #007BFF;
+            border-radius: 5px;
+            margin: 5px 0;
+            display: inline-block;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        a:hover {
+            background-color: #007BFF;
+            color: #FFFFFF;
+        }
     </style>
     <!-- Firebase App (the core Firebase SDK) -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
@@ -57,12 +72,41 @@
     </div>
 
     <script>
-        // Fetch documentation from Firestore and display it
-        function fetchDocumentation() {
+        // Fetch list of documents from Firestore
+        function fetchDocumentList() {
             const contentDiv = document.querySelector('.content');
 
             db.collection("documentation").get().then((querySnapshot) => {
                 querySnapshot.forEach((doc) => {
+                    const docData = doc.data();
+                    const docLink = document.createElement('a');
+                    docLink.textContent = docData.title;
+                    docLink.href = "#"; // Placeholder href
+                    docLink.dataset.docId = doc.id; // Store the document ID as a data attribute
+                    docLink.addEventListener('click', loadDocumentContent); // Add click event listener
+                    contentDiv.appendChild(docLink);
+                    contentDiv.appendChild(document.createElement('br')); // Line break for readability
+                });
+            }).catch((error) => {
+                console.error("Error fetching document list: ", error);
+            });
+        }
+
+        // Call the function when the page loads
+        fetchDocumentList();
+
+        function loadDocumentContent(event) {
+            event.preventDefault(); // Prevent the default link behavior
+
+            const docId = event.target.dataset.docId; // Get the document ID from the data attribute
+
+            // Clear the content div
+            const contentDiv = document.querySelector('.content');
+            contentDiv.innerHTML = "";
+
+            // Fetch the document content from Firestore
+            db.collection("documentation").doc(docId).get().then((doc) => {
+                if (doc.exists) {
                     const docData = doc.data();
                     const docTitle = document.createElement('h3');
                     docTitle.textContent = docData.title;
@@ -71,14 +115,21 @@
                     const docContent = document.createElement('p');
                     docContent.textContent = docData.content;
                     contentDiv.appendChild(docContent);
-                });
+                } else {
+                    console.error("Document not found!");
+                }
             }).catch((error) => {
-                console.error("Error fetching documentation: ", error);
+                console.error("Error fetching document content: ", error);
             });
+            // Add a "Back to List" button
+            const backButton = document.createElement('button');
+            backButton.textContent = "Back to List";
+            backButton.addEventListener('click', function() {
+                contentDiv.innerHTML = ""; // Clear the content
+                fetchDocumentList(); // Reload the list of documents
+            });
+            contentDiv.appendChild(backButton);
         }
-
-        // Call the function when the page loads
-        fetchDocumentation();
     </script>
 </body>
 </html>
