@@ -65,6 +65,11 @@
     <a href="references.html">References</a>
     <a href="contact_us.html">Contact Us</a>
 
+    <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Search for a document...">
+        <button onclick="searchDocuments()">Search</button>
+    </div>
+
     <div class="content">
         <h2>Distribution Functions</h2>
         <p>Distribution functions 'distribute‘ objects in a certain manner. They are used to lay objects out on the screen. All objects for which the same parameters of 'distribute' are called will be included in the distribution.</p>
@@ -130,6 +135,39 @@
             });
             contentDiv.appendChild(backButton);
         }
+
+        function searchDocuments() {
+            const searchTerm = document.getElementById('searchInput').value;
+            const contentDiv = document.querySelector('.content');
+            contentDiv.innerHTML = ""; // Clear the content
+
+            // Query Firestore for documents with titles that start with the search term
+            db.collection("documentation")
+            .where("title", ">=", searchTerm)
+            .where("title", "<=", searchTerm + "\uf8ff")
+            .get()
+            .then((querySnapshot) => {
+                if (querySnapshot.empty) {
+                    contentDiv.innerHTML = "No documents found for the search term.";
+                    return;
+                }
+
+                querySnapshot.forEach((doc) => {
+                    const docData = doc.data();
+                    const docLink = document.createElement('a');
+                    docLink.textContent = docData.title;
+                    docLink.href = "#"; // Placeholder href
+                    docLink.dataset.docId = doc.id; // Store the document ID as a data attribute
+                    docLink.addEventListener('click', loadDocumentContent); // Add click event listener
+                    contentDiv.appendChild(docLink);
+                    contentDiv.appendChild(document.createElement('br')); // Line break for readability
+                });
+            })
+            .catch((error) => {
+                console.error("Error searching documents: ", error);
+            });
+        }
+
     </script>
 </body>
 </html>
