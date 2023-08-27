@@ -1,0 +1,13 @@
+h1 {
+    background-color: white;
+    padding: 0.5rem;
+    margin-top: calc(max(2.5rem, 1vh));
+    border-radius: 1rem 1rem;
+    text-align: left;
+    font-size: 2rem;
+    word-wrap: break-word;
+}
+
+h1 > code {
+    color: #404FB5;
+}

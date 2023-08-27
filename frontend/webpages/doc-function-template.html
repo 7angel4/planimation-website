@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="../assets/stylesheets/master.css"/>
+    <link rel="stylesheet" type="text/css" href="../assets/stylesheets/function-doc-style.css"/>
+    <script src="../assets/scripts/reusable-elements.js"></script>
+    <script src="../assets/scripts/function-doc-template.js"></script>
+</head>
+<body>
+    <!-- Header (function name) -->
+    <header>
+        <nav-bar></nav-bar>
+        <h1><code id="function-name"></code></h1>
+        <script>addTitle("distributex");</script>
+    </header>
+
+    <div class="page-content">
+        <!-- General description -->
+        <div class="description"><p id="description"></p></div>
+        <!-- Parameters -->
+        <div class="params">
+            <h2>Parameters</h2>
+            <ul id="parameters"></ul>
+            <script>
+                addParams(fetchFunctionDoc("distributex").params); <!--?????-->
+            </script>
+        </div>
+        <!-- Example usage -->
+        <div class="example">
+            <h2>Example</h2>
+            <code id="example"></code>
+            <script>
+                let example = "(assign (?obj x) (function distributex (objects ?obj) (settings (spacebtw 40))))";
+                addExample(example); <!--?????-->
+            </script>
+        </div>
+        <div class="demo">
+            <!-- Video demo -->
+            <h2>Visual Demo</h2>
+            <div class="video-container">
+                <video width="320" height="240" controls id="video-demo"></video>
+            </div>
+            <!-- Code snippet -->
+            <code id="code-demo"></code>
+            <script>
+                let doc = fetchFunctionDoc("distributex");
+                addExample(doc.VideoExplanation); <!--?????-->
+                addExample(doc.VideoCode);
+            </script>
+        </div>
+    </div>
+
+    <main-footer></main-footer>
+</body>
+</html>
