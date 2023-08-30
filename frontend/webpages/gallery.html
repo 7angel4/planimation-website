@@ -110,13 +110,13 @@
             const gallery = document.getElementById('animationGallery');
             const animations = gallery.getElementsByClassName('animation');
 
-            for (let i = 0; i < animations.length; i++) {
-                const a = animations[i].getElementsByTagName('a')[0];
+            for (let i = 0; i < gallery.length; i++) {
+                const a = gallery[i].getElementsByTagName('a')[0];
                 const txtValue = a.textContent || a.innerText;
                 if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                    animations[i].style.display = "";
+                    gallery[i].style.display = "";
                 } else {
-                    animations[i].style.display = "none";
+                    gallery[i].style.display = "none";
                 }
             }
         }
