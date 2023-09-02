@@ -13,6 +13,11 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
     <script src="../assets/scripts/fetch-firebase.js"></script>
     <script src="../assets/scripts/reusable-elements.js"></script>
+
+    <script>
+        var db = initialize();
+    </script>
+
 </head>
 <body>
     <!-- Header at the top -->
@@ -24,6 +29,7 @@
         <aside>Please refer to other <a class="reference external" href="#reference" id="header-ref"><u>resources</u></a> for more information on the PDDL syntax.</aside>
     </header>
     <nav-bar></nav-bar>
+    <search-bar></search-bar>
 
     <!-- General Structure -->
     <div class="page-content">
@@ -44,48 +50,12 @@
                     Between animation frames, objects will not move (unless their positions are reset).
                 </p>
                 <table class="doc-table-summary">
-                    <tbody>
-                        <tr class="row-odd">
-                            <td><p>
-                                <a class="reference internal" href="" title="distributex"><code class="table-keyword">distributex</code></a>
-                            </p></td>
-                            <td><p>Distributes objects along a horizontal plane.</p></td>
-                        </tr>
-                        <tr class="row-even">
-                            <td><p>
-                                <a class="reference internal" href="" title="distributey"><code class="table-keyword">distributey</code></a>
-                            </p></td>
-                            <td><p>Distributes objects along a vertical plane.</p></td>
-                        </tr>
-                        <tr class="row-odd">
-                            <td><p>
-                                <a class="reference internal" href="" title="distribute_grid_around_point"><code class="table-keyword">distribute_grid_around_point</code></a>
-                            </p></td>
-                            <td><p>Distributes objects within a grid-like structure.</p></td>
-                        </tr>
-                        <tr class="row-even">
-                            <td><p>
-                                <a class="reference internal" href="" title="distribute_within_objects_vertical"><code class="table-keyword">distribute_within_objects_vertical</code></a>
-                            </p></td>
-                            <td><p>Distributes objects vertically within the bounds of another object.</p></td>
-                        </tr>
-                        <tr class="row-odd">
-                            <td><p>
-                                <a class="reference internal" href="" title="distribute_within_objects_horizontal"><code class="table-keyword">distribute_within_objects_horizontal</code></a>
-                            </p></td>
-                            <td><p>Distributes inner objects horizontally within the bounds of an outer object, occupying empty space where possible.
-                            </p></td>
-                        </tr>
-                        <tr class="row-even">
-                            <td><p>
-                                <a class="reference internal" href="" title="distribute_within_objects_horizontal_v2"><code class="table-keyword">distribute_within_objects_horizontal_v2</code></a>
-                            </p></td>
-                            <td><p>Distributes inner objects horizontally within the bounds of an outer object, reserving space when the object leaves.
-                            </p></td>
-                        </tr>
+                    <tbody class="doc-table-content">
+                        <tr><td>hi</td></tr>
                     </tbody>
                 </table>
             </section>
+            <script>fetchDocumentList(db);</script>
 
             <!-- Other functions -->
             <section id="other-functions">
@@ -128,6 +98,8 @@
         <section id="further-reference">
             <h3>Reference<a class="header-link" href="#further-reference" title="Permalink to this heading">¶</a></h3>
         </section>
+
+        <script>fetchDocumentList(db);</script>
     </div>
 
     <!-- Footer -->

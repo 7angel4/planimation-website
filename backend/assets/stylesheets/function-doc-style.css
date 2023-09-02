@@ -8,6 +8,6 @@ h1 {
     word-wrap: break-word;
 }
 
-h1 > code {
+#function-name {
     color: #404FB5;
 }

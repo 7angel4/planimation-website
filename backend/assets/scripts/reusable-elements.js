@@ -1,3 +1,5 @@
+import {searchDocuments} from "./fetch-frebase.js"
+
 class NavBar extends HTMLElement {
     connectedCallback() {
         this.innerHTML = `
@@ -44,9 +46,22 @@ class Footer extends HTMLElement {
     }
 }
 
+class SearchBar extends HTMLElement {
+    connectedCallback() {
+        this.innerHTML =
+            `
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search for a document...">
+                <button onClick=searchDocuments()>Search</button>
+            </div>
+            `
+    }
+}
+
 class HeadBanner extends HTMLElement {
 
 }
 
 customElements.define('nav-bar', NavBar);
 customElements.define('main-footer', Footer);
+customElements.define('search-bar', SearchBar);

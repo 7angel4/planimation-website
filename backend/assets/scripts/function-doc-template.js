@@ -57,7 +57,7 @@ function addCodeDemo(code) {
 
 
 /* DB Querying */
-import { initialize } from 'fetch-firebase.js';
+import { initialize } from 'backend/assets/scripts/fetch-firebase.js';
 import { collection, query, where, getDocs } from "firebase/firestore";
 
 const db = initialize();
