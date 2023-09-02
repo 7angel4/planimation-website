@@ -69,7 +69,7 @@ function loadDocumentContent(event) {
     const docId = event.target.dataset.docId; // Get the document ID from the data attribute
 
     // Clear the content div
-    const contentDiv = document.querySelector('.content');
+    const contentDiv = document.querySelector(CONTENT_ELEM);
     contentDiv.innerHTML = "";
 
     // Fetch the function content from Firestore
