@@ -32,6 +32,7 @@
 
     <!-- Firebase Firestore (the database) -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="../assets/scripts/reusable-elements.js"></script>
     <script>
         // Firebase Configuration
         const firebaseConfig = {
@@ -51,10 +52,7 @@
 </head>
 <body>
     <h1>Planimation Animations</h1>
-    <a href="index.html">Home</a>
-    <a href="documentation.html">Documentation</a>
-    <a href="references.html">References</a>
-    <a href="suggestions.html">Contact Us</a>
+    <nav-bar></nav-bar>
 
     <input type="text" id="searchInput" placeholder="Search animations..." onkeyup="filterAnimations()">
 
