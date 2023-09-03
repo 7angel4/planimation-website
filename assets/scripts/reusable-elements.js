@@ -56,10 +56,6 @@ class SearchBar extends HTMLElement {
     }
 }
 
-class HeadBanner extends HTMLElement {
-
-}
-
 customElements.define('nav-bar', NavBar);
 customElements.define('main-footer', Footer);
 customElements.define('search-bar', SearchBar);

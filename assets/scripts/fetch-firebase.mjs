@@ -11,7 +11,9 @@ const firebaseConfig = {
     measurementId: "G-XYNE4FJ1CF"
 };
 
-const CONTENT_ELEM = ".doc-table-content";
+const TABLE_CONTENT_ELEM = ".doc-table-content";
+const PAGE_CONTENT_ELEM = ".page-content";
+
 initializeApp(firebaseConfig);
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
@@ -35,7 +37,7 @@ function createFunctionRef(doc) {
     let functionName = doc.data().functionName;
     let functionDescription = doc.data().briefDescription;
 
-    const contentParent = document.querySelector(CONTENT_ELEM);
+    const contentParent = document.querySelector(TABLE_CONTENT_ELEM);
     const tr = document.createElement('tr');
     //tr.class = "row-odd";
     const td = document.createElement('td');
@@ -43,12 +45,11 @@ function createFunctionRef(doc) {
     const a = document.createElement('a');
     a.class = "reference internal";
     a.href = "#"; // Placeholder href;
-    a.title = functionName;
     a.addEventListener('click', loadDocumentContent);
     const code =  document.createElement('code');
     code.class="table-keyword";
     code.textContent = functionName;
-    a.dataset.docId = doc.id; // Store the document ID as a data attribute
+    code.dataset.docId = doc.id;  // Store the document ID as a data attribute
 
     a.appendChild(code);
     p.appendChild(a);
@@ -61,18 +62,17 @@ function createFunctionRef(doc) {
     descriptionTd.appendChild(descriptionP);
     tr.appendChild(descriptionTd);
 
-    contentParent.appendChild(a);
+    contentParent.appendChild(tr);
 }
 
 function loadDocumentContent(event) {
     event.preventDefault(); // Prevent the default link behavior
     const docId = event.target.dataset.docId; // Get the document ID from the data attribute
-    console.log(docId);
 
     // Fetch the function content from Firestore
     db.collection("functions").doc(docId).get().then((doc) => {
         if (doc.exists) {
-            createFunctionDoc(doc);
+            loadFunctionDoc(doc);
         } else {
             console.error("Function not found!");
         }
@@ -81,7 +81,7 @@ function loadDocumentContent(event) {
     });
 }
 
-function loadFuncDoc(doc) {
+function loadFunctionDoc(doc) {
     const functionDocTemplate =
         `
         <!-- General description -->
@@ -114,7 +114,7 @@ function loadFuncDoc(doc) {
             </div>
             <script>addData(${doc})</script>
             `
-    const contentDiv = document.querySelector(CONTENT_ELEM);
+    const contentDiv = document.querySelector(PAGE_CONTENT_ELEM);
     // Swap the content div
     contentDiv.innerHTML = functionDocTemplate;
 }

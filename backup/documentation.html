@@ -99,7 +99,7 @@
 
         function loadDocumentContent(event) {
             event.preventDefault(); // Prevent the default link behavior
-
+            console.log(event.target);
             const docId = event.target.dataset.docId; // Get the document ID from the data attribute
 
             // Clear the content div
