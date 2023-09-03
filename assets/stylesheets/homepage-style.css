@@ -2,28 +2,14 @@ body {
     font-family: Arial, sans-serif;
 }
 
-.block1 {
-    width: 400px;
-    text-align: center;
-    margin: auto;
-}
-
-button {
-    background-color: #3F50B6;
-    border-radius: 25px;
-    color: white;
-    padding: 10px;
-    border: none;
-}
-
-.block2 {
+.middle-block {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .block1,
-.block2 {
+.middle-block {
     margin-top: 100px;
     margin-bottom: 100px;
 }
@@ -66,7 +52,7 @@ li {
     height: 350px;
 }
 
-.block3 {
+.bottom-block {
     background-color: #3F50B6;
     color: white;
     background-image: url(/assets/resources/icons/left_quotation_marks.png);

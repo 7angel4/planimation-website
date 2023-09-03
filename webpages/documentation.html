@@ -16,14 +16,14 @@
 <body>
     <!-- Header at the top -->
     <nav-bar></nav-bar>
-    <header class="page-header" role="banner">
-        <h1 class="page-name">Get Started with Planimation</h1>
-        <h2 class="page-tagline">A guide to writing animation profiles in Planimation</h2>
-        <!-- Link to GitHub documentation -->
-        <a href="https://github.com/planimation/documentation" class="btn">View original GitHub documentation</a>
-        <aside>Please refer to other <a class="reference external" href="references.html" id="header-ref"><u>resources</u></a> for more information on the PDDL syntax.</aside>
-    </header>
+    <head-banner></head-banner>
     <search-bar></search-bar>
+    <script>
+        const headBanner = document.querySelector("head-banner");
+        headBanner.setTextContent("Get Started with Planimation");
+        headBanner.addTagLine("A guide to writing animation profiles in Planimation");
+        headBanner.addButton("View original GitHub documentation", "https://github.com/planimation/documentation");
+    </script>
 
     <!-- General Structure -->
     <div class="page-content">

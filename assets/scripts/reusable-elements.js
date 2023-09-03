@@ -97,8 +97,62 @@ class CodeBlock extends HTMLElement {
     }
 }
 
+class HeadBanner extends HTMLElement {
+    connectedCallback() {
+        this.innerHTML =
+            `
+            <header class="page-header"><h1 class="page-name"></h1></header>
+            <style>
+                .page-header {
+                    color: black;
+                    text-align: center;
+                    background-color: white;
+                    margin: 50px auto 10px auto;
+                    width: 100vw;
+                }
+                h1.page-name {
+                    font-size: 40px;
+                    font-weight: 700;
+                    text-transform: uppercase;
+                    width: 600px;
+                    margin: auto;
+                }
+            </style>
+            `
+    }
+
+    setTextContent(content) {
+        this.children[0].children[0].textContent = content;
+    }
+
+    addButton(text, ref) {
+        const header = this.children[0];
+        const btn = document.createElement('button');
+        btn.setAttribute("class", "btn");
+        const link = document.createElement('a');
+        link.textContent = text;
+        link.href = ref;
+        link.style["color"] = "white";
+        btn.appendChild(link);
+        header.appendChild(btn);
+    }
+
+    addTagLine(text) {
+        const header = this.children[0];
+        const tagLine = document.createElement("h2");
+        tagLine.textContent = text;
+        tagLine.style["font-size"] = "20px";
+        tagLine.style["font-weight"] = "600";
+        tagLine.style["textTransform"] = "uppercase";
+        header.appendChild(tagLine);
+    }
+}
+
+
+
 
 customElements.define('nav-bar', NavBar);
 customElements.define('main-footer', Footer);
 customElements.define('search-bar', SearchBar);
 customElements.define('code-block', CodeBlock);
+customElements.define('head-banner', HeadBanner);

@@ -63,58 +63,21 @@ a:hover {
 }
 
 /** Button **/
-.btn {
+button.btn {
+    background-color: #3F50B6;
+    border-radius: 25px;
+    color: white;
+    padding: 10px;
+    border: none;
     display: inline-block;
     margin-bottom: 1rem;
-    color: white;
-    background-color: #4250B0;
-    border-color: rgba(255,255,255,0.2);
-    border-style: solid;
-    border-width: 1px;
-    border-radius: 0.3rem;
-    transition: color 0.2s, background-color 0.2s, border-color 0.2s
+    transition: color 0.2s, background-color 0.2s, border-color 0.2s;
 }
+
 
 .btn:hover {
     color: white;
-    text-decoration: none;
     background-color: #313b82;
-    border-color: rgba(255,255,255,0.3)
-}
-
-.btn+.btn {
-    margin-left: 1rem
-}
-
-.btn+.btn {
-    margin-left: 1rem
-}
-
-@media screen and (min-width: 64em) {
-    .btn {
-        padding:0.75rem 1rem
-    }
-}
-
-@media screen and (min-width: 42em) and (max-width: 64em) {
-    .btn {
-        padding: 0.6rem 0.9rem;
-        font-size: 0.9rem
-    }
-}
-
-@media screen and (max-width: 42em) {
-    .btn {
-        display: block;
-        width: 100%;
-        padding: 0.75rem;
-        font-size: 0.9rem
-    }
-
-    .btn+.btn {
-        margin-top: 1rem;
-        margin-left: 0
-    }
 }
 
 /** Header **/
@@ -123,9 +86,6 @@ a:hover {
     text-align: center;
     background-color: white;
     /*background-image: linear-gradient(120deg, #0A369D, #CFDEE7)*/
-}
-
-.page-header {
     margin: 0 auto;
 }
 
