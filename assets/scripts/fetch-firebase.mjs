@@ -1,3 +1,6 @@
+import { addData } from "./function-doc-template.mjs";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-app.js";
+
 const firebaseConfig = {
     apiKey: "AIzaSyDf--XeJ2-pkwKkjGO1RLxzjwzJZUy_e0s",
     authDomain: "planimation-staging-181bc.firebaseapp.com",
@@ -9,15 +12,13 @@ const firebaseConfig = {
 };
 
 const CONTENT_ELEM = ".doc-table-content";
+initializeApp(firebaseConfig);
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+// Initialize Firestore
+const db = firebase.firestore();
 
-function initialize() {
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-
-    // Initialize Firestore
-    return firebase.firestore();
-}
-
+fetchDocumentList(db);
 
 // Fetch list of documents from Firestore
 function fetchDocumentList(db) {
@@ -41,13 +42,13 @@ function createFunctionRef(doc) {
     const p = document.createElement('p');
     const a = document.createElement('a');
     a.class = "reference internal";
-    a.href = "";
+    a.href = "#"; // Placeholder href;
     a.title = functionName;
+    a.addEventListener('click', loadDocumentContent);
     const code =  document.createElement('code');
     code.class="table-keyword";
     code.textContent = functionName;
     a.dataset.docId = doc.id; // Store the document ID as a data attribute
-    a.addEventListener('click', loadDocumentContent); // Add click event listener
 
     a.appendChild(code);
     p.appendChild(a);
@@ -65,60 +66,57 @@ function createFunctionRef(doc) {
 
 function loadDocumentContent(event) {
     event.preventDefault(); // Prevent the default link behavior
-
     const docId = event.target.dataset.docId; // Get the document ID from the data attribute
-
-    // Clear the content div
-    const contentDiv = document.querySelector(CONTENT_ELEM);
-    contentDiv.innerHTML = "";
+    console.log(docId);
 
     // Fetch the function content from Firestore
     db.collection("functions").doc(docId).get().then((doc) => {
         if (doc.exists) {
-            const docData = doc.data();
-
-            // Display function name
-            const funcName = document.createElement('h3');
-            funcName.textContent = docData.functionName;
-            contentDiv.appendChild(funcName);
-
-            // Display example
-            const example = document.createElement('pre'); // Using pre for code formatting
-            example.textContent = "Example: " + docData.example;
-            contentDiv.appendChild(example);
-
-            // Display video code if it exists
-            if(docData.videoCode) {
-                const videoCode = document.createElement('pre');
-                videoCode.textContent = "Video Code: " + docData.videoCode;
-                contentDiv.appendChild(videoCode);
-            }
-
-            // Display video explanation if it exists
-            if(docData.videoExplanation) {
-                const videoExplanation = document.createElement('p');
-                videoExplanation.textContent = "Video Explanation: " + docData.videoExplanation;
-                contentDiv.appendChild(videoExplanation);
-            }
-
-            // Fetch and display parameters, then append the "Back to List" button
-            displayParameters(docId, contentDiv).then(() => {
-                // Add a "Back to List" button at the end
-                const backButton = document.createElement('button');
-                backButton.textContent = "Back to List";
-                backButton.addEventListener('click', function() {
-                    contentDiv.innerHTML = ""; // Clear the content
-                    fetchDocumentList(); // Reload the list of functions
-                });
-                contentDiv.appendChild(backButton);
-            });
-
+            createFunctionDoc(doc);
         } else {
             console.error("Function not found!");
         }
     }).catch((error) => {
         console.error("Error fetching function content: ", error);
     });
+}
+
+function loadFuncDoc(doc) {
+    const functionDocTemplate =
+        `
+        <!-- General description -->
+                <div class="description">
+                    <p id="description"></p>
+                </div>
+                <script><!-- description --></script>
+                <!-- Parameters -->
+                <div class="params">
+                    <h2>Parameters</h2>
+                    <ul id="parameters"></ul>
+                    <script><!-- params --></script>
+                </div>
+                <!-- Example usage -->
+                <div class="example">
+                    <h2>Example</h2>
+                    <code id="example"></code>
+                    <script><!-- example --></script>
+                </div>
+                <div class="demo">
+                    <!-- Video demo -->
+                    <h2>Visual Demo</h2>
+                    <div class="video-container">
+                        <video width="320" height="240" controls id="video-demo"></video>
+                    </div>
+                    <!-- Code snippet -->
+                    <code id="code-demo"></code>
+                    <script><!-- video explanation & code --></script>
+                </div>
+            </div>
+            <script>addData(${doc})</script>
+            `
+    const contentDiv = document.querySelector(CONTENT_ELEM);
+    // Swap the content div
+    contentDiv.innerHTML = functionDocTemplate;
 }
 
 function displayParameters(docId, contentDiv) {

@@ -1,5 +1,3 @@
-import {searchDocuments} from "./fetch-frebase.js"
-
 class NavBar extends HTMLElement {
     connectedCallback() {
         this.innerHTML = `
