@@ -1,4 +1,4 @@
-import { addData } from "./function-doc-template.mjs";
+import { addData, addParams } from "./function-doc-template.mjs";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-app.js";
 
 const firebaseConfig = {
@@ -20,10 +20,10 @@ firebase.initializeApp(firebaseConfig);
 // Initialize Firestore
 const db = firebase.firestore();
 
-fetchDocumentList(db);
+fetchDocumentList();
 
 // Fetch list of documents from Firestore
-function fetchDocumentList(db) {
+function fetchDocumentList() {
     db.collection("functions").get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
             createFunctionRef(doc);
@@ -73,6 +73,7 @@ function loadDocumentContent(event) {
     db.collection("functions").doc(docId).get().then((doc) => {
         if (doc.exists) {
             loadFunctionDoc(doc);
+            loadParams(docId);
         } else {
             console.error("Function not found!");
         }
@@ -84,59 +85,44 @@ function loadDocumentContent(event) {
 function loadFunctionDoc(doc) {
     const functionDocTemplate =
         `
+        <h1 id="function-name"></h1>
         <!-- General description -->
-                <div class="description">
-                    <p id="description"></p>
-                </div>
-                <script><!-- description --></script>
-                <!-- Parameters -->
-                <div class="params">
-                    <h2>Parameters</h2>
-                    <ul id="parameters"></ul>
-                    <script><!-- params --></script>
-                </div>
-                <!-- Example usage -->
-                <div class="example">
-                    <h2>Example</h2>
-                    <code id="example"></code>
-                    <script><!-- example --></script>
-                </div>
-                <div class="demo">
-                    <!-- Video demo -->
-                    <h2>Visual Demo</h2>
-                    <div class="video-container">
-                        <video width="320" height="240" controls id="video-demo"></video>
-                    </div>
-                    <!-- Code snippet -->
-                    <code id="code-demo"></code>
-                    <script><!-- video explanation & code --></script>
-                </div>
+        <div class="description">
+            <p id="description"></p>
+        </div>
+        <!-- Parameters -->
+        <div class="params">
+            <h2>Parameters</h2>
+            <ul id="parameters"></ul>
+        </div>
+        <!-- Example usage -->
+        <div class="example">
+            <h2>Example</h2>
+            <code id="example"></code>
+        </div>
+        <div class="demo">
+            <!-- Video demo -->
+            <h2>Visual Demo</h2>
+            <div class="video-container">
+                <video width="320" height="240" controls id="video-demo"></video>
             </div>
-            <script>addData(${doc})</script>
-            `
+            <!-- Code snippet -->
+            <code id="code-demo"></code>
+        </div>
+    `
     const contentDiv = document.querySelector(PAGE_CONTENT_ELEM);
     // Swap the content div
     contentDiv.innerHTML = functionDocTemplate;
+    document.body.onLoad = addData(doc);
 }
 
-function displayParameters(docId, contentDiv) {
+
+
+function loadParams(docId) {
+    console.log("hi");
     return new Promise((resolve, reject) => {
         db.collection("functions").doc(docId).collection("parameters").get().then((querySnapshot) => {
-            querySnapshot.forEach((paramDoc) => {
-                const paramData = paramDoc.data();
-
-                const paramName = document.createElement('h4');
-                paramName.textContent = paramData.parameterName;
-                contentDiv.appendChild(paramName);
-
-                const paramExplanation = document.createElement('p');
-                paramExplanation.textContent = paramData.explanation;
-                contentDiv.appendChild(paramExplanation);
-
-                const paramDefault = document.createElement('p');
-                paramDefault.textContent = "Default value: " + paramData.defaultValue;
-                contentDiv.appendChild(paramDefault);
-            });
+            addParams(querySnapshot);
             resolve(); // Resolve the promise when done
         }).catch((error) => {
             console.error("Error fetching parameters: ", error);
