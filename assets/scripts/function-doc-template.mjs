@@ -45,7 +45,7 @@ export function addParams(querySnapshot) {
 
 function addExample(exampleCode) {
     const example = document.getElementById(FUNC_EG_ELEM);
-    example.textContent = exampleCode;
+    example.setCodeContent(exampleCode);
 }
 
 function addVideoDemo(videoSrc) {
@@ -58,7 +58,7 @@ function addVideoDemo(videoSrc) {
 
 function addCodeDemo(code) {
     const codeSnippet = document.getElementById(CODE_DEMO_ELEM);
-    codeSnippet.textContent = code;
+    codeSnippet.setCodeContent(code);
 }
 
 /**

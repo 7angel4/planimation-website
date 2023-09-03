@@ -92,22 +92,22 @@ function loadFunctionDoc(doc) {
         </div>
         <!-- Parameters -->
         <div class="params">
-            <h2>Parameters</h2>
+            <h3>Parameters</h3>
             <ul id="parameters"></ul>
         </div>
         <!-- Example usage -->
         <div class="example">
-            <h2>Example</h2>
-            <code id="example"></code>
+            <h3>Example</h3>
+            <code-block id="example"></code-block>
         </div>
         <div class="demo">
             <!-- Video demo -->
-            <h2>Visual Demo</h2>
+            <h3>Visual Demo</h3>
             <div class="video-container">
                 <video width="320" height="240" controls id="video-demo"></video>
             </div>
             <!-- Code snippet -->
-            <code id="code-demo"></code>
+            <code-block id="code-demo"></code-block>
         </div>
     `
     const contentDiv = document.querySelector(PAGE_CONTENT_ELEM);
