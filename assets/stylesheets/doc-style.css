@@ -1,0 +1,20 @@
+table.doc-table-summary {
+    line-height: 1rem;
+    max-width: 85%;
+    overflow-x: scroll;
+}
+
+table.doc-table-summary td,
+table.doc-table-summary th {
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    padding-right: 0.5rem;
+}
+
+table.doc-table-summary p {
+    margin: 0.5rem 0.5rem;
+}
+
+table.doc-table-summary tr:nth-child(odd) {
+    background-color: #F6F9FE;
+}

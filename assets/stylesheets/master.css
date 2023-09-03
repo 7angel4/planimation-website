@@ -31,16 +31,14 @@ h1.page-name {
     text-transform: uppercase;
     font-size: 50px;
     font-weight: 700;
-    font-style: italic;
 }
 
 h2.page-tagline {
     font-size: 30px;
     font-weight: 400;
-    font-style: italic;
 }
 
-#header-ref, .page-footer {
+.page-footer {
     font-family: 'Shantell Sans', cursive;
     color: white
 }
@@ -68,8 +66,8 @@ a:hover {
 .btn {
     display: inline-block;
     margin-bottom: 1rem;
-    color: rgba(255,255,255,0.7);
-    background-color: rgba(255,255,255,0.08);
+    color: white;
+    background-color: #4250B0;
     border-color: rgba(255,255,255,0.2);
     border-style: solid;
     border-width: 1px;
@@ -78,9 +76,9 @@ a:hover {
 }
 
 .btn:hover {
-    color: rgba(255,255,255,0.8);
+    color: white;
     text-decoration: none;
-    background-color: rgba(255,255,255,0.2);
+    background-color: #313b82;
     border-color: rgba(255,255,255,0.3)
 }
 
@@ -121,10 +119,10 @@ a:hover {
 
 /** Header **/
 .page-header {
-    color: #fff;
+    color: black;
     text-align: center;
-    background-color: #F9F8FF;
-    background-image: linear-gradient(120deg, #0A369D, #CFDEE7)
+    background-color: white;
+    /*background-image: linear-gradient(120deg, #0A369D, #CFDEE7)*/
 }
 
 .page-header {
@@ -134,7 +132,7 @@ a:hover {
 /* rules for different screens */
 @media screen and (min-width: 64em) {
     .page-header {
-        padding: 5rem 6rem
+        padding: 3rem 6rem
     }
 }
 
@@ -257,25 +255,4 @@ table {
     border-color: #CFDEE7;
     border-spacing: 2px;
     border-width: 1px;
-}
-
-table.doc-table-summary {
-    line-height: 1rem;
-    max-width: 85%;
-    overflow-x: scroll;
-}
-
-table.doc-table-summary td,
-table.doc-table-summary th {
-    border-top: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
-    padding-right: 0.5rem;
-}
-
-table.doc-table-summary p {
-    margin: 0.5rem 0.5rem;
-}
-
-table.doc-table-summary tr:nth-child(odd) {
-    background-color: #F6F9FE;
 }

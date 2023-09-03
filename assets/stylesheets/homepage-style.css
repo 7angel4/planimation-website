@@ -30,11 +30,11 @@ button {
 
 ul {
     list-style-type: none;  
-    padding: 0px;;
+    padding: 0;
 }
 
 h4 {
-    margin: 0px;
+    margin: 0;
 }
 
 li {
@@ -57,7 +57,7 @@ li {
 }
 
 .description {
-    font-weight: thin;
+    font-weight: lighter;
 }
 
 #demo {

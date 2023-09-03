@@ -3,26 +3,33 @@ class NavBar extends HTMLElement {
         this.innerHTML = `
             <header>
                 <div class="top-nav-bar">
-                    <nav><ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="documentation.html">Documentation</a></li>
-                        <li><a href="gallery.html">Gallery</a></li>
-                        <li><a href="references.html">References</a></li>
-                        <li><a href="suggestions.html">Suggestions</a></li>
+                    <nav><ul class="nav-list">
+                        <li><a href="./index.html">Home</a></li>
+                        <li><a href="./documentation.html">Documentation</a></li>
+                        <li><a href="./gallery.html">Gallery</a></li>
+                        <li><a href="./references.html">References</a></li>
+                        <li><a href="./suggestions.html">Suggestions</a></li>
                     </ul></nav>
                 </div>
                 <style>
-                    li {
+                    .nav-list > li {
                         display: inline-block;
                         list-style-type: none;
-                        padding: 14px 30px;
+                        padding: 10px 30px;
+                        font-weight: bold;
+                        width: auto;
                     }
         
                     .top-nav-bar {
                         text-align: center;
-                        overflow: hidden;
-                        display: flex;
+                        display: block;
                         justify-content: center;
+                        overflow: hidden;
+                        
+                        position: fixed; /* hanging at the top */
+                        top: 0;
+                        background-color: white;
+                        width: 100vw;
                     }
                 </style>
             </header>
@@ -89,6 +96,7 @@ class CodeBlock extends HTMLElement {
         this.children[0].children[0].textContent = content;
     }
 }
+
 
 customElements.define('nav-bar', NavBar);
 customElements.define('main-footer', Footer);
