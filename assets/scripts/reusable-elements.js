@@ -3,6 +3,7 @@ class NavBar extends HTMLElement {
         this.innerHTML = `
             <header>
                 <div class="top-nav-bar">
+                    <img src="/assets/resources/icons/planimation_logo.png" alt="planimation logo" class="logo"/>
                     <nav><ul class="nav-list">
                         <li><a href="./index.html">Home</a></li>
                         <li><a href="./documentation.html">Documentation</a></li>
@@ -12,6 +13,10 @@ class NavBar extends HTMLElement {
                     </ul></nav>
                 </div>
                 <style>
+                    .logo {
+                        width: 60px;
+                        height: 60px;
+                    }
                     .nav-list > li {
                         display: inline-block;
                         list-style-type: none;
@@ -21,10 +26,9 @@ class NavBar extends HTMLElement {
                     }
         
                     .top-nav-bar {
-                        text-align: center;
-                        display: block;
+                        display: flex;
                         justify-content: center;
-                        overflow: hidden;
+                        align-items: center;
                         
                         position: fixed; /* hanging at the top */
                         top: 0;
@@ -41,10 +45,21 @@ class Footer extends HTMLElement {
     connectedCallback() {
         this.innerHTML =
             `<footer class="page-footer">
-                <span>
-                    This page is maintained by <a href="https://github.com/7angel4">@7angel4</a>.<br>
-                    Last updated: <time>15/08/2023</time><br><br>
-                </span>
+                <img src="/assets/resources/icons/planimation_logo.png" alt="planimation logo" class="logo"/>
+                <button>
+                    return to top
+                </button>
+                <div class="copyright">
+                    Copyright © Team AAAAS
+                </div>
+                <style>
+                    .page-footer {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        color: black;
+                    }
+                </style>
             </footer>
             `
 
@@ -202,4 +217,4 @@ customElements.define('main-footer', Footer);
 customElements.define('search-bar', SearchBar);
 customElements.define('code-block', CodeBlock);
 customElements.define('head-banner', HeadBanner);
-customElements.define('web-logo', WebLogo);
+
