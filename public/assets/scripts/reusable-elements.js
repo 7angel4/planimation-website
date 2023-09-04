@@ -4,11 +4,11 @@ class NavBar extends HTMLElement {
             <header>
                 <div class="top-nav-bar">
                     <nav><ul class="nav-list">
-                        <li><a href="./index.html">Home</a></li>
-                        <li><a href="./documentation.html">Documentation</a></li>
-                        <li><a href="./gallery.html">Gallery</a></li>
-                        <li><a href="./references.html">References</a></li>
-                        <li><a href="./suggestions.html">Suggestions</a></li>
+                        <li><a href="/index.html">Home</a></li>
+                        <li><a href="/documentation.html">Documentation</a></li>
+                        <li><a href="/gallery.html">Gallery</a></li>
+                        <li><a href="/references.html">References</a></li>
+                        <li><a href="/suggestions.html">Suggestions</a></li>
                     </ul></nav>
                 </div>
                 <style>

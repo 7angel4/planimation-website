@@ -39,13 +39,13 @@ function createFunctionRef(doc) {
 
     const contentParent = document.querySelector(TABLE_CONTENT_ELEM);
     const tr = document.createElement('tr');
-    //tr.class = "row-odd";
     const td = document.createElement('td');
     const p = document.createElement('p');
     const a = document.createElement('a');
     a.class = "reference internal";
-    a.href = `/function/${functionName}`; // Placeholder href;
-    // a.addEventListener('click', loadDocumentContent);
+    a.href = `/function/${functionName}`;
+    a.dataset.type = "function";  // Add this line
+
     const code =  document.createElement('code');
     code.class="table-keyword";
     code.textContent = functionName;
@@ -65,7 +65,12 @@ function createFunctionRef(doc) {
     contentParent.appendChild(tr);
 }
 
-function loadDocumentContent() {
+
+function loadDocumentContent(event) {
+    // Check if the clicked link is a function link
+    if (event && event.target.dataset.type !== "function") {
+        return;
+    }
     // Extract the functionName from the URL path
     const pathSegments = window.location.pathname.split('/');
     const functionName = pathSegments[pathSegments.length - 1]; // Assuming the last segment is the functionName
@@ -157,7 +162,7 @@ function searchDocuments() {
                 docLink.textContent = docData.functionName;
                 docLink.href = "#"; // Placeholder href
                 docLink.dataset.docId = doc.id; // Store the document ID as a data attribute
-                docLink.addEventListener('click', loadDocumentContent); // Add click event listener
+                docLink.addEventListener('click', (event) => loadDocumentContent(event)); // Add click event listener
                 contentDiv.appendChild(docLink);
                 contentDiv.appendChild(document.createElement('br')); // Line break for readability
             });
