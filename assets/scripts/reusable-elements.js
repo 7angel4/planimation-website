@@ -56,7 +56,7 @@ class SearchBar extends HTMLElement {
         this.innerHTML =
             `
             <div class="search-bar">
-                <input type="text" id="searchInput" placeholder="Search for a function...">
+                <input type="text" id="searchInput">
                 <button onClick=searchDocuments()>Search</button>
                 <style>
                     input button {
@@ -72,6 +72,16 @@ class SearchBar extends HTMLElement {
                 </style>
             </div>
             `
+    }
+
+    setTextContent(text) {
+        const input = document.querySelector(".search-bar > input");
+        input.placeholder = text;
+    }
+
+    setOnKeyUp(searchFunction) {
+        const input = document.querySelector(".search-bar > input");
+        input.onkeyup = searchFunction;
     }
 }
 
@@ -148,6 +158,42 @@ class HeadBanner extends HTMLElement {
     }
 }
 
+class WebLogo extends HTMLElement {
+    connectedCallback() {
+        this.innerHTML =
+            `
+            <div class="logo">
+                <a href="./index.html">
+                    <img src="../assets/resources/logo.png" alt="Planiwiki logo" width='40px' height='40px'>
+                    <label class="web-name">Planiwiki</label>
+                </a>
+            </div>
+            <style>
+                .logo { 
+                    position: fixed; 
+                    top: 1%; 
+                    left: 1%; 
+                    z-index: 10;
+                } 
+                .logo > a > img {
+                    display: inline-block;
+                }
+                .web-name {
+                    display: inline-block;
+                    font-weight: 800;
+                    text-shadow: 1px 1px 2px gray;
+                    font-size: 40px;
+                    margin-left: 10px;
+                    color: black;
+                }
+                
+                .logo > a:hover {
+                    text-decoration: none;
+                }
+            </style>
+            `
+    }
+}
 
 
 
@@ -156,3 +202,4 @@ customElements.define('main-footer', Footer);
 customElements.define('search-bar', SearchBar);
 customElements.define('code-block', CodeBlock);
 customElements.define('head-banner', HeadBanner);
+customElements.define('web-logo', WebLogo);

@@ -9,12 +9,13 @@
     <link rel="stylesheet" type="text/css" href="../assets/stylesheets/doc-style.css"/>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-    <script type="module" src="../assets/scripts/fetch-firebase.mjs"></script>
+    <script type="module" src="../assets/scripts/fetch-function-doc.mjs"></script>
     <script src="../assets/scripts/reusable-elements.js"></script>
 
 </head>
 <body>
     <!-- Header at the top -->
+    <web-logo></web-logo>
     <nav-bar></nav-bar>
     <head-banner></head-banner>
     <search-bar></search-bar>
@@ -23,6 +24,9 @@
         headBanner.setTextContent("Get Started with Planimation");
         headBanner.addTagLine("A guide to writing animation profiles in Planimation");
         headBanner.addButton("View original GitHub documentation", "https://github.com/planimation/documentation");
+
+        const searchBar = document.querySelector("search-bar");
+        searchBar.setTextContent("Search for a function");
     </script>
 
     <!-- General Structure -->

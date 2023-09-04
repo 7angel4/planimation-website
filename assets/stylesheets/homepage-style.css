@@ -1,5 +1,5 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Raleway', sans-serif;
 }
 
 .middle-block {
@@ -8,7 +8,6 @@ body {
     align-items: center;
 }
 
-.block1,
 .middle-block {
     margin-top: 100px;
     margin-bottom: 100px;
@@ -43,7 +42,7 @@ li {
 }
 
 .description {
-    font-weight: lighter;
+    font-weight: normal;
 }
 
 #demo {

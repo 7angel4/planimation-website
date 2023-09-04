@@ -10,13 +10,14 @@
     <script src="../assets/scripts/reusable-elements.js"></script>
 </head>
 <body>
+    <web-logo></web-logo>
     <nav-bar></nav-bar>
     <head-banner></head-banner>
     <script>
         const headBanner = document.querySelector("head-banner");
         headBanner.setTextContent("A wiki for Planimation");
         headBanner.addTagLine("The visualiser of planning problems in PDDL");
-        headBanner.addButton("EXPLORE DOMAINS", "#");
+        headBanner.addButton("EXPLORE DOMAINS", "./gallery.html");
     </script>
 
     <div class="middle-block">
