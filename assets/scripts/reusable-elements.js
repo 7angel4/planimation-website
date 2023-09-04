@@ -56,18 +56,23 @@ class SearchBar extends HTMLElement {
         this.innerHTML =
             `
             <div class="search-bar">
+                <button class="search-btn"><img src="../assets/resources/icons/magnifying-glass.png" width="30px" height="30px"></button>
                 <input type="text" id="searchInput">
-                <button onClick=searchDocuments()>Search</button>
                 <style>
-                    input button {
+                    #searchInput {
+                        width: 40vw;
                         text-align: center;
-                    }
-                    input {
-                        padding: 5px 100px;
+                        background-color: #D9D9D9;
+                        border-width: 1.5px;
+                        border-radius: 25px;
                     }
                     .search-bar {
                         display: flex;
-                        justify-content: center; 
+                        justify-content: center;
+                    }
+                    .search-btn {
+                        background: transparent;
+                        border: none;
                     }
                 </style>
             </div>
@@ -79,9 +84,9 @@ class SearchBar extends HTMLElement {
         input.placeholder = text;
     }
 
-    setOnKeyUp(searchFunction) {
-        const input = document.querySelector(".search-bar > input");
-        input.onkeyup = searchFunction;
+    setOnClick(searchFunction) {
+        const btn = document.querySelector(".search-bar > button");
+        btn.onClick = searchFunction;
     }
 }
 
@@ -117,7 +122,7 @@ class HeadBanner extends HTMLElement {
                     color: black;
                     text-align: center;
                     background-color: white;
-                    margin: 50px auto 10px auto;
+                    margin: 50px auto 0 auto;
                     width: 100vw;
                 }
                 h1.page-name {
@@ -186,7 +191,6 @@ class WebLogo extends HTMLElement {
                     margin-left: 10px;
                     color: black;
                 }
-                
                 .logo > a:hover {
                     text-decoration: none;
                 }

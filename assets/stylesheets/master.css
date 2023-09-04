@@ -70,7 +70,6 @@ button.btn {
     padding: 10px;
     border: none;
     display: inline-block;
-    margin-bottom: 1rem;
     transition: color 0.2s, background-color 0.2s, border-color 0.2s;
 }
 
@@ -85,7 +84,6 @@ button.btn {
     color: black;
     text-align: center;
     background-color: white;
-    /*background-image: linear-gradient(120deg, #0A369D, #CFDEE7)*/
     margin: 0 auto;
 }
 
