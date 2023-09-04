@@ -3,7 +3,7 @@ class NavBar extends HTMLElement {
         this.innerHTML = `
             <header>
                 <div class="top-nav-bar">
-                    <img src="/assets/resources/icons/planimation_logo.png" alt="planimation logo" class="logo"/>
+                    <official-logo></official-logo>
                     <nav><ul class="nav-list">
                         <li><a href="./index.html">Home</a></li>
                         <li><a href="./documentation.html">Documentation</a></li>
@@ -13,10 +13,6 @@ class NavBar extends HTMLElement {
                     </ul></nav>
                 </div>
                 <style>
-                    .logo {
-                        width: 60px;
-                        height: 60px;
-                    }
                     .nav-list > li {
                         display: inline-block;
                         list-style-type: none;
@@ -184,7 +180,7 @@ class WebLogo extends HTMLElement {
             `
             <div class="logo">
                 <a href="./index.html">
-                    <img src="../assets/resources/logo.png" alt="Planiwiki logo" width='40px' height='40px'>
+                    <img src="../assets/resources/logo.png" alt="Planiwiki logo" width='40px' height='40px' class="logo-img">
                     <label class="web-name">Planiwiki</label>
                 </a>
             </div>
@@ -192,14 +188,13 @@ class WebLogo extends HTMLElement {
                 .logo { 
                     position: fixed; 
                     top: 1%; 
-                    left: 1%; 
-                    z-index: 10;
+                    left: 0.5%; 
                 } 
-                .logo > a > img {
-                    display: inline-block;
+                .logo-img {
+                    float: left;
                 }
+                
                 .web-name {
-                    display: inline-block;
                     font-weight: 800;
                     text-shadow: 1px 1px 2px gray;
                     font-size: 40px;
@@ -221,4 +216,6 @@ customElements.define('main-footer', Footer);
 customElements.define('search-bar', SearchBar);
 customElements.define('code-block', CodeBlock);
 customElements.define('head-banner', HeadBanner);
+customElements.define('official-logo', WebLogo);
+
 
