@@ -1,14 +1,29 @@
 body {
-    font-family: 'Raleway', sans-serif;
+    font-family: Arial, sans-serif;
 }
 
-.middle-block {
+.block1 {
+    width: 400px;
+    text-align: center;
+    margin: auto;
+}
+
+button {
+    background-color: #3F50B6;
+    border-radius: 25px;
+    color: white;
+    padding: 10px;
+    border: none;
+}
+
+.block2 {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.middle-block {
+.block1,
+.block2 {
     margin-top: 100px;
     margin-bottom: 100px;
 }
@@ -42,7 +57,7 @@ li {
 }
 
 .description {
-    font-weight: normal;
+    font-weight: lighter;
 }
 
 #demo {
@@ -51,10 +66,10 @@ li {
     height: 350px;
 }
 
-.bottom-block {
+.block3 {
     background-color: #3F50B6;
     color: white;
-    background-image: url(/assets/resources/icons/left-quotation-marks.png);
+    background-image: url(/public/assets/resources/icons/left_quotation_marks.png);
     background-repeat: no-repeat;
     background-position: 18% 20%;
 }
