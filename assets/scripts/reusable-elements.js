@@ -41,7 +41,7 @@ class Footer extends HTMLElement {
     connectedCallback() {
         this.innerHTML =
             `<footer class="page-footer">
-                <img src="/assets/resources/icons/planimation_logo.png" alt="planimation logo" class="logo"/>
+                <img src="/assets/resources/logo.png" alt="Planimation logo" width="40px" height="40px"/>
                 <button>
                     return to top
                 </button>
@@ -180,7 +180,7 @@ class WebLogo extends HTMLElement {
             `
             <div class="logo">
                 <a href="./index.html">
-                    <img src="../assets/resources/logo.png" alt="Planiwiki logo" width='40px' height='40px' class="logo-img">
+                    <img src="../assets/resources/logo.png" alt="Planimation logo" width='40px' height='40px' class="logo-img">
                     <label class="web-name">Planiwiki</label>
                 </a>
             </div>
