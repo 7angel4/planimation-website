@@ -69,7 +69,7 @@ li {
 .block3 {
     background-color: #3F50B6;
     color: white;
-    background-image: url(/assets/resources/icons/left_quotation_marks.png);
+    background-image: url(/public/assets/resources/icons/left_quotation_marks.png);
     background-repeat: no-repeat;
     background-position: 18% 20%;
 }

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.2">
+    <title>Planimation Documentation</title>
+    <link rel="stylesheet" type="text/css" href="/assets/stylesheets/master.css"/>
+    <link rel="stylesheet" type="text/css" href="/assets/stylesheets/doc-style.css"/>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script type="module" src="/assets/scripts/fetch-firebase.mjs"></script>
+    <script src="/assets/scripts/reusable-elements.js"></script>
+</head>
+
+<body>
+    <!-- Header at the top -->
+    <nav-bar></nav-bar>
+    <header class="page-header" role="banner">
+        <h1 class="page-name">Get Started with Planimation</h1>
+        <h2 class="page-tagline">A guide to writing animation profiles in Planimation</h2>
+        <!-- Link to GitHub documentation -->
+        <a href="https://github.com/planimation/documentation" class="btn">View original GitHub documentation</a>
+        <aside>Please refer to other <a class="reference external" href="references.html" id="header-ref"><u>resources</u></a> for more information on the PDDL syntax.</aside>
+    </header>
+    <search-bar></search-bar>
+
+    <!-- General Structure -->
+    <div class="page-content">
+        <section id="ap-structure">
+            <h2>General structure of an Animation Profile<a class="header-link" href="#ap-structure" title="Permalink to this heading">¶</a></h2>
+        </section>
+
+        <!-- Functions -->
+        <section id="effect-functions">
+            <h2><code>:effect</code> Functions<a class="header-link" href="#effect-functions" title="Permalink to this heading">¶</a></h2>
+
+            <!-- Distribution functions -->
+            <section id="distribution-functions">
+                <h3>Distribution of objects<a class="header-link" href="#distribution-functions" title="Permalink to this heading">¶</a></h3>
+                <p>Distribution functions 'distribute' objects in a certain manner. They are used to lay objects out on the screen.
+                    All objects for which the same parameters of 'distribute' are called will be included in the distribution.
+                    Distribution works such that objects will be placed in a certain area without overlapping.
+                    Between animation frames, objects will not move (unless their positions are reset).
+                </p>
+                <table class="doc-table-summary">
+                    <tbody class="doc-table-content">
+
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Other functions -->
+            <section id="other-functions">
+                <h3>Other functions<a class="header-link" href="#other-functions" title="Permalink to this heading">¶</a></h3>
+                <table class="doc-table-summary">
+                    <tbody>
+                    <tr class="row-odd">
+                        <td><p>
+                            <a class="reference internal" href="" title="calculate_label"><code class="table-keyword">calculate_label</code></a>
+                        </p></td>
+                        <td><p>Counts the number of objects being 'labelled' by this function for another object.</p></td>
+                    </tr>
+                    <tr class="row-even">
+                        <td><p>
+                            <a class="reference internal" href="" title="align_middle"><code class="table-keyword">align_middle</code></a>
+                        </p></td>
+                        <td><p>Aligns an object to the middle of another.</p></td>
+                    </tr>
+                    <tr class="row-odd">
+                        <td><p>
+                            <a class="reference internal" href="" title="apply_smaller"><code class="table-keyword">apply_smaller</code></a>
+                        </p></td>
+                        <td><p>Sets <code>y</code> to be displayed smaller than <code>x</code>.</p></td>
+                    </tr>
+                    <tr class="row-even">
+                        <td><p>
+                            <a class="reference internal" href="" title="draw_line"><code class="table-keyword">draw_line</code></a>
+                        </p></td>
+                        <td><p>Draws a line between two objects.</p></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </section>
+        </section>
+
+        <!-- Other sections in its own row -->
+        <section id="visual-properties">
+            <h3>Visual properties<a class="header-link" href="#visual-properties" title="Permalink to this heading">¶</a></h3>
+        </section>
+        <section id="further-reference">
+            <h3>Reference<a class="header-link" href="#further-reference" title="Permalink to this heading">¶</a></h3>
+        </section>
+
+    </div>
+
+    <!-- Footer -->
+    <main-footer></main-footer>
+
+</body>
+
+</html>

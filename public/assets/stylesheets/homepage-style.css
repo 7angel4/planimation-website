@@ -1,0 +1,82 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.block1 {
+    width: 400px;
+    text-align: center;
+    margin: auto;
+}
+
+button {
+    background-color: #3F50B6;
+    border-radius: 25px;
+    color: white;
+    padding: 10px;
+    border: none;
+}
+
+.block2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.block1,
+.block2 {
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+ul {
+    list-style-type: none;  
+    padding: 0;
+}
+
+h4 {
+    margin: 0;
+}
+
+li {
+    width: 500px;
+}
+
+.featureBlock {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.content {
+    width: 600px;
+    margin-left: 50px;
+}
+
+.icon {
+    width: 60px;
+    height: 60px;
+}
+
+.description {
+    font-weight: lighter;
+}
+
+#demo {
+    padding-left: 50px;
+    width: 500px;
+    height: 350px;
+}
+
+.block3 {
+    background-color: #3F50B6;
+    color: white;
+    background-image: url(/public/assets/resources/icons/left_quotation_marks.png);
+    background-repeat: no-repeat;
+    background-position: 18% 20%;
+}
+
+#quote {
+    width: 700px;
+    text-align: center;
+    margin: auto;
+    padding: 100px;
+}
