@@ -10,12 +10,17 @@
     <script src="../public/assets/scripts/reusable-elements.js"></script>
 </head>
 <body>
+    <web-logo></web-logo>
     <nav-bar></nav-bar>
-    <div class="block1">
-        <h1>A wiki for Planimation - the visualiser of planning problems in PDDL</h1>
-        <button>EXPLORE DOMAINS</button>
-    </div>
-    <div class="block2">
+    <head-banner></head-banner>
+    <script>
+        const headBanner = document.querySelector("head-banner");
+        headBanner.setTextContent("A wiki for Planimation");
+        headBanner.addTagLine("The visualiser of planning problems in PDDL");
+        headBanner.addButton("EXPLORE DOMAINS", "./gallery.html");
+    </script>
+
+    <div class="middle-block">
         <div id="features">
             <ul>
                 <li class="featureBlock">
@@ -53,7 +58,7 @@
         </div>
         <img src="/assets/resources/demo.gif" alt="Planimation Demo" id="demo"/>
     </div>
-    <div class="block3">
+    <div class="bottom-block">
         <p id="quote">Planiwiki serves as an extension to the planimation webpage hosted 
             on github. The original site lacked documentations on some 
             important functions, and also didn't have many sample animations 
@@ -64,5 +69,6 @@
         </p>
     </div>
 <!--    <main-footer></main-footer>-->
+<main-footer></main-footer>
 </body>
 </html>
