@@ -45,9 +45,7 @@ class Footer extends HTMLElement {
                 <button>
                     return to top
                 </button>
-                <div class="copyright">
-                    Copyright © Team AAAAS
-                </div>
+                <div class="copyright">Copyright &copy; Team AAAAS</div>
                 <style>
                     .page-footer {
                         display: flex;
