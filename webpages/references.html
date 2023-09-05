@@ -4,45 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Planimation References</title>
+    <link rel="stylesheet" type="text/css" href="../assets/stylesheets/master.css"/>
+    <script src="../assets/scripts/reusable-elements.js"></script>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 50px;
+        .ref-list {
+            display: table;
+            margin: 0 auto;
         }
-        a {
-            margin: 10px;
-            display: inline-block;
+        .ref-list > li {
+            padding: 5px 0;
+            line-height: 1.5;
         }
-        .references {
-            text-align: left;
-            margin: 20px auto;
-            max-width: 800px;
+        li span {
+            position: relative;
+            left: 10px;
         }
     </style>
-    <script src="../assets/scripts/reusable-elements.js"></script>
 </head>
 <body>
+    <head-banner></head-banner>
     <nav-bar></nav-bar>
-    <h1>Links to External Resources</h1>
+    <script>
+        const headBanner = document.querySelector("head-banner");
+        headBanner.setTextContent("Links to External Resources");
+    </script>
     <div class="references">
-        <ul>
-            <li>
+        <ul class="ref-list">
+            <li><span>
                 <a href="https://github.com/planimation/documentation/tree/master/AnimationProfiles" target="_blank" rel="reference">Planimation Documentation on GitHub</a>
-            </li>
-            <li>
+            </span></li>
+            <li><span>
                 <a href="http://editor.planning.domains/" target="_blank" rel="reference">Planning Domain Editor</a>
-            </li>
-            <li>
+            </span></li>
+            <li><span>
                 <a href="http://api.planning.domains/" target="_blank" rel="reference">API.Planning.Domains</a>
-            </li>
-            <li>
+            </span></li>
+            <li><span>
                 <a href="https://planning.wiki/" target="_blank" rel="reference">Planning.wiki</a>
-            </li>
-            <li>
+            </span></li>
+            <li><span>
                 <a href="https://planimation.planning.domains/problem" target="_blank" rel="reference">Planimation Visualiser</a>
-            </li>
+            </span></li>
         </ul>
     </div>
+
 </body>
 </html>
