@@ -103,9 +103,7 @@ function loadFunctionDoc(doc) {
         <div class="demo">
             <!-- Video demo -->
             <h3>Visual Demo</h3>
-            <div class="video-container">
-                <video width="320" height="240" controls id="video-demo"></video>
-            </div>
+            <div class="video-demo-container"></div>
             <!-- Code snippet -->
             <code-block id="code-demo"></code-block>
         </div>
@@ -119,7 +117,6 @@ function loadFunctionDoc(doc) {
 
 
 function loadParams(docId) {
-    console.log("hi");
     return new Promise((resolve, reject) => {
         db.collection("functions").doc(docId).collection("parameters").get().then((querySnapshot) => {
             addParams(querySnapshot);

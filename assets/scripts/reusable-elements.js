@@ -103,7 +103,7 @@ class CodeBlock extends HTMLElement {
     connectedCallback() {
         this.innerHTML =
             `
-            <pre><code></code></pre>
+            <pre><code class="formatted-code"></code></pre>
             <style>
                 pre {
                   background-color: #e8e8e8;
@@ -112,11 +112,15 @@ class CodeBlock extends HTMLElement {
                   padding: 20px;
                   border-radius: 0.5rem;
                 }
+                
+                .formatted-code {
+                    white-space: pre;
+                }
             </style>
             `
     }
 
-    setCodeContent(content) {
+    setTextContent(content) {
         this.children[0].children[0].textContent = content;
     }
 }

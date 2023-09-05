@@ -2,8 +2,21 @@ const FUNC_NAME_ELEM = "function-name";
 const FUNC_DESC_ELEM = "description";
 const FUNC_PARAMS_ELEM = "parameters";
 const FUNC_EG_ELEM = "example";
-const VIDEO_DEMO_ELEM = "video-demo";
+const VIDEO_DEMO_ELEM = ".video-demo-container";
 const CODE_DEMO_ELEM = "code-demo";
+const YOUTUBE_EMBEDDING_HTML =
+    `
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/Ee0ZWyQX9ZQ?si=Y4hANUQFWJwEv1Tj" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    `
+
+/**
+ * Gets the HTML code to embed the specified YouTube video.
+ * @param link: URL of the video demo on YouTube
+ * @returns the HTML code required to embed the given YouTube video
+ */
+const getYouTubeEmbedding = (link) => {
+    return `<iframe width="560" height="315" src=${link} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`
+};
 
 function addTitle(functionName) {
     const title = document.getElementById(FUNC_NAME_ELEM);
@@ -23,42 +36,44 @@ function addDescription(desc) {
  */
 export function addParams(querySnapshot) {
     const parameters = document.getElementById(FUNC_PARAMS_ELEM);
-    querySnapshot.forEach((paramDoc) => {
-            const li = document.createElement("li");
-            // wrap parameter name in code style
-            const paramName = document.createElement("code");
-            paramName.textContent = paramDoc.parameterName;
+    querySnapshot.forEach((doc) => {
+        const docData = doc.data();
+        const li = document.createElement("li");
+        // wrap parameter name in code style
+        const paramName = document.createElement("code");
+        paramName.textContent = docData.parameterName;
 
-            const paramDefaultVal = document.createElement("p");
-            paramDefaultVal.textContent = "Default value: " + paramDoc.defaultValue;
-            const paramDesc = document.createElement("p");
-            paramDesc.textContent = paramDoc.explanation;
+        const paramDefaultVal = document.createElement("p");
+        paramDefaultVal.textContent = "Default value: " + docData.defaultValue;
+        const paramDesc = document.createElement("p");
+        paramDesc.textContent = docData.explanation;
 
-            li.appendChild(paramName);
-            li.appendChild(paramDefaultVal);
-            li.appendChild(paramDesc);
+        li.appendChild(paramName);
+        li.appendChild(paramDefaultVal);
+        li.appendChild(paramDesc);
 
-            parameters.appendChild(li);
-        }
-    );
+        parameters.appendChild(li);
+    });
 }
 
 function addExample(exampleCode) {
     const example = document.getElementById(FUNC_EG_ELEM);
-    example.setCodeContent(exampleCode);
+    example.setTextContent(exampleCode);
 }
 
 function addVideoDemo(videoSrc) {
-    const video = document.getElementById(VIDEO_DEMO_ELEM);
-    const content = document.createElement("source");
-    content.type = "video/mp4";
-    content.src = videoSrc;
-    video.appendChild(content);
+    const videoContainer = document.querySelector(VIDEO_DEMO_ELEM);
+    videoContainer.innerHTML = getYouTubeEmbedding(videoSrc);
+    videoContainer.style["display"] = "inline-block";
 }
 
+const formatString = (s) => { return s.replaceAll("\\n", "\r\n"); }
+
 function addCodeDemo(code) {
-    const codeSnippet = document.getElementById(CODE_DEMO_ELEM);
-    codeSnippet.setCodeContent(code);
+    const codeBlock = document.getElementById(CODE_DEMO_ELEM);
+    codeBlock.setTextContent(formatString(code));
+    codeBlock.style["display"] = "inline-block";
+    codeBlock.style["float"] = "right";
 }
 
 /**
@@ -70,6 +85,6 @@ export function addData(doc) {
     addTitle(docData.functionName);
     addDescription(docData.briefDescription);
     addExample(docData.example);
-    addVideoDemo(docData.videoAddr);
+    addVideoDemo("https://www.youtube.com/embed/Ee0ZWyQX9ZQ?si=G8zBaidLGb0VY5Eh");
     addCodeDemo(docData.videoCode);
 }
