@@ -37,7 +37,7 @@ class NavBar extends HTMLElement {
     }
 }
 
-class Footer extends HTMLElement {
+class MainFooter extends HTMLElement {
     connectedCallback() {
         this.innerHTML =
             `<footer class="page-footer">
@@ -52,11 +52,13 @@ class Footer extends HTMLElement {
                         justify-content: space-between;
                         align-items: center;
                         color: black;
+                        /*position: absolute;*/
+                        /*bottom: 0;*/
+                        /*width: 100%;*/
                     }
                 </style>
             </footer>
             `
-
     }
 }
 
@@ -214,7 +216,7 @@ class WebLogo extends HTMLElement {
 
 
 customElements.define('nav-bar', NavBar);
-customElements.define('main-footer', Footer);
+customElements.define('main-footer', MainFooter);
 customElements.define('search-bar', SearchBar);
 customElements.define('code-block', CodeBlock);
 customElements.define('head-banner', HeadBanner);
