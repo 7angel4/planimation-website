@@ -1,17 +1,40 @@
-div.gallery-block {
-    margin: 5px;
-    border: 1px solid #ccc;
-    float: left;
-    width: 180px;
+.gallery {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: repeat(7, 20vw);
+    grid-gap: 15px;
+    margin-top: 30px;
 }
 
-div.gallery-block:hover {
+div.gallery-item {
+    margin: auto auto;
+    padding: 20px 50px 10px 50px;
+    text-align: center;
+    display: inline-block;
+    height: 100%;
+    width: 60%;
+
+    background-color: #F1F1F1;
+    border-radius: 25px;
+}
+
+.gallery-item:after {
+    clear: both;
+}
+
+div.gallery-item:hover {
     border: 1px solid #777;
 }
 
-div.gallery-block img {
-    width: 100%;
+.thumbnail {
+    width: 70%;
     height: auto;
+    max-width: 100%;
+    background-color: grey;
+}
+
+.caption {
+    display: block;
 }
 
 div.domain-desc {

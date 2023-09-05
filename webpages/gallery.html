@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="../assets/stylesheets/master.css"/>
     <link rel="stylesheet" type="text/css" href="../assets/stylesheets/gallery-style.css"/>
     <script type="module" src="../assets/scripts/fetch-animation.mjs"></script>
+    <script type="module" src="../assets/scripts/gallery-index.mjs"></script>
     <script src="../assets/scripts/reusable-elements.js"></script>
 </head>
 <body>
@@ -26,21 +27,6 @@
         searchBar.setOnKeyUp(filterAnimations);
     </script>
 
-    <div class="gallery-block">
-        <a target="_blank" href="15puzzle.html">
-            <img src="" alt="15puzzle" width="600" height="400">
-            <label>15puzzle</label>
-        </a>
-        <div class="animation-desc"></div> <!-- insert description -->
-    </div>
-
-    <div class="gallery-block">
-        <a target="_blank" href="blocksworld.html">
-            <img src="" alt="blocksworld" width="600" height="400">
-            <label>BlocksWorld</label>
-        </a>
-        <div class="domain-desc"></div> <!-- insert description -->
-    </div>
-
+    <div class="gallery"></div>
 </body>
 </html>
