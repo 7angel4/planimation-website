@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planimation Animations</title>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <link rel="stylesheet" type="text/css" href="assets/stylesheets/master.css"/>
+    <link rel="stylesheet" type="text/css" href="assets/stylesheets/gallery-style.css"/>
+    <script type="module" src="assets/scripts/fetch-animation.mjs"></script>
+    <script type="module" src="assets/scripts/gallery-index.mjs"></script>
+    <script src="assets/scripts/reusable-elements.js"></script>
+</head>
+<body>
+<nav-bar></nav-bar>
+<head-banner></head-banner>
+<search-bar></search-bar>
+<script>
+    const headBanner = document.querySelector("head-banner");
+    headBanner.setTextContent("Animation gallery");
+    headBanner.addTagLine("A collection of animations for various PDDL domains")
+    headBanner.addButton("View source code of animation profiles", "https://github.com/planimation/documentation/tree/master/AnimationProfiles");
+
+    const searchBar = document.querySelector("search-bar");
+    searchBar.setTextContent("Search for a domain");
+    searchBar.setOnKeyUp(filterAnimations);
+</script>
+
+<div class="gallery">
+    <h1 id="domain-name"></h1>
+    <p class="domain-desc"></p>
+    <div class="animation-container"><video></video></div>
+    <div class="file-buttons">
+        <button class="view-btn"></button>
+        <button class="view-btn"></button>
+        <button class="view-btn"></button>
+        <button class="view-btn"></button>
+        <button class="download-btn"></button>
+    </div>
+</div>
+
+<main-footer></main-footer>
+</body>
+</html>

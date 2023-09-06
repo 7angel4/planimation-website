@@ -4,20 +4,13 @@ const FUNC_PARAMS_ELEM = "parameters";
 const FUNC_EG_ELEM = "example";
 const VIDEO_DEMO_ELEM = ".video-demo-container";
 const CODE_DEMO_ELEM = "code-demo";
-const YOUTUBE_EMBEDDING_HTML =
-    `
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/Ee0ZWyQX9ZQ?si=Y4hANUQFWJwEv1Tj" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-    `
+
+import { getYouTubeEmbedding } from "./util.js"
 
 /**
- * Gets the HTML code to embed the specified YouTube video.
- * @param link: URL of the video demo on YouTube
- * @returns the HTML code required to embed the given YouTube video
+ * Adds a title to the page, which is the provided function name
+ * @param functionName: a function name representing the heading of this screen
  */
-const getYouTubeEmbedding = (link) => {
-    return `<iframe width="560" height="315" src=${link} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`
-};
-
 function addTitle(functionName) {
     const title = document.getElementById(FUNC_NAME_ELEM);
     const content = document.createElement("code");

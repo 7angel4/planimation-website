@@ -13,6 +13,7 @@ const firebaseConfig = {
 
 const TABLE_CONTENT_ELEM = ".doc-table-content";
 const PAGE_CONTENT_ELEM = ".page-content";
+const FUNCTION_COLLECTION = "functions";
 
 initializeApp(firebaseConfig);
 // Initialize Firebase
@@ -24,7 +25,7 @@ fetchDocumentList();
 
 // Fetch list of documents from Firestore
 function fetchDocumentList() {
-    db.collection("functions").get().then((querySnapshot) => {
+    db.collection(FUNCTION_COLLECTION).get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
             createFunctionRef(doc);
         });
@@ -87,9 +88,7 @@ function loadFunctionDoc(doc) {
         `
         <h1 id="function-name"></h1>
         <!-- General description -->
-        <div class="description">
-            <p id="description"></p>
-        </div>
+        <div class="description"><p id="description"></p></div>
         <!-- Parameters -->
         <div class="params">
             <h3>Parameters</h3>
