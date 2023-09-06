@@ -41,7 +41,7 @@ class MainFooter extends HTMLElement {
     connectedCallback() {
         this.innerHTML =
             `<footer class="page-footer">
-                <img src="/assets/resources/logo.png" alt="Planimation logo" width="40px" height="40px"/>
+                <img src="../assets/resources/logo.png" alt="Planimation logo" width="40px" height="40px"/>
                 <button>
                     return to top
                 </button>
