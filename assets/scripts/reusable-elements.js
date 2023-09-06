@@ -113,6 +113,7 @@ class CodeBlock extends HTMLElement {
                   display: block;
                   padding: 20px;
                   border-radius: 0.5rem;
+                  word-wrap: break-word;
                 }
                 
                 .formatted-code {
