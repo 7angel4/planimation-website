@@ -1,3 +1,5 @@
+const WEBPAGE_PATH = "assets/"
+
 class NavBar extends HTMLElement {
     connectedCallback() {
         this.innerHTML = `
@@ -41,7 +43,7 @@ class MainFooter extends HTMLElement {
     connectedCallback() {
         this.innerHTML =
             `<footer class="page-footer">
-                <img src="../assets/resources/logo.png" alt="Planimation logo" width="40px" height="40px"/>
+                <img src="${WEBPAGE_PATH}resources/logo.png" alt="Planimation logo" width="40px" height="40px"/>
                 <button>
                     return to top
                 </button>
@@ -67,7 +69,7 @@ class SearchBar extends HTMLElement {
         this.innerHTML =
             `
             <div class="search-bar">
-                <button class="search-btn"><img src="../assets/resources/icons/magnifying-glass.png" width="30px" height="30px"></button>
+                <button class="search-btn"><img src="${WEBPAGE_PATH}resources/icons/magnifying-glass.png" width="30px" height="30px"></button>
                 <input type="text" id="searchInput">
                 <style>
                     #searchInput {
@@ -185,7 +187,7 @@ class WebLogo extends HTMLElement {
             `
             <div class="logo">
                 <a href="./index.html">
-                    <img src="../assets/resources/logo.png" alt="Planimation logo" width='40px' height='40px' class="logo-img">
+                    <img src="${WEBPAGE_PATH}resources/logo.png" alt="Planimation logo" width='40px' height='40px' class="logo-img">
                     <label class="web-name">Planiwiki</label>
                 </a>
             </div>
