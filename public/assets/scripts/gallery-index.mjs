@@ -1,5 +1,5 @@
 const GALLERY_DIV = document.querySelector("div.gallery");
-const THUMBNAIL_PATH = "../assets/resources/thumbnails/"
+const THUMBNAIL_PATH = "assets/resources/thumbnails/"
 
 const getThumbnail = (domainName) => { return THUMBNAIL_PATH + domainName + ".png"};
 const getWebpage = (domainName) => { return domainName + ".html" };
