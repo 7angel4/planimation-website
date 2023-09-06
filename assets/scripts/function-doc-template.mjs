@@ -74,6 +74,7 @@ function addCodeDemo(code) {
     codeBlock.setTextContent(formatString(code));
     codeBlock.style["display"] = "inline-block";
     codeBlock.style["float"] = "right";
+    codeBlock.style["max-width"] = '50%';
 }
 
 /**
