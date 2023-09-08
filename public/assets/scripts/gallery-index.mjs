@@ -1,13 +1,14 @@
+import {loadDomainContent} from "./fetch-gallery-data.mjs";
 const GALLERY_DIV = document.querySelector("div.gallery");
 const THUMBNAIL_PATH = "assets/resources/thumbnails/"
 
 const getThumbnail = (domainName) => { return THUMBNAIL_PATH + domainName + ".png"};
-const getWebpage = (domainName) => { return domainName + ".html" };
+// const getWebpage = (domainName) => { return domainName + ".html" };
 function createGalleryItem(domain) {
     let galleryItem = document.createElement('div');
     galleryItem.className = "gallery-item";
     let link = document.createElement('a');
-    link.href = getWebpage(domain);
+    link.addEventListener('click', loadDomainContent);
 
     let thumbnail = document.createElement('img');
     thumbnail.className = "thumbnail";

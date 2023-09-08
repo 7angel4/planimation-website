@@ -45,7 +45,7 @@ function createFunctionRef(doc) {
     const p = document.createElement('p');
     const a = document.createElement('a');
     a.class = "reference internal";
-    a.href = "#"; // Placeholder href;
+    // a.href = "#"; // Placeholder href;
     a.addEventListener('click', loadDocumentContent);
     const code =  document.createElement('code');
     code.class="table-keyword";

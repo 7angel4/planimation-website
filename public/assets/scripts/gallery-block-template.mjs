@@ -1,13 +1,10 @@
-import { getYouTubeEmbedding } from "util.js";
+import { getYouTubeEmbedding } from "./util.js";
 
 const DOMAIN_NAME_ID = "domain-name";
 const DOMAIN_DESC_CLASS = ".domain-desc";
 const ANIMATION_CLASS = ".animation-container";
-const VIEW_BTN_CLASS = ".view-btn";
-const BTN_IDS = ["view-domain-file", "view-problem-file", "view-animation-profile", "src-code-btn"];
-const BTN_TEXTS = ["View Domain file", "View Problem file", "View Animation Profile", "Download source code"];
-const GITHUB_SRC_CODE_PATH = "https://github.com/planimation/documentation/tree/master/AnimationProfiles/";
-const BTN_TEXTS = [];
+const GITHUB_BTN_ID = "view-source-code";
+const EDITOR_BTN_ID = "view-on-PDDL-editor";
 
 function addTitle(domainName) {
     const title = document.getElementById(DOMAIN_NAME_ID);
@@ -32,13 +29,11 @@ function addButton(id, text, ref) {
     btn.appendChild(link);
 }
 
-function addButtons() {
-    let n = BTN_IDS.length;
-    for (let i = 0; i < n; i++) {
-        addButton(BTN_IDS[i], BTN_TEXTS[i], BTN_REFS[i]);
-    }
-}
-
 function addData(doc) {
-
+    const docData = doc.data();
+    addTitle(docData.name);
+    addDescription(docData.description);
+    // addAnimation(docData.youtubeLink);
+    addButton(GITHUB_BTN_ID, "View source code", docData.githubLink);
+    // addButton(EDITOR_BTN_ID, "View on PDDL Editor", docData.githubLink);
 }

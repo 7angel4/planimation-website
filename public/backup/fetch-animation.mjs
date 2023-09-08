@@ -51,6 +51,28 @@ function fetchAnimations() {
     });
 }
 
+function loadDomainContent(event) {
+    event.preventDefault(); // Prevent the default link behavior
+    const docId = event.target.dataset.docId; // Get the document ID from the data attribute
+
+    // Fetch the function content from Firestore
+    db.collection("animation").doc(docId).get().then((doc) => {
+        if (doc.exists) {
+            loadDomainPage(doc);
+        } else {
+            console.error("Domain not found!");
+        }
+    }).catch((error) => {
+        console.error("Error fetching domain content: ", error);
+    });
+}
+
+function loadDomainPage(doc) {
+    const domainPageTemplate =
+        `
+        `
+}
+
 function filterAnimations() {
     const input = document.getElementById('searchInput');
     const filter = input.value.toUpperCase();
