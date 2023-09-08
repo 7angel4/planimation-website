@@ -1,7 +1,7 @@
 import { getYouTubeEmbedding } from "./util.js";
 
 const DOMAIN_NAME_ID = "domain-name";
-const DOMAIN_DESC_CLASS = ".domain-desc";
+const DOMAIN_DESC_ID = "domain-desc";
 const ANIMATION_CLASS = ".animation-container";
 const GITHUB_BTN_ID = "view-source-code";
 const EDITOR_BTN_ID = "view-on-PDDL-editor";
@@ -12,7 +12,7 @@ function addTitle(domainName) {
 }
 
 function addDescription(domainDesc) {
-    const desc = document.querySelector(DOMAIN_DESC_CLASS);
+    const desc = document.getElementById(DOMAIN_DESC_ID);
     desc.textContent = domainDesc;
 }
 

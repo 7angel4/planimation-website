@@ -71,12 +71,12 @@ function createGalleryItem(domainDoc) {
 export function loadDomainContent(event) {
     event.preventDefault(); // Prevent the default link behavior
     const docId = event.target.dataset.docId; // Get the document ID from the data attribute
-    console.log(docId);
 
     // Fetch the function content from Firestore
     db.collection("animation").doc(docId).get().then((doc) => {
         if (doc.exists) {
             loadDomainPage(doc);
+            changePageDisplay();
         } else {
             console.error("Domain not found!");
         }
@@ -90,7 +90,7 @@ function loadDomainPage(doc) {
     GALLERY_DIV.innerHTML =
         `
         <h1 id="domain-name"></h1>
-        <p class="domain-desc"></p>
+        <div class="domain-desc"><p id="domain-desc"></p></div>
         <div class="animation-container"><video></video></div>
         <div class="file-buttons">
             <button id="view-source-code"></button>
@@ -98,4 +98,9 @@ function loadDomainPage(doc) {
         </div>
         `;
     document.body.onLoad = addData(doc);
+}
+
+function changePageDisplay() {
+    GALLERY_DIV.style.display = "block";
+    GALLERY_DIV.style.margin = "70px auto";
 }
