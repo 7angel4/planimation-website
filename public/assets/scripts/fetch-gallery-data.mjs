@@ -91,11 +91,8 @@ function loadDomainPage(doc) {
         `
         <h1 id="domain-name"></h1>
         <div class="domain-desc"><p id="domain-desc"></p></div>
-        <div class="animation-container"><video></video></div>
-        <div class="file-buttons">
-            <button id="view-source-code"></button>
-            <button id="view-on-PDDL-editor"></button>
-        </div>
+        <div class="animation-container"></div>
+        <button class="btn" id="view-source-code"></button>
         `;
     document.body.onLoad = addData(doc);
 }

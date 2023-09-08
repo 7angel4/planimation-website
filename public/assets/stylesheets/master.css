@@ -43,7 +43,7 @@ code {
     font-family: monospace, monospace;
     font-size: 1em;
     color: #0A369D;
-    background-color: transparent
+    background-color: transparent;
 }
 
 /** Hyperlinks **/
@@ -52,6 +52,7 @@ a {
     color: #006BC8;
     text-decoration: none;
     word-wrap: break-word;
+    font-family: 'Raleway', sans-serif;
 }
 
 a:hover {
