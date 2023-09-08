@@ -29,7 +29,7 @@ function addButton(id, text, ref) {
     btn.appendChild(link);
 }
 
-function addData(doc) {
+export function addData(doc) {
     const docData = doc.data();
     addTitle(docData.name);
     addDescription(docData.description);
