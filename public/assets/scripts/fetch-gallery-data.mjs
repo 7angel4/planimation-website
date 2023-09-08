@@ -86,7 +86,8 @@ export function loadDomainContent(event) {
 }
 
 function loadDomainPage(doc) {
-    const domainTemplate =
+    // Swap the content div
+    GALLERY_DIV.innerHTML =
         `
         <h1 id="domain-name"></h1>
         <p class="domain-desc"></p>
@@ -95,9 +96,6 @@ function loadDomainPage(doc) {
             <button id="view-source-code"></button>
             <button id="view-on-PDDL-editor"></button>
         </div>
-        `
-
-    // Swap the content div
-    GALLERY_DIV.innerHTML = domainTemplate;
+        `;
     document.body.onLoad = addData(doc);
 }
