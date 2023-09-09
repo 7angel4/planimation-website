@@ -115,6 +115,7 @@ function loadFunctionDoc(doc) {
             <div class="video-demo-container"></div>
             <!-- Code snippet -->
             <code-block id="code-demo"></code-block>
+            <p id="video-explanation"></p>
         </div>
         <button class="btn return"><a href="/documentation.html">Return</a></button>
     `

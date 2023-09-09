@@ -4,6 +4,7 @@ const FUNC_PARAMS_ELEM = "parameters";
 const FUNC_EG_ELEM = "example";
 const VIDEO_DEMO_ELEM = ".video-demo-container";
 const CODE_DEMO_ELEM = "code-demo";
+const VIDEO_EXPLANATION_ELEM = "video-explanation";
 
 import { getYouTubeEmbedding } from "./util.js"
 
@@ -71,6 +72,11 @@ function addCodeDemo(code, videoSrc) {
     codeBlock.style["max-width"] = '50%';
 }
 
+function addVideoExplanation(text) {
+    const p = document.getElementById(VIDEO_EXPLANATION_ELEM);
+    p.textContent = text;
+}
+
 /**
  * Add the string fields of the doc object to the HTML document
  * @param doc: an object containing multiple fields
@@ -82,4 +88,5 @@ export function addData(doc) {
     addExample(docData.example);
     addVideoDemo(docData.youtubeEmbeddingLink);
     addCodeDemo(docData.videoCode, docData.youtubeLink);
+    addVideoExplanation(docData.videoExplanation);
 }

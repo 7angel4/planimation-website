@@ -1,5 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-app.js";
 import { addData } from "./gallery-block-template.mjs";
+import { autoOpenPlanimation } from "./gallery-block-template.mjs";
 
 const firebaseConfig = {
     apiKey: "AIzaSyDf--XeJ2-pkwKkjGO1RLxzjwzJZUy_e0s",
@@ -91,7 +92,7 @@ function loadDomainPage(doc) {
         `
         <h1 id="domain-name"></h1>
         <div class="domain-desc"><p id="domain-desc"></p></div>
-        <div class="animation-container"><embed id="pddl-editor" width="100%" height="100%"></div>
+        <div class="animation-container"><iframe id="pddl-editor" width="100%" height="100%"></iframe></div>
         <button class="btn" id="view-source-code"></button>
         <button class="btn"><a href="gallery.html">Back</a></button>
         `;
