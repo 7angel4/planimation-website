@@ -55,6 +55,7 @@ function addExample(exampleCode) {
 }
 
 function addVideoDemo(videoSrc) {
+    if (videoSrc === undefined)  return;
     const videoContainer = document.querySelector(VIDEO_DEMO_ELEM);
     videoContainer.innerHTML = getYouTubeEmbedding(videoSrc);
     videoContainer.style["display"] = "inline-block";
@@ -62,11 +63,11 @@ function addVideoDemo(videoSrc) {
 
 const formatString = (s) => { return s.replaceAll("\\n", "\r\n"); }
 
-function addCodeDemo(code) {
+function addCodeDemo(code, videoSrc) {
     const codeBlock = document.getElementById(CODE_DEMO_ELEM);
     codeBlock.setTextContent(formatString(code));
     codeBlock.style["display"] = "inline-block";
-    codeBlock.style["float"] = "right";
+    codeBlock.style["float"] = (videoSrc === undefined) ? "none" : "right";
     codeBlock.style["max-width"] = '50%';
 }
 
@@ -79,6 +80,6 @@ export function addData(doc) {
     addTitle(docData.functionName);
     addDescription(docData.briefDescription);
     addExample(docData.example);
-    addVideoDemo(docData.youtubeLink);
-    addCodeDemo(docData.videoCode);
+    addVideoDemo(docData.youtubeEmbeddingLink);
+    addCodeDemo(docData.videoCode, docData.youtubeLink);
 }
