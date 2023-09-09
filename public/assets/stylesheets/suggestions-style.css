@@ -4,9 +4,25 @@ p {
 }
 
 .suggestions {
-    padding-bottom: 2.5rem;
+    padding: 2.5rem;
+    background-color: #3F50B6;
+    color: white;
+    height: 50vh;
 }
 
+.suggestions a {
+    color: hotpink;
+}
+
+.screenshot {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    border-color: black;
+    border-width: thick;
+    border-radius: 2%;
+}
 
 /* This change should be made in reusable-elements.js */
 /* nav-bar should be outside of body and inside of page container */
@@ -18,4 +34,6 @@ main-footer {
     width: 100%;
     height: 2.5rem; 
 }
+
+
 

@@ -18,4 +18,9 @@
 
 #description {
     width: 1200px;
+    text-align: center;
+}
+
+li a {
+    font-weight: bold;
 }
