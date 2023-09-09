@@ -111,7 +111,7 @@ function loadFunctionDoc(doc) {
             <!-- Code snippet -->
             <code-block id="code-demo"></code-block>
         </div>
-        <button class="btn"><a href="documentation.html">Back</a></button>
+        <button class="btn return"><a href="documentation.html">Return</a></button>
     `
     const contentDiv = document.querySelector(PAGE_CONTENT_CLASS);
     // Swap the content div
