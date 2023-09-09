@@ -91,7 +91,7 @@ function loadDomainPage(doc) {
         `
         <h1 id="domain-name"></h1>
         <div class="domain-desc"><p id="domain-desc"></p></div>
-        <div class="animation-container"></div>
+        <div class="animation-container"><embed id="pddl-editor" width="100%" height="100%"></div>
         <button class="btn" id="view-source-code"></button>
         <button class="btn"><a href="gallery.html">Back</a></button>
         `;

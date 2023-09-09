@@ -66,3 +66,7 @@ div.domain-desc {
     clear: both;
 }
 
+.animation-container {
+    width: 80%;
+    height: 70vw;
+}

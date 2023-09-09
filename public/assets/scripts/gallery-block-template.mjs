@@ -1,6 +1,6 @@
 const DOMAIN_NAME_ID = "domain-name";
 const DOMAIN_DESC_ID = "domain-desc";
-const ANIMATION_CLASS = ".animation-container";
+const EDITOR_ID = "pddl-editor";
 const GITHUB_BTN_ID = "view-source-code";
 
 function addTitle(domainName) {
@@ -13,9 +13,9 @@ function addDescription(domainDesc) {
     desc.textContent = domainDesc;
 }
 
-function addAnimation(domainName) {
-    const container = document.querySelector(ANIMATION_CLASS);
-    container.innerHTML = getYouTubeEmbedding(domainName);
+function addAnimation(sessionLink) {
+    const editor = document.getElementById(EDITOR_ID);
+    editor.src = sessionLink;
 }
 
 function addButton(id, text, ref) {
@@ -24,12 +24,12 @@ function addButton(id, text, ref) {
     link.href = ref;
     link.textContent = text;
     btn.appendChild(link);
-    // btn.style.float = right;
 }
 
 export function addData(doc) {
     const docData = doc.data();
     addTitle(docData.name);
     addDescription(docData.description);
+    addAnimation(docData.sessionLink);
     addButton(GITHUB_BTN_ID, "View source code", docData.githubLink);
 }
