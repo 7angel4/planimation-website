@@ -21,6 +21,12 @@
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "/function/**",
+        "destination": "/documentation.html"
+      }
     ]
   },
   "emulators": {

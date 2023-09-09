@@ -1,4 +1,4 @@
-const WEBPAGE_PATH = "assets/"
+const WEBPAGE_PATH = "/assets/"
 
 class NavBar extends HTMLElement {
     connectedCallback() {
@@ -7,11 +7,11 @@ class NavBar extends HTMLElement {
                 <div class="top-nav-bar">
                     <official-logo></official-logo>
                     <nav><ul class="nav-list">
-                        <li><a href="./index.html">Home</a></li>
-                        <li><a href="./documentation.html">Documentation</a></li>
-                        <li><a href="./gallery.html">Gallery</a></li>
-                        <li><a href="./references.html">References</a></li>
-                        <li><a href="./suggestions.html">Suggestions</a></li>
+                        <li><a href="/index.html">Home</a></li>
+                        <li><a href="/documentation.html">Documentation</a></li>
+                        <li><a href="/gallery.html">Gallery</a></li>
+                        <li><a href="/references.html">References</a></li>
+                        <li><a href="/suggestions.html">Suggestions</a></li>
                     </ul></nav>
                 </div>
                 <style>
@@ -186,7 +186,7 @@ class WebLogo extends HTMLElement {
         this.innerHTML =
             `
             <div class="logo">
-                <a href="./index.html">
+                <a href="/index.html">
                     <img src="${WEBPAGE_PATH}resources/logo.png" alt="Planimation logo" width='40px' height='40px' class="logo-img">
                     <label class="web-name">Planiwiki</label>
                 </a>
