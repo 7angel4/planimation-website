@@ -79,6 +79,6 @@ export function addData(doc) {
     addTitle(docData.functionName);
     addDescription(docData.briefDescription);
     addExample(docData.example);
-    addVideoDemo("https://www.youtube.com/embed/Ee0ZWyQX9ZQ?si=G8zBaidLGb0VY5Eh");
+    addVideoDemo(docData.youtubeLink);
     addCodeDemo(docData.videoCode);
 }

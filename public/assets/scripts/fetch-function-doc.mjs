@@ -11,9 +11,13 @@ const firebaseConfig = {
     measurementId: "G-XYNE4FJ1CF"
 };
 
-const TABLE_CONTENT_ELEM = ".doc-table-content";
-const PAGE_CONTENT_ELEM = ".page-content";
+const TABLE_CONTENT_CLASS = ".doc-table-content";
+const PAGE_CONTENT_CLASS = ".page-content";
 const FUNCTION_COLLECTION = "functions";
+const DISTRIBUTE_FUNCTIONS_TABLE = "#distribute-functions " + TABLE_CONTENT_CLASS;
+const OTHER_FUNCTIONS_TABLE = "#other-functions " + TABLE_CONTENT_CLASS;
+const DISTRIBUTE_FUNCTION_CATEGORY = "distribute";
+const OTHER_FUNCTION_CATEGORY = "others";
 
 initializeApp(firebaseConfig);
 // Initialize Firebase
@@ -37,8 +41,9 @@ function fetchDocumentList() {
 function createFunctionRef(doc) {
     let functionName = doc.data().functionName;
     let functionDescription = doc.data().briefDescription;
+    const category = doc.data().category;
 
-    const contentParent = document.querySelector(TABLE_CONTENT_ELEM);
+    const contentParent = document.querySelector((category === DISTRIBUTE_FUNCTION_CATEGORY) ? DISTRIBUTE_FUNCTIONS_TABLE : OTHER_FUNCTIONS_TABLE);
     const tr = document.createElement('tr');
     //tr.class = "row-odd";
     const td = document.createElement('td');
@@ -107,7 +112,7 @@ function loadFunctionDoc(doc) {
             <code-block id="code-demo"></code-block>
         </div>
     `
-    const contentDiv = document.querySelector(PAGE_CONTENT_ELEM);
+    const contentDiv = document.querySelector(PAGE_CONTENT_CLASS);
     // Swap the content div
     contentDiv.innerHTML = functionDocTemplate;
     document.body.onLoad = addData(doc);
@@ -117,7 +122,7 @@ function loadFunctionDoc(doc) {
 
 function loadParams(docId) {
     return new Promise((resolve, reject) => {
-        db.collection("functions").doc(docId).collection("parameters").get().then((querySnapshot) => {
+        db.collection(FUNCTION_COLLECTION).doc(docId).collection("parameters").get().then((querySnapshot) => {
             addParams(querySnapshot);
             resolve(); // Resolve the promise when done
         }).catch((error) => {
