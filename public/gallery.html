@@ -6,11 +6,10 @@
     <title>Planimation Animations</title>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-    <link rel="stylesheet" type="text/css" href="assets/stylesheets/master.css"/>
-    <link rel="stylesheet" type="text/css" href="assets/stylesheets/gallery-style.css"/>
-    <script type="module" src="assets/scripts/fetch-animation.mjs"></script>
-    <script type="module" src="assets/scripts/gallery-index.mjs"></script>
-    <script src="assets/scripts/reusable-elements.js"></script>
+    <link rel="stylesheet" type="text/css" href="./assets/stylesheets/master.css"/>
+    <link rel="stylesheet" type="text/css" href="./assets/stylesheets/gallery-style.css"/>
+    <script type="module" src="./assets/scripts/fetch-gallery-data.mjs"></script>
+    <script src="./assets/scripts/reusable-elements.js"></script>
 </head>
 <body>
     <nav-bar></nav-bar>
@@ -24,7 +23,7 @@
 
         const searchBar = document.querySelector("search-bar");
         searchBar.setTextContent("Search for a domain");
-        searchBar.setOnKeyUp(filterAnimations);
+        // searchBar.setOnKeyUp(filterAnimations);
     </script>
 
     <div class="gallery"></div>

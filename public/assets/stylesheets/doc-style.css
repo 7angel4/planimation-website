@@ -18,3 +18,7 @@ table.doc-table-summary p {
 table.doc-table-summary tr:nth-child(odd) {
     background-color: #F6F9FE;
 }
+
+.return {
+    margin-top: 20px;
+}

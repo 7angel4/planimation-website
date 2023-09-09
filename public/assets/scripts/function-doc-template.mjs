@@ -4,20 +4,13 @@ const FUNC_PARAMS_ELEM = "parameters";
 const FUNC_EG_ELEM = "example";
 const VIDEO_DEMO_ELEM = ".video-demo-container";
 const CODE_DEMO_ELEM = "code-demo";
-const YOUTUBE_EMBEDDING_HTML =
-    `
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/Ee0ZWyQX9ZQ?si=Y4hANUQFWJwEv1Tj" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-    `
+
+import { getYouTubeEmbedding } from "./util.js"
 
 /**
- * Gets the HTML code to embed the specified YouTube video.
- * @param link: URL of the video demo on YouTube
- * @returns the HTML code required to embed the given YouTube video
+ * Adds a title to the page, which is the provided function name
+ * @param functionName: a function name representing the heading of this screen
  */
-const getYouTubeEmbedding = (link) => {
-    return `<iframe width="560" height="315" src=${link} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`
-};
-
 function addTitle(functionName) {
     const title = document.getElementById(FUNC_NAME_ELEM);
     const content = document.createElement("code");
@@ -62,6 +55,7 @@ function addExample(exampleCode) {
 }
 
 function addVideoDemo(videoSrc) {
+    if (videoSrc === undefined)  return;
     const videoContainer = document.querySelector(VIDEO_DEMO_ELEM);
     videoContainer.innerHTML = getYouTubeEmbedding(videoSrc);
     videoContainer.style["display"] = "inline-block";
@@ -69,11 +63,11 @@ function addVideoDemo(videoSrc) {
 
 const formatString = (s) => { return s.replaceAll("\\n", "\r\n"); }
 
-function addCodeDemo(code) {
+function addCodeDemo(code, videoSrc) {
     const codeBlock = document.getElementById(CODE_DEMO_ELEM);
     codeBlock.setTextContent(formatString(code));
     codeBlock.style["display"] = "inline-block";
-    codeBlock.style["float"] = "right";
+    codeBlock.style["float"] = (videoSrc === undefined) ? "none" : "right";
     codeBlock.style["max-width"] = '50%';
 }
 
@@ -86,6 +80,6 @@ export function addData(doc) {
     addTitle(docData.functionName);
     addDescription(docData.briefDescription);
     addExample(docData.example);
-    addVideoDemo("https://www.youtube.com/embed/Ee0ZWyQX9ZQ?si=G8zBaidLGb0VY5Eh");
-    addCodeDemo(docData.videoCode);
+    addVideoDemo(docData.youtubeEmbeddingLink);
+    addCodeDemo(docData.videoCode, docData.youtubeLink);
 }

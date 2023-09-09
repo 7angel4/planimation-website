@@ -54,9 +54,10 @@ class MainFooter extends HTMLElement {
                         justify-content: space-between;
                         align-items: center;
                         color: black;
-                        /*position: absolute;*/
-                        /*bottom: 0;*/
-                        /*width: 100%;*/
+                        position: sticky;
+                        bottom: 0;
+                        background-color: white;
+                        padding: 1rem 2rem;
                     }
                 </style>
             </footer>
@@ -115,11 +116,13 @@ class CodeBlock extends HTMLElement {
                   display: block;
                   padding: 20px;
                   border-radius: 0.5rem;
-                  word-wrap: break-word;
-                }
-                
-                .formatted-code {
-                    white-space: pre;
+                  /*word-wrap: break-word;*/
+                  white-space: pre-wrap;
+                  white-space: -moz-pre-wrap;
+                  white-space: -o-pre-wrap;
+                  overflow-wrap: break-word;
+                  /*word-break: break-all;*/
+                  inline-size: 100%;
                 }
             </style>
             `
@@ -165,7 +168,6 @@ class HeadBanner extends HTMLElement {
         const link = document.createElement('a');
         link.textContent = text;
         link.href = ref;
-        link.style["color"] = "white";
         btn.appendChild(link);
         header.appendChild(btn);
     }

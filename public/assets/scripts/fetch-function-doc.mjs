@@ -11,9 +11,14 @@ const firebaseConfig = {
     measurementId: "G-XYNE4FJ1CF"
 };
 
+const TABLE_CONTENT_CLASS = ".doc-table-content";
+const PAGE_CONTENT_CLASS = ".page-content";
+const FUNCTION_COLLECTION = "functions";
+const DISTRIBUTE_FUNCTIONS_TABLE = "#distribute-functions " + TABLE_CONTENT_CLASS;
+const OTHER_FUNCTIONS_TABLE = "#other-functions " + TABLE_CONTENT_CLASS;
+const DISTRIBUTE_FUNCTION_CATEGORY = "distribute";
+const OTHER_FUNCTION_CATEGORY = "others";
 
-const TABLE_CONTENT_ELEM = ".doc-table-content";
-const PAGE_CONTENT_ELEM = ".page-content";
 initializeApp(firebaseConfig);
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
@@ -22,6 +27,7 @@ const db = firebase.firestore();
 
 
 fetchDocumentList();
+
 // Fetch list of documents from Firestore
 function fetchDocumentList() {
     db.collection("functions").get().then((querySnapshot) => {
@@ -32,10 +38,13 @@ function fetchDocumentList() {
         console.error("Error fetching document list: ", error);
     });
 }
+
 function createFunctionRef(doc) {
     let functionName = doc.data().functionName;
     let functionDescription = doc.data().briefDescription;
-    const contentParent = document.querySelector(TABLE_CONTENT_ELEM);
+    const category = doc.data().category;
+
+    const contentParent = document.querySelector((category === DISTRIBUTE_FUNCTION_CATEGORY) ? DISTRIBUTE_FUNCTIONS_TABLE : OTHER_FUNCTIONS_TABLE);
     const tr = document.createElement('tr');
     //tr.class = "row-odd";
     const td = document.createElement('td');
@@ -52,13 +61,16 @@ function createFunctionRef(doc) {
     p.appendChild(a);
     td.appendChild(p);
     tr.appendChild(td);
+
     const descriptionTd = document.createElement('td');
     const descriptionP = document.createElement('p');
     descriptionP.textContent = functionDescription;
     descriptionTd.appendChild(descriptionP);
     tr.appendChild(descriptionTd);
+
     contentParent.appendChild(tr);
 }
+
 function loadDocumentContent(event) {
     // Check if the clicked link is a function link
     if (event && event.target.dataset.type !== "function") {
@@ -80,41 +92,43 @@ function loadDocumentContent(event) {
         console.error("Error fetching function content: ", error);
     });
 }
+
 function loadFunctionDoc(doc) {
     const functionDocTemplate =
-        `	
-        <h1 id="function-name"></h1>	
-        <!-- General description -->	
-        <div class="description">	
-            <p id="description"></p>	
-        </div>	
-        <!-- Parameters -->	
-        <div class="params">	
-            <h3>Parameters</h3>	
-            <ul id="parameters"></ul>	
-        </div>	
-        <!-- Example usage -->	
-        <div class="example">	
-            <h3>Example</h3>	
-            <code-block id="example"></code-block>	
-        </div>	
-        <div class="demo">	
-            <!-- Video demo -->	
-            <h3>Visual Demo</h3>	
-            <div class="video-demo-container"></div>	
-            <!-- Code snippet -->	
-            <code-block id="code-demo"></code-block>	
-        </div>	
+        `
+        <h1 id="function-name"></h1>
+        <!-- General description -->
+        <div class="description"><p id="description"></p></div>
+        <!-- Parameters -->
+        <div class="params">
+            <h3>Parameters</h3>
+            <ul id="parameters"></ul>
+        </div>
+        <!-- Example usage -->
+        <div class="example">
+            <h3>Example</h3>
+            <code-block id="example"></code-block>
+        </div>
+        <div class="demo">
+            <!-- Video demo -->
+            <h3>Visual Demo</h3>
+            <div class="video-demo-container"></div>
+            <!-- Code snippet -->
+            <code-block id="code-demo"></code-block>
+        </div>
+        <button class="btn return"><a href="documentation.html">Return</a></button>
     `
-    const contentDiv = document.querySelector(PAGE_CONTENT_ELEM);
+    const contentDiv = document.querySelector(PAGE_CONTENT_CLASS);
     // Swap the content div
     contentDiv.innerHTML = functionDocTemplate;
     document.body.onLoad = addData(doc);
 }
 
+
+
 function loadParams(docId) {
     return new Promise((resolve, reject) => {
-        db.collection("functions").doc(docId).collection("parameters").get().then((querySnapshot) => {
+        db.collection(FUNCTION_COLLECTION).doc(docId).collection("parameters").get().then((querySnapshot) => {
             addParams(querySnapshot);
             resolve(); // Resolve the promise when done
         }).catch((error) => {
