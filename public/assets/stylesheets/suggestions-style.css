@@ -1,0 +1,21 @@
+p {
+    font-size: 20px;
+    text-align: center;
+}
+
+.suggestions {
+    padding-bottom: 2.5rem;
+}
+
+
+/* This change should be made in reusable-elements.js */
+/* nav-bar should be outside of body and inside of page container */
+/* https://www.freecodecamp.org/news/how-to-keep-your-footer-where-it-belongs-59c6aa05c59c/ */
+
+main-footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 2.5rem; 
+}
+
