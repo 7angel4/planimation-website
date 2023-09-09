@@ -93,6 +93,7 @@ function loadDomainPage(doc) {
         <div class="domain-desc"><p id="domain-desc"></p></div>
         <div class="animation-container"></div>
         <button class="btn" id="view-source-code"></button>
+        <button class="btn"><a href="gallery.html">Back</a></button>
         `;
     document.body.onLoad = addData(doc);
 }
