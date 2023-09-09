@@ -25,11 +25,12 @@ firebase.initializeApp(firebaseConfig);
 // Initialize Firestore
 const db = firebase.firestore();
 
+
 fetchDocumentList();
 
 // Fetch list of documents from Firestore
 function fetchDocumentList() {
-    db.collection(FUNCTION_COLLECTION).get().then((querySnapshot) => {
+    db.collection("functions").get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
             createFunctionRef(doc);
         });
@@ -50,13 +51,12 @@ function createFunctionRef(doc) {
     const p = document.createElement('p');
     const a = document.createElement('a');
     a.class = "reference internal";
-    // a.href = "#"; // Placeholder href;
-    a.addEventListener('click', loadDocumentContent);
+    a.href = `/function/${functionName}`;
+    a.dataset.type = "function";  // Add this line
     const code =  document.createElement('code');
     code.class="table-keyword";
     code.textContent = functionName;
     code.dataset.docId = doc.id;  // Store the document ID as a data attribute
-
     a.appendChild(code);
     p.appendChild(a);
     td.appendChild(p);
@@ -72,14 +72,19 @@ function createFunctionRef(doc) {
 }
 
 function loadDocumentContent(event) {
-    event.preventDefault(); // Prevent the default link behavior
-    const docId = event.target.dataset.docId; // Get the document ID from the data attribute
-
+    // Check if the clicked link is a function link
+    if (event && event.target.dataset.type !== "function") {
+        return;
+    }
+    // Extract the functionName from the URL path
+    const pathSegments = window.location.pathname.split('/');
+    const functionName = pathSegments[pathSegments.length - 1]; // Assuming the last segment is the functionName
     // Fetch the function content from Firestore
-    db.collection("functions").doc(docId).get().then((doc) => {
-        if (doc.exists) {
+    db.collection("functions").where("functionName", "==", functionName).get().then((querySnapshot) => {
+        if (!querySnapshot.empty) {
+            const doc = querySnapshot.docs[0];
             loadFunctionDoc(doc);
-            loadParams(docId);
+            loadParams(doc.id);
         } else {
             console.error("Function not found!");
         }
@@ -165,3 +170,10 @@ function searchDocuments() {
             console.error("Error searching documents: ", error);
         });
 }
+
+window.onload = function() {
+    // Check if the URL path contains "/function/"
+    if (window.location.pathname.includes("/function/")) {
+        loadDocumentContent();
+    }
+};
