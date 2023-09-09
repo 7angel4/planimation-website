@@ -3,53 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Planimation References</title>
+    <title>References</title>
     <link rel="stylesheet" type="text/css" href="assets/stylesheets/master.css"/>
+    <link rel="stylesheet" type="text/css" href="assets/stylesheets/references-style.css"/>
     <script src="assets/scripts/reusable-elements.js"></script>
-    <style>
-        .ref-list {
-            display: table;
-            margin: 0 auto;
-        }
-        .ref-list > li {
-            padding: 5px 0;
-            line-height: 1.5;
-        }
-        li span {
-            position: relative;
-            left: 10px;
-        }
-    </style>
 </head>
 <body>
-    <head-banner></head-banner>
     <nav-bar></nav-bar>
+    <head-banner></head-banner>
     <script>
         const headBanner = document.querySelector("head-banner");
-        headBanner.setTextContent("Links to External Resources");
+        headBanner.setTextContent("Links to External References");
     </script>
     <div class="references">
+        <p id="description">In order to ensure the utmost completeness and comprehensiveness of this wiki, we have included an extensive range of supplementary resources below to support your endeavors in PDDL and planimation.</p>
         <ul class="ref-list">
             <li><span>
-                <a href="https://github.com/planimation/documentation/tree/master/AnimationProfiles" target="_blank" rel="reference">Planimation Documentation on GitHub</a>
+                <a href="https://planimation.github.io/documentation/" target="_blank" rel="reference">Planimation Documentation on GitHub</a>
+                <p>Definitive home of Planimation. This site contains extended descriptions regarding the development of Planimation.</p>
             </span></li>
             <li><span>
-                <a href="http://editor.planning.domains/" target="_blank" rel="reference">Planning Domain Editor</a>
+                <a href="http://api.planning.domains/" target="_blank" rel="reference">Planning.Domains</a>
+                <p>This site contains a collection of tools for working with planning domains, including an API that provides programmatic access to a wide collection of PDDL benchmark domain and problem files, an automated planner and validator in the cloud, a PDDL editor, and a collection of learning resources.</p>
             </span></li>
             <li><span>
-                <a href="http://api.planning.domains/" target="_blank" rel="reference">API.Planning.Domains</a>
-            </span></li>
-            <li><span>
-                <a href="https://planning.wiki/" target="_blank" rel="reference">Planning.wiki</a>
+                <a href="https://planning.wiki/" target="_blank" rel="reference">Planning.Wiki</a>
+                <p>Definitive home of PDDL, which focuses on PDDL syntax and interpretation of PDDL problems.</p>
             </span></li>
             <li><span>
                 <a href="https://planimation.planning.domains/problem" target="_blank" rel="reference">Planimation Visualiser</a>
+                <p>A visualiser that accepts a domain file, a problem file and an animation file. An animation with an user interface is produced based on the supplied files.</p>
             </span></li>
         </ul>
     </div>
-
-    <main-footer>
-        <style> {position: absolute; bottom: 0} </style>
-    </main-footer>
+    <main-footer></main-footer>
 </body>
 </html>

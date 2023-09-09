@@ -1,0 +1,26 @@
+.references {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    font-size: large;
+}
+
+.ref-list > li {
+    padding: 5px 0;
+    line-height: 1.5;
+}
+
+.ref-list {
+    list-style: none;
+    width: 1200px;
+    padding: 0px;
+}
+
+#description {
+    width: 1200px;
+    text-align: center;
+}
+
+li a {
+    font-weight: bold;
+}
