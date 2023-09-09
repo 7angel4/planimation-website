@@ -77,6 +77,10 @@ button.btn {
     background-color: #313b82;
 }
 
+.btn > a {
+    color: white;
+}
+
 /** Header **/
 .page-header {
     color: black;
@@ -165,24 +169,24 @@ h6:hover a.header-link {
     visibility: visible;
 }
 
-/* rules for different screens */
-@media screen and (min-width: 64em) {
-    .page-footer {
-        padding: 3rem 6rem
-    }
-}
+/*!* rules for different screens *!*/
+/*@media screen and (min-width: 64em) {*/
+/*    .page-footer {*/
+/*        padding: 3rem 6rem*/
+/*    }*/
+/*}*/
 
-@media screen and (min-width: 42em) and (max-width: 64em) {
-    .page-footer {
-        padding: 2rem 4rem
-    }
-}
+/*@media screen and (min-width: 42em) and (max-width: 64em) {*/
+/*    .page-footer {*/
+/*        padding: 2rem 4rem*/
+/*    }*/
+/*}*/
 
-@media screen and (max-width: 42em) {
-    .page-footer {
-        padding: 1rem 1rem
-    }
-}
+/*@media screen and (max-width: 42em) {*/
+/*    .page-footer {*/
+/*        padding: 1rem 1rem*/
+/*    }*/
+/*}*/
 
 /** Table summaries **/
 table,thead,tbody,tr {
