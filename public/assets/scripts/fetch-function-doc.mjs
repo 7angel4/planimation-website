@@ -168,13 +168,29 @@ function createVisualPropertyRow(doc) {
     const descriptionTd = createTd(docData.description);
     const typeTd = createTd(docData.type);
     const additionalList = document.createElement('ul');
-    const defaultVal = document.createElement('li');
-    defaultVal.textContent = "Default value: " + docData.defaultValue;
-    const note = document.createElement('li');
-    note.textContent = docData.note;
-    additionalList.appendChild(defaultVal);
-    additionalList.appendChild(note);
     const additionalTd = createElemTd(additionalList);
+    let note, defaultVal;
+    if (docData.note === undefined && docData.defaultValue === undefined) {
+        additionalTd.style['background-color'] = '#D9D9D9';
+    } else if (docData.note === undefined && docData.defaultValue !== undefined) {
+        // defaultValue only
+        defaultVal = document.createElement('li');
+        defaultVal.textContent = "Default value: " + docData.defaultValue;
+        additionalList.appendChild(defaultVal);
+    } else if (docData.defaultValue === undefined && docData.note !== undefined) {
+        // note only
+        note = document.createElement('li');
+        note.textContent = docData.note;
+        additionalList.appendChild(note);
+    } else {
+        // both
+        defaultVal = document.createElement('li');
+        note = document.createElement('li');
+        defaultVal.textContent = docData.defaultValue;
+        note.textContent = docData.note;
+        additionalList.appendChild(defaultVal);
+        additionalList.appendChild(note);
+    }
 
     // add the entries into the row
     tr.appendChild(nameTd);
