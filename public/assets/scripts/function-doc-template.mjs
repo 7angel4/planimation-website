@@ -6,7 +6,7 @@ const VIDEO_DEMO_ELEM = ".video-demo-container";
 const CODE_DEMO_ELEM = "code-demo";
 const VIDEO_EXPLANATION_ELEM = "video-explanation";
 
-import { getYouTubeEmbedding } from "./util.js"
+import { getYouTubeEmbedding, formatString } from "./util.js"
 
 /**
  * Adds a title to the page, which is the provided function name
@@ -62,8 +62,6 @@ function addVideoDemo(videoSrc) {
     videoContainer.style["display"] = "inline-block";
 }
 
-const formatString = (s) => { return s.replaceAll("\\n", "\r\n"); }
-
 function addCodeDemo(code, videoSrc) {
     const codeBlock = document.getElementById(CODE_DEMO_ELEM);
     codeBlock.setTextContent(formatString(code));
@@ -89,4 +87,11 @@ export function addData(doc) {
     addVideoDemo(docData.youtubeEmbeddingLink);
     addCodeDemo(docData.videoCode, docData.youtubeLink);
     addVideoExplanation(docData.videoExplanation);
+}
+
+export function addCustomProperties(doc) {
+    const note = document.getElementById("custom-prop-note");
+    note.textContent = doc.data().note;
+    const example = document.getElementById("custom-prop-example");
+    example.setTextContent(formatString(doc.data().example));
 }

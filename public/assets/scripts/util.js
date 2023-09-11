@@ -31,3 +31,5 @@ export const createTdWithCode = (text) => {
     td.children[0].appendChild(code);
     return td;
 }
+
+export const formatString = (s) => { return s.replaceAll("\\n", "\r\n"); }

@@ -1,6 +1,6 @@
-import { addData, addParams } from "./function-doc-template.mjs";
+import { addData, addParams, addCustomProperties } from "./function-doc-template.mjs";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-app.js";
-import {createTdWithP, wrapTextInCode, createTdWithElem, createTdWithCode} from "./util.js";
+import {createTdWithP, wrapTextInCode, createTdWithElem, createTdWithCode, formatString} from "./util.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyDf--XeJ2-pkwKkjGO1RLxzjwzJZUy_e0s",
@@ -15,13 +15,16 @@ const firebaseConfig = {
 const TABLE_CONTENT_CLASS = ".doc-table-content";
 const PAGE_CONTENT_CLASS = ".page-content";
 const FUNCTION_COLLECTION = "functions";
+const CUSTOMISED_PROPERTY_COLLECTION = "customisedProperty";
+const CUSTOM_PROPERTY_ID = "custom-properties";
 const VISUAL_PROPERTY_COLLECTION = "visualProperty";
 const DISTRIBUTE_FUNCTIONS_TABLE = "#distribute-functions " + TABLE_CONTENT_CLASS;
 const OTHER_FUNCTIONS_TABLE = "#other-functions " + TABLE_CONTENT_CLASS;
-const VISUAL_PROPERTIES_TABLE = "#visual-properties " + TABLE_CONTENT_CLASS;
+const VISUAL_PROPERTY_ID = "visual-properties";
+const VISUAL_PROPERTIES_TABLE = "#" + VISUAL_PROPERTY_ID + " " + TABLE_CONTENT_CLASS;
 const DISTRIBUTE_FUNCTION_CATEGORY = "distribute";
 const OTHER_FUNCTION_CATEGORY = "others";
-const CHILD_DIR = "/function/"
+const CHILD_DIR = "/function/";
 
 initializeApp(firebaseConfig);
 // Initialize Firebase
@@ -32,6 +35,20 @@ const db = firebase.firestore();
 
 fetchDocumentList();
 fetchVisualPropertiesDoc();
+fetchCustomPropertiesDoc();
+
+/**
+ * Fetch documentation for visual properties from Firebase.
+ */
+function fetchCustomPropertiesDoc() {
+    db.collection(CUSTOMISED_PROPERTY_COLLECTION).get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            addCustomProperties(doc);
+        });
+    }).catch((error) => {
+        console.error("Error fetching documents for custom properties: ", error);
+    });
+}
 
 /**
  * Fetch documentation for visual properties from Firebase.
@@ -56,6 +73,7 @@ function fetchDocumentList() {
         console.error("Error fetching document list for functions: ", error);
     });
 }
+
 
 function createFunctionRef(doc) {
     let functionName = doc.data().functionName;
