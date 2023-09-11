@@ -71,7 +71,7 @@ function createFunctionRef(doc) {
     a.href = CHILD_DIR + functionName;
     a.dataset.type = "function";  // Add this line
     const code =  document.createElement('code');
-    code.class="table-keyword";
+    code.class = "table-keyword";
     code.textContent = functionName;
     code.dataset.docId = doc.id;  // Store the document ID as a data attribute
     a.appendChild(code);
@@ -156,6 +156,12 @@ function loadParams(docId) {
     });
 }
 
+function wrapTextInCode(text) {
+    const code = document.createElement('code');
+    code.textContent = text;
+    return code;
+}
+
 function createVisualPropertyRow(doc) {
     const docData = doc.data();
     const contentParent = document.querySelector(VISUAL_PROPERTIES_TABLE);
@@ -171,11 +177,12 @@ function createVisualPropertyRow(doc) {
     const additionalTd = createElemTd(additionalList);
     let note, defaultVal;
     if (docData.note === undefined && docData.defaultValue === undefined) {
-        additionalTd.style['background-color'] = '#D9D9D9';
+        additionalTd.style['background-color'] = '#ecf2f6';
     } else if (docData.note === undefined && docData.defaultValue !== undefined) {
         // defaultValue only
         defaultVal = document.createElement('li');
-        defaultVal.textContent = "Default value: " + docData.defaultValue;
+        defaultVal.textContent = "Default value: ";
+        defaultVal.appendChild(wrapTextInCode(docData.defaultValue));
         additionalList.appendChild(defaultVal);
     } else if (docData.defaultValue === undefined && docData.note !== undefined) {
         // note only
