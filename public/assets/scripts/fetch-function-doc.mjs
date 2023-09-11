@@ -17,7 +17,7 @@ const FUNCTION_COLLECTION = "functions";
 const VISUAL_PROPERTY_COLLECTION = "visualProperty";
 const DISTRIBUTE_FUNCTIONS_TABLE = "#distribute-functions " + TABLE_CONTENT_CLASS;
 const OTHER_FUNCTIONS_TABLE = "#other-functions " + TABLE_CONTENT_CLASS;
-const VISUAL_PROPERTIES_TABLE = "#visual-properties" + TABLE_CONTENT_CLASS;
+const VISUAL_PROPERTIES_TABLE = "#visual-properties " + TABLE_CONTENT_CLASS;
 const DISTRIBUTE_FUNCTION_CATEGORY = "distribute";
 const OTHER_FUNCTION_CATEGORY = "others";
 const CHILD_DIR = "/function/"
@@ -189,6 +189,7 @@ function createTd(text) {
     const td = document.createElement('td');
     const textContainer = document.createElement('p');
     textContainer.textContent = text;
+    td.appendChild(textContainer);
     return td;
 }
 
