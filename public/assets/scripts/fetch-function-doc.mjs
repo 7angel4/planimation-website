@@ -14,6 +14,7 @@ const firebaseConfig = {
 const TABLE_CONTENT_CLASS = ".doc-table-content";
 const PAGE_CONTENT_CLASS = ".page-content";
 const FUNCTION_COLLECTION = "functions";
+const VISUAL_PROPERTY_COLLECTION = "visualProperty";
 const DISTRIBUTE_FUNCTIONS_TABLE = "#distribute-functions " + TABLE_CONTENT_CLASS;
 const OTHER_FUNCTIONS_TABLE = "#other-functions " + TABLE_CONTENT_CLASS;
 const VISUAL_PROPERTIES_TABLE = "#visual-properties" + TABLE_CONTENT_CLASS;
@@ -29,15 +30,29 @@ const db = firebase.firestore();
 
 
 fetchDocumentList();
+fetchVisualPropertiesDoc();
+
+/**
+ * Fetch documentation for visual properties from Firebase.
+ */
+function fetchVisualPropertiesDoc() {
+    db.collection(VISUAL_PROPERTY_COLLECTION).get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            createVisualPropertyRow(doc);
+        });
+    }).catch((error) => {
+        console.error("Error fetching document list for visual properties: ", error);
+    });
+}
 
 // Fetch list of documents from Firestore
 function fetchDocumentList() {
-    db.collection("functions").get().then((querySnapshot) => {
+    db.collection(FUNCTION_COLLECTION).get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
             createFunctionRef(doc);
         });
     }).catch((error) => {
-        console.error("Error fetching document list: ", error);
+        console.error("Error fetching document list for functions: ", error);
     });
 }
 
