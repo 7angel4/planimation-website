@@ -15,7 +15,7 @@ const firebaseConfig = {
 const TABLE_CONTENT_CLASS = ".doc-table-content";
 const PAGE_CONTENT_CLASS = ".page-content";
 const FUNCTION_COLLECTION = "functions";
-const CUSTOMISED_PROPERTY_COLLECTION = "customisedProperty";
+const CUSTOM_PROPERTY_COLLECTION = "customisedProperty";
 const CUSTOM_PROPERTY_ID = "custom-properties";
 const VISUAL_PROPERTY_COLLECTION = "visualProperty";
 const DISTRIBUTE_FUNCTIONS_TABLE = "#distribute-functions " + TABLE_CONTENT_CLASS;
@@ -33,44 +33,23 @@ firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
 
-fetchDocumentList();
-fetchVisualPropertiesDoc();
-fetchCustomPropertiesDoc();
+fetchDocFromCollection(FUNCTION_COLLECTION, createFunctionRef);
+fetchDocFromCollection(VISUAL_PROPERTY_COLLECTION, createVisualPropertyRow);
+fetchDocFromCollection(CUSTOM_PROPERTY_COLLECTION, addCustomProperties);
 
 /**
- * Fetch documentation for visual properties from Firebase.
+ * Fetch documentation from Firestore for the given collection,
+ * and performs the action on the documents
+ * @param collectionName: name of the collection from which data is to be fetched.
+ * @param action: action to be performed on the documents.
  */
-function fetchCustomPropertiesDoc() {
-    db.collection(CUSTOMISED_PROPERTY_COLLECTION).get().then((querySnapshot) => {
+function fetchDocFromCollection(collectionName, action) {
+    db.collection(collectionName).get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
-            addCustomProperties(doc);
+            action(doc);
         });
     }).catch((error) => {
-        console.error("Error fetching documents for custom properties: ", error);
-    });
-}
-
-/**
- * Fetch documentation for visual properties from Firebase.
- */
-function fetchVisualPropertiesDoc() {
-    db.collection(VISUAL_PROPERTY_COLLECTION).get().then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-            createVisualPropertyRow(doc);
-        });
-    }).catch((error) => {
-        console.error("Error fetching document list for visual properties: ", error);
-    });
-}
-
-// Fetch list of documents from Firestore
-function fetchDocumentList() {
-    db.collection(FUNCTION_COLLECTION).get().then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-            createFunctionRef(doc);
-        });
-    }).catch((error) => {
-        console.error("Error fetching document list for functions: ", error);
+        console.error("Error fetching documents for " + collectionName + ": ", error);
     });
 }
 
