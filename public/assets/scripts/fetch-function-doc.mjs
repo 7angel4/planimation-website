@@ -71,7 +71,7 @@ function createFunctionRef(doc) {
     a.href = CHILD_DIR + functionName;
     a.dataset.type = "function";  // Add this line
     const code =  document.createElement('code');
-    code.class="table-keyword";
+    code.class = "table-keyword";
     code.textContent = functionName;
     code.dataset.docId = doc.id;  // Store the document ID as a data attribute
     a.appendChild(code);
@@ -97,7 +97,7 @@ function loadDocumentContent(event) {
     const pathSegments = window.location.pathname.split('/');
     const functionName = pathSegments[pathSegments.length - 1]; // Assuming the last segment is the functionName
     // Fetch the function content from Firestore
-    db.collection("functions").where("functionName", "==", functionName).get().then((querySnapshot) => {
+    db.collection(FUNCTION_COLLECTON).where("functionName", "==", functionName).get().then((querySnapshot) => {
         if (!querySnapshot.empty) {
             const doc = querySnapshot.docs[0];
             loadFunctionDoc(doc);
@@ -219,7 +219,7 @@ function searchDocuments() {
     contentDiv.innerHTML = ""; // Clear the content
 
     // Query Firestore for documents with titles that start with the search term
-    db.collection("functions")
+    db.collection(FUNCTION_COLLECTION)
         .where("functionName", ">=", searchTerm)
         .where("functionName", ">=", searchTerm + "\uf8ff")
         .get()
