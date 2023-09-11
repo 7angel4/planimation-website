@@ -6,3 +6,28 @@
 export const getYouTubeEmbedding = (link) => {
     return `<iframe width="560" height="315" src=${link} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`
 };
+
+export const wrapTextInCode = (text) => {
+    const code = document.createElement('code');
+    code.textContent = text;
+    return code;
+}
+
+export const createTdWithP = (text) => {
+    const textContainer = document.createElement('p');
+    textContainer.textContent = text;
+    return createTdWithElem(textContainer);
+}
+
+export const createTdWithElem = (elem) => {
+    const td = document.createElement('td');
+    td.appendChild(elem);
+    return td;
+}
+
+export const createTdWithCode = (text) => {
+    const code = wrapTextInCode(text);
+    const td = createTdWithP("");
+    td.children[0].appendChild(code);
+    return td;
+}

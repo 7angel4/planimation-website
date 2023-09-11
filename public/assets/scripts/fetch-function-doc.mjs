@@ -1,5 +1,6 @@
 import { addData, addParams } from "./function-doc-template.mjs";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-app.js";
+import {createTdWithP, wrapTextInCode, createTdWithElem, createTdWithCode} from "./util.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyDf--XeJ2-pkwKkjGO1RLxzjwzJZUy_e0s",
@@ -63,28 +64,23 @@ function createFunctionRef(doc) {
 
     const contentParent = document.querySelector((category === DISTRIBUTE_FUNCTION_CATEGORY) ? DISTRIBUTE_FUNCTIONS_TABLE : OTHER_FUNCTIONS_TABLE);
     const tr = document.createElement('tr');
-    //tr.class = "row-odd";
-    const td = document.createElement('td');
+
+    // inside the td
     const p = document.createElement('p');
     const a = document.createElement('a');
     a.class = "reference internal";
     a.href = CHILD_DIR + functionName;
     a.dataset.type = "function";  // Add this line
     const code =  document.createElement('code');
-    code.class = "table-keyword";
+    // code.class = "table-keyword";
     code.textContent = functionName;
     code.dataset.docId = doc.id;  // Store the document ID as a data attribute
     a.appendChild(code);
     p.appendChild(a);
-    td.appendChild(p);
-    tr.appendChild(td);
 
-    const descriptionTd = document.createElement('td');
-    const descriptionP = document.createElement('p');
-    descriptionP.textContent = functionDescription;
-    descriptionTd.appendChild(descriptionP);
-    tr.appendChild(descriptionTd);
-
+    // assemble
+    tr.appendChild(createTdWithElem(p));
+    tr.appendChild(createTdWithP(functionDescription));
     contentParent.appendChild(tr);
 }
 
@@ -156,25 +152,20 @@ function loadParams(docId) {
     });
 }
 
-function wrapTextInCode(text) {
-    const code = document.createElement('code');
-    code.textContent = text;
-    return code;
-}
-
 function createVisualPropertyRow(doc) {
     const docData = doc.data();
     const contentParent = document.querySelector(VISUAL_PROPERTIES_TABLE);
 
     // row header
     const tr = document.createElement('tr', 'table-keyword');
-    const nameTd = createCodeTd(docData.name);
+    const nameTd = createTdWithCode(docData.name);
 
     // row body
-    const descriptionTd = createTd(docData.description);
-    const typeTd = createTd(docData.type);
+    const descriptionTd = createTdWithP(docData.description);
+    const typeTd = createTdWithP(docData.type);
     const additionalList = document.createElement('ul');
-    const additionalTd = createElemTd(additionalList);
+    const additionalTd = createTdWithElem(additionalList);
+
     let note, defaultVal;
     if (docData.note === undefined && docData.defaultValue === undefined) {
         additionalTd.style['background-color'] = '#ecf2f6';
@@ -207,35 +198,6 @@ function createVisualPropertyRow(doc) {
 
     contentParent.appendChild(tr);
 }
-
-function createTd(text) {
-    const td = document.createElement('td');
-    const textContainer = document.createElement('p');
-    textContainer.textContent = text;
-    td.appendChild(textContainer);
-    return td;
-}
-
-function createCodeTd(text, elemClass) {
-    const td = document.createElement('td');
-    const textContainer = document.createElement('p');
-    const codeContainer = document.createElement('code');
-    codeContainer.textContent = text;
-    codeContainer.class = elemClass;
-
-    textContainer.appendChild(codeContainer);
-    td.appendChild(textContainer);
-    return td;
-}
-
-function createElemTd(elem) {
-    const td = document.createElement('td');
-    const textContainer = document.createElement('p');
-    textContainer.appendChild(elem);
-    td.appendChild(textContainer);
-    return td;
-}
-
 
 function searchDocuments() {
     const searchTerm = document.getElementById('searchInput').value;
