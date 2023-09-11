@@ -88,6 +88,15 @@ class SearchBar extends HTMLElement {
                 </style>
             </div>
             `
+        const input = this.querySelector("#searchInput");
+
+        // Determine the context and set it as a data- attribute
+        if (window.location.pathname.includes("gallery.html")) {
+            this.setAttribute("data-context", "gallery");
+        } else {
+            this.setAttribute("data-context", "documentation");
+        }
+        input.addEventListener("keyup", this.filterItems.bind(this));
     }
 
     setTextContent(text) {
@@ -98,6 +107,58 @@ class SearchBar extends HTMLElement {
     setOnClick(searchFunction) {
         const btn = document.querySelector(".search-bar > button");
         btn.onClick = searchFunction;
+    }
+
+    filterItems(e) {
+        const query = e.target.value.toLowerCase();
+        const context = this.getAttribute("data-context");
+
+        if (context === "documentation") {
+            this.filterDocs(query);
+        } else if (context === "gallery") {
+            this.filterGallery(query);
+        }
+    }
+
+    filterDocs(query) {
+        // Get all sections with .doc-table-content
+        const tables = document.querySelectorAll(".doc-table-content");
+
+        tables.forEach(table => {
+            let anyVisible = false;
+            const functionRows = table.querySelectorAll('tr');
+
+            functionRows.forEach(row => {
+                const functionNameElement = row.querySelector(".table-keyword");
+                if (functionNameElement) {
+                    const functionName = functionNameElement.textContent.toLowerCase();
+                    const isVisible = functionName.includes(query);
+                    row.style.display = isVisible ? "" : "none";
+                    anyVisible = anyVisible || isVisible;
+                }
+            });
+
+            // Determine the associated .no-match-message for this table.
+            const section = table.closest('section');
+            const messageElement = section.querySelector('.no-match-message');
+            messageElement.style.display = anyVisible ? 'none' : 'block';
+        });
+    }
+
+    filterGallery(query) {
+        const galleryItems = document.querySelectorAll(".gallery-item .caption");
+        let anyVisible = false;
+
+        galleryItems.forEach(item => {
+            const domainName = item.textContent.toLowerCase();
+            const isVisible = domainName.includes(query);
+            item.parentElement.parentElement.style.display = isVisible ? "" : "none";
+            anyVisible = anyVisible || isVisible;
+        });
+
+        // If none are visible, show the message
+        const messageElement = document.querySelector(".no-match-message");
+        messageElement.style.display = anyVisible ? 'none' : 'block';
     }
 }
 

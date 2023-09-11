@@ -54,7 +54,7 @@ function createFunctionRef(doc) {
     a.href = `/function/${functionName}`;
     a.dataset.type = "function";  // Add this line
     const code =  document.createElement('code');
-    code.class="table-keyword";
+    code.className="table-keyword";
     code.textContent = functionName;
     code.dataset.docId = doc.id;  // Store the document ID as a data attribute
     a.appendChild(code);
@@ -139,38 +139,6 @@ function loadParams(docId) {
     });
 }
 
-
-function searchDocuments() {
-    const searchTerm = document.getElementById('searchInput').value;
-    const contentDiv = document.querySelector('.content');
-    contentDiv.innerHTML = ""; // Clear the content
-
-    // Query Firestore for documents with titles that start with the search term
-    db.collection("functions")
-        .where("functionName", ">=", searchTerm)
-        .where("functionName", ">=", searchTerm + "\uf8ff")
-        .get()
-        .then((querySnapshot) => {
-            if (querySnapshot.empty) {
-                contentDiv.innerHTML = "No documents found for the search term.";
-                return;
-            }
-
-            querySnapshot.forEach((doc) => {
-                const docData = doc.data();
-                const docLink = document.createElement('a');
-                docLink.textContent = docData.functionName;
-                docLink.href = "#"; // Placeholder href
-                docLink.dataset.docId = doc.id; // Store the document ID as a data attribute
-                docLink.addEventListener('click', loadDocumentContent); // Add click event listener
-                contentDiv.appendChild(docLink);
-                contentDiv.appendChild(document.createElement('br')); // Line break for readability
-            });
-        })
-        .catch((error) => {
-            console.error("Error searching documents: ", error);
-        });
-}
 
 window.onload = function() {
     // Check if the URL path contains "/function/"
