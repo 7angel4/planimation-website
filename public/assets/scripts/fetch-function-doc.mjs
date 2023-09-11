@@ -94,6 +94,19 @@ function loadDocumentContent(event) {
 }
 
 function loadFunctionDoc(doc) {
+    const functionName = doc.data().functionName;
+    const headBanner = document.querySelector("head-banner");
+
+    // Hide the main title, tagline, and button within the head-banner
+    const titleElement = headBanner.querySelector(".page-name");
+    const tagLineElement = headBanner.querySelector("h2");
+    const buttonElement = headBanner.querySelector("button");
+
+    if (titleElement) titleElement.style.display = "none";
+    if (tagLineElement) tagLineElement.style.display = "none";
+    if (buttonElement) buttonElement.style.display = "none";
+
+
     const functionDocTemplate =
         `
         <h1 id="function-name"></h1>
