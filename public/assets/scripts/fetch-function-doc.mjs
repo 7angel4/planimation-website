@@ -16,8 +16,10 @@ const PAGE_CONTENT_CLASS = ".page-content";
 const FUNCTION_COLLECTION = "functions";
 const DISTRIBUTE_FUNCTIONS_TABLE = "#distribute-functions " + TABLE_CONTENT_CLASS;
 const OTHER_FUNCTIONS_TABLE = "#other-functions " + TABLE_CONTENT_CLASS;
+const VISUAL_PROPERTIES_TABLE = "#visual-properties" + TABLE_CONTENT_CLASS;
 const DISTRIBUTE_FUNCTION_CATEGORY = "distribute";
 const OTHER_FUNCTION_CATEGORY = "others";
+const CHILD_DIR = "/function/"
 
 initializeApp(firebaseConfig);
 // Initialize Firebase
@@ -51,7 +53,7 @@ function createFunctionRef(doc) {
     const p = document.createElement('p');
     const a = document.createElement('a');
     a.class = "reference internal";
-    a.href = `/function/${functionName}`;
+    a.href = CHILD_DIR + functionName;
     a.dataset.type = "function";  // Add this line
     const code =  document.createElement('code');
     code.class="table-keyword";
@@ -139,6 +141,62 @@ function loadParams(docId) {
     });
 }
 
+function createVisualPropertyRow(doc) {
+    const docData = doc.data();
+    const contentParent = document.querySelector(VISUAL_PROPERTIES_TABLE);
+
+    // row header
+    const tr = document.createElement('tr', 'table-keyword');
+    const nameTd = createCodeTd(docData.name);
+
+    // row body
+    const descriptionTd = createTd(docData.description);
+    const typeTd = createTd(docData.type);
+    const additionalList = document.createElement('ul');
+    const defaultVal = document.createElement('li');
+    defaultVal.textContent = "Default value: " + docData.defaultValue;
+    const note = document.createElement('li');
+    note.textContent = docData.note;
+    additionalList.appendChild(defaultVal);
+    additionalList.appendChild(note);
+    const additionalTd = createElemTd(additionalList);
+
+    // add the entries into the row
+    tr.appendChild(nameTd);
+    tr.appendChild(typeTd);
+    tr.appendChild(descriptionTd);
+    tr.appendChild(additionalTd);
+
+    contentParent.appendChild(tr);
+}
+
+function createTd(text) {
+    const td = document.createElement('td');
+    const textContainer = document.createElement('p');
+    textContainer.textContent = text;
+    return td;
+}
+
+function createCodeTd(text, elemClass) {
+    const td = document.createElement('td');
+    const textContainer = document.createElement('p');
+    const codeContainer = document.createElement('code');
+    codeContainer.textContent = text;
+    codeContainer.class = elemClass;
+
+    textContainer.appendChild(codeContainer);
+    td.appendChild(textContainer);
+    return td;
+}
+
+function createElemTd(elem) {
+    const td = document.createElement('td');
+    const textContainer = document.createElement('p');
+    textContainer.appendChild(elem);
+    td.appendChild(textContainer);
+    return td;
+}
+
 
 function searchDocuments() {
     const searchTerm = document.getElementById('searchInput').value;
@@ -174,7 +232,7 @@ function searchDocuments() {
 
 window.onload = function() {
     // Check if the URL path contains "/function/"
-    if (window.location.pathname.includes("/function/")) {
+    if (window.location.pathname.includes(CHILD_DIR)) {
         loadDocumentContent();
     }
 };
