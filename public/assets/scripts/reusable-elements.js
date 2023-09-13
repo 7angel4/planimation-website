@@ -56,11 +56,14 @@ class MainFooter extends HTMLElement {
                         background-color: white;
                         padding: 1rem 2rem;
                     }
+
                 </style>
             </footer>
             `
     }
 }
+
+
 
 class SearchBar extends HTMLElement {
     connectedCallback() {
