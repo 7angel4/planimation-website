@@ -24,10 +24,6 @@ p {
     border-radius: 2%;
 }
 
-/* This change should be made in reusable-elements.js */
-/* nav-bar should be outside of body and inside of page container */
-/* https://www.freecodecamp.org/news/how-to-keep-your-footer-where-it-belongs-59c6aa05c59c/ */
-
 main-footer {
     position: absolute;
     bottom: 2rem;
