@@ -11,6 +11,11 @@ table.doc-table-summary th {
     padding-right: 0.5rem;
 }
 
+th {
+    background-color: #c7d8e3;
+    height: 3rem;
+}
+
 table.doc-table-summary p {
     margin: 0.5rem 0.5rem;
 }
