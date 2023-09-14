@@ -24,7 +24,7 @@
     ],
     "rewrites": [
       {
-        "source": "/function/**",
+        "source": "/documentation/**",
         "destination": "/documentation.html"
       }
     ]

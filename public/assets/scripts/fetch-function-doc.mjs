@@ -51,7 +51,7 @@ function createFunctionRef(doc) {
     const p = document.createElement('p');
     const a = document.createElement('a');
     a.class = "reference internal";
-    a.href = `/function/${functionName}`;
+    a.href = `/documentation/${functionName}`;
     a.dataset.type = "function";  // Add this line
     const code =  document.createElement('code');
     code.class="table-keyword";
