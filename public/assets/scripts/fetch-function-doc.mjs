@@ -229,7 +229,7 @@ function searchDocuments() {
 }
 
 window.onload = function() {
-    // Check if the URL path contains "/function/"
+    // Check if the URL path contains "/documentation/"
     if (window.location.pathname.includes(CHILD_DIR)) {
         loadDocumentContent();
     }

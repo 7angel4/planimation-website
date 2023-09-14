@@ -15,6 +15,7 @@ const firebaseConfig = {
 const GALLERY_DIV = document.querySelector("div.gallery");
 const ANIMATION_COLLECTION = "animation";
 const THUMBNAIL_PATH = "assets/resources/thumbnails/";
+const CHILD_DIR = "/gallery/";
 
 
 initializeApp(firebaseConfig);
@@ -49,7 +50,7 @@ function createGalleryItem(domainDoc) {
     let galleryItem = document.createElement('div');
     galleryItem.className = "gallery-item";
     let link = document.createElement('a');
-    link.href = `/gallery/${domainName}`;
+    a.href = CHILD_DIR + domainName;
     link.dataset.type = "domain";
 
     let thumbnail = document.createElement('img');
@@ -124,7 +125,7 @@ function changePageDisplay() {
 
 window.onload = function() {
     // Check if the URL path contains "/gallery/"
-    if (window.location.pathname.includes("/gallery/")) {
+    if (window.location.pathname.includes(CHILD_DIR)) {
         loadDomainContent();
     }
 };
