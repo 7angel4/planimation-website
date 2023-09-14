@@ -50,7 +50,7 @@ function createGalleryItem(domainDoc) {
     let galleryItem = document.createElement('div');
     galleryItem.className = "gallery-item";
     let link = document.createElement('a');
-    a.href = CHILD_DIR + domainName;
+    link.href = CHILD_DIR + domainName;
     link.dataset.type = "domain";
 
     let thumbnail = document.createElement('img');
