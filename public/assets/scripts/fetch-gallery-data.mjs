@@ -101,7 +101,7 @@ function loadDomainPage(doc) {
         <div class="domain-desc"><p id="domain-desc"></p></div>
         <div class="animation-container"><iframe id="pddl-editor" width="100%" height="100%"></iframe></div>
         <button class="btn" id="view-source-code"></button>
-        <button class="btn"><a href="gallery.html">Back</a></button>
+        <button class="btn"><a href="/gallery.html">Back</a></button>
         `;
     document.body.onLoad = addData(doc);
 }
