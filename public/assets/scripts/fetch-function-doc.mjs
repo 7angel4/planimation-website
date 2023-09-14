@@ -52,7 +52,7 @@ function createFunctionRef(doc) {
     const a = document.createElement('a');
     a.class = "reference internal";
     a.href = `/documentation/${functionName}`;
-    a.dataset.type = "function";  // Add this line
+    a.dataset.type = "function";
     const code =  document.createElement('code');
     code.class="table-keyword";
     code.textContent = functionName;
@@ -173,8 +173,8 @@ function searchDocuments() {
 }
 
 window.onload = function() {
-    // Check if the URL path contains "/function/"
-    if (window.location.pathname.includes("/function/")) {
+    // Check if the URL path contains "/documentation/"
+    if (window.location.pathname.includes("/documentation/")) {
         loadDocumentContent();
     }
 };

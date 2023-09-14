@@ -26,6 +26,10 @@
       {
         "source": "/documentation/**",
         "destination": "/documentation.html"
+      },
+      {
+        "source": "/gallery/**",
+        "destination": "/gallery.html"
       }
     ]
   },

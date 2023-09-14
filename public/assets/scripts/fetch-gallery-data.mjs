@@ -49,8 +49,8 @@ function createGalleryItem(domainDoc) {
     let galleryItem = document.createElement('div');
     galleryItem.className = "gallery-item";
     let link = document.createElement('a');
-    link.addEventListener('click', loadDomainContent);
-    // link.dataset.docId = domainDoc.id;
+    link.href = `/gallery/${domainName}`;
+    link.dataset.type = "domain";
 
     let thumbnail = document.createElement('img');
     thumbnail.className = "thumbnail";
@@ -70,12 +70,18 @@ function createGalleryItem(domainDoc) {
 }
 
 export function loadDomainContent(event) {
-    event.preventDefault(); // Prevent the default link behavior
-    const docId = event.target.dataset.docId; // Get the document ID from the data attribute
+    // Check if the clicked link is a function link
+    if (event && event.target.dataset.type !== "domain") {
+        return;
+    }
+    // Extract the domainName from the URL path
+    const pathSegments = window.location.pathname.split('/');
+    const domainName = pathSegments[pathSegments.length - 1];
 
-    // Fetch the function content from Firestore
-    db.collection("animation").doc(docId).get().then((doc) => {
-        if (doc.exists) {
+    // Fetch the domain content from Firestore based on domainName
+    db.collection("animation").where("name", "==", domainName).get().then((querySnapshot) => {
+        if (!querySnapshot.empty) {
+            const doc = querySnapshot.docs[0];
             loadDomainPage(doc);
             changePageDisplay();
         } else {
@@ -85,6 +91,7 @@ export function loadDomainContent(event) {
         console.error("Error fetching domain content: ", error);
     });
 }
+
 
 function loadDomainPage(doc) {
     // Swap the content div
@@ -103,3 +110,10 @@ function changePageDisplay() {
     GALLERY_DIV.style.display = "block";
     GALLERY_DIV.style.margin = "70px auto";
 }
+
+window.onload = function() {
+    // Check if the URL path contains "/gallery/"
+    if (window.location.pathname.includes("/gallery/")) {
+        loadDomainContent();
+    }
+};
