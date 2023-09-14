@@ -1,5 +1,6 @@
-import { addData, addParams } from "./function-doc-template.mjs";
+import { addData, addParams, addCustomProperties } from "./function-doc-template.mjs";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-app.js";
+import {createTdWithP, wrapTextInCode, createTdWithElem, createTdWithCode, formatString} from "./util.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyDf--XeJ2-pkwKkjGO1RLxzjwzJZUy_e0s",
@@ -14,10 +15,16 @@ const firebaseConfig = {
 const TABLE_CONTENT_CLASS = ".doc-table-content";
 const PAGE_CONTENT_CLASS = ".page-content";
 const FUNCTION_COLLECTION = "functions";
+const CUSTOM_PROPERTY_COLLECTION = "customisedProperty";
+const CUSTOM_PROPERTY_ID = "custom-properties";
+const VISUAL_PROPERTY_COLLECTION = "visualProperty";
 const DISTRIBUTE_FUNCTIONS_TABLE = "#distribute-functions " + TABLE_CONTENT_CLASS;
 const OTHER_FUNCTIONS_TABLE = "#other-functions " + TABLE_CONTENT_CLASS;
+const VISUAL_PROPERTY_ID = "visual-properties";
+const VISUAL_PROPERTIES_TABLE = "#" + VISUAL_PROPERTY_ID + " " + TABLE_CONTENT_CLASS;
 const DISTRIBUTE_FUNCTION_CATEGORY = "distribute";
 const OTHER_FUNCTION_CATEGORY = "others";
+const CHILD_DIR = "/documentation/";
 
 initializeApp(firebaseConfig);
 // Initialize Firebase
@@ -26,18 +33,26 @@ firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
 
-fetchDocumentList();
+fetchDocFromCollection(FUNCTION_COLLECTION, createFunctionRef);
+fetchDocFromCollection(VISUAL_PROPERTY_COLLECTION, createVisualPropertyRow);
+fetchDocFromCollection(CUSTOM_PROPERTY_COLLECTION, addCustomProperties);
 
-// Fetch list of documents from Firestore
-function fetchDocumentList() {
-    db.collection("functions").get().then((querySnapshot) => {
+/**
+ * Fetch documentation from Firestore for the given collection,
+ * and performs the action on the documents
+ * @param collectionName: name of the collection from which data is to be fetched.
+ * @param action: action to be performed on the documents.
+ */
+function fetchDocFromCollection(collectionName, action) {
+    db.collection(collectionName).get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
-            createFunctionRef(doc);
+            action(doc);
         });
     }).catch((error) => {
-        console.error("Error fetching document list: ", error);
+        console.error("Error fetching documents for " + collectionName + ": ", error);
     });
 }
+
 
 function createFunctionRef(doc) {
     let functionName = doc.data().functionName;
@@ -46,28 +61,23 @@ function createFunctionRef(doc) {
 
     const contentParent = document.querySelector((category === DISTRIBUTE_FUNCTION_CATEGORY) ? DISTRIBUTE_FUNCTIONS_TABLE : OTHER_FUNCTIONS_TABLE);
     const tr = document.createElement('tr');
-    //tr.class = "row-odd";
-    const td = document.createElement('td');
+
+    // inside the td
     const p = document.createElement('p');
     const a = document.createElement('a');
     a.class = "reference internal";
-    a.href = `/documentation/${functionName}`;
+    a.href = CHILD_DIR + functionName;
     a.dataset.type = "function";
     const code =  document.createElement('code');
-    code.class="table-keyword";
+    // code.class = "table-keyword";
     code.textContent = functionName;
     code.dataset.docId = doc.id;  // Store the document ID as a data attribute
     a.appendChild(code);
     p.appendChild(a);
-    td.appendChild(p);
-    tr.appendChild(td);
 
-    const descriptionTd = document.createElement('td');
-    const descriptionP = document.createElement('p');
-    descriptionP.textContent = functionDescription;
-    descriptionTd.appendChild(descriptionP);
-    tr.appendChild(descriptionTd);
-
+    // assemble
+    tr.appendChild(createTdWithElem(p));
+    tr.appendChild(createTdWithP(functionDescription));
     contentParent.appendChild(tr);
 }
 
@@ -139,6 +149,52 @@ function loadParams(docId) {
     });
 }
 
+function createVisualPropertyRow(doc) {
+    const docData = doc.data();
+    const contentParent = document.querySelector(VISUAL_PROPERTIES_TABLE);
+
+    // row header
+    const tr = document.createElement('tr', 'table-keyword');
+    const nameTd = createTdWithCode(docData.name);
+
+    // row body
+    const descriptionTd = createTdWithP(docData.description);
+    const typeTd = createTdWithP(docData.type);
+    const additionalList = document.createElement('ul');
+    const additionalTd = createTdWithElem(additionalList);
+
+    let note, defaultVal;
+    if (docData.note === undefined && docData.defaultValue === undefined) {
+        additionalTd.style['background-color'] = '#ecf2f6';
+    } else if (docData.note === undefined && docData.defaultValue !== undefined) {
+        // defaultValue only
+        defaultVal = document.createElement('li');
+        defaultVal.textContent = "Default value: ";
+        defaultVal.appendChild(wrapTextInCode(docData.defaultValue));
+        additionalList.appendChild(defaultVal);
+    } else if (docData.defaultValue === undefined && docData.note !== undefined) {
+        // note only
+        note = document.createElement('li');
+        note.textContent = docData.note;
+        additionalList.appendChild(note);
+    } else {
+        // both
+        defaultVal = document.createElement('li');
+        note = document.createElement('li');
+        defaultVal.textContent = docData.defaultValue;
+        note.textContent = docData.note;
+        additionalList.appendChild(defaultVal);
+        additionalList.appendChild(note);
+    }
+
+    // add the entries into the row
+    tr.appendChild(nameTd);
+    tr.appendChild(typeTd);
+    tr.appendChild(descriptionTd);
+    tr.appendChild(additionalTd);
+
+    contentParent.appendChild(tr);
+}
 
 function searchDocuments() {
     const searchTerm = document.getElementById('searchInput').value;
@@ -173,8 +229,8 @@ function searchDocuments() {
 }
 
 window.onload = function() {
-    // Check if the URL path contains "/documentation/"
-    if (window.location.pathname.includes("/documentation/")) {
+    // Check if the URL path contains "/function/"
+    if (window.location.pathname.includes(CHILD_DIR)) {
         loadDocumentContent();
     }
 };
