@@ -1,0 +1,292 @@
+[debug] [2023-09-15T13:27:41.511Z] ----------------------------------------------------------------------
+[debug] [2023-09-15T13:27:41.513Z] Command:       /Users/tonyhe/.nvm/versions/node/v18.16.0/bin/node /Users/tonyhe/.nvm/versions/node/v18.16.0/bin/firebase emulators:start
+[debug] [2023-09-15T13:27:41.514Z] CLI Version:   12.5.4
+[debug] [2023-09-15T13:27:41.514Z] Platform:      darwin
+[debug] [2023-09-15T13:27:41.515Z] Node Version:  v18.16.0
+[debug] [2023-09-15T13:27:41.516Z] Time:          Fri Sep 15 2023 23:27:41 GMT+1000 (Australian Eastern Standard Time)
+[debug] [2023-09-15T13:27:41.516Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-09-15T13:27:41.665Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-09-15T13:27:41.665Z] > authorizing via signed-in user (tyhe@student.unimelb.edu.au)
+[debug] [2023-09-15T13:27:41.752Z] openjdk version "17.0.1" 2021-10-19
+
+[debug] [2023-09-15T13:27:41.753Z] OpenJDK Runtime Environment (build 17.0.1+12-39)
+OpenJDK 64-Bit Server VM (build 17.0.1+12-39, mixed mode, sharing)
+
+[debug] [2023-09-15T13:27:41.757Z] Parsed Java major version: 17
+[info] i  emulators: Starting emulators: functions, firestore, hosting {"metadata":{"emulator":{"name":"hub"},"message":"Starting emulators: functions, firestore, hosting"}}
+[debug] [2023-09-15T13:27:42.696Z] [logging] Logging Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-09-15T13:27:42.696Z] [firestore] Firestore Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-09-15T13:27:42.696Z] [firestore.websocket] websocket server for firestore only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-09-15T13:27:42.697Z] [hosting] Hosting Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-09-15T13:27:42.697Z] assigned listening specs for emulators {"user":{"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400},{"address":"::1","family":"IPv6","port":4400}],"ui":[{"address":"127.0.0.1","family":"IPv4","port":4000},{"address":"::1","family":"IPv6","port":4000}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}],"firestore":[{"address":"127.0.0.1","family":"IPv4","port":8080}],"firestore.websocket":[{"address":"127.0.0.1","family":"IPv4","port":9150}],"hosting":[{"address":"127.0.0.1","family":"IPv4","port":5004}]},"metadata":{"message":"assigned listening specs for emulators"}}
+[debug] [2023-09-15T13:27:42.708Z] [hub] writing locator at /var/folders/90/vrl6vxws06bdyx7hlrqxb0dw0000gn/T/hub-planimation-staging-181bc.json
+[debug] [2023-09-15T13:27:43.050Z] [functions] Functions Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-09-15T13:27:43.051Z] [eventarc] Eventarc Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-09-15T13:27:43.051Z] late-assigned ports for functions and eventarc emulators {"user":{"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400},{"address":"::1","family":"IPv6","port":4400}],"ui":[{"address":"127.0.0.1","family":"IPv4","port":4000},{"address":"::1","family":"IPv6","port":4000}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}],"firestore":[{"address":"127.0.0.1","family":"IPv4","port":8080}],"firestore.websocket":[{"address":"127.0.0.1","family":"IPv4","port":9150}],"hosting":[{"address":"127.0.0.1","family":"IPv4","port":5004}],"functions":[{"address":"127.0.0.1","family":"IPv4","port":5001}],"eventarc":[{"address":"127.0.0.1","family":"IPv4","port":9299}]},"metadata":{"message":"late-assigned ports for functions and eventarc emulators"}}
+[warn] ⚠  functions: The following emulators are not running, calls to these services from the Functions emulator will affect production: auth, database, pubsub, storage {"metadata":{"emulator":{"name":"functions"},"message":"The following emulators are not running, calls to these services from the Functions emulator will affect production: \u001b[1mauth, database, pubsub, storage\u001b[22m"}}
+[debug] [2023-09-15T13:27:43.054Z] defaultcredentials: writing to file /Users/tonyhe/.config/firebase/tyhe_student_unimelb.edu.au_application_default_credentials.json
+[debug] [2023-09-15T13:27:43.066Z] Setting GAC to /Users/tonyhe/.config/firebase/tyhe_student_unimelb.edu.au_application_default_credentials.json {"metadata":{"emulator":{"name":"functions"},"message":"Setting GAC to /Users/tonyhe/.config/firebase/tyhe_student_unimelb.edu.au_application_default_credentials.json"}}
+[debug] [2023-09-15T13:27:43.069Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/planimation-staging-181bc/adminSdkConfig [none]
+[debug] [2023-09-15T13:27:43.805Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/planimation-staging-181bc/adminSdkConfig 200
+[debug] [2023-09-15T13:27:43.805Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/planimation-staging-181bc/adminSdkConfig {"projectId":"planimation-staging-181bc","storageBucket":"planimation-staging-181bc.appspot.com"}
+[debug] [2023-09-15T13:27:43.848Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2023-09-15T13:27:43.849Z] Ignoring unsupported arg: single_project_mode_error {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: single_project_mode_error"}}
+[debug] [2023-09-15T13:27:43.849Z] Starting Firestore Emulator with command {"binary":"java","args":["-Dgoogle.cloud_firestore.debug_log_level=FINE","-Duser.language=en","-jar","/Users/tonyhe/.cache/firebase/emulators/cloud-firestore-emulator-v1.18.2.jar","--host","127.0.0.1","--port",8080,"--websocket_port",9150,"--project_id","planimation-staging-181bc","--rules","/Users/tonyhe/repos/planimation-website/firestore.rules","--single_project_mode",true,"--functions_emulator","127.0.0.1:5001"],"optionalArgs":["port","webchannel_port","host","rules","websocket_port","functions_emulator","seed_from_export","project_id","single_project_mode"],"joinArgs":false} {"metadata":{"emulator":{"name":"firestore"},"message":"Starting Firestore Emulator with command {\"binary\":\"java\",\"args\":[\"-Dgoogle.cloud_firestore.debug_log_level=FINE\",\"-Duser.language=en\",\"-jar\",\"/Users/tonyhe/.cache/firebase/emulators/cloud-firestore-emulator-v1.18.2.jar\",\"--host\",\"127.0.0.1\",\"--port\",8080,\"--websocket_port\",9150,\"--project_id\",\"planimation-staging-181bc\",\"--rules\",\"/Users/tonyhe/repos/planimation-website/firestore.rules\",\"--single_project_mode\",true,\"--functions_emulator\",\"127.0.0.1:5001\"],\"optionalArgs\":[\"port\",\"webchannel_port\",\"host\",\"rules\",\"websocket_port\",\"functions_emulator\",\"seed_from_export\",\"project_id\",\"single_project_mode\"],\"joinArgs\":false}"}}
+[info] i  firestore: Firestore Emulator logging to firestore-debug.log {"metadata":{"emulator":{"name":"firestore"},"message":"Firestore Emulator logging to \u001b[1mfirestore-debug.log\u001b[22m"}}
+[info] ✔  firestore: Firestore Emulator UI websocket is running on 9150. {"metadata":{"emulator":{"name":"firestore"},"message":"Firestore Emulator UI websocket is running on 9150."}}
+[debug] [2023-09-15T13:27:43.859Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/planimation-staging-181bc/sites 
+[debug] [2023-09-15T13:27:45.093Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/planimation-staging-181bc/sites 200
+[debug] [2023-09-15T13:27:45.093Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/planimation-staging-181bc/sites {"sites":[{"name":"projects/planimation-staging-181bc/sites/planimation-staging-181bc","defaultUrl":"https://planimation-staging-181bc.web.app","appId":"1:914707935474:web:ba4d0f22fa93687482206b","type":"DEFAULT_SITE"}]}
+[debug] [2023-09-15T13:27:45.094Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/planimation-staging-181bc/webApps/1:914707935474:web:ba4d0f22fa93687482206b/config [none]
+[debug] [2023-09-15T13:27:45.787Z] Sept 15, 2023 11:27:45 PM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketServer start
+INFO: Started WebSocket server on ws://127.0.0.1:9150
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Sept 15, 2023 11:27:45 PM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketServer start\nINFO: Started WebSocket server on ws://127.0.0.1:9150\n"}}
+[debug] [2023-09-15T13:27:45.818Z] API endpoint: http://127.0.0.1:8080 {"metadata":{"emulator":{"name":"firestore"},"message":"API endpoint: http://127.0.0.1:8080"}}
+[debug] [2023-09-15T13:27:45.818Z] 
+If you are using a library that supports the FIRESTORE_EMULATOR_HOST environment variable, run:
+
+   export FIRESTORE_EMULATOR_HOST=127.0.0.1:8080
+
+Dev App Server is now running.
+
+ {"metadata":{"emulator":{"name":"firestore"},"message":"\nIf you are using a library that supports the FIRESTORE_EMULATOR_HOST environment variable, run:\n\n   export FIRESTORE_EMULATOR_HOST=127.0.0.1:8080\n\nDev App Server is now running.\n\n"}}
+[debug] [2023-09-15T13:27:46.464Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/planimation-staging-181bc/webApps/1:914707935474:web:ba4d0f22fa93687482206b/config 200
+[debug] [2023-09-15T13:27:46.464Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/planimation-staging-181bc/webApps/1:914707935474:web:ba4d0f22fa93687482206b/config {"projectId":"planimation-staging-181bc","appId":"1:914707935474:web:ba4d0f22fa93687482206b","storageBucket":"planimation-staging-181bc.appspot.com","apiKey":"AIzaSyDf--XeJ2-pkwKkjGO1RLxzjwzJZUy_e0s","authDomain":"planimation-staging-181bc.firebaseapp.com","messagingSenderId":"914707935474","measurementId":"G-XYNE4FJ1CF"}
+[debug] [2023-09-15T13:27:46.491Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/planimation-staging-181bc [none]
+[debug] [2023-09-15T13:27:46.976Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/planimation-staging-181bc 200
+[debug] [2023-09-15T13:27:46.976Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/planimation-staging-181bc {"projectId":"planimation-staging-181bc","projectNumber":"914707935474","displayName":"planimation-staging","name":"projects/planimation-staging-181bc","resources":{"hostingSite":"planimation-staging-181bc"},"state":"ACTIVE","etag":"1_466bee80-ee8a-4ca1-83ce-3db69e029544"}
+[info] i  hosting[planimation-staging-181bc]: Serving hosting files from: public {"metadata":{"emulator":{"name":"hosting"},"message":"Serving hosting files from: \u001b[1mpublic\u001b[22m"}}
+[info] ✔  hosting[planimation-staging-181bc]: Local server: http://127.0.0.1:5004 {"metadata":{"emulator":{"name":"hosting"},"message":"Local server: \u001b[4m\u001b[1mhttp://127.0.0.1:5004\u001b[22m\u001b[24m"}}
+[info] i  ui: downloading ui-v1.11.7.zip... {"metadata":{"emulator":{"name":"ui"},"message":"downloading ui-v1.11.7.zip..."}}
+[debug] [2023-09-15T13:27:47.084Z] >>> [apiv2][query] GET https://storage.googleapis.com/firebase-preview-drop/emulator/ui-v1.11.7.zip 
+[debug] [2023-09-15T13:27:47.229Z] <<< [apiv2][status] GET https://storage.googleapis.com/firebase-preview-drop/emulator/ui-v1.11.7.zip 200
+[debug] [2023-09-15T13:27:47.229Z] <<< [apiv2][body] GET https://storage.googleapis.com/firebase-preview-drop/emulator/ui-v1.11.7.zip [stream]
+[debug] [2023-09-15T13:27:47.800Z] Data is 3064105
+[debug] [2023-09-15T13:27:47.800Z] [unzip] Entry: client/ (compressed_size=0 bytes, uncompressed_size=0 bytes)
+[debug] [2023-09-15T13:27:47.800Z] [unzip] Processing entry: client/
+[debug] [2023-09-15T13:27:47.800Z] [unzip] mkdir: /Users/tonyhe/.cache/firebase/emulators/ui-v1.11.7/client/
+[debug] [2023-09-15T13:27:47.801Z] [unzip] Entry: client/favicon.ico (compressed_size=2497 bytes, uncompressed_size=7406 bytes)
+[debug] [2023-09-15T13:27:47.801Z] [unzip] Processing entry: client/favicon.ico
+[debug] [2023-09-15T13:27:47.801Z] [unzip] else mkdir: /Users/tonyhe/.cache/firebase/emulators/ui-v1.11.7/client
+[debug] [2023-09-15T13:27:47.801Z] [unzip] deflating: /Users/tonyhe/.cache/firebase/emulators/ui-v1.11.7/client/favicon.ico
+[debug] [2023-09-15T13:27:47.805Z] [unzip] Entry: client/apple-touch-icon.png (compressed_size=7231 bytes, uncompressed_size=7367 bytes)
+[debug] [2023-09-15T13:27:47.805Z] [unzip] Processing entry: client/apple-touch-icon.png
+[debug] [2023-09-15T13:27:47.805Z] [unzip] else mkdir: /Users/tonyhe/.cache/firebase/emulators/ui-v1.11.7/client
+[debug] [2023-09-15T13:27:47.805Z] [unzip] deflating: /Users/tonyhe/.cache/firebase/emulators/ui-v1.11.7/client/apple-touch-icon.png
+[debug] [2023-09-15T13:27:47.807Z] [unzip] Entry: client/android-chrome-512x512.png (compressed_size=16987 bytes, uncompressed_size=18186 bytes)
+[debug] [2023-09-15T13:27:47.807Z] [unzip] Processing entry: client/android-chrome-512x512.png
+[debug] [2023-09-15T13:27:47.807Z] [unzip] else mkdir: /Users/tonyhe/.cache/firebase/emulators/ui-v1.11.7/client
+[debug] [2023-09-15T13:27:47.807Z] [unzip] deflating: /Users/tonyhe/.cache/firebase/emulators/ui-v1.11.7/client/android-chrome-512x512.png
+[debug] [2023-09-15T13:27:47.808Z] [unzip] Entry: client/assets/ (compressed_size=0 bytes, uncompressed_size=0 bytes)
+[debug] [2023-09-15T13:27:47.808Z] [unzip] Processing entry: client/assets/
+[debug] [2023-09-15T13:27:47.808Z] [unzip] mkdir: /Users/tonyhe/.cache/firebase/emulators/ui-v1.11.7/client/assets/
+[debug] [2023-09-15T13:27:47.809Z] [unzip] Entry: client/assets/extensions/ (compressed_size=0 bytes, uncompressed_size=0 bytes)
+[debug] [2023-09-15T13:27:47.809Z] [unzip] Processing entry: client/assets/extensions/
+[debug] [2023-09-15T13:27:47.809Z] [unzip] mkdir: /Users/tonyhe/.cache/firebase/emulators/ui-v1.11.7/client/assets/extensions/
+[debug] [2023-09-15T13:27:47.809Z] [unzip] Entry: client/assets/extensions/default-extension.png (compressed_size=1646 bytes, uncompressed_size=1657 bytes)
+[debug] [2023-09-15T13:27:47.809Z] [unzip] Processing entry: client/assets/extensions/default-extension.png
+[debug] [2023-09-15T13:27:47.809Z] [unzip] else mkdir: /Users/tonyhe/.cache/firebase/emulators/ui-v1.11.7/client/assets/extensions
+[debug] [2023-09-15T13:27:47.809Z] [unzip] deflating: /Users/tonyhe/.cache/firebase/emulators/ui-v1.11.7/client/assets/extensions/default-extension.png
+[debug] [2023-09-15T13:27:47.810Z] [unzip] Entry: client/assets/index.58ca09f7.css (compressed_size=37601 bytes, uncompressed_size=321252 bytes)
+[debug] [2023-09-15T13:27:47.810Z] [unzip] Processing entry: client/assets/index.58ca09f7.css
+[debug] [2023-09-15T13:27:47.810Z] [unzip] else mkdir: /Users/tonyhe/.cache/firebase/emulators/ui-v1.11.7/client/assets
+[debug] [2023-09-15T13:27:47.811Z] [unzip] deflating: /Users/tonyhe/.cache/firebase/emulators/ui-v1.11.7/client/assets/index.58ca09f7.css
+[debug] [2023-09-15T13:27:47.813Z] [unzip] Entry: client/assets/index.c2583d42.js (compressed_size=526232 bytes, uncompressed_size=1860152 bytes)
+[debug] [2023-09-15T13:27:47.813Z] [unzip] Processing entry: client/assets/index.c2583d42.js
+[debug] [2023-09-15T13:27:47.813Z] [unzip] else mkdir: /Users/tonyhe/.cache/firebase/emulators/ui-v1.11.7/client/assets
+[debug] [2023-09-15T13:27:47.813Z] [unzip] deflating: /Users/tonyhe/.cache/firebase/emulators/ui-v1.11.7/client/assets/index.c2583d42.js
+[debug] [2023-09-15T13:27:47.825Z] [unzip] Entry: client/assets/provider-icons/ (compressed_size=0 bytes, uncompressed_size=0 bytes)
+[debug] [2023-09-15T13:27:47.826Z] [unzip] Processing entry: client/assets/provider-icons/
+[debug] [2023-09-15T13:27:47.826Z] [unzip] mkdir: /Users/tonyhe/.cache/firebase/emulators/ui-v1.11.7/client/assets/provider-icons/
+[debug] [2023-09-15T13:27:47.826Z] [unzip] Entry: client/assets/provider-icons/auth_service_oidc.svg (compressed_size=414 bytes, uncompressed_size=858 bytes)
+[debug] [2023-09-15T13:27:47.826Z] [unzip] Processing entry: client/assets/provider-icons/auth_service_oidc.svg
+[debug] [2023-09-15T13:27:47.826Z] [unzip] else mkdir: /Users/tonyhe/.cache/firebase/emulators/ui-v1.11.7/client/assets/provider-icons
+[debug] [2023-09-15T13:27:47.826Z] [unzip] deflating: /Users/tonyhe/.cache/firebase/emulators/ui-v1.11.7/client/assets/provider-icons/auth_service_oidc.svg
+[debug] [2023-09-15T13:27:47.827Z] [unzip] Entry: client/assets/provider-icons/auth_service_yahoo.svg (compressed_size=577 bytes, uncompressed_size=1182 bytes)
+[debug] [2023-09-15T13:27:47.827Z] [unzip] Processing entry: client/assets/provider-icons/auth_service_yahoo.svg
+[debug] [2023-09-15T13:27:47.827Z] [unzip] else mkdir: /Users/tonyhe/.cache/firebase/emulators/ui-v1.11.7/client/assets/provider-icons
+[debug] [2023-09-15T13:27:47.827Z] [unzip] deflating: /Users/tonyhe/.cache/firebase/emulators/ui-v1.11.7/client/assets/provider-icons/auth_service_yahoo.svg
+[debug] [2023-09-15T13:27:47.828Z] [unzip] Entry: client/assets/provider-icons/auth_service_phone.svg (compressed_size=261 bytes, uncompressed_size=414 bytes)
+[debug] [2023-09-15T13:27:47.829Z] [unzip] Processing entry: client/assets/provider-icons/auth_service_phone.svg
+[debug] [2023-09-15T13:27:47.829Z] [unzip] else mkdir: /Users/tonyhe/.cache/firebase/emulators/ui-v1.11.7/client/assets/provider-icons
+[debug] [2023-09-15T13:27:47.829Z] [unzip] deflating: /Users/tonyhe/.cache/firebase/emulators/ui-v1.11.7/client/assets/provider-icons/auth_service_phone.svg
+[debug] [2023-09-15T13:27:47.830Z] [unzip] Entry: client/assets/provider-icons/auth_service_saml.svg (compressed_size=575 bytes, uncompressed_size=1226 bytes)
+[debug] [2023-09-15T13:27:47.830Z] [unzip] Processing entry: client/assets/provider-icons/auth_service_saml.svg
+[debug] [2023-09-15T13:27:47.830Z] [unzip] else mkdir: /Users/tonyhe/.cache/firebase/emulators/ui-v1.11.7/client/assets/provider-icons
+[debug] [2023-09-15T13:27:47.830Z] [unzip] deflating: /Users/tonyhe/.cache/firebase/emulators/ui-v1.11.7/client/assets/provider-icons/auth_service_saml.svg
+[debug] [2023-09-15T13:27:47.832Z] [unzip] Entry: client/assets/provider-icons/auth_service_mslive.svg (compressed_size=203 bytes, uncompressed_size=378 bytes)
+[debug] [2023-09-15T13:27:47.832Z] [unzip] Processing entry: client/assets/provider-icons/auth_service_mslive.svg
+[debug] [2023-09-15T13:27:47.832Z] [unzip] else mkdir: /Users/tonyhe/.cache/firebase/emulators/ui-v1.11.7/client/assets/provider-icons
+[debug] [2023-09-15T13:27:47.832Z] [unzip] deflating: /Users/tonyhe/.cache/firebase/emulators/ui-v1.11.7/client/assets/provider-icons/auth_service_mslive.svg
+[debug] [2023-09-15T13:27:47.833Z] [unzip] Entry: client/assets/provider-icons/auth_service_facebook.svg (compressed_size=289 bytes, uncompressed_size=457 bytes)
+[debug] [2023-09-15T13:27:47.833Z] [unzip] Processing entry: client/assets/provider-icons/auth_service_facebook.svg
+[debug] [2023-09-15T13:27:47.833Z] [unzip] else mkdir: /Users/tonyhe/.cache/firebase/emulators/ui-v1.11.7/client/assets/provider-icons
+[debug] [2023-09-15T13:27:47.833Z] [unzip] deflating: /Users/tonyhe/.cache/firebase/emulators/ui-v1.11.7/client/assets/provider-icons/auth_service_facebook.svg
+[debug] [2023-09-15T13:27:47.834Z] [unzip] Entry: client/assets/provider-icons/auth_service_play_games.svg (compressed_size=565 bytes, uncompressed_size=1173 bytes)
+[debug] [2023-09-15T13:27:47.834Z] [unzip] Processing entry: client/assets/provider-icons/auth_service_play_games.svg
+[debug] [2023-09-15T13:27:47.834Z] [unzip] else mkdir: /Users/tonyhe/.cache/firebase/emulators/ui-v1.11.7/client/assets/provider-icons
+[debug] [2023-09-15T13:27:47.834Z] [unzip] deflating: /Users/tonyhe/.cache/firebase/emulators/ui-v1.11.7/client/assets/provider-icons/auth_service_play_games.svg
+[debug] [2023-09-15T13:27:47.835Z] [unzip] Entry: client/assets/provider-icons/auth_service_github.svg (compressed_size=466 bytes, uncompressed_size=838 bytes)
+[debug] [2023-09-15T13:27:47.835Z] [unzip] Processing entry: client/assets/provider-icons/auth_service_github.svg
+[debug] [2023-09-15T13:27:47.835Z] [unzip] else mkdir: /Users/tonyhe/.cache/firebase/emulators/ui-v1.11.7/client/assets/provider-icons
+[debug] [2023-09-15T13:27:47.835Z] [unzip] deflating: /Users/tonyhe/.cache/firebase/emulators/ui-v1.11.7/client/assets/provider-icons/auth_service_github.svg
+[debug] [2023-09-15T13:27:47.836Z] [unzip] Entry: client/assets/provider-icons/auth_service_apple.svg (compressed_size=230 bytes, uncompressed_size=334 bytes)
+[debug] [2023-09-15T13:27:47.836Z] [unzip] Processing entry: client/assets/provider-icons/auth_service_apple.svg
+[debug] [2023-09-15T13:27:47.836Z] [unzip] else mkdir: /Users/tonyhe/.cache/firebase/emulators/ui-v1.11.7/client/assets/provider-icons
+[debug] [2023-09-15T13:27:47.837Z] [unzip] deflating: /Users/tonyhe/.cache/firebase/emulators/ui-v1.11.7/client/assets/provider-icons/auth_service_apple.svg
+[debug] [2023-09-15T13:27:47.837Z] [unzip] Entry: client/assets/provider-icons/auth_service_google.svg (compressed_size=409 bytes, uncompressed_size=720 bytes)
+[debug] [2023-09-15T13:27:47.837Z] [unzip] Processing entry: client/assets/provider-icons/auth_service_google.svg
+[debug] [2023-09-15T13:27:47.837Z] [unzip] else mkdir: /Users/tonyhe/.cache/firebase/emulators/ui-v1.11.7/client/assets/provider-icons
+[debug] [2023-09-15T13:27:47.837Z] [unzip] deflating: /Users/tonyhe/.cache/firebase/emulators/ui-v1.11.7/client/assets/provider-icons/auth_service_google.svg
+[debug] [2023-09-15T13:27:47.838Z] [unzip] Entry: client/assets/provider-icons/auth_service_email.svg (compressed_size=228 bytes, uncompressed_size=326 bytes)
+[debug] [2023-09-15T13:27:47.838Z] [unzip] Processing entry: client/assets/provider-icons/auth_service_email.svg
+[debug] [2023-09-15T13:27:47.838Z] [unzip] else mkdir: /Users/tonyhe/.cache/firebase/emulators/ui-v1.11.7/client/assets/provider-icons
+[debug] [2023-09-15T13:27:47.838Z] [unzip] deflating: /Users/tonyhe/.cache/firebase/emulators/ui-v1.11.7/client/assets/provider-icons/auth_service_email.svg
+[debug] [2023-09-15T13:27:47.839Z] [unzip] Entry: client/assets/provider-icons/auth_service_twitter.svg (compressed_size=444 bytes, uncompressed_size=751 bytes)
+[debug] [2023-09-15T13:27:47.839Z] [unzip] Processing entry: client/assets/provider-icons/auth_service_twitter.svg
+[debug] [2023-09-15T13:27:47.839Z] [unzip] else mkdir: /Users/tonyhe/.cache/firebase/emulators/ui-v1.11.7/client/assets/provider-icons
+[debug] [2023-09-15T13:27:47.839Z] [unzip] deflating: /Users/tonyhe/.cache/firebase/emulators/ui-v1.11.7/client/assets/provider-icons/auth_service_twitter.svg
+[debug] [2023-09-15T13:27:47.840Z] [unzip] Entry: client/assets/provider-icons/auth_service_game_center.svg (compressed_size=991 bytes, uncompressed_size=3921 bytes)
+[debug] [2023-09-15T13:27:47.840Z] [unzip] Processing entry: client/assets/provider-icons/auth_service_game_center.svg
+[debug] [2023-09-15T13:27:47.840Z] [unzip] else mkdir: /Users/tonyhe/.cache/firebase/emulators/ui-v1.11.7/client/assets/provider-icons
+[debug] [2023-09-15T13:27:47.840Z] [unzip] deflating: /Users/tonyhe/.cache/firebase/emulators/ui-v1.11.7/client/assets/provider-icons/auth_service_game_center.svg
+[debug] [2023-09-15T13:27:47.841Z] [unzip] Entry: client/assets/index.c2583d42.js.map (compressed_size=1778557 bytes, uncompressed_size=7961927 bytes)
+[debug] [2023-09-15T13:27:47.841Z] [unzip] Processing entry: client/assets/index.c2583d42.js.map
+[debug] [2023-09-15T13:27:47.841Z] [unzip] else mkdir: /Users/tonyhe/.cache/firebase/emulators/ui-v1.11.7/client/assets
+[debug] [2023-09-15T13:27:47.841Z] [unzip] deflating: /Users/tonyhe/.cache/firebase/emulators/ui-v1.11.7/client/assets/index.c2583d42.js.map
+[debug] [2023-09-15T13:27:47.888Z] [unzip] Entry: client/assets/img/ (compressed_size=0 bytes, uncompressed_size=0 bytes)
+[debug] [2023-09-15T13:27:47.888Z] [unzip] Processing entry: client/assets/img/
+[debug] [2023-09-15T13:27:47.888Z] [unzip] mkdir: /Users/tonyhe/.cache/firebase/emulators/ui-v1.11.7/client/assets/img/
+[debug] [2023-09-15T13:27:47.888Z] [unzip] Entry: client/assets/img/database.png (compressed_size=29449 bytes, uncompressed_size=29988 bytes)
+[debug] [2023-09-15T13:27:47.888Z] [unzip] Processing entry: client/assets/img/database.png
+[debug] [2023-09-15T13:27:47.888Z] [unzip] else mkdir: /Users/tonyhe/.cache/firebase/emulators/ui-v1.11.7/client/assets/img
+[debug] [2023-09-15T13:27:47.888Z] [unzip] deflating: /Users/tonyhe/.cache/firebase/emulators/ui-v1.11.7/client/assets/img/database.png
+[debug] [2023-09-15T13:27:47.889Z] [unzip] Entry: client/safari-pinned-tab.svg (compressed_size=838 bytes, uncompressed_size=1504 bytes)
+[debug] [2023-09-15T13:27:47.889Z] [unzip] Processing entry: client/safari-pinned-tab.svg
+[debug] [2023-09-15T13:27:47.889Z] [unzip] else mkdir: /Users/tonyhe/.cache/firebase/emulators/ui-v1.11.7/client
+[debug] [2023-09-15T13:27:47.889Z] [unzip] deflating: /Users/tonyhe/.cache/firebase/emulators/ui-v1.11.7/client/safari-pinned-tab.svg
+[debug] [2023-09-15T13:27:47.890Z] [unzip] Entry: client/mstile-150x150.png (compressed_size=5406 bytes, uncompressed_size=5723 bytes)
+[debug] [2023-09-15T13:27:47.890Z] [unzip] Processing entry: client/mstile-150x150.png
+[debug] [2023-09-15T13:27:47.890Z] [unzip] else mkdir: /Users/tonyhe/.cache/firebase/emulators/ui-v1.11.7/client
+[debug] [2023-09-15T13:27:47.890Z] [unzip] deflating: /Users/tonyhe/.cache/firebase/emulators/ui-v1.11.7/client/mstile-150x150.png
+[debug] [2023-09-15T13:27:47.891Z] [unzip] Entry: client/browserconfig.xml (compressed_size=491 bytes, uncompressed_size=822 bytes)
+[debug] [2023-09-15T13:27:47.891Z] [unzip] Processing entry: client/browserconfig.xml
+[debug] [2023-09-15T13:27:47.891Z] [unzip] else mkdir: /Users/tonyhe/.cache/firebase/emulators/ui-v1.11.7/client
+[debug] [2023-09-15T13:27:47.891Z] [unzip] deflating: /Users/tonyhe/.cache/firebase/emulators/ui-v1.11.7/client/browserconfig.xml
+[debug] [2023-09-15T13:27:47.892Z] [unzip] Entry: client/robots.txt (compressed_size=26 bytes, uncompressed_size=26 bytes)
+[debug] [2023-09-15T13:27:47.892Z] [unzip] Processing entry: client/robots.txt
+[debug] [2023-09-15T13:27:47.892Z] [unzip] else mkdir: /Users/tonyhe/.cache/firebase/emulators/ui-v1.11.7/client
+[debug] [2023-09-15T13:27:47.892Z] [unzip] Writing file: /Users/tonyhe/.cache/firebase/emulators/ui-v1.11.7/client/robots.txt
+[debug] [2023-09-15T13:27:47.893Z] [unzip] Entry: client/index.html (compressed_size=1363 bytes, uncompressed_size=3064 bytes)
+[debug] [2023-09-15T13:27:47.893Z] [unzip] Processing entry: client/index.html
+[debug] [2023-09-15T13:27:47.893Z] [unzip] else mkdir: /Users/tonyhe/.cache/firebase/emulators/ui-v1.11.7/client
+[debug] [2023-09-15T13:27:47.893Z] [unzip] deflating: /Users/tonyhe/.cache/firebase/emulators/ui-v1.11.7/client/index.html
+[debug] [2023-09-15T13:27:47.894Z] [unzip] Entry: client/favicon-16x16.png (compressed_size=757 bytes, uncompressed_size=777 bytes)
+[debug] [2023-09-15T13:27:47.894Z] [unzip] Processing entry: client/favicon-16x16.png
+[debug] [2023-09-15T13:27:47.894Z] [unzip] else mkdir: /Users/tonyhe/.cache/firebase/emulators/ui-v1.11.7/client
+[debug] [2023-09-15T13:27:47.894Z] [unzip] deflating: /Users/tonyhe/.cache/firebase/emulators/ui-v1.11.7/client/favicon-16x16.png
+[debug] [2023-09-15T13:27:47.895Z] [unzip] Entry: client/manifest.json (compressed_size=246 bytes, uncompressed_size=551 bytes)
+[debug] [2023-09-15T13:27:47.895Z] [unzip] Processing entry: client/manifest.json
+[debug] [2023-09-15T13:27:47.895Z] [unzip] else mkdir: /Users/tonyhe/.cache/firebase/emulators/ui-v1.11.7/client
+[debug] [2023-09-15T13:27:47.895Z] [unzip] deflating: /Users/tonyhe/.cache/firebase/emulators/ui-v1.11.7/client/manifest.json
+[debug] [2023-09-15T13:27:47.896Z] [unzip] Entry: client/favicon-32x32.png (compressed_size=1175 bytes, uncompressed_size=1175 bytes)
+[debug] [2023-09-15T13:27:47.896Z] [unzip] Processing entry: client/favicon-32x32.png
+[debug] [2023-09-15T13:27:47.896Z] [unzip] else mkdir: /Users/tonyhe/.cache/firebase/emulators/ui-v1.11.7/client
+[debug] [2023-09-15T13:27:47.896Z] [unzip] Writing file: /Users/tonyhe/.cache/firebase/emulators/ui-v1.11.7/client/favicon-32x32.png
+[debug] [2023-09-15T13:27:47.896Z] [unzip] Entry: client/android-chrome-192x192.png (compressed_size=7602 bytes, uncompressed_size=7834 bytes)
+[debug] [2023-09-15T13:27:47.897Z] [unzip] Processing entry: client/android-chrome-192x192.png
+[debug] [2023-09-15T13:27:47.897Z] [unzip] else mkdir: /Users/tonyhe/.cache/firebase/emulators/ui-v1.11.7/client
+[debug] [2023-09-15T13:27:47.897Z] [unzip] deflating: /Users/tonyhe/.cache/firebase/emulators/ui-v1.11.7/client/android-chrome-192x192.png
+[debug] [2023-09-15T13:27:47.897Z] [unzip] Entry: server/ (compressed_size=0 bytes, uncompressed_size=0 bytes)
+[debug] [2023-09-15T13:27:47.897Z] [unzip] Processing entry: server/
+[debug] [2023-09-15T13:27:47.897Z] [unzip] mkdir: /Users/tonyhe/.cache/firebase/emulators/ui-v1.11.7/server/
+[debug] [2023-09-15T13:27:47.898Z] [unzip] Entry: server/server.js (compressed_size=343746 bytes, uncompressed_size=1346374 bytes)
+[debug] [2023-09-15T13:27:47.898Z] [unzip] Processing entry: server/server.js
+[debug] [2023-09-15T13:27:47.898Z] [unzip] else mkdir: /Users/tonyhe/.cache/firebase/emulators/ui-v1.11.7/server
+[debug] [2023-09-15T13:27:47.898Z] [unzip] deflating: /Users/tonyhe/.cache/firebase/emulators/ui-v1.11.7/server/server.js
+[debug] [2023-09-15T13:27:47.906Z] [unzip] Entry: server/server.js.map (compressed_size=289157 bytes, uncompressed_size=1325651 bytes)
+[debug] [2023-09-15T13:27:47.906Z] [unzip] Processing entry: server/server.js.map
+[debug] [2023-09-15T13:27:47.906Z] [unzip] else mkdir: /Users/tonyhe/.cache/firebase/emulators/ui-v1.11.7/server
+[debug] [2023-09-15T13:27:47.906Z] [unzip] deflating: /Users/tonyhe/.cache/firebase/emulators/ui-v1.11.7/server/server.js.map
+[debug] [2023-09-15T13:27:47.915Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2023-09-15T13:27:47.915Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2023-09-15T13:27:47.915Z] Starting Emulator UI with command {"binary":"node","args":["/Users/tonyhe/.cache/firebase/emulators/ui-v1.11.7/server/server.js"],"optionalArgs":[],"joinArgs":false} {"metadata":{"emulator":{"name":"ui"},"message":"Starting Emulator UI with command {\"binary\":\"node\",\"args\":[\"/Users/tonyhe/.cache/firebase/emulators/ui-v1.11.7/server/server.js\"],\"optionalArgs\":[],\"joinArgs\":false}"}}
+[info] i  ui: Emulator UI logging to ui-debug.log {"metadata":{"emulator":{"name":"ui"},"message":"Emulator UI logging to \u001b[1mui-debug.log\u001b[22m"}}
+[debug] [2023-09-15T13:27:48.081Z] Web / API server started at 127.0.0.1:4000
+ {"metadata":{"emulator":{"name":"ui"},"message":"Web / API server started at 127.0.0.1:4000\n"}}
+[debug] [2023-09-15T13:27:48.081Z] Web / API server started at ::1:4000
+ {"metadata":{"emulator":{"name":"ui"},"message":"Web / API server started at ::1:4000\n"}}
+[info] i  functions: Watching "/Users/tonyhe/repos/planimation-website/functions" for Cloud Functions... {"metadata":{"emulator":{"name":"functions"},"message":"Watching \"/Users/tonyhe/repos/planimation-website/functions\" for Cloud Functions..."}}
+[debug] [2023-09-15T13:27:48.181Z] Validating nodejs source
+[debug] [2023-09-15T13:27:49.402Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "18"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^11.8.0",
+    "firebase-functions": "^4.3.1"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^3.1.0"
+  },
+  "private": true
+}
+[debug] [2023-09-15T13:27:49.402Z] Building nodejs source
+[debug] [2023-09-15T13:27:49.402Z] Failed to find version of module node: reached end of search path /Users/tonyhe/repos/planimation-website/functions/node_modules
+[info] ✔  functions: Using node@18 from host. 
+[debug] [2023-09-15T13:27:49.405Z] Could not find functions.yaml. Must use http discovery
+[debug] [2023-09-15T13:27:49.414Z] Found firebase-functions binary at '/Users/tonyhe/repos/planimation-website/functions/node_modules/.bin/firebase-functions'
+[info] Serving at port 8504
+
+[debug] [2023-09-15T13:27:49.940Z] Got response from /__/functions.yaml {"endpoints":{},"specVersion":"v1alpha1","requiredAPIs":[]}
+[info] shutdown requested via /__/quitquitquit
+
+[info] ✔  functions: Loaded functions definitions from source: . {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: ."}}
+[info] 
+┌─────────────────────────────────────────────────────────────┐
+│ ✔  All emulators ready! It is now safe to connect your app. │
+│ i  View Emulator UI at http://127.0.0.1:4000/               │
+└─────────────────────────────────────────────────────────────┘
+
+┌───────────┬────────────────┬─────────────────────────────────┐
+│ Emulator  │ Host:Port      │ View in Emulator UI             │
+├───────────┼────────────────┼─────────────────────────────────┤
+│ Functions │ 127.0.0.1:5001 │ http://127.0.0.1:4000/functions │
+├───────────┼────────────────┼─────────────────────────────────┤
+│ Firestore │ 127.0.0.1:8080 │ http://127.0.0.1:4000/firestore │
+├───────────┼────────────────┼─────────────────────────────────┤
+│ Hosting   │ 127.0.0.1:5004 │ n/a                             │
+└───────────┴────────────────┴─────────────────────────────────┘
+  Emulator Hub running at 127.0.0.1:4400
+  Other reserved ports: 4500, 9150
+
+Issues? Report them at https://github.com/firebase/firebase-tools/issues and attach the *-debug.log files.
+ 
+[debug] [2023-09-15T13:28:07.576Z] Sept 15, 2023 11:28:07 PM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketChannelHandler initChannel
+INFO: Connected to new websocket client
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Sept 15, 2023 11:28:07 PM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketChannelHandler initChannel\nINFO: Connected to new websocket client\n"}}
+[info] i  hosting: 127.0.0.1 - - [15/Sep/2023:13:28:19 +0000] "GET / HTTP/1.1" 200 - "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [15/Sep/2023:13:28:19 +0000] \"GET / HTTP/1.1\" 200 - \"-\" \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36\""}}
+[info] i  hosting: 127.0.0.1 - - [15/Sep/2023:13:28:19 +0000] "GET /assets/stylesheets/master.css HTTP/1.1" 200 - "http://127.0.0.1:5004/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [15/Sep/2023:13:28:19 +0000] \"GET /assets/stylesheets/master.css HTTP/1.1\" 200 - \"http://127.0.0.1:5004/\" \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36\""}}
+[info] i  hosting: 127.0.0.1 - - [15/Sep/2023:13:28:19 +0000] "GET /assets/stylesheets/homepage-style.css HTTP/1.1" 200 932 "http://127.0.0.1:5004/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [15/Sep/2023:13:28:19 +0000] \"GET /assets/stylesheets/homepage-style.css HTTP/1.1\" 200 932 \"http://127.0.0.1:5004/\" \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36\""}}
+[debug] [2023-09-15T13:28:19.667Z] Sept 15, 2023 11:28:19 PM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketChannelHandler channelClosed
+INFO: Websocket client disconnected
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Sept 15, 2023 11:28:19 PM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketChannelHandler channelClosed\nINFO: Websocket client disconnected\n"}}
+[info] i  hosting: 127.0.0.1 - - [15/Sep/2023:13:28:19 +0000] "GET /assets/scripts/reusable-elements.js HTTP/1.1" 200 - "http://127.0.0.1:5004/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [15/Sep/2023:13:28:19 +0000] \"GET /assets/scripts/reusable-elements.js HTTP/1.1\" 200 - \"http://127.0.0.1:5004/\" \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36\""}}
+[info] i  hosting: 127.0.0.1 - - [15/Sep/2023:13:28:19 +0000] "GET /assets/resources/icons/paper.png HTTP/1.1" 200 339 "http://127.0.0.1:5004/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [15/Sep/2023:13:28:19 +0000] \"GET /assets/resources/icons/paper.png HTTP/1.1\" 200 339 \"http://127.0.0.1:5004/\" \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36\""}}
+[info] i  hosting: 127.0.0.1 - - [15/Sep/2023:13:28:19 +0000] "GET /assets/resources/icons/gallery.png HTTP/1.1" 200 636 "http://127.0.0.1:5004/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [15/Sep/2023:13:28:19 +0000] \"GET /assets/resources/icons/gallery.png HTTP/1.1\" 200 636 \"http://127.0.0.1:5004/\" \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36\""}}
+[info] i  hosting: 127.0.0.1 - - [15/Sep/2023:13:28:19 +0000] "GET /assets/resources/icons/interaction.png HTTP/1.1" 200 1062 "http://127.0.0.1:5004/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [15/Sep/2023:13:28:19 +0000] \"GET /assets/resources/icons/interaction.png HTTP/1.1\" 200 1062 \"http://127.0.0.1:5004/\" \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36\""}}
+[info] i  hosting: 127.0.0.1 - - [15/Sep/2023:13:28:19 +0000] "GET /assets/resources/logo.png HTTP/1.1" 200 7967 "http://127.0.0.1:5004/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [15/Sep/2023:13:28:19 +0000] \"GET /assets/resources/logo.png HTTP/1.1\" 200 7967 \"http://127.0.0.1:5004/\" \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36\""}}
+[info] i  hosting: 127.0.0.1 - - [15/Sep/2023:13:28:19 +0000] "GET /assets/resources/icons/left-quotation-marks.png HTTP/1.1" 200 792 "http://127.0.0.1:5004/assets/stylesheets/homepage-style.css" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [15/Sep/2023:13:28:19 +0000] \"GET /assets/resources/icons/left-quotation-marks.png HTTP/1.1\" 200 792 \"http://127.0.0.1:5004/assets/stylesheets/homepage-style.css\" \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36\""}}
+[info] i  hosting: 127.0.0.1 - - [15/Sep/2023:13:28:19 +0000] "GET /assets/resources/demo.gif HTTP/1.1" 200 9874048 "http://127.0.0.1:5004/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [15/Sep/2023:13:28:19 +0000] \"GET /assets/resources/demo.gif HTTP/1.1\" 200 9874048 \"http://127.0.0.1:5004/\" \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36\""}}
+[info] i  hosting: 127.0.0.1 - - [15/Sep/2023:13:28:19 +0000] "GET /favicon.ico HTTP/1.1" 404 - "http://127.0.0.1:5004/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [15/Sep/2023:13:28:19 +0000] \"GET /favicon.ico HTTP/1.1\" 404 - \"http://127.0.0.1:5004/\" \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36\""}}
