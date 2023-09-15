@@ -9,16 +9,15 @@
     <link rel="stylesheet" href="/assets/stylesheets/homepage-style.css">
     <script src="/assets/scripts/reusable-elements.js"></script>
 </head>
+<nav-bar></nav-bar>
+<head-banner></head-banner>
 <body>
-    <nav-bar></nav-bar>
-    <head-banner></head-banner>
     <script>
         const headBanner = document.querySelector("head-banner");
         headBanner.setTextContent("A wiki for Planimation");
         headBanner.addTagLine("The visualiser of planning problems in PDDL");
         headBanner.addButton("EXPLORE DOMAINS", "./gallery.html");
     </script>
-
     <div class="middle-block">
         <div id="features">
             <ul class="feature-list">
