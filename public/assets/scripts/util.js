@@ -46,3 +46,11 @@ export function hideHeadBannerElements() {
     if (tagLineElement) tagLineElement.style.display = "none";
     if (buttonElement) buttonElement.style.display = "none";
 }
+
+export function convertToMarkdown() {
+    // convert all paragraph elements
+    const pElems = document.querySelectorAll('p');
+    pElems.forEach((p) =>
+        { p.textContent = p.textContent.replace(/`(.*)`/, '<code>$1</code>'); }
+    );
+}

@@ -1,6 +1,6 @@
 import { addData, addParams, addCustomProperties } from "./function-doc-template.mjs";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-app.js";
-import { createTdWithP, wrapTextInCode, createTdWithElem, createTdWithCode, formatString, hideHeadBannerElements } from "./util.js";
+import { createTdWithP, wrapTextInCode, createTdWithElem, createTdWithCode, convertToMarkdown, hideHeadBannerElements } from "./util.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyDf--XeJ2-pkwKkjGO1RLxzjwzJZUy_e0s",
@@ -135,6 +135,7 @@ function loadFunctionDoc(doc) {
     // Swap the content div
     contentDiv.innerHTML = functionDocTemplate;
     document.body.onLoad = addData(doc);
+    convertToMarkdown();
 }
 
 
