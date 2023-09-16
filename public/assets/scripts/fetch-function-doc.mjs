@@ -69,7 +69,7 @@ function createFunctionRef(doc) {
     a.href = CHILD_DIR + functionName;
     a.dataset.type = "function";  // Add this line
     const code =  document.createElement('code');
-    code.className="table-keyword";
+    code.className = "table-keyword";
     code.textContent = functionName;
     code.dataset.docId = doc.id;  // Store the document ID as a data attribute
     a.appendChild(code);
