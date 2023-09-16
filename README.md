@@ -1,6 +1,9 @@
 # Planiwiki
+[![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg)](#contributors)
+[![Github](https://img.shields.io/github/license/7angel4/planimation-website.svg)](https://github.com/7angel4/planimation-website/blob/master/LICENSE)
+![GitHub repo size in bytes](https://img.shields.io/github/repo-size/7angel4/planimation-website.svg)
 
-Planiwiki serves as an extension to the [Planimation Documentation Page] (https://planimation.github.io/documentation/). The original site lacked documentations on some important functions, and also didn't have many sample animations for visitors to truly appreciate the magnificence of Planimation. In an attempt to tackle the aforementioned issues, as well as promoting Planimation among students and researchers in the field of artificial intelligence, Planiwiki is created.
+Planiwiki serves as an extension to the [Planimation Documentation Page](https://planimation.github.io/documentation/). The original site lacked documentations on some important functions, and also didn't have many sample animations for visitors to truly appreciate the magnificence of Planimation. In an attempt to tackle the aforementioned issues, as well as promoting Planimation among students and researchers in the field of artificial intelligence, Planiwiki is created.
 
 ## Screenshots
 
@@ -10,8 +13,6 @@ Planiwiki serves as an extension to the [Planimation Documentation Page] (https:
 - More description on existing domains, along with easily accessible and executable source code.
 - A reference page linking to other PDDL resources.
 - Accepting community recommendations and suggestions.
-
-## Technical Details
 
 ## Contributors
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
