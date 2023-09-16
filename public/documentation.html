@@ -11,12 +11,11 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
     <script src="/assets/scripts/reusable-elements.js"></script>
     <script type="module" src="/assets/scripts/fetch-function-doc.mjs"></script>
-
 </head>
+<nav-bar></nav-bar>
+<head-banner></head-banner>
 <body>
     <!-- Header at the top -->
-    <nav-bar></nav-bar>
-    <head-banner></head-banner>
     <search-bar></search-bar>
     <script>
         const headBanner = document.querySelector("head-banner");
@@ -49,6 +48,9 @@
                 <table class="doc-table-summary">
                     <tbody class="doc-table-content"></tbody>
                 </table>
+                <p class="no-match-message">
+                    No functions match your search in this category.
+                </p>
             </section>
 
             <!-- Other functions -->
@@ -57,6 +59,9 @@
                 <table class="doc-table-summary">
                     <tbody class="doc-table-content"></tbody>
                 </table>
+                <p class="no-match-message">
+                    No functions match your search in this category.
+                </p>
             </section>
         </section>
 

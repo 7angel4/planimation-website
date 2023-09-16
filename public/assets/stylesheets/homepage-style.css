@@ -54,7 +54,7 @@ li {
 .bottom-block {
     background-color: #3F50B6;
     color: white;
-    background-image: url(/public/assets/resources/icons/left-quotation-marks.png);
+    background-image: url(../resources/icons/left-quotation-marks.png);
     background-repeat: no-repeat;
     background-position: 18% 20%;
 }
