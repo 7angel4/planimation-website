@@ -24,7 +24,7 @@ const VISUAL_PROPERTY_ID = "visual-properties";
 const VISUAL_PROPERTIES_TABLE = "#" + VISUAL_PROPERTY_ID + " " + TABLE_CONTENT_CLASS;
 const DISTRIBUTE_FUNCTION_CATEGORY = "distribute";
 const OTHER_FUNCTION_CATEGORY = "others";
-const CHILD_DIR = "/function/";
+const CHILD_DIR = "/documentation/";
 
 initializeApp(firebaseConfig);
 // Initialize Firebase
@@ -67,7 +67,7 @@ function createFunctionRef(doc) {
     const a = document.createElement('a');
     a.class = "reference internal";
     a.href = CHILD_DIR + functionName;
-    a.dataset.type = "function";  // Add this line
+    a.dataset.type = "function";
     const code =  document.createElement('code');
     code.className = "table-keyword";
     code.textContent = functionName;
@@ -199,7 +199,7 @@ function createVisualPropertyRow(doc) {
 }
 
 window.onload = function() {
-    // Check if the URL path contains "/function/"
+    // Check if the URL path contains "/documentation/"
     if (window.location.pathname.includes(CHILD_DIR)) {
         loadDocumentContent();
     }
