@@ -33,3 +33,16 @@ export const createTdWithCode = (text) => {
 }
 
 export const formatString = (s) => { return s.replaceAll("\\n", "\r\n"); }
+
+export function hideHeadBannerElements() {
+    const headBanner = document.querySelector("head-banner");
+
+    // Hide the main title, tagline, and button within the head-banner
+    const titleElement = headBanner.querySelector(".page-name");
+    const tagLineElement = headBanner.querySelector("h2");
+    const buttonElement = headBanner.querySelector("button");
+
+    if (titleElement) titleElement.style.display = "none";
+    if (tagLineElement) tagLineElement.style.display = "none";
+    if (buttonElement) buttonElement.style.display = "none";
+}

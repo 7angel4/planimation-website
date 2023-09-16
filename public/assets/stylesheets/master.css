@@ -115,6 +115,14 @@ div.page-content {
     width: 140vh;
 }
 
+.no-match-message {
+    color: #888;
+    font-style: italic;
+    text-align: center;
+    margin-top: 15px;
+    display: none;
+}
+
 /** Subheaders **/
 
 div.page-content h2 {

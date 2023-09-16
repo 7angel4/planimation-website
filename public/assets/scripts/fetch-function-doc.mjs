@@ -1,6 +1,6 @@
 import { addData, addParams, addCustomProperties } from "./function-doc-template.mjs";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-app.js";
-import {createTdWithP, wrapTextInCode, createTdWithElem, createTdWithCode, formatString} from "./util.js";
+import { createTdWithP, wrapTextInCode, createTdWithElem, createTdWithCode, formatString, hideHeadBannerElements } from "./util.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyDf--XeJ2-pkwKkjGO1RLxzjwzJZUy_e0s",
@@ -24,7 +24,7 @@ const VISUAL_PROPERTY_ID = "visual-properties";
 const VISUAL_PROPERTIES_TABLE = "#" + VISUAL_PROPERTY_ID + " " + TABLE_CONTENT_CLASS;
 const DISTRIBUTE_FUNCTION_CATEGORY = "distribute";
 const OTHER_FUNCTION_CATEGORY = "others";
-const CHILD_DIR = "/function/";
+const CHILD_DIR = "/documentation/";
 
 initializeApp(firebaseConfig);
 // Initialize Firebase
@@ -67,9 +67,9 @@ function createFunctionRef(doc) {
     const a = document.createElement('a');
     a.class = "reference internal";
     a.href = CHILD_DIR + functionName;
-    a.dataset.type = "function";  // Add this line
+    a.dataset.type = "function";
     const code =  document.createElement('code');
-    // code.class = "table-keyword";
+    code.className = "table-keyword";
     code.textContent = functionName;
     code.dataset.docId = doc.id;  // Store the document ID as a data attribute
     a.appendChild(code);
@@ -104,6 +104,8 @@ function loadDocumentContent(event) {
 }
 
 function loadFunctionDoc(doc) {
+    hideHeadBannerElements();
+
     const functionDocTemplate =
         `
         <h1 id="function-name"></h1>
@@ -196,40 +198,8 @@ function createVisualPropertyRow(doc) {
     contentParent.appendChild(tr);
 }
 
-function searchDocuments() {
-    const searchTerm = document.getElementById('searchInput').value;
-    const contentDiv = document.querySelector('.content');
-    contentDiv.innerHTML = ""; // Clear the content
-
-    // Query Firestore for documents with titles that start with the search term
-    db.collection("functions")
-        .where("functionName", ">=", searchTerm)
-        .where("functionName", ">=", searchTerm + "\uf8ff")
-        .get()
-        .then((querySnapshot) => {
-            if (querySnapshot.empty) {
-                contentDiv.innerHTML = "No documents found for the search term.";
-                return;
-            }
-
-            querySnapshot.forEach((doc) => {
-                const docData = doc.data();
-                const docLink = document.createElement('a');
-                docLink.textContent = docData.functionName;
-                docLink.href = "#"; // Placeholder href
-                docLink.dataset.docId = doc.id; // Store the document ID as a data attribute
-                docLink.addEventListener('click', loadDocumentContent); // Add click event listener
-                contentDiv.appendChild(docLink);
-                contentDiv.appendChild(document.createElement('br')); // Line break for readability
-            });
-        })
-        .catch((error) => {
-            console.error("Error searching documents: ", error);
-        });
-}
-
 window.onload = function() {
-    // Check if the URL path contains "/function/"
+    // Check if the URL path contains "/documentation/"
     if (window.location.pathname.includes(CHILD_DIR)) {
         loadDocumentContent();
     }
