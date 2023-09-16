@@ -1,6 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-app.js";
 import { addData } from "./gallery-block-template.mjs";
 import { autoOpenPlanimation } from "./gallery-block-template.mjs";
+import { hideHeadBannerElements } from "./util.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyDf--XeJ2-pkwKkjGO1RLxzjwzJZUy_e0s",

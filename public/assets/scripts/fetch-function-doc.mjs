@@ -1,6 +1,6 @@
 import { addData, addParams, addCustomProperties } from "./function-doc-template.mjs";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-app.js";
-import {createTdWithP, wrapTextInCode, createTdWithElem, createTdWithCode, formatString} from "./util.js";
+import { createTdWithP, wrapTextInCode, createTdWithElem, createTdWithCode, formatString, hideHeadBannerElements } from "./util.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyDf--XeJ2-pkwKkjGO1RLxzjwzJZUy_e0s",
@@ -104,18 +104,7 @@ function loadDocumentContent(event) {
 }
 
 function loadFunctionDoc(doc) {
-    const functionName = doc.data().functionName;
-    const headBanner = document.querySelector("head-banner");
-
-    // Hide the main title, tagline, and button within the head-banner
-    const titleElement = headBanner.querySelector(".page-name");
-    const tagLineElement = headBanner.querySelector("h2");
-    const buttonElement = headBanner.querySelector("button");
-
-    if (titleElement) titleElement.style.display = "none";
-    if (tagLineElement) tagLineElement.style.display = "none";
-    if (buttonElement) buttonElement.style.display = "none";
-
+    hideHeadBannerElements();
 
     const functionDocTemplate =
         `
