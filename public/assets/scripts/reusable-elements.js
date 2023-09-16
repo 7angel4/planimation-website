@@ -91,6 +91,15 @@ class SearchBar extends HTMLElement {
                 </style>
             </div>
             `
+        const input = this.querySelector("#searchInput");
+
+        // Determine the context and set it as a data- attribute
+        if (window.location.pathname.includes("gallery.html")) {
+            this.setAttribute("data-context", "gallery");
+        } else {
+            this.setAttribute("data-context", "documentation");
+        }
+        input.addEventListener("keyup", this.filterItems.bind(this));
     }
 
     setTextContent(text) {
@@ -101,6 +110,56 @@ class SearchBar extends HTMLElement {
     setOnClick(searchFunction) {
         const btn = document.querySelector(".search-bar > button");
         btn.onClick = searchFunction;
+    }
+
+    filterItems(e) {
+        const query = e.target.value.toLowerCase();
+        const context = this.getAttribute("data-context");
+
+        if (context === "documentation") {
+            this.filterDocs(query);
+        } else if (context === "gallery") {
+            this.filterGallery(query);
+        }
+    }
+
+    filterDocs(query) {
+        const tables = document.querySelectorAll(".doc-table-content");
+
+        tables.forEach(table => {
+            const functionRows = table.querySelectorAll('tr');
+            const anyVisible = this.filterItemsByQuery(functionRows, query, row => row.querySelector(".table-keyword").textContent);
+
+            // Determine the associated .no-match-message for this table.
+            const section = table.closest('section');
+            this.toggleNoMatchMessage(section, anyVisible);
+        });
+    }
+
+    filterGallery(query) {
+        const galleryItems = document.querySelectorAll(".gallery-item .caption");
+        const anyVisible = this.filterItemsByQuery(galleryItems, query, item => item.textContent);
+
+        // If none are visible, show the message
+        this.toggleNoMatchMessage(document, anyVisible);
+    }
+
+    filterItemsByQuery(items, query, extractTextCallback) {
+        let anyVisible = false;
+
+        items.forEach(item => {
+            const textContent = extractTextCallback(item).toLowerCase();
+            const isVisible = textContent.includes(query);
+            item.style.display = isVisible ? "" : "none";
+            anyVisible = anyVisible || isVisible;
+        });
+
+        return anyVisible;
+    }
+
+    toggleNoMatchMessage(parentElement, anyVisible) {
+        const messageElement = parentElement.querySelector('.no-match-message');
+        messageElement.style.display = anyVisible ? 'none' : 'block';
     }
 }
 
