@@ -51,6 +51,6 @@ export function convertToMarkdown() {
     // convert all paragraph elements
     const pElems = document.querySelectorAll('p');
     pElems.forEach((p) =>
-        { p.textContent = p.textContent.replace(/`(.*)`/, '<code>$1</code>'); }
+        { p.innerHTML = p.innerHTML.replace(/`(.*?)`/g, '<code>$1</code>'); }
     );
 }

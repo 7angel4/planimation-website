@@ -47,6 +47,7 @@ function fetchDocFromCollection(collectionName, action) {
     db.collection(collectionName).get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
             action(doc);
+            convertToMarkdown();
         });
     }).catch((error) => {
         console.error("Error fetching documents for " + collectionName + ": ", error);
@@ -135,7 +136,6 @@ function loadFunctionDoc(doc) {
     // Swap the content div
     contentDiv.innerHTML = functionDocTemplate;
     document.body.onLoad = addData(doc);
-    convertToMarkdown();
 }
 
 
@@ -204,4 +204,5 @@ window.onload = function() {
     if (window.location.pathname.includes(CHILD_DIR)) {
         loadDocumentContent();
     }
+    convertToMarkdown();
 };
