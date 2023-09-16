@@ -96,16 +96,7 @@ export function loadDomainContent(event) {
 
 
 function loadDomainPage(doc) {
-    const headBanner = document.querySelector("head-banner");
-
-    // Hide the main title, tagline, and button within the head-banner
-    const titleElement = headBanner.querySelector(".page-name");
-    const tagLineElement = headBanner.querySelector("h2");
-    const buttonElement = headBanner.querySelector("button");
-
-    if (titleElement) titleElement.style.display = "none";
-    if (tagLineElement) tagLineElement.style.display = "none";
-    if (buttonElement) buttonElement.style.display = "none";
+    hideHeadBannerElements()
 
     // Swap the content div
     GALLERY_DIV.innerHTML =
