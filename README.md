@@ -31,7 +31,6 @@ Planiwiki serves as an extension to the [Planimation Documentation Page](https:/
 [User Stories](docs/user_stories.pdf)
 ### Models & Diagrams
 - [Motivational Model](docs/motivational_model.pdf)
-- [Use Case Diagram](docs/use_case_diagram.pdf)
 - [Domain Model](docs/domain_model.pdf)
 - [System Sequence Diagram](docs/system_sequence_diagram.pdf)
 - [Architecture Diagram](docs/architecture_diagram.pdf)
