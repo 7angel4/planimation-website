@@ -17,12 +17,6 @@ function addDescription(domainDesc) {
 function addAnimation(sessionLink) {
     const editor = document.getElementById(EDITOR_ID);
     editor.src = sessionLink;
-    editor.onload = () => {autoOpenPlanimation(sessionLink)};
-}
-
-export function autoOpenPlanimation(sessionLink) {
-    const pddlEditor = document.getElementById(EDITOR_ID);
-    pddlEditor.contentWindow.document.querySelector(PLANIMATION_BTN).click();
 }
 
 function addButton(id, text, ref) {
