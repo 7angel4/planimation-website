@@ -1,0 +1,42 @@
+.container {
+    margin: 5% auto 0;
+    position: relative;
+    bottom: 8rem;  /* offset from bottom of the screen */
+    width: 50%;
+    height: 75vh;
+    text-align: center;
+
+    background-image: url("/assets/resources/speech-bubble.png");
+    background-size: 100% 100%;  /* show speech bubble in full */
+}
+
+h1 {
+    color: #4051B0;
+    font-weight: 700;
+    padding-top: 4rem;
+    font-size: 15rem;
+    margin-bottom: 0;
+}
+
+h2.warning {
+    text-transform: uppercase;
+    font-size: 2.5rem;
+    width: 60%;
+    margin: 2rem auto;
+    line-height: 1.4;
+}
+
+.return {
+    width: 20%;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.logo-img {
+    position: absolute;
+    z-index: 1;
+    width: 21vh;
+    height: auto;
+    left: 15%;
+    bottom: 8%;
+}
