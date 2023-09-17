@@ -39,56 +39,62 @@ Planiwiki serves as an extension to the [Planimation Documentation Page](https:/
 
 ### Test Cases
 
-
 ## Technical Details
-### Folder Structure
-### Setup
-#### Firebase
-0. *Navigate to project root directory*
-1. *Install Node.js and npm (if not already installed)*:
+### System requirements
+- Node.js
+- Firebase
+- Git
+
+### Setting up
+
+#### Node.js Installation
+1. *Navigate to project root directory*
+   
+2. *Install Node.js and npm (if not already installed)*:
    - You can download and install Node.js from the official website. npm is included with Node.js.
    - Alternatively, if you have Homebrew installed, you can use it to install Node.js and npm: `brew install node`
+
+#### Firebase access
+Email Yezihanz@student.unimelb.edu.au for access to firebase.
+
+#### Firebase Installation
+1. *Navigate to project root directory*
      
-2. *Install the Firebase CLI*:
+2. *Install the Firebase Command line Interface (CLI) Tools*:
    Once you have npm installed, you can install the Firebase CLI using the following command:
     ```
-    bash
-        npm install -g firebase-tools
+    $ npm install -g firebase-tools
     ```
    
 3. *Verify the Installation*:
    After the installation is complete, you can verify it by checking the version of the Firebase CLI:
     ```
-    bash
-        firebase --version
+    $ firebase --version
     ```
    
 4. *Login to Firebase*:
-   To interact with your Firebase projects, you'll need to authenticate with your Google account (the one that was given Firebase access:
+   To interact with your Firebase projects, you'll need to authenticate with your Google account (the one that was given Firebase access):
     ```
-    bash
-        firebase login
+    $ firebase login
     ```
    - This command will open a new browser window asking you to authenticate with your Google account. Once authenticated, the CLI will be linked to your Firebase projects.
 
 5. Initialise your local project as Firebase project:
     ```
-    bash
-        firebase init
+    $ firebase init
     ```
     Follow the prompts to initialize. Follow the default answer unless otherwise stated below:
     - For the step `Which Firebase features do you want to set up for this directory?`, select `Firestore`, `Functions`, `Hosting` (the first out of two), `Emulators`.
     - For the step `Would you like to initialize a new codebase, or overwrite an existing one?`, select `Overwrite`.
-
-6. Deploy using emulator:
+  
+#### Deployment
+- Deploy using emulator:
     ```
-    bash
-        firebase emulators:start`
+    $ firebase emulators:start
     ```
-7. Deploy to website:
+- Deploy to website:
     ```
-    bash
-        firebase deploy
+    $ firebase deploy
     ```
 
 ## Contributors
