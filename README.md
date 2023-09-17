@@ -41,9 +41,9 @@ Planiwiki serves as an extension to the [Planimation Documentation Page](https:/
 
 ## Technical Details
 ### System requirements
-- Node.js
-- Firebase
-- Git
+- Node.js (v18.16.0)
+- Firebase (12.5.4)
+- Git (2.30.1)
 
 ### Setting up
 
