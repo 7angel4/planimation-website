@@ -21,6 +21,26 @@ Planiwiki serves as an extension to the [Planimation Documentation Page](https:/
 
 [Live Demo](https://planimation-staging-181bc.web.app/)
 
+## Key features
+- Extensive description on Planimation-specific functions with video demonstrations and code examples.
+- More description on existing domains, along with easily accessible and executable source code.
+- A reference page linking to other PDDL resources.
+- Accepting community recommendations and suggestions.
+
+## Documentation
+[User Stories](docs/user_stories.pdf)
+### Models & Diagrams
+- [Motivational Model](docs/motivational_model.pdf)
+- [Use Case Diagram](docs/use_case_diagram.pdf)
+- [Domain Model](docs/domain_model.pdf)
+- [System Sequence Diagram](docs/system_sequence_diagram.pdf)
+- [Architecture Diagram](docs/architecture_diagram.pdf)
+- [Website Database Schema](docs/website_database_schema.pdf)
+- [Deployment View](docs/deployment_view.pdf)
+
+### Test Cases
+
+
 ## Technical Details
 ### Folder Structure
 ### Setup
@@ -71,12 +91,6 @@ Planiwiki serves as an extension to the [Planimation Documentation Page](https:/
     bash
         firebase deploy
     ```
-
-## Key features
-- Extensive description on Planimation-specific functions with video demonstrations and code examples.
-- More description on existing domains, along with easily accessible and executable source code.
-- A reference page linking to other PDDL resources.
-- Accepting community recommendations and suggestions.
 
 ## Contributors
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
