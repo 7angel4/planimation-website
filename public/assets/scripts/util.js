@@ -35,7 +35,7 @@ export const createTdWithCode = (text) => {
 export const formatString = (s) => { return s.replaceAll("\\n", "\r\n"); }
 
 export function hideHeadBannerElements() {
-    const headBanner = document.querySelector("head-banner");
+    const headBanner = document.querySelector('head-banner');
 
     // Hide the main title, tagline, and button within the head-banner
     const titleElement = headBanner.querySelector(".page-name");

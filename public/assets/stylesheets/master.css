@@ -62,9 +62,11 @@ a:hover {
 
 /** Button **/
 button.btn {
+    font-family: 'Raleway', sans-serif;
     background-color: #3F50B6;
     border-radius: 25px;
     color: white;
+
     padding: 10px;
     border: none;
     display: inline-block;
@@ -75,6 +77,7 @@ button.btn {
 .btn:hover {
     color: white;
     background-color: #313b82;
+    cursor: pointer;
 }
 
 .btn > a {

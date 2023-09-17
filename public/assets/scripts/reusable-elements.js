@@ -64,7 +64,6 @@ class MainFooter extends HTMLElement {
 }
 
 
-
 class SearchBar extends HTMLElement {
     connectedCallback() {
         this.innerHTML =
@@ -93,7 +92,7 @@ class SearchBar extends HTMLElement {
             `
         const input = this.querySelector("#searchInput");
 
-        // Determine the context and set it as a data- attribute
+        // Determine the context and set it as a data attribute
         if (window.location.pathname.includes("gallery.html")) {
             this.setAttribute("data-context", "gallery");
         } else {
@@ -224,10 +223,12 @@ class HeadBanner extends HTMLElement {
         const header = this.children[0];
         const btn = document.createElement('button');
         btn.setAttribute("class", "btn");
-        const link = document.createElement('a');
-        link.textContent = text;
-        link.href = ref;
-        btn.appendChild(link);
+        btn.addEventListener('click', function(event) {
+            window.location.href = ref;
+        });
+
+        btn.type = 'button';
+        btn.textContent = text;
         header.appendChild(btn);
     }
 
