@@ -52,11 +52,7 @@ div.domain-desc {
     background-color: white;
     border-radius: 25px;
     border: 6px solid #43B9AA;
-    /*width: 250px;*/
-    /*height: 55px;*/
-}
 
-#view-source-code > a {
     color: black;
     font-weight: 700;
     margin: 7px;

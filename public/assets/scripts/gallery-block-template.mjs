@@ -31,6 +31,7 @@ function addButton(id, text, ref) {
     btn.addEventListener('click', function(event) {
         window.location.href = ref;
     });
+    btn.textContent = text;
 }
 
 export function addData(doc) {

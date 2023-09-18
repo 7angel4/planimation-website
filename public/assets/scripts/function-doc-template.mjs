@@ -85,7 +85,7 @@ export function addData(doc) {
     addDescription(docData.briefDescription);
     addExample(docData.example);
     addVideoDemo(docData.youtubeEmbeddingLink);
-    addCodeDemo(docData.videoCode, docData.youtubeLink);
+    addCodeDemo(docData.videoCode, docData.youtubeEmbeddingLink);
     addVideoExplanation(docData.videoExplanation);
 }
 
