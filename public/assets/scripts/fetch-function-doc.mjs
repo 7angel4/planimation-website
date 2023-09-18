@@ -1,7 +1,7 @@
-import { addData, addParams, addCustomProperties } from "./function-doc-template.mjs";
+import { addData, addParams } from "./function-doc-template.mjs";
+import { addDataTypesToList, addCustomProperties } from "./properties-doc-template.mjs";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-app.js";
 import {
-    createLiWithText,
     createTdWithP,
     wrapTextInCode,
     createTdWithElem,
@@ -172,18 +172,6 @@ function loadDataTypes(docId, list) {
     });
 }
 
-/**
- * Adds the data types from the query snapshot to the provided list element.
- * @param querySnapshot: the query snapshot holding the documents for the data types
- * @param list: the list to hold the data type values
- */
-function addDataTypesToList(querySnapshot, list) {
-    querySnapshot.forEach((doc) => {
-        const docData = doc.data();
-        const li = createLiWithText(docData.dataType);
-        list.appendChild(li);
-    });
-}
 
 function createVisualPropertyRow(doc) {
     const docData = doc.data();

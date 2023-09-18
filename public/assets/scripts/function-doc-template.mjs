@@ -88,10 +88,3 @@ export function addData(doc) {
     addCodeDemo(docData.videoCode, docData.youtubeEmbeddingLink);
     addVideoExplanation(docData.videoExplanation);
 }
-
-export function addCustomProperties(doc) {
-    const note = document.getElementById("custom-prop-note");
-    note.textContent = doc.data().note;
-    const example = document.getElementById("custom-prop-example");
-    example.setTextContent(formatString(doc.data().example));
-}
