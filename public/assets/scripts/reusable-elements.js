@@ -219,7 +219,7 @@ class HeadBanner extends HTMLElement {
         this.children[0].children[0].textContent = content;
     }
 
-    addButton(text, ref) {
+    addButton(text, ref, className) {
         const header = this.children[0];
         const btn = document.createElement('button');
         btn.setAttribute("class", "btn");
@@ -229,6 +229,7 @@ class HeadBanner extends HTMLElement {
 
         btn.type = 'button';
         btn.textContent = text;
+        btn.classList.add(className);
         header.appendChild(btn);
     }
 
