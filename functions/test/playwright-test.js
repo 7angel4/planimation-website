@@ -24,7 +24,9 @@ const DOMAIN_SRC_CODE_URL_PREFIX = "https://github.com/planimation/documentation
 const LOGO_IMG = ".logo-img";
 
 (async () => {
-    const browser = await chromium.launch({headless: false});
+    const browser = await chromium.launch({
+        headless: false
+    });
     const context = await browser.newContext();
     const page = await context.newPage();
 
@@ -85,13 +87,29 @@ async function testGallery(page) {
 
 async function testPddlEditorFrame(page) {
     const pddlEditorLocator = page.frameLocator('#pddl-editor');
+    // click on "Planimation" button in the menu
     await pddlEditorLocator.locator("#planimationMenuItem > a").click();
+    // click on "Planimate" in the pop-up
     await pddlEditorLocator.locator("#filesChosenButton").click();
     // await pddlEditorLocator.locator("[d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z']").click();
     // await pddlEditorLocator.locator("[d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z']").click();
     // await pddlEditorLocator.locator("._3MfPgPVvFEx5krwdLXMAdU div > :nth-child(1) .MuiSvgIcon-root").click();
     // await pddlEditorLocator.locator(".MuiSlider-root").click();
     // await pddlEditorLocator.locator("[d='M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z']").click();
+
+    // click on the play button
+    await pddlEditorLocator.locator("._3MfPgPVvFEx5krwdLXMAdU div > :nth-child(2) .MuiSvgIcon-root").click();
+    console.log("this works")
+    // console.log(pddlEditorLocator.locator("button.MuiButtonBase-root:nth-child(1)"));
+    await pddlEditorLocator.locator("button.MuiButtonBase-root:nth-child(1)").click();
+    console.log("pddl editor tested")
+    // click on the pause button
+    // await page.click("._3MfPgPVvFEx5krwdLXMAdU div > :nth-child(3) .MuiSvgIcon-root");
+    // await page.click("._3MfPgPVvFEx5krwdLXMAdU div > :nth-child(4) .MuiSvgIcon-root");
+    // await page.click("._2MlLD73FNJ1C09CuToKYlK > div:nth-of-type(18) ._2vjqn185hWwo0hPXGg5UJp");
+    // await page.click(".MuiSlider-rail");
+    // await page.click("[d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z']");
+    // await page.click("._3MfPgPVvFEx5krwdLXMAdU div > :nth-child(5) .MuiSvgIcon-root");
 }
 
 const FUNCTION_DOC_IDS = ["2JelRRGyOoOGXls6fXXB", "6zeSOZbqnlMpo9wKLzLk", "FjBOvZOOv777pzPtDT9y"];

@@ -103,7 +103,7 @@ function loadDomainPage(doc) {
         `
         <h1 id="domain-name"></h1>
         <div class="domain-desc"><p id="domain-desc"></p></div>
-        <div class="animation-container"><iframe id="pddl-editor" width="100%" height="100%"></iframe></div>
+        <div class="animation-container"><iframe id="pddl-editor" width="100%" height="90%"></iframe></div>
         <button class="btn" id="view-source-code"></button>
         <button class="btn" onclick="window.location.href='/gallery.html'" type='button'>Return</button>
         `;
