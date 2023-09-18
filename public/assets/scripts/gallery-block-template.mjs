@@ -27,10 +27,10 @@ export function autoOpenPlanimation(sessionLink) {
 
 function addButton(id, text, ref) {
     const btn = document.getElementById(id);
-    const link = document.createElement('a');
-    link.href = ref;
-    link.textContent = text;
-    btn.appendChild(link);
+    btn.type = 'button';
+    btn.addEventListener('click', function(event) {
+        window.location.href = ref;
+    });
 }
 
 export function addData(doc) {
