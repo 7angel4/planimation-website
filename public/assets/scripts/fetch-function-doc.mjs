@@ -1,6 +1,14 @@
 import { addData, addParams, addCustomProperties } from "./function-doc-template.mjs";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-app.js";
-import { createTdWithP, wrapTextInCode, createTdWithElem, createTdWithCode, convertToMarkdown, hideHeadBannerElements } from "./util.js";
+import {
+    createLiWithText,
+    createTdWithP,
+    wrapTextInCode,
+    createTdWithElem,
+    createTdWithCode,
+    convertToMarkdown,
+    hideHeadBannerElements
+} from "./util.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyDf--XeJ2-pkwKkjGO1RLxzjwzJZUy_e0s",
@@ -152,6 +160,31 @@ function loadParams(docId) {
     });
 }
 
+function loadDataTypes(docId, list) {
+    return new Promise((resolve, reject) => {
+        db.collection(VISUAL_PROPERTY_COLLECTION).doc(docId).collection("dataType").get().then((querySnapshot) => {
+            addDataTypesToList(querySnapshot, list);
+            resolve(); // Resolve the promise when done
+        }).catch((error) => {
+            console.error("Error fetching data types: ", error);
+            reject(error); // Reject the promise on error
+        });
+    });
+}
+
+/**
+ * Adds the data types from the query snapshot to the provided list element.
+ * @param querySnapshot: the query snapshot holding the documents for the data types
+ * @param list: the list to hold the data type values
+ */
+function addDataTypesToList(querySnapshot, list) {
+    querySnapshot.forEach((doc) => {
+        const docData = doc.data();
+        const li = createLiWithText(docData.dataType);
+        list.appendChild(li);
+    });
+}
+
 function createVisualPropertyRow(doc) {
     const docData = doc.data();
     const contentParent = document.querySelector(VISUAL_PROPERTIES_TABLE);
@@ -163,6 +196,12 @@ function createVisualPropertyRow(doc) {
     // row body
     const descriptionTd = createTdWithP(docData.description);
     const typeTd = createTdWithP(docData.type);
+
+    // data types are compulsory
+    const dataTypeList = document.createElement('ul');
+    loadDataTypes(doc.id, dataTypeList);
+    const dataTypeTd = createTdWithElem(dataTypeList);
+
     const additionalList = document.createElement('ul');
     const additionalTd = createTdWithElem(additionalList);
 
@@ -193,6 +232,7 @@ function createVisualPropertyRow(doc) {
     // add the entries into the row
     tr.appendChild(nameTd);
     tr.appendChild(typeTd);
+    tr.appendChild(dataTypeTd);
     tr.appendChild(descriptionTd);
     tr.appendChild(additionalTd);
 

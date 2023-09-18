@@ -27,3 +27,7 @@ table.doc-table-summary tr:nth-child(odd) {
 .return {
     margin-top: 20px;
 }
+
+td > ul > li {
+    margin-bottom: 5px;
+}

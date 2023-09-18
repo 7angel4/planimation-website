@@ -13,12 +13,23 @@ export const wrapTextInCode = (text) => {
     return code;
 }
 
+export const createLiWithText = (text) => {
+    const li = document.createElement('li');
+    li.textContent = text;
+    return li;
+}
+
 export const createTdWithP = (text) => {
     const textContainer = document.createElement('p');
     textContainer.textContent = text;
     return createTdWithElem(textContainer);
 }
 
+/**
+ * Creates a table data entry that holds the given element.
+ * @param elem: the element to be held in the cell
+ * @returns {HTMLTableCellElement}: the resulting HTML `td` element.
+ */
 export const createTdWithElem = (elem) => {
     const td = document.createElement('td');
     td.appendChild(elem);
