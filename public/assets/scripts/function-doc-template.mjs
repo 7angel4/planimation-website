@@ -84,7 +84,16 @@ export function addData(doc) {
     addTitle(docData.functionName);
     addDescription(docData.briefDescription);
     addExample(docData.example);
+    if (docData.nonFunctioning) {
+        addNotFunctioningWarning(docData.functionName);
+        return;
+    }
+
     addVideoDemo(docData.youtubeEmbeddingLink);
     addCodeDemo(docData.videoCode, docData.youtubeEmbeddingLink);
     addVideoExplanation(docData.videoExplanation);
+}
+
+function addNotFunctioningWarning(functionName) {
+
 }
