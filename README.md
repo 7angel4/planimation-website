@@ -47,6 +47,15 @@ Planiwiki serves as an extension to the [Planimation Documentation Page](https:/
 
 ### Setting up
 
+#### Get Source
+The source code and related artefacts are hosted in Github, repository can be cloned through the following command:
+
+```
+git clone https://github.com/7angel4/planimation-website.git
+```
+
+git clone https://github.com/planimation/frontend.git planimation-frontend
+All the code is available in https://github.com/planimation/
 #### Node.js Installation
 1. *Navigate to project root directory*
    
