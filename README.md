@@ -96,7 +96,9 @@ Email Yezihanz@student.unimelb.edu.au for access to firebase.
     ```
     $ firebase deploy
     ```
-
+## Changelog
+[version history](VERSIONS.md)
+  
 ## Contributors
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore -->
