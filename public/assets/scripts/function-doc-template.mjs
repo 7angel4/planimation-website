@@ -70,6 +70,10 @@ function addCodeDemo(code, videoSrc) {
     codeBlock.style["max-width"] = '50%';
 }
 
+/**
+ * Fills in the paragraph element with the video explanation.
+ * @param text: represents the video explanation.
+ */
 function addVideoExplanation(text) {
     const p = document.getElementById(VIDEO_EXPLANATION_ELEM);
     p.textContent = text;

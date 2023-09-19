@@ -132,7 +132,7 @@ function loadFunctionDoc(doc) {
         </div>
         <div class="demo">
             <!-- Video demo -->
-            <h3>Visual Demo</h3>
+            <h3>Demo</h3>
             <div class="video-demo-container"></div>
             <!-- Code snippet -->
             <code-block id="code-demo"></code-block>
