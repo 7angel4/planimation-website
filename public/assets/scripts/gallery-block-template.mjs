@@ -1,3 +1,5 @@
+import {createButton} from './util.js'
+
 const DOMAIN_NAME_ID = "domain-name";
 const DOMAIN_DESC_ID = "domain-desc";
 const EDITOR_ID = "pddl-editor";
@@ -39,9 +41,7 @@ function addAnimation(sessionLink) {
 function addButton(id, text, ref) {
     const btn = document.getElementById(id);
     btn.type = 'button';
-    btn.addEventListener('click', function(event) {
-        window.location.href = ref;
-    });
+    btn.addEventListener('click', () => { window.location.href = ref; });
     btn.textContent = text;
 }
 
@@ -58,19 +58,19 @@ export function addData(doc) {
 }
 
 /**
- * Inserts
- * @param contentDiv
- * @param contentType
- * @param content
- * @param colour
+ * Wrap the content in an element, and appends it to the specified content division.
+ * @param contentDiv: the HTML `div` element to hold the content wrapper element
+ * @param contentType: the type of HTML element to wrap the content
+ * @param content: string representing the content to be inserted
+ * @param color: color in which the content will be rendered
  */
-function insertContent(contentDiv, contentType, content, colour="black") {
+function insertContent(contentDiv, contentType, content, color="black") {
     let element = null;
     switch (contentType) {
         case "p":
             element = document.createElement("p");
             element.textContent = content;
-            element.style.color = colour;
+            element.style.color = color;
             break;
         case "ol":
             element = document.createElement("ol");
@@ -80,7 +80,7 @@ function insertContent(contentDiv, contentType, content, colour="black") {
                 let desc = document.createElement("p");
                 desc.textContent = content.text;
                 desc.style.fontSize = "14px";
-                desc.style.color = colour;
+                desc.style.color = color;
 
                 let image = document.createElement("img");
                 image.src = content.imageSrc;
@@ -101,10 +101,7 @@ function insertContent(contentDiv, contentType, content, colour="black") {
  * Creates a collapsible button.
  */
 function createCollapsibleButton() {
-    let button = document.createElement("button");
-    button.type = "button";
-    button.className = "collapsible";
-    button.innerHTML = "&darr; How to animate";
+    let button = createButton('collapsible', "&darr; How to animate");
 
     let contentDiv = document.createElement("div");
     contentDiv.className = "collapsible-content";
@@ -143,20 +140,23 @@ function createCollapsibleButton() {
     container.appendChild(contentDiv);
 }
 
+/**
+ * Enables the collapsible functionality (expand and collapse content).
+ */
 export function enableCollapsible() {
     createCollapsibleButton();
 
     let collapsible = document.getElementsByClassName("collapsible");
     for (let i = 0; i < collapsible.length; i++) {
         collapsible[i].addEventListener("click", function() {
-        this.classList.toggle("active");
-        let content = this.nextElementSibling;
+            this.classList.toggle("active");
+            let content = this.nextElementSibling;
 
-        if (content.style.display === "block") {
-            content.style.display = "none";
-        } else {
-            content.style.display = "block";
-        }
+            if (content.style.display === "block") {
+                content.style.display = "none";
+            } else {
+                content.style.display = "block";
+            }
         });
     }
 }

@@ -4,21 +4,43 @@
  * @returns the HTML code required to embed the given YouTube video
  */
 export const getYouTubeEmbedding = (link) => {
-    return `<iframe class="youtube-demo" width="560" height="315" src=${link} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`
+    return `
+        <iframe class="youtube-demo" width="560" height="315" src=${link} 
+            title="YouTube video player" frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            allowfullscreen>
+        </iframe>
+    `;
 };
 
+/**
+ * Wraps the text in a code element
+ * @param text: string representing the text to be wrapped
+ * @returns {HTMLElement}: the HTML `code` element holding the text
+ */
 export const wrapTextInCode = (text) => {
     const code = document.createElement('code');
     code.textContent = text;
     return code;
 }
 
+/**
+ * Creates a list item holding the text.
+ * @param text: string representing the text to be wrapped
+ * @returns {HTMLLIElement}: the HTML `li` element holding the text
+ */
 export const createLiWithText = (text) => {
     const li = document.createElement('li');
     li.textContent = text;
     return li;
 }
 
+/**
+ * Wraps the provided text in a paragraph element,
+ * and creates a table data entry holding that paragraph element.
+ * @param text: string representing the text to be wrapped
+ * @returns {HTMLTableCellElement}: the HTML `li` element holding the text
+ */
 export const createTdWithP = (text) => {
     const textContainer = document.createElement('p');
     textContainer.textContent = text;
@@ -36,6 +58,11 @@ export const createTdWithElem = (elem) => {
     return td;
 }
 
+/**
+ * Creates a table data entry that holds the text in code format.
+ * @param text: string representing content of the cell
+ * @returns {HTMLTableCellElement}: the resulting HTML `td` element.
+ */
 export const createTdWithCode = (text) => {
     const code = wrapTextInCode(text);
     const td = createTdWithP("");
@@ -43,8 +70,16 @@ export const createTdWithCode = (text) => {
     return td;
 }
 
+/**
+ * Formats the string  (handles newline characters exported from Firebase)
+ * @param s: string to be formatted
+ * @returns {string}: the formatted string.
+ */
 export const formatString = (s) => { return s.replaceAll("\\n", "\r\n"); }
 
+/**
+ * Hides the title, tagline and button within the custom head-banner element.
+ */
 export function hideHeadBannerElements() {
     const headBanner = document.querySelector('head-banner');
 
@@ -53,15 +88,33 @@ export function hideHeadBannerElements() {
     const tagLineElement = headBanner.querySelector("h2");
     const buttonElement = headBanner.querySelector("button");
 
-    if (titleElement) titleElement.style.display = "none";
-    if (tagLineElement) tagLineElement.style.display = "none";
-    if (buttonElement) buttonElement.style.display = "none";
+    if (titleElement)  titleElement.style.display = "none";
+    if (tagLineElement)  tagLineElement.style.display = "none";
+    if (buttonElement)  buttonElement.style.display = "none";
 }
 
+/**
+ * Converts all paragraph elements in the document to markdown format
+ * (i.e. detects code snippets).
+ */
 export function convertToMarkdown() {
     // convert all paragraph elements
     const pElems = document.querySelectorAll('p');
-    pElems.forEach((p) =>
-        { p.innerHTML = p.innerHTML.replace(/`(.*?)`/g, '<code>$1</code>'); }
-    );
+    pElems.forEach((p) => {
+        p.innerHTML = p.innerHTML.replace(/`(.*?)`/g, '<code>$1</code>');
+    });
+}
+
+/**
+ * Creates a button with the given class name and text display.
+ * @param className: class name to add to the button
+ * @param text: text to be displayed by the button
+ * @returns {HTMLButtonElement}: the created button.
+ */
+export function createButton(className, text) {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.classList.add(className);
+    btn.innerHTML = text;
+    return btn;
 }

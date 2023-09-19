@@ -96,7 +96,7 @@ export function loadDomainContent(event) {
 
 
 function loadDomainPage(doc) {
-    hideHeadBannerElements()
+    hideHeadBannerElements();
 
     // Swap the content div
     GALLERY_DIV.innerHTML =
