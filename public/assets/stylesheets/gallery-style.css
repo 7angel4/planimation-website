@@ -47,7 +47,7 @@ div.domain-desc {
     padding-bottom: 15px;
 }
 
-#view-source-code.btn {
+#view-src-code.btn {
     float: right;
     background-color: white;
     border-radius: 25px;
@@ -55,10 +55,9 @@ div.domain-desc {
 
     color: black;
     font-weight: 700;
-    margin: 7px;
 }
 
-#view-source-code::after {
+#view-src-code::after {
     clear: both;
 }
 

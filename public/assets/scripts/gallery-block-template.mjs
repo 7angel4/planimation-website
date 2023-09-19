@@ -1,8 +1,7 @@
 const DOMAIN_NAME_ID = "domain-name";
 const DOMAIN_DESC_ID = "domain-desc";
 const EDITOR_ID = "pddl-editor";
-const GITHUB_BTN_ID = "view-source-code";
-const PLANIMATION_BTN = "#planimationMenuItem > a";
+const GITHUB_BTN_ID = "view-src-code";
 
 function addTitle(domainName) {
     const title = document.getElementById(DOMAIN_NAME_ID);
@@ -17,12 +16,6 @@ function addDescription(domainDesc) {
 function addAnimation(sessionLink) {
     const editor = document.getElementById(EDITOR_ID);
     editor.src = sessionLink;
-    editor.onload = () => {autoOpenPlanimation(sessionLink)};
-}
-
-export function autoOpenPlanimation(sessionLink) {
-    const pddlEditor = document.getElementById(EDITOR_ID);
-    pddlEditor.contentWindow.document.querySelector(PLANIMATION_BTN).click();
 }
 
 function addButton(id, text, ref) {

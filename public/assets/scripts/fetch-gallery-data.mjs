@@ -1,6 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-app.js";
 import { addData } from "./gallery-block-template.mjs";
-import { autoOpenPlanimation } from "./gallery-block-template.mjs";
 import { hideHeadBannerElements } from "./util.js";
 
 const firebaseConfig = {
@@ -104,8 +103,8 @@ function loadDomainPage(doc) {
         <h1 id="domain-name"></h1>
         <div class="domain-desc"><p id="domain-desc"></p></div>
         <div class="animation-container"><iframe id="pddl-editor" width="100%" height="90%"></iframe></div>
-        <button class="btn" id="view-source-code"></button>
-        <button class="btn" onclick="window.location.href='/gallery.html'" type='button'>Return</button>
+        <button class="btn" id="view-src-code"></button>
+        <button class="btn return" onclick="window.location.href='/gallery.html'" type='button'>Return</button>
         `;
     document.body.onLoad = addData(doc);
 }
