@@ -112,6 +112,7 @@ function loadDocumentContent(event) {
     });
 }
 
+
 function loadFunctionDoc(doc) {
     hideHeadBannerElements();
 
@@ -147,7 +148,11 @@ function loadFunctionDoc(doc) {
 }
 
 
-
+/**
+ * Loads information from the parameters document.
+ * @param docId: ID of the document to be fetched
+ * @returns {Promise<unknown>}
+ */
 function loadParams(docId) {
     return new Promise((resolve, reject) => {
         db.collection(FUNCTION_COLLECTION).doc(docId).collection("parameters").get().then((querySnapshot) => {
@@ -160,6 +165,12 @@ function loadParams(docId) {
     });
 }
 
+/**
+ * Loads information from the data types document to the provided list element.
+ * @param docId: ID of the document to be fetched
+ * @param list: an HTML `ul` element which holds the list of data types
+ * @returns {Promise<unknown>}
+ */
 function loadDataTypes(docId, list) {
     return new Promise((resolve, reject) => {
         db.collection(VISUAL_PROPERTY_COLLECTION).doc(docId).collection("dataType").get().then((querySnapshot) => {
@@ -172,7 +183,10 @@ function loadDataTypes(docId, list) {
     });
 }
 
-
+/**
+ * Creates a row in the visual property documentation table.
+ * @param doc: Firebase document containing the data to fill the row.
+ */
 function createVisualPropertyRow(doc) {
     const docData = doc.data();
     const contentParent = document.querySelector(VISUAL_PROPERTIES_TABLE);
@@ -226,6 +240,7 @@ function createVisualPropertyRow(doc) {
 
     contentParent.appendChild(tr);
 }
+
 
 window.onload = function() {
     // Check if the URL path contains "/documentation/"
