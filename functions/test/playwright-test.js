@@ -2,6 +2,7 @@
 
 const { chromium } = require('playwright');
 const assert = require('assert');
+const {expect} = require('@playwright/test');
 const { clickAndVerify, getRandomElem, clickAndVerifyLocation } = require("./playwright-test-util.js");
 
 const INDEX_URL = "http://localhost:5004/";
@@ -36,10 +37,10 @@ const LOGO_IMG = ".logo-img";
     const page = await context.newPage();
 
     await testIndex(page);
-    // await testDoc(page);
-    // await testGallery(page);
+    await testDoc(page);
+    await testGallery(page);
     await testReferences(page);
-    // await testSuggestions(page);
+    await testSuggestions(page);
 
     await browser.close();
 })();
@@ -101,6 +102,8 @@ async function testGallery(page) {
     let chosenDomain = getRandomElem(DOMAINS);
     let expectedDomainUrl = GALLERY_URL + "/" + chosenDomain;
     await clickAndVerifyLocation(page, `[alt='${chosenDomain}']`, expectedDomainUrl);
+    // check the collapsible
+    await checkCollapsible(page, ".collapsible", ".collapsible-content")
 
     // click "View Source Code" button
     await clickAndVerify(page, DOMAIN_SRC_CODE_BTN, "View source code", DOMAIN_SRC_CODE_URL_PREFIX + chosenDomain);
@@ -111,6 +114,21 @@ async function testGallery(page) {
 
     // return to gallery
     await clickAndVerify(page, RETURN_BTN, RETURN_BTN_TEXT, GALLERY_URL);
+}
+
+/**
+ * Checks the functionality of a collapsible.
+ * @param page: page containing the collapsible
+ * @param btn: string selector for the button controlling the collapsible
+ * @param content: string selector for the content within the collapsible
+ * @returns {Promise<void>}
+ */
+async function checkCollapsible(page, btn, content) {
+    let contentLocator = page.locator(content);
+    expect(await contentLocator.evaluate(elem => elem.style.display)).toBe('none');
+    expect(await contentLocator.evaluate(elem => elem.classList)).not.toContain('active');
+    await page.click(btn);
+    expect(await contentLocator.evaluate(elem => elem.style.display)).toBe('block');
 }
 
 async function testPddlEditorFrame(page) {
@@ -130,8 +148,8 @@ const FUNCTION_DOC_IDS = [
 
 
 /**
- * Tests the index page -- should start and end at the index page.
- * @param page
+ * Tests the index page - should start and end at the index page.
+ * @param page: the page to interact with
  * @returns {Promise<void>}
  */
 async function testIndex(page) {

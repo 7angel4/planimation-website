@@ -87,7 +87,7 @@ div.domain-desc {
     border: 5px solid #43B9AA;
 }
 
-.content {
+.collapsible-content {
     padding: 0 18px;
     display: none;
     overflow: hidden;
