@@ -65,3 +65,32 @@ div.domain-desc {
     width: 100%;
     height: 40vw;
 }
+
+
+.collapsible {
+    background-color: white;
+    border: 5px solid #313b82;
+    border-radius: 5px;
+    color: black;
+    cursor: pointer;
+    font-family: 'Raleway';
+
+    padding: 18px;
+    width: 100%;
+    text-align: left;
+    transition-duration: 0.2s;
+    outline: none;
+    font-size: 15px;
+}
+
+.active, .collapsible:hover {
+    border: 5px solid #43B9AA;
+}
+
+.content {
+    padding: 0 18px;
+    display: none;
+    overflow: hidden;
+    background-color: #F1F1F1;
+    margin-bottom: 1rem;
+}

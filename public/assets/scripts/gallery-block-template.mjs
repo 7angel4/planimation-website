@@ -69,12 +69,12 @@ function insertContent(contentDiv, contentType, content, colour="black") {
 }
 
 function createCollapsibleButton() {
-    var button = document.createElement("button");
+    let button = document.createElement("button");
     button.type = "button";
     button.className = "collapsible";
     button.innerHTML = "&darr; How to animate";
 
-    var contentDiv = document.createElement("div");
+    let contentDiv = document.createElement("div");
     contentDiv.className = "content";
     contentDiv.style.display = "none";
 
@@ -114,11 +114,11 @@ function createCollapsibleButton() {
 export function enableCollapsible() {
     createCollapsibleButton();
 
-    var coll = document.getElementsByClassName("collapsible");
-    for (var i = 0; i < coll.length; i++) {
-        coll[i].addEventListener("click", function() {
+    let collapsible = document.getElementsByClassName("collapsible");
+    for (let i = 0; i < collapsible.length; i++) {
+        collapsible[i].addEventListener("click", function() {
         this.classList.toggle("active");
-        var content = this.nextElementSibling;
+        let content = this.nextElementSibling;
 
         if (content.style.display === "block") {
             content.style.display = "none";
