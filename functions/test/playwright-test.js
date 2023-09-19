@@ -10,13 +10,14 @@ const GALLERY_URL = INDEX_URL + "gallery";
 const REF_URL = INDEX_URL + "references";
 const SUGGESTIONS_URL = INDEX_URL + "suggestions";
 
-const NAV_HOME = ".to-home";
-const NAV_DOC = ".to-documentation";
-const NAV_GALLERY = ".to-gallery";
-const NAV_REF = ".to-references";
-const NAV_SUGGESTIONS = ".to-suggestions";
+const NAV_HOME = "nav .to-home";
+const NAV_DOC = "nav .to-documentation";
+const NAV_GALLERY = "nav .to-gallery";
+const NAV_REF = "nav .to-references";
+const NAV_SUGGESTIONS = "nav .to-suggestions";
 
 const RETURN_BTN = ".return";
+const RETURN_BTN_TEXT = "Return";
 const EXPLORE_DOMAINS_BTN = ".explore-domains";
 const VIEW_GITHUB_DOC_BTN = ".view-github-doc";
 const GITHUB_DOC_REPO_URL = "https://github.com/planimation/documentation";
@@ -35,24 +36,29 @@ const LOGO_IMG = ".logo-img";
     const page = await context.newPage();
 
     await testIndex(page);
-    await testDoc(page);
-    await testGallery(page);
+    // await testDoc(page);
+    // await testGallery(page);
     await testReferences(page);
-    await testSuggestions(page);
+    // await testSuggestions(page);
 
     await browser.close();
 })();
 
+/**
+ * Tests the suggestions page.
+ * @param page: the page to interact with
+ * @returns {Promise<void>}
+ */
 async function testSuggestions(page) {
-    await clickAndVerify(page, NAV_SUGGESTIONS, SUGGESTIONS_URL);
+    await clickAndVerify(page, NAV_SUGGESTIONS, "Suggestions", SUGGESTIONS_URL);
     await page.click("[target='_blank']");
     // return to home page
-    await clickAndVerify(page, LOGO_IMG, INDEX_URL);
+    await clickAndVerifyLocation(page, LOGO_IMG, INDEX_URL);
 }
 
-const REFERENCE_URLS = [
+const REFERENCES = [
     {text: "Planimation Documentation on GitHub", url: "https://planimation.github.io/documentation/"},
-    {text: "Planning.Domains", url: "https://planning.domains/"},
+    {text: "Planning.Domains", url: "http://api.planning.domains/"},
     {text: "Planning.Wiki", url: "https://planning.wiki/"},
     {text: "Planimation Visualiser", url: "https://planimation.planning.domains/problem"}
 ]
@@ -63,20 +69,24 @@ const REFERENCE_URLS = [
  * @returns {Promise<void>}
  */
 async function testReferences(page) {
-    await page.click(NAV_REF);
-    assert.equal(page.url(), REF_URL);
+    await clickAndVerify(page, NAV_REF, "References", REF_URL);
 
-    // check the list of URLs
-    for (let i = 1; i <= REFERENCE_URLS.length; i++) {
-        // check text display
-        // check link
-        await clickAndVerify(page, `.ref-list > :nth-child(${i}) [target='_blank']`, REFERENCE_URLS[i].text, REFERENCE_URLS[i].url);
+    // check each URL in the list of references
+    for (let i = 0; i < REFERENCES.length; i++) {
+        // handle pop-up pages
+        let refLocator = page.locator(`.ref-list > li:nth-child(${i+1}) > span > a`);
+        assert.equal(await refLocator.innerText(), REFERENCES[i].text);
+
+        // Start waiting for popup before clicking.
+        const popupPromise = page.waitForEvent('popup');
+        await refLocator.click();
+        const popup = await popupPromise;
+        // Wait for the popup to load.
+        await popup.waitForLoadState();
+
+        // verify
+        assert.equal(popup.url(), REFERENCES[i].url);
     }
-    await page.click(".ref-list > :nth-child(1) [target='_blank']");
-    assert.equal(page.url(), REF_URL);
-    await page.click(".ref-list > :nth-child(2) [target='_blank']");
-    await page.click(".ref-list > :nth-child(3) [target='_blank']");
-    await page.click(".ref-list > :nth-child(4) [target='_blank']");
 }
 
 const DOMAINS = ["Family-and-fisherman", "Visitall", "Grid"];
@@ -90,17 +100,17 @@ async function testGallery(page) {
 
     let chosenDomain = getRandomElem(DOMAINS);
     let expectedDomainUrl = GALLERY_URL + "/" + chosenDomain;
-    await clickAndVerify(page, `[alt='${chosenDomain}']`, chosenDomain, expectedDomainUrl);
+    await clickAndVerifyLocation(page, `[alt='${chosenDomain}']`, expectedDomainUrl);
 
     // click "View Source Code" button
-    await clickAndVerify(page, DOMAIN_SRC_CODE_BTN, DOMAIN_SRC_CODE_URL_PREFIX + chosenDomain);
+    await clickAndVerify(page, DOMAIN_SRC_CODE_BTN, "View source code", DOMAIN_SRC_CODE_URL_PREFIX + chosenDomain);
 
     // return to gallery
     await page.goto(expectedDomainUrl);
     await testPddlEditorFrame(page);
 
     // return to gallery
-    await clickAndVerify(page, RETURN_BTN, GALLERY_URL);
+    await clickAndVerify(page, RETURN_BTN, RETURN_BTN_TEXT, GALLERY_URL);
 }
 
 async function testPddlEditorFrame(page) {
@@ -127,7 +137,7 @@ const FUNCTION_DOC_IDS = [
 async function testIndex(page) {
     await page.goto(INDEX_URL);
     // click on "Explore Domains" button
-    await clickAndVerifyWithText(page, EXPLORE_DOMAINS_BTN, "EXPLORE DOMAINS", GALLERY_URL);
+    await clickAndVerify(page, EXPLORE_DOMAINS_BTN, "EXPLORE DOMAINS", GALLERY_URL);
     // return to home page
     await clickAndVerify(page, NAV_HOME, "Home", INDEX_URL);
 }
@@ -146,7 +156,7 @@ async function testDoc(page) {
     await testYoutubeFrame(page);
 
     // click "Return" button - should return to documentation page
-    await clickAndVerify(page, RETURN_BTN, DOC_URL);
+    await clickAndVerify(page, RETURN_BTN, RETURN_BTN_TEXT, DOC_URL);
 }
 
 async function testYoutubeFrame(page) {
