@@ -93,7 +93,7 @@ class SearchBar extends HTMLElement {
         const input = this.querySelector("#searchInput");
 
         // Determine the context and set it as a data attribute
-        if (window.location.pathname.includes("gallery.html")) {
+        if (window.location.pathname.includes("gallery")) {
             this.setAttribute("data-context", "gallery");
         } else {
             this.setAttribute("data-context", "documentation");
@@ -136,8 +136,11 @@ class SearchBar extends HTMLElement {
     }
 
     filterGallery(query) {
-        const galleryItems = document.querySelectorAll(".gallery-item .caption");
-        const anyVisible = this.filterItemsByQuery(galleryItems, query, item => item.textContent);
+        const galleryItems = document.querySelectorAll(".gallery-item");
+        const anyVisible = this.filterItemsByQuery(galleryItems, query, item => {
+            const caption = item.querySelector('.caption');
+            return caption ? caption.textContent : '';
+        });
 
         // If none are visible, show the message
         this.toggleNoMatchMessage(document, anyVisible);

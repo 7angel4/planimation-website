@@ -90,6 +90,7 @@ export function loadDomainContent(event) {
             hideHeaderAboveTitle(GALLERY_DIV);
         } else {
             console.error("Domain not found!");
+            window.location.href = "/404.html";
         }
     }).catch((error) => {
         console.error("Error fetching domain content: ", error);
