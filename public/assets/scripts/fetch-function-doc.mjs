@@ -106,6 +106,7 @@ function loadDocumentContent(event) {
             loadParams(doc.id);
         } else {
             console.error("Function not found!");
+            window.location.href = "/404.html";
         }
     }).catch((error) => {
         console.error("Error fetching function content: ", error);
