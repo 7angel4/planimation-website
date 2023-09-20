@@ -1,11 +1,13 @@
 import { addData, addParams } from "./function-doc-template.mjs";
 import { addDataTypesToList, addCustomProperties } from "./properties-doc-template.mjs";
-import { initializeFirestore } from "./fetch-data.js";
+import { initializeFirestore, loadDocumentContent, DB } from "./fetch-data.js";
 import {
     createTdWithP,
     wrapTextInCode,
     createTdWithElem,
     createTdWithCode,
+    createAnchor,
+    createLiWithText,
     convertToMarkdown,
     hideHeaderAboveTitle
 } from "./util.js";
@@ -25,9 +27,10 @@ const DISTRIBUTE_FUNCTION_CATEGORY = "distribute";
 const OTHER_FUNCTION_CATEGORY = "others";
 const CHILD_DIR = "/documentation/";
 const PAGE_CONTENT_DIV = document.querySelector(PAGE_CONTENT_CLASS);
+const EMPTY_TD_COLOR = '#ecf2f6';  /* gray out color for empty table cells */
 
 
-const DB = initializeFirestore();
+// const DB = initializeFirestore();
 
 
 fetchDocFromCollection(FUNCTION_COLLECTION, createFunctionRef);
@@ -62,25 +65,23 @@ function createFunctionRef(doc) {
     const category = docData.category;
 
     const contentParent = getTableMatchingCategory(category);
-    const tr = document.createElement('tr');
+    const tableRow = document.createElement('tr');
 
-    // inside the td
+    // hierarchy inside the table data entry: paragraph > anchor > code
     const p = document.createElement('p');
-    const a = document.createElement('a');
+    const a = createAnchor(CHILD_DIR + functionName, '');
     a.class = "reference internal";
-    a.href = CHILD_DIR + functionName;
     a.dataset.type = "function";
-    const code =  document.createElement('code');
+    const code =  wrapTextInCode(functionName);
     code.className = "table-keyword";
-    code.textContent = functionName;
     code.dataset.docId = doc.id;  // Store the document ID as a data attribute
     a.appendChild(code);
     p.appendChild(a);
 
     // assemble
-    tr.appendChild(createTdWithElem(p));
-    tr.appendChild(createTdWithP(functionDescription));
-    contentParent.appendChild(tr);
+    tableRow.appendChild(createTdWithElem(p));
+    tableRow.appendChild(createTdWithP(functionDescription));
+    contentParent.appendChild(tableRow);
 }
 
 /**
@@ -101,27 +102,14 @@ const getTableMatchingCategory = (category) => {
     return document.querySelector(tableSelector);
 }
 
-function loadDocumentContent(event) {
-    // Check if the clicked link is a function link
-    if (event && event.target.dataset.type !== "function") {
-        return;
-    }
-    // Extract the functionName from the URL path
-    const pathSegments = window.location.pathname.split('/');
-    const functionName = pathSegments[pathSegments.length - 1]; // Assuming the last segment is the functionName
-    // Fetch the function content from Firestore
-    DB.collection("functions").where("functionName", "==", functionName).get().then((querySnapshot) => {
-        if (!querySnapshot.empty) {
-            const doc = querySnapshot.docs[0];
+
+function loadFunctionDocContent(event) {
+    loadDocumentContent(
+        event, FUNCTION_COLLECTION, 'function', 'functionName',
+        (doc) => {
             loadFunctionDoc(doc);
             loadParams(doc.id);
-        } else {
-            console.error("Function not found!");
-            window.location.href = "/404.html";
-        }
-    }).catch((error) => {
-        console.error("Error fetching function content: ", error);
-    });
+        });
 }
 
 
@@ -193,6 +181,12 @@ function loadDataTypes(docId, list) {
     });
 }
 
+const createDefaultValueLi = (defaultValue) => {
+    let li = createLiWithText("Default value: ");
+    li.appendChild(wrapTextInCode(defaultValue));
+    return li;
+}
+
 /**
  * Creates a row in the visual property documentation table.
  * @param doc: Firebase document containing the data to fill the row.
@@ -217,28 +211,19 @@ function createVisualPropertyRow(doc) {
     const additionalList = document.createElement('ul');
     const additionalTd = createTdWithElem(additionalList);
 
-    let note, defaultVal;
+    let note, defaultVal = null;
     if (docData.note === undefined && docData.defaultValue === undefined) {
-        additionalTd.style['background-color'] = '#ecf2f6';
+        additionalTd.style['background-color'] = EMPTY_TD_COLOR;
     } else if (docData.note === undefined && docData.defaultValue !== undefined) {
-        // defaultValue only
-        defaultVal = document.createElement('li');
-        defaultVal.textContent = "Default value: ";
-        defaultVal.appendChild(wrapTextInCode(docData.defaultValue));
-        additionalList.appendChild(defaultVal);
+        // default value only
+        additionalList.appendChild(createDefaultValueLi(docData.defaultValue));
     } else if (docData.defaultValue === undefined && docData.note !== undefined) {
         // note only
-        note = document.createElement('li');
-        note.textContent = docData.note;
-        additionalList.appendChild(note);
+        additionalList.appendChild(createLiWithText(docData.note));
     } else {
         // both
-        defaultVal = document.createElement('li');
-        note = document.createElement('li');
-        defaultVal.textContent = docData.defaultValue;
-        note.textContent = docData.note;
-        additionalList.appendChild(defaultVal);
-        additionalList.appendChild(note);
+        additionalList.appendChild(createDefaultValueLi(docData.defaultValue));
+        additionalList.appendChild(createLiWithText(docData.note));
     }
 
     // add the entries into the row
@@ -255,7 +240,6 @@ function createVisualPropertyRow(doc) {
 window.onload = function() {
     // Check if the URL path contains "/documentation/"
     if (window.location.pathname.includes(CHILD_DIR)) {
-        loadDocumentContent();
+        loadFunctionDocContent();
     }
-    convertToMarkdown();
 };

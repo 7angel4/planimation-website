@@ -1,21 +1,21 @@
 import { addData } from "./gallery-block-template.mjs";
 import { enableCollapsible } from "./gallery-block-template.mjs";
 import { hideHeaderAboveTitle, createAnchor } from "./util.js";
-import { initializeFirestore } from "./fetch-data.js";
+import { initializeFirestore, loadDocumentContent, DB } from "./fetch-data.js";
 
 const GALLERY_DIV = document.querySelector("div.gallery");
 const ANIMATION_COLLECTION = "animation";
 const THUMBNAIL_PATH = "assets/resources/thumbnails/";
 const CHILD_DIR = "/gallery/";
 
-const db = initializeFirestore();
+// const DB = initializeFirestore();
 fetchAnimations();
 
 /**
  * Fetch the animation documents from Firestore, and creates a gallery 'item' for each.
  */
 function fetchAnimations() {
-    db.collection(ANIMATION_COLLECTION).get().then((querySnapshot) => {
+    DB.collection(ANIMATION_COLLECTION).get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
             createGalleryItem(doc);
         });
@@ -64,34 +64,20 @@ function createGalleryItem(domainDoc) {
     GALLERY_DIV.appendChild(galleryItem);
 }
 
+
+
 /**
  * Loads the content of a domain.
  * @param event:
  */
-export function loadDomainContent(event) {
-    // Check if the clicked link is a function link
-    if (event && event.target.dataset.type !== "domain") {
-        return;
-    }
-
-    // Extract the domainName from the URL path
-    const pathSegments = window.location.pathname.split('/');
-    const domainName = pathSegments[pathSegments.length - 1];
-
-    // Fetch the domain content from Firestore based on domainName
-    db.collection(ANIMATION_COLLECTION).where("name", "==", domainName).get().then((querySnapshot) => {
-        if (!querySnapshot.empty) {
-            const doc = querySnapshot.docs[0];
+function loadDomainContent(event) {
+    loadDocumentContent(event, ANIMATION_COLLECTION, 'domain', 'name',
+        (doc) => {
             loadDomainPage(doc);
             changePageDisplay();
             hideHeaderAboveTitle(GALLERY_DIV);
-        } else {
-            console.error("Domain not found!");
-            window.location.href = "/404.html";
         }
-    }).catch((error) => {
-        console.error("Error fetching domain content: ", error);
-    });
+    );
 }
 
 /**

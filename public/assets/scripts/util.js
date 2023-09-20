@@ -140,3 +140,12 @@ export function createAnchor(ref, text) {
     anchor.text = text;
     return anchor;
 }
+
+/**
+ * Capitalise the first letter of the given string.
+ * @param text: string to be formatted
+ * @returns {string}: the formatted string
+ */
+export const capitaliseFirstLetter = (text) => {
+    return text.charAt(0).toUpperCase() + text.slice(1);
+}

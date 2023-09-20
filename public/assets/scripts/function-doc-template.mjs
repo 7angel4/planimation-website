@@ -14,7 +14,7 @@ import {getYouTubeEmbedding, formatString, wrapTextInCode, wrapTextInParagraph} 
  */
 function addTitle(functionName) {
     const title = document.getElementById(FUNC_NAME_ELEM);
-    const content = document.createElement("code");
+    const content = document.createElement('code');
     content.textContent = functionName;
     title.appendChild(content);
 }
