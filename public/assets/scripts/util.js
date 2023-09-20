@@ -14,7 +14,7 @@ export const getYouTubeEmbedding = (link) => {
 };
 
 /**
- * Wraps the text in a code element
+ * Wraps the text in a code element.
  * @param text: string representing the text to be wrapped
  * @returns {HTMLElement}: the HTML `code` element holding the text
  */
@@ -23,6 +23,18 @@ export const wrapTextInCode = (text) => {
     code.textContent = text;
     return code;
 }
+
+/**
+ * Wraps the text in a paragraph element.
+ * @param text: string representing the text to be wrapped
+ * @returns {HTMLElement}: the HTML `p` element holding the text
+ */
+export const wrapTextInParagraph = (text) => {
+    const p = document.createElement('p');
+    p.textContent = text;
+    return p;
+}
+
 
 /**
  * Creates a list item holding the text.
