@@ -25,7 +25,15 @@ export function initializeFirestore() {
     return firebase.firestore();
 }
 
-
+/**
+ * Loads the document content dynamically from the database.
+ * @param event: the event to be handled
+ * @param collection: string representing the name of the collection, from which data is to be retrieved
+ * @param dataType: string representing the type of data to retrieve
+ * @param identifierAttribute: string representing the attribute used to identify/select the document
+ * @param action: function taking the document as a parameter;
+ *                represents the action to perform on the retrieved document
+ */
 export function loadDocumentContent(event, collection, dataType, identifierAttribute, action) {
     // Check if the clicked link is of the correct type
     if (event && event.target.dataset.type !== dataType) {

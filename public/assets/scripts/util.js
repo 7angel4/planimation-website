@@ -35,7 +35,6 @@ export const wrapTextInParagraph = (text) => {
     return p;
 }
 
-
 /**
  * Creates a list item holding the text.
  * @param text: string representing the text to be wrapped
@@ -44,6 +43,18 @@ export const wrapTextInParagraph = (text) => {
 export const createLiWithText = (text) => {
     const li = document.createElement('li');
     li.textContent = text;
+    return li;
+}
+
+/**
+ * Creates a list item element holding the provided text wrapped in code.
+ * @param code: string representing the code content
+ * @param text: string representing the plain text content
+ * @returns {HTMLLIElement}: a HTML `li` element holding the text in code.
+ */
+export const createLiWithCodeAndText = (code, text) => {
+    let li = createLiWithText(text);
+    li.appendChild(wrapTextInCode(code));
     return li;
 }
 

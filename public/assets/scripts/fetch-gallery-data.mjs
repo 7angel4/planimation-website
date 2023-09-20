@@ -67,10 +67,10 @@ function createGalleryItem(domainDoc) {
 
 
 /**
- * Loads the content of a domain.
- * @param event:
+ * Loads the content of a domain's document.
+ * @param event: the event to be handled
  */
-function loadDomainContent(event) {
+function loadDomainDocContent(event) {
     loadDocumentContent(event, ANIMATION_COLLECTION, 'domain', 'name',
         (doc) => {
             loadDomainPage(doc);
@@ -110,6 +110,6 @@ function changePageDisplay() {
 window.onload = function() {
     // Check if the URL path contains "/gallery/"
     if (window.location.pathname.includes(CHILD_DIR)) {
-        loadDomainContent();
+        loadDomainDocContent();
     }
 };

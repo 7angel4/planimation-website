@@ -8,6 +8,7 @@ import {
     createTdWithCode,
     createAnchor,
     createLiWithText,
+    createLiWithCodeAndText,
     convertToMarkdown,
     hideHeaderAboveTitle
 } from "./util.js";
@@ -28,9 +29,7 @@ const OTHER_FUNCTION_CATEGORY = "others";
 const CHILD_DIR = "/documentation/";
 const PAGE_CONTENT_DIV = document.querySelector(PAGE_CONTENT_CLASS);
 const EMPTY_TD_COLOR = '#ecf2f6';  /* gray out color for empty table cells */
-
-
-// const DB = initializeFirestore();
+const FORMAT_DEFAULT_VAL = "Default value: ";
 
 
 fetchDocFromCollection(FUNCTION_COLLECTION, createFunctionRef);
@@ -102,7 +101,10 @@ const getTableMatchingCategory = (category) => {
     return document.querySelector(tableSelector);
 }
 
-
+/**
+ * Loads the content of a function's document.
+ * @param event: the event to be handled
+ */
 function loadFunctionDocContent(event) {
     loadDocumentContent(
         event, FUNCTION_COLLECTION, 'function', 'functionName',
@@ -181,12 +183,6 @@ function loadDataTypes(docId, list) {
     });
 }
 
-const createDefaultValueLi = (defaultValue) => {
-    let li = createLiWithText("Default value: ");
-    li.appendChild(wrapTextInCode(defaultValue));
-    return li;
-}
-
 /**
  * Creates a row in the visual property documentation table.
  * @param doc: Firebase document containing the data to fill the row.
@@ -216,13 +212,13 @@ function createVisualPropertyRow(doc) {
         additionalTd.style['background-color'] = EMPTY_TD_COLOR;
     } else if (docData.note === undefined && docData.defaultValue !== undefined) {
         // default value only
-        additionalList.appendChild(createDefaultValueLi(docData.defaultValue));
+        additionalList.appendChild(createLiWithCodeAndText(docData.defaultValue, FORMAT_DEFAULT_VAL));
     } else if (docData.defaultValue === undefined && docData.note !== undefined) {
         // note only
         additionalList.appendChild(createLiWithText(docData.note));
     } else {
         // both
-        additionalList.appendChild(createDefaultValueLi(docData.defaultValue));
+        additionalList.appendChild(createLiWithCodeAndText(docData.defaultValue, FORMAT_DEFAULT_VAL));
         additionalList.appendChild(createLiWithText(docData.note));
     }
 
