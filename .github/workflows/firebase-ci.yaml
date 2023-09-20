@@ -1,0 +1,21 @@
+# https://github.com/firebase/emulators-codelab/blob/master/.github/workflows/firebase-ci.yaml
+
+on: [push, pull_request]
+jobs:
+  emulator_test:
+    name: Run all tests using Firebase Emulator Suite
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "latest"
+      - name: Install Firebase Emulator Suite
+        run: npm install -g firebase-tools
+      - name: Install Jest
+        run: npm install --save-dev jest
+      - name: Install dependencies
+        run: npm install
+        working-directory: functions
+      - name: Run all the tests
+        run: firebase emulators:exec --project planimation-staging-181bc 'npm test'
