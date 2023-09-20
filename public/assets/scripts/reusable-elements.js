@@ -93,7 +93,7 @@ class SearchBar extends HTMLElement {
         const input = this.querySelector("#searchInput");
 
         // Determine the context and set it as a data attribute
-        if (window.location.pathname.includes("gallery.html")) {
+        if (window.location.pathname.includes("gallery")) {
             this.setAttribute("data-context", "gallery");
         } else {
             this.setAttribute("data-context", "documentation");
