@@ -27,7 +27,7 @@ const CHILD_DIR = "/documentation/";
 const PAGE_CONTENT_DIV = document.querySelector(PAGE_CONTENT_CLASS);
 
 
-const db = initializeFirestore();
+const DB = initializeFirestore();
 
 
 fetchDocFromCollection(FUNCTION_COLLECTION, createFunctionRef);
@@ -41,7 +41,7 @@ fetchDocFromCollection(CUSTOM_PROPERTY_COLLECTION, addCustomProperties);
  * @param action: action to be performed on the documents.
  */
 function fetchDocFromCollection(collectionName, action) {
-    db.collection(collectionName).get().then((querySnapshot) => {
+    DB.collection(collectionName).get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
             action(doc);
             convertToMarkdown();
@@ -51,13 +51,17 @@ function fetchDocFromCollection(collectionName, action) {
     });
 }
 
-
+/**
+ * Creates a reference to the specified function's individual page.
+ * @param doc: the document containing data for the function.
+ */
 function createFunctionRef(doc) {
-    let functionName = doc.data().functionName;
-    let functionDescription = doc.data().briefDescription;
-    const category = doc.data().category;
+    let docData = doc.data();
+    let functionName = docData.functionName;
+    let functionDescription = docData.briefDescription;
+    const category = docData.category;
 
-    const contentParent = document.querySelector((category === DISTRIBUTE_FUNCTION_CATEGORY) ? DISTRIBUTE_FUNCTIONS_TABLE : OTHER_FUNCTIONS_TABLE);
+    const contentParent = getTableMatchingCategory(category);
     const tr = document.createElement('tr');
 
     // inside the td
@@ -79,6 +83,24 @@ function createFunctionRef(doc) {
     contentParent.appendChild(tr);
 }
 
+/**
+ * Gets the table matching the specified category.
+ * @param category: string representing a function category (e.g. distribute / other functions)
+ * @returns {Element}: the corresponding HTML `table` element
+ */
+const getTableMatchingCategory = (category) => {
+    let tableSelector;
+    switch (category) {
+        case DISTRIBUTE_FUNCTION_CATEGORY:
+            tableSelector = DISTRIBUTE_FUNCTIONS_TABLE;
+            break;
+        default:
+            tableSelector = OTHER_FUNCTIONS_TABLE;
+            break;
+    }
+    return document.querySelector(tableSelector);
+}
+
 function loadDocumentContent(event) {
     // Check if the clicked link is a function link
     if (event && event.target.dataset.type !== "function") {
@@ -88,7 +110,7 @@ function loadDocumentContent(event) {
     const pathSegments = window.location.pathname.split('/');
     const functionName = pathSegments[pathSegments.length - 1]; // Assuming the last segment is the functionName
     // Fetch the function content from Firestore
-    db.collection("functions").where("functionName", "==", functionName).get().then((querySnapshot) => {
+    DB.collection("functions").where("functionName", "==", functionName).get().then((querySnapshot) => {
         if (!querySnapshot.empty) {
             const doc = querySnapshot.docs[0];
             loadFunctionDoc(doc);
@@ -143,7 +165,7 @@ function loadFunctionDoc(doc) {
  */
 function loadParams(docId) {
     return new Promise((resolve, reject) => {
-        db.collection(FUNCTION_COLLECTION).doc(docId).collection("parameters").get().then((querySnapshot) => {
+        DB.collection(FUNCTION_COLLECTION).doc(docId).collection("parameters").get().then((querySnapshot) => {
             addParams(querySnapshot);
             resolve(); // Resolve the promise when done
         }).catch((error) => {
@@ -161,7 +183,7 @@ function loadParams(docId) {
  */
 function loadDataTypes(docId, list) {
     return new Promise((resolve, reject) => {
-        db.collection(VISUAL_PROPERTY_COLLECTION).doc(docId).collection("dataType").get().then((querySnapshot) => {
+        DB.collection(VISUAL_PROPERTY_COLLECTION).doc(docId).collection("dataType").get().then((querySnapshot) => {
             addDataTypesToList(querySnapshot, list);
             resolve(); // Resolve the promise when done
         }).catch((error) => {
