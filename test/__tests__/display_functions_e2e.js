@@ -1,4 +1,4 @@
-import { TEST_DATA_VALID } from "./test_data_constants";
+import { TEST_FUNCTIONS_VALID } from "./test_data_constants";
 const { chromium } = require('playwright');
 
 const TABLE_CONTENT_CLASS = ".doc-table-content";
@@ -30,9 +30,9 @@ describe('Display function stored in database', ()=> {
     })
 
     it('lists stored valid functions in the correct category', async() => {
-        for (const validFunctions of TEST_DATA_VALID) {
+        for (const validFunctions of TEST_FUNCTIONS_VALID) {
             // check function category
-            const category = validFunctions.category;
+            const category = validFunctions[0].category;
             const selector = category === DISTRIBUTE_FUNCTION_CATEGORY ? DISTRIBUTE_FUNCTIONS_TABLE : OTHER_FUNCTIONS_TABLE;
             
             // retrieve all code elements (function anmes) in the specified category
@@ -42,7 +42,7 @@ describe('Display function stored in database', ()=> {
             });
             
             // check whether the test data is displayed in the correct category
-            expect(codeElements.includes(validFunctions.functionName)).toBe(true);
+            expect(codeElements.includes(validFunctions[0].functionName)).toBe(true);
         }
     })
 

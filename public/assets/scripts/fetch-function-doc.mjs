@@ -1,6 +1,6 @@
 import { addData, addParams, addCustomProperties } from "./function-doc-template.mjs";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-app.js";
-import { getFirestore, connectFirestoreEmulator, collection, getDocs, query, where} from "https://www.gstatic.com/firebasejs/10.3.1/firebase-firestore.js";
+import { getFirestore, connectFirestoreEmulator, collection, getDocs, doc, query, where} from "https://www.gstatic.com/firebasejs/10.3.1/firebase-firestore.js";
 import { createTdWithP, wrapTextInCode, createTdWithElem, createTdWithCode, convertToMarkdown, hideHeadBannerElements } from "./util.js";
 
 const firebaseConfig = {
@@ -149,8 +149,11 @@ function loadFunctionDoc(doc) {
 
 
 function loadParams(docId) {
-    return new Promise((resolve, reject) => {
-        db.collection(FUNCTION_COLLECTION).doc(docId).collection("parameters").get().then((querySnapshot) => {
+    return new Promise(async (resolve, reject) => {
+        const parametersCollectionRef = collection(doc(db, FUNCTION_COLLECTION, docId),"parameters");
+        const queryParameters = query(parametersCollectionRef);
+        getDocs(queryParameters)
+        .then((querySnapshot) => {
             addParams(querySnapshot);
             resolve(); // Resolve the promise when done
         }).catch((error) => {

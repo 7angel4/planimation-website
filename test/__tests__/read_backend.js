@@ -2,11 +2,12 @@
 const { initializeApp } = require('firebase/app');
 //const {initializeApp} = require("https://www.gstatic.com/firebasejs/10.3.1/firebase-app.js");
 const { getFirestore, connectFirestoreEmulator,collection, doc, getDocs, query, where, setDoc, deleteDoc, getDoc} = require('firebase/firestore');
-import { TEST_DATA_VALID, FIREBASE_CONFIG } from './test_data_constants';
+import { TEST_FUNCTIONS_VALID, FIREBASE_CONFIG } from './test_data_constants';
 
 describe('Read from database', () => {
     let db;
     const FUNCTION_COLLECTION = "functions";
+    const PARAMETER_COLLECTION = "parameters";
   
 
     // Initialize Firestore Emulator
@@ -20,9 +21,17 @@ describe('Read from database', () => {
             connectFirestoreEmulator(db, 'localhost', 8080);
             
             // write each valid functions into database
-            for (const validFunction of TEST_DATA_VALID) {
-                let docRef = doc(db, FUNCTION_COLLECTION, validFunction.functionName); 
-                await setDoc(docRef, validFunction);
+            for (const validFunction of TEST_FUNCTIONS_VALID) {
+                let docRef = doc(db, FUNCTION_COLLECTION, validFunction[0].functionName); 
+                await setDoc(docRef, validFunction[0]);
+                // write function parameters
+                if (validFunction.length > 1) {
+                    console.log("properties!");
+                    const subcollectionRef = collection(docRef, PARAMETER_COLLECTION);
+                    for (let i=1; i < validFunction.length; i++) {
+                        await setDoc(doc(subcollectionRef, validFunction[i].parameterName), validFunction[i]);
+                    }
+                }
             }
         } catch (error) {
             console.error('Firestore Error:', error);
@@ -30,8 +39,8 @@ describe('Read from database', () => {
     });
 
     it('can read from database', async () => {
-        for (const validFunction of TEST_DATA_VALID) {
-            const q = query(collection(db, FUNCTION_COLLECTION), where('functionName', '==', validFunction.functionName));
+        for (const validFunction of TEST_FUNCTIONS_VALID) {
+            const q = query(collection(db, FUNCTION_COLLECTION), where('functionName', '==', validFunction[0].functionName));
             let nMatch;
 
             // Use getDocs to fetch documents that match the query
