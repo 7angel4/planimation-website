@@ -1,30 +1,14 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-app.js";
 import { addData } from "./gallery-block-template.mjs";
 import { enableCollapsible } from "./gallery-block-template.mjs";
 import { hideHeaderAboveTitle, createAnchor } from "./util.js";
-
-const firebaseConfig = {
-    apiKey: "AIzaSyDf--XeJ2-pkwKkjGO1RLxzjwzJZUy_e0s",
-    authDomain: "planimation-staging-181bc.firebaseapp.com",
-    projectId: "planimation-staging-181bc",
-    storageBucket: "planimation-staging-181bc.appspot.com",
-    messagingSenderId: "914707935474",
-    appId: "1:914707935474:web:ba4d0f22fa93687482206b",
-    measurementId: "G-XYNE4FJ1CF"
-};
+import { initializeFirestore } from "./fetch-data.js";
 
 const GALLERY_DIV = document.querySelector("div.gallery");
 const ANIMATION_COLLECTION = "animation";
 const THUMBNAIL_PATH = "assets/resources/thumbnails/";
 const CHILD_DIR = "/gallery/";
 
-
-initializeApp(firebaseConfig);
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-// Initialize Firestore
-const db = firebase.firestore();
-
+const db = initializeFirestore();
 fetchAnimations();
 
 /**
@@ -46,43 +30,56 @@ function fetchAnimations() {
  * @returns {string}: the path to that domain's thumbnail
  */
 const getThumbnail = (domainName) => { return THUMBNAIL_PATH + domainName + ".png"};
-// const getWebpage = (domainName) => { return domainName + ".html" };
 
+/**
+ * Creates a gallery item for the domain specified by the document.
+ * @param domainDoc: the document containing data for the domain
+ */
 function createGalleryItem(domainDoc) {
     const domainName = domainDoc.data().name;
     let galleryItem = document.createElement('div');
-    galleryItem.className = "gallery-item";
-    let link = createAnchor(CHILD_DIR + domainName, '');
-    link.dataset.type = "domain";
 
+    // create the link
+    galleryItem.className = 'gallery-item';
+    let link = createAnchor(CHILD_DIR + domainName, '');
+    link.dataset.type = 'domain';
+
+    // create the thumbnail
     let thumbnail = document.createElement('img');
     thumbnail.className = "thumbnail";
     thumbnail.src = getThumbnail(domainName);
     thumbnail.alt = domainName;
     thumbnail.dataset.docId = domainDoc.id;
 
+    // create the caption
     let caption = document.createElement('span');
-    caption.className = "caption";
+    caption.className = 'caption';
     caption.textContent = domainName;
     caption.dataset.docId = domainDoc.id;
 
+    // add the new elements
     link.appendChild(thumbnail);
     link.appendChild(caption)
     galleryItem.appendChild(link);
     GALLERY_DIV.appendChild(galleryItem);
 }
 
+/**
+ * Loads the content of a domain.
+ * @param event:
+ */
 export function loadDomainContent(event) {
     // Check if the clicked link is a function link
     if (event && event.target.dataset.type !== "domain") {
         return;
     }
+
     // Extract the domainName from the URL path
     const pathSegments = window.location.pathname.split('/');
     const domainName = pathSegments[pathSegments.length - 1];
 
     // Fetch the domain content from Firestore based on domainName
-    db.collection("animation").where("name", "==", domainName).get().then((querySnapshot) => {
+    db.collection(ANIMATION_COLLECTION).where("name", "==", domainName).get().then((querySnapshot) => {
         if (!querySnapshot.empty) {
             const doc = querySnapshot.docs[0];
             loadDomainPage(doc);
@@ -116,6 +113,9 @@ function loadDomainPage(doc) {
     enableCollapsible();
 }
 
+/**
+ * Changes the page display for the individual domain page.
+ */
 function changePageDisplay() {
     GALLERY_DIV.style.display = "block";
     GALLERY_DIV.style.margin = "70px auto";
