@@ -7,7 +7,7 @@ import {
     createTdWithElem,
     createTdWithCode,
     convertToMarkdown,
-    hideHeadBannerElements
+    hideHeaderAboveTitle
 } from "./util.js";
 
 const firebaseConfig = {
@@ -33,6 +33,7 @@ const VISUAL_PROPERTIES_TABLE = "#" + VISUAL_PROPERTY_ID + " " + TABLE_CONTENT_C
 const DISTRIBUTE_FUNCTION_CATEGORY = "distribute";
 const OTHER_FUNCTION_CATEGORY = "others";
 const CHILD_DIR = "/documentation/";
+const PAGE_CONTENT_DIV = document.querySelector(PAGE_CONTENT_CLASS);
 
 initializeApp(firebaseConfig);
 // Initialize Firebase
@@ -114,8 +115,6 @@ function loadDocumentContent(event) {
 
 
 function loadFunctionDoc(doc) {
-    hideHeadBannerElements();
-
     const functionDocTemplate =
         `
         <h1 id="function-name"></h1>
@@ -141,10 +140,10 @@ function loadFunctionDoc(doc) {
         </div>
         <button class="btn return" onclick="window.location.href='/documentation.html'" type='button'>Return</button>
     `
-    const contentDiv = document.querySelector(PAGE_CONTENT_CLASS);
     // Swap the content div
-    contentDiv.innerHTML = functionDocTemplate;
+    PAGE_CONTENT_DIV.innerHTML = functionDocTemplate;
     document.body.onLoad = addData(doc);
+    hideHeaderAboveTitle(PAGE_CONTENT_DIV);
 }
 
 

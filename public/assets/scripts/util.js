@@ -78,19 +78,16 @@ export const createTdWithCode = (text) => {
 export const formatString = (s) => { return s.replaceAll("\\n", "\r\n"); }
 
 /**
- * Hides the title, tagline and button within the custom head-banner element.
+ * Hides the head banner and search bar, and corrects the title display accordingly.
+ * @param elemToFix: the element following the removed elements whose margin is to be adjusted
  */
-export function hideHeadBannerElements() {
+export function hideHeaderAboveTitle(elemToFix) {
     const headBanner = document.querySelector('head-banner');
-
-    // Hide the main title, tagline, and button within the head-banner
-    const titleElement = headBanner.querySelector(".page-name");
-    const tagLineElement = headBanner.querySelector("h2");
-    const buttonElement = headBanner.querySelector("button");
-
-    if (titleElement)  titleElement.style.display = "none";
-    if (tagLineElement)  tagLineElement.style.display = "none";
-    if (buttonElement)  buttonElement.style.display = "none";
+    headBanner.hidden = true;
+    const searchBar = document.querySelector('search-bar');
+    searchBar.hidden = true;
+    // correct the title display
+    elemToFix.style['margin-top'] = '8rem';
 }
 
 /**
@@ -117,4 +114,17 @@ export function createButton(className, text) {
     btn.classList.add(className);
     btn.innerHTML = text;
     return btn;
+}
+
+/**
+ * Creates a link with the given hyperlink reference and text display.
+ * @param ref: string representing the location url
+ * @param text: text to be displayed by the anchor element
+ * @returns {HTMLAnchorElement}: the created anchor element.
+ */
+export function createAnchor(ref, text) {
+    const anchor = document.createElement('a');
+    anchor.href = ref;
+    anchor.text = text;
+    return anchor;
 }

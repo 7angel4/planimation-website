@@ -1,7 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-app.js";
 import { addData } from "./gallery-block-template.mjs";
 import { enableCollapsible } from "./gallery-block-template.mjs";
-import { hideHeadBannerElements } from "./util.js";
+import { hideHeaderAboveTitle, createAnchor } from "./util.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyDf--XeJ2-pkwKkjGO1RLxzjwzJZUy_e0s",
@@ -27,7 +27,9 @@ const db = firebase.firestore();
 
 fetchAnimations();
 
-// Fetch list of documents from Firestore
+/**
+ * Fetch the animation documents from Firestore, and creates a gallery 'item' for each.
+ */
 function fetchAnimations() {
     db.collection(ANIMATION_COLLECTION).get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
@@ -50,8 +52,7 @@ function createGalleryItem(domainDoc) {
     const domainName = domainDoc.data().name;
     let galleryItem = document.createElement('div');
     galleryItem.className = "gallery-item";
-    let link = document.createElement('a');
-    link.href = CHILD_DIR + domainName;
+    let link = createAnchor(CHILD_DIR + domainName, '');
     link.dataset.type = "domain";
 
     let thumbnail = document.createElement('img');
@@ -86,6 +87,7 @@ export function loadDomainContent(event) {
             const doc = querySnapshot.docs[0];
             loadDomainPage(doc);
             changePageDisplay();
+            hideHeaderAboveTitle(GALLERY_DIV);
         } else {
             console.error("Domain not found!");
         }
@@ -94,10 +96,11 @@ export function loadDomainContent(event) {
     });
 }
 
-
+/**
+ * Loads the page for an individual domain, retrieving data from the specified document.
+ * @param doc: the document containing data for the domain.
+ */
 function loadDomainPage(doc) {
-    hideHeadBannerElements();
-
     // Swap the content div
     GALLERY_DIV.innerHTML =
         `

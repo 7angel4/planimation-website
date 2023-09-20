@@ -27,6 +27,23 @@ const AP_SRC_CODE_URL = "https://github.com/planimation/documentation/tree/maste
 const DOMAIN_SRC_CODE_BTN = "#view-src-code";
 const DOMAIN_SRC_CODE_URL_PREFIX = "https://github.com/planimation/documentation/tree/af1851dd6c679f554afa7bab88f7d37d56187c1b/AnimationProfiles/";
 const LOGO_IMG = ".logo-img";
+const COLLAPSIBLE_BTN = ".collapsible";
+
+const REFERENCES = [
+    {text: "Planimation Documentation on GitHub", url: "https://planimation.github.io/documentation/"},
+    {text: "Planning.Domains", url: "http://api.planning.domains/"},
+    {text: "Planning.Wiki", url: "https://planning.wiki/"},
+    {text: "Planimation Visualiser", url: "https://planimation.planning.domains/problem"}
+];
+
+const FUNCTION_DOC_IDS = [
+    {docId: "2JelRRGyOoOGXls6fXXB", functionName: "align_middle"},
+    {docId: "6zeSOZbqnlMpo9wKLzLk", functionName: "distributey"},
+    {docId: "FjBOvZOOv777pzPtDT9y", functionName: "draw_line"},
+    {docId: "afGuuOwlb4iqoAEh57Ma", functionName: "distributex"}
+];
+
+const DOMAINS = ["Family-and-fisherman", "Visitall", "Grid"];
 
 
 (async () => {
@@ -57,13 +74,6 @@ async function testSuggestions(page) {
     await clickAndVerifyLocation(page, LOGO_IMG, INDEX_URL);
 }
 
-const REFERENCES = [
-    {text: "Planimation Documentation on GitHub", url: "https://planimation.github.io/documentation/"},
-    {text: "Planning.Domains", url: "http://api.planning.domains/"},
-    {text: "Planning.Wiki", url: "https://planning.wiki/"},
-    {text: "Planimation Visualiser", url: "https://planimation.planning.domains/problem"}
-]
-
 /**
  * Tests the references page.
  * @param page: the page to interact with
@@ -90,7 +100,11 @@ async function testReferences(page) {
     }
 }
 
-const DOMAINS = ["Family-and-fisherman", "Visitall", "Grid"];
+/**
+ * Tests the gallery page.
+ * @param page: the page to interact with
+ * @returns {Promise<void>}
+ */
 async function testGallery(page) {
     await clickAndVerify(page, NAV_GALLERY, "Gallery", GALLERY_URL);
     // click on "View source code of animation profiles" button in head banner
@@ -103,7 +117,7 @@ async function testGallery(page) {
     let expectedDomainUrl = GALLERY_URL + "/" + chosenDomain;
     await clickAndVerifyLocation(page, `[alt='${chosenDomain}']`, expectedDomainUrl);
     // check the collapsible
-    await checkCollapsible(page, ".collapsible", ".collapsible-content")
+    await testCollapsible(page, COLLAPSIBLE_BTN, ".collapsible-content")
 
     // click "View Source Code" button
     await clickAndVerify(page, DOMAIN_SRC_CODE_BTN, "View source code", DOMAIN_SRC_CODE_URL_PREFIX + chosenDomain);
@@ -123,7 +137,7 @@ async function testGallery(page) {
  * @param content: string selector for the content within the collapsible
  * @returns {Promise<void>}
  */
-async function checkCollapsible(page, btn, content) {
+async function testCollapsible(page, btn, content) {
     let contentLocator = page.locator(content);
     expect(await contentLocator.evaluate(elem => elem.style.display)).toBe('none');
     expect(await contentLocator.evaluate(elem => elem.classList)).not.toContain('active');
@@ -131,6 +145,11 @@ async function checkCollapsible(page, btn, content) {
     expect(await contentLocator.evaluate(elem => elem.style.display)).toBe('block');
 }
 
+/**
+ * Tests the PDDL Editor iframe element.
+ * @param page: the page containing the PDDL Editor frame
+ * @returns {Promise<void>}
+ */
 async function testPddlEditorFrame(page) {
     const pddlEditorLocator = page.frameLocator('#pddl-editor');
     // click on "Planimation" button in the menu
@@ -138,14 +157,6 @@ async function testPddlEditorFrame(page) {
     // click on "Planimate" in the pop-up
     await pddlEditorLocator.locator("#filesChosenButton").click();
 }
-
-const FUNCTION_DOC_IDS = [
-    {docId: "2JelRRGyOoOGXls6fXXB", functionName: "align_middle"},
-    {docId: "6zeSOZbqnlMpo9wKLzLk", functionName: "distributey"},
-    {docId: "FjBOvZOOv777pzPtDT9y", functionName: "draw_line"},
-    {docId: "afGuuOwlb4iqoAEh57Ma", functionName: "distributex"}
-];
-
 
 /**
  * Tests the index page - should start and end at the index page.
@@ -160,6 +171,11 @@ async function testIndex(page) {
     await clickAndVerify(page, NAV_HOME, "Home", INDEX_URL);
 }
 
+/**
+ * Tests the documentation page.
+ * @param page: the page to interact with
+ * @returns {Promise<void>}
+ */
 async function testDoc(page) {
     await clickAndVerify(page, NAV_DOC, "Documentation", DOC_URL);
     // click "View original GitHub documentation" button in head-banner
@@ -177,6 +193,11 @@ async function testDoc(page) {
     await clickAndVerify(page, RETURN_BTN, RETURN_BTN_TEXT, DOC_URL);
 }
 
+/**
+ * Tests the YouTube iframe embedding.
+ * @param page: the page containing the YouTube video frame.
+ * @returns {Promise<void>}
+ */
 async function testYoutubeFrame(page) {
     const playBtnLocator = page.frameLocator('.youtube-demo');
     await playBtnLocator.locator('.ytp-large-play-button').click();
