@@ -1,5 +1,6 @@
 import { addData, addParams, addCustomProperties } from "./function-doc-template.mjs";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-app.js";
+import { getFirestore, connectFirestoreEmulator, collection, getDocs, query, where} from "https://www.gstatic.com/firebasejs/10.3.1/firebase-firestore.js";
 import { createTdWithP, wrapTextInCode, createTdWithElem, createTdWithCode, convertToMarkdown, hideHeadBannerElements } from "./util.js";
 
 const firebaseConfig = {
@@ -26,11 +27,14 @@ const DISTRIBUTE_FUNCTION_CATEGORY = "distribute";
 const OTHER_FUNCTION_CATEGORY = "others";
 const CHILD_DIR = "/documentation/";
 
-initializeApp(firebaseConfig);
+
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
 // Initialize Firestore
-const db = firebase.firestore();
+const db = getFirestore(app);
+if (location.hostname === 'localhost') {
+    connectFirestoreEmulator(db, "localhost", 8080);
+}
 
 
 fetchDocFromCollection(FUNCTION_COLLECTION, createFunctionRef);
@@ -44,7 +48,8 @@ fetchDocFromCollection(CUSTOM_PROPERTY_COLLECTION, addCustomProperties);
  * @param action: action to be performed on the documents.
  */
 function fetchDocFromCollection(collectionName, action) {
-    db.collection(collectionName).get().then((querySnapshot) => {
+    const q = query(collection(db, collectionName));
+    getDocs(q).then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
             action(doc);
             convertToMarkdown();
@@ -91,7 +96,10 @@ function loadDocumentContent(event) {
     const pathSegments = window.location.pathname.split('/');
     const functionName = pathSegments[pathSegments.length - 1]; // Assuming the last segment is the functionName
     // Fetch the function content from Firestore
-    db.collection("functions").where("functionName", "==", functionName).get().then((querySnapshot) => {
+    const q = query(collection(db, FUNCTION_COLLECTION), where('functionName', '==', functionName));
+
+    // Use getDocs to fetch documents that match the query
+    getDocs(q).then((querySnapshot) => {
         if (!querySnapshot.empty) {
             const doc = querySnapshot.docs[0];
             loadFunctionDoc(doc);
