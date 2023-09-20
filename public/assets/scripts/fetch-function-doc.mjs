@@ -1,6 +1,12 @@
 import { addData, addParams } from "./function-doc-template.mjs";
 import { addDataTypesToList, addCustomProperties } from "./properties-doc-template.mjs";
-import { initializeFirestore, loadDocumentContent, DB } from "./fetch-data.js";
+import {
+    initializeFirestore,
+    fetchDocFromCollection,
+    loadDocumentContent,
+    DB,
+    fetchDocFromSubCollection
+} from "./fetch-data.js";
 import {
     createTdWithP,
     wrapTextInCode,
@@ -35,23 +41,6 @@ const FORMAT_DEFAULT_VAL = "Default value: ";
 fetchDocFromCollection(FUNCTION_COLLECTION, createFunctionRef);
 fetchDocFromCollection(VISUAL_PROPERTY_COLLECTION, createVisualPropertyRow);
 fetchDocFromCollection(CUSTOM_PROPERTY_COLLECTION, addCustomProperties);
-
-/**
- * Fetch documentation from Firestore for the given collection,
- * and performs the action on the documents
- * @param collectionName: name of the collection from which data is to be fetched.
- * @param action: action to be performed on the documents.
- */
-function fetchDocFromCollection(collectionName, action) {
-    DB.collection(collectionName).get().then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-            action(doc);
-            convertToMarkdown();
-        });
-    }).catch((error) => {
-        console.error("Error fetching documents for " + collectionName + ": ", error);
-    });
-}
 
 /**
  * Creates a reference to the specified function's individual page.
@@ -151,18 +140,9 @@ function loadFunctionDoc(doc) {
 /**
  * Loads information from the parameters document.
  * @param docId: ID of the document to be fetched
- * @returns {Promise<unknown>}
  */
 function loadParams(docId) {
-    return new Promise((resolve, reject) => {
-        DB.collection(FUNCTION_COLLECTION).doc(docId).collection("parameters").get().then((querySnapshot) => {
-            addParams(querySnapshot);
-            resolve(); // Resolve the promise when done
-        }).catch((error) => {
-            console.error("Error fetching parameters: ", error);
-            reject(error); // Reject the promise on error
-        });
-    });
+    fetchDocFromSubCollection(FUNCTION_COLLECTION, "parameters", docId, addParams);
 }
 
 /**
@@ -172,15 +152,9 @@ function loadParams(docId) {
  * @returns {Promise<unknown>}
  */
 function loadDataTypes(docId, list) {
-    return new Promise((resolve, reject) => {
-        DB.collection(VISUAL_PROPERTY_COLLECTION).doc(docId).collection("dataType").get().then((querySnapshot) => {
-            addDataTypesToList(querySnapshot, list);
-            resolve(); // Resolve the promise when done
-        }).catch((error) => {
-            console.error("Error fetching data types: ", error);
-            reject(error); // Reject the promise on error
-        });
-    });
+    fetchDocFromSubCollection(VISUAL_PROPERTY_COLLECTION, "dataType", docId,
+        (querySnapshot) => { addDataTypesToList(querySnapshot, list); }
+    );
 }
 
 /**

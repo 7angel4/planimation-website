@@ -1,5 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-app.js";
-import {capitaliseFirstLetter} from "./util.js";
+import { capitaliseFirstLetter, convertToMarkdown } from "./util.js";
+import {addParams} from "./function-doc-template.mjs";
 
 const FIREBASE_CONFIG = {
     apiKey: "AIzaSyDf--XeJ2-pkwKkjGO1RLxzjwzJZUy_e0s",
@@ -23,6 +24,42 @@ export function initializeFirestore() {
     firebase.initializeApp(FIREBASE_CONFIG);
     // Initialize Firestore
     return firebase.firestore();
+}
+
+/**
+ * Fetch documentation from Firestore for the given collection,
+ * and performs the action on the documents
+ * @param collectionName: string representing the name of the collection from which data is to be fetched
+ * @param action: a function taking a document as its parameter,
+ *                representing the action to be performed on the documents
+ */
+export function fetchDocFromCollection(collectionName, action) {
+    DB.collection(collectionName).get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            action(doc);
+            convertToMarkdown();
+        });
+    }).catch((error) => {
+        console.error("Error fetching documents for " + collectionName + ": ", error);
+    });
+}
+
+/**
+ * Fetch documentation from Firestore for the given collection,
+ * and performs the action on the documents
+ * @param parentCollection: string representing the name of the parent collection
+ * @param childCollection: string representing the name of the sub-collection
+ *                         (i.e. a collection within the parent collection) from which data is to be fetched
+ * @param docId: string representing the ID of the document to be fetched
+ * @param action: a function taking a query snapshot as its parameter,
+ *                representing the action to be performed on the query snapshot
+ */
+export function fetchDocFromSubCollection(parentCollection, childCollection, docId, action) {
+    DB.collection(parentCollection).doc(docId).collection(childCollection).get().then((querySnapshot) => {
+        action(querySnapshot);
+    }).catch((error) => {
+        console.error(`Error fetching ${childCollection}: `, error);
+    });
 }
 
 /**

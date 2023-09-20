@@ -1,28 +1,16 @@
 import { addData } from "./gallery-block-template.mjs";
 import { enableCollapsible } from "./gallery-block-template.mjs";
 import { hideHeaderAboveTitle, createAnchor } from "./util.js";
-import { initializeFirestore, loadDocumentContent, DB } from "./fetch-data.js";
+import { fetchDocFromCollection, loadDocumentContent, DB } from "./fetch-data.js";
 
 const GALLERY_DIV = document.querySelector("div.gallery");
 const ANIMATION_COLLECTION = "animation";
 const THUMBNAIL_PATH = "assets/resources/thumbnails/";
 const CHILD_DIR = "/gallery/";
 
-// const DB = initializeFirestore();
-fetchAnimations();
+// Fetch the animation documents from Firestore, and creates a gallery 'item' for each.
+fetchDocFromCollection(ANIMATION_COLLECTION, createGalleryItem);
 
-/**
- * Fetch the animation documents from Firestore, and creates a gallery 'item' for each.
- */
-function fetchAnimations() {
-    DB.collection(ANIMATION_COLLECTION).get().then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-            createGalleryItem(doc);
-        });
-    }).catch((error) => {
-        console.error("Error fetching document list: ", error);
-    });
-}
 
 /**
  * Returns the path of the thumbnail for the given domain.
