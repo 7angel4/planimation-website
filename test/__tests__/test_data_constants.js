@@ -1,7 +1,7 @@
 export const TEST_FUNCTIONS_VALID = [
     [{
         functionName: 'align_middle',
-        briefDescription: 'This function aligns obj1 to the middle of obj2.',
+        briefDescription: 'This function aligns `obj1` to the middle of `obj2`.',
         category: 'other',
         example: '(equal (?obj1 x) (function align_middle (objects ?obj1 ?obj2)))',
         youtubeEmbeddingLink: 'https://www.youtube.com/embed/ziTAKykPj40?si=95t4ekKNAFpaOsAn',
