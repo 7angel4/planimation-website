@@ -48,14 +48,16 @@ export const formatString = (s) => { return s.replaceAll("\\n", "\r\n"); }
 export function hideHeadBannerElements() {
     const headBanner = document.querySelector('head-banner');
 
-    // Hide the main title, tagline, and button within the head-banner
+    // Hide the main title, tagline, button, and search bar within the head-banner
     const titleElement = headBanner.querySelector(".page-name");
     const tagLineElement = headBanner.querySelector("h2");
     const buttonElement = headBanner.querySelector("button");
+    const searchElement = document.querySelector("search-bar");
 
     if (titleElement) titleElement.style.display = "none";
     if (tagLineElement) tagLineElement.style.display = "none";
     if (buttonElement) buttonElement.style.display = "none";
+    if (searchElement) searchElement.style.display = "none";
 }
 
 export function convertToMarkdown() {
