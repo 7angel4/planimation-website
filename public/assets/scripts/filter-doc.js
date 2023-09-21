@@ -6,7 +6,7 @@ const DOC_CONTEXT = 'documentation';
 const GALLERY_ITEM = '.gallery-item';
 const GALLERY_ITEM_CAPTION = '.caption';
 const DOC_TABLE_KEYWORD = '.table-keyword';
-const TABLE_CONTENT_CLASS = ".doc-table-content";
+const DOC_TABLE_CONTENT = ".doc-table-content";
 
 /**
  * Filters items based on user input.
@@ -43,7 +43,7 @@ function filterItemsByQuery(items, query, extractTextCallback) {
         const textContent = extractTextCallback(item).toLowerCase();
         const isVisible = textContent.includes(query);
         // only display the item if it matches the query
-        item.style.display = isVisible ? "" : "none";
+        item.style.display = isVisible ? '' : 'none';
         anyVisible = anyVisible || isVisible;
     });
 
@@ -57,7 +57,8 @@ function filterItemsByQuery(items, query, extractTextCallback) {
  */
 function toggleNoMatchMessage(parentElement, anyVisible) {
     const messageElement = parentElement.querySelector(NO_MATCH_MSG);
-    messageElement.style.display = anyVisible ? 'none' : 'block';
+    // if no results left after filtering (anyVisible == false), then show the message (hidden = false)
+    if (messageElement) messageElement.hidden = anyVisible;
 }
 
 /**
@@ -65,15 +66,17 @@ function toggleNoMatchMessage(parentElement, anyVisible) {
  * @param query: string representing the user's query.
  */
 function filterFunctionDocs(query) {
-    let tables = document.querySelectorAll(TABLE_CONTENT_CLASS);
+    let tables = document.querySelectorAll(DOC_TABLE_CONTENT);
 
     tables.forEach(table => {
         let functionRows = table.querySelectorAll('tr');
-        let anyVisible = filterItemsByQuery(functionRows, query,
-            row => row.querySelector(DOC_TABLE_KEYWORD).textContent
+        let anyVisible = filterItemsByQuery(functionRows, query, row => {
+                let tableKeyword = row.querySelector(DOC_TABLE_KEYWORD);
+                // prevents the case where `tableKeyword` is null
+                return tableKeyword ? tableKeyword.textContent : '';
+            }
         );
-
-        // Determine the associated .no-match-message for this table.
+        // Determine the associated no-match-message for this table.
         let section = table.closest('section');
         toggleNoMatchMessage(section, anyVisible);
     });
