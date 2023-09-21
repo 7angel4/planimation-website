@@ -1,10 +1,8 @@
 import { addData, addParams } from "./function-doc-template.mjs";
 import { addDataTypesToList, addCustomProperties } from "./properties-doc-template.mjs";
 import {
-    initializeFirestore,
     fetchDocFromCollection,
     loadDocumentContent,
-    DB,
     fetchDocFromSubCollection
 } from "./fetch-data.js";
 import {
@@ -135,6 +133,7 @@ function loadFunctionDoc(doc) {
         `;
     document.body.onLoad = addData(doc);
     hideHeaderAboveTitle(PAGE_CONTENT_DIV);
+    convertToMarkdown();
 }
 
 
