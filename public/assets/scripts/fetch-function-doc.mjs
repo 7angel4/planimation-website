@@ -1,5 +1,5 @@
-import { addData, addParams } from "./function-doc-template.mjs";
-import { addDataTypesToList, addCustomProperties } from "./properties-doc-template.mjs";
+import { addData, addParams } from "./function-doc-template.js";
+import { addDataTypesToList, addCustomProperties } from "./properties-doc-template.js";
 import {
     fetchDocFromCollection,
     loadDocumentContent,
@@ -18,22 +18,23 @@ import {
 } from "./util.js";
 
 
-const TABLE_CONTENT_CLASS = ".doc-table-content";
 const PAGE_CONTENT_CLASS = ".page-content";
+const DOC_TABLE_CONTENT = ".doc-table-content";
 const FUNCTION_COLLECTION = "function";
 const CUSTOM_PROPERTY_COLLECTION = "customisedProperty";
 const CUSTOM_PROPERTY_ID = "custom-properties";
 const VISUAL_PROPERTY_COLLECTION = "visualProperty";
-const DISTRIBUTE_FUNCTIONS_TABLE = "#distribute-functions " + TABLE_CONTENT_CLASS;
-const OTHER_FUNCTIONS_TABLE = "#other-functions " + TABLE_CONTENT_CLASS;
+const DISTRIBUTE_FUNCTIONS_TABLE = "#distribute-functions " + DOC_TABLE_CONTENT;
+const OTHER_FUNCTIONS_TABLE = "#other-functions " + DOC_TABLE_CONTENT;
 const VISUAL_PROPERTY_ID = "visual-properties";
-const VISUAL_PROPERTIES_TABLE = "#" + VISUAL_PROPERTY_ID + " " + TABLE_CONTENT_CLASS;
+const VISUAL_PROPERTIES_TABLE = "#" + VISUAL_PROPERTY_ID + " " + DOC_TABLE_CONTENT;
 const DISTRIBUTE_FUNCTION_CATEGORY = "distribute";
 const OTHER_FUNCTION_CATEGORY = "others";
 const CHILD_DIR = "/documentation/";
 const PAGE_CONTENT_DIV = document.querySelector(PAGE_CONTENT_CLASS);
 const EMPTY_TD_COLOR = '#ecf2f6';  /* gray out color for empty table cells */
 const FORMAT_DEFAULT_VAL = "Default value: ";
+const DOC_TABLE_KEYWORD = "table-keyword";
 
 
 fetchDocFromCollection(FUNCTION_COLLECTION, createFunctionRef);
@@ -59,7 +60,7 @@ function createFunctionRef(doc) {
     a.class = "reference internal";
     a.dataset.type = "function";
     const code =  wrapTextInCode(functionName);
-    code.className = "table-keyword";
+    code.className = DOC_TABLE_KEYWORD;
     code.dataset.docId = doc.id;  // Store the document ID as a data attribute
     a.appendChild(code);
     p.appendChild(a);

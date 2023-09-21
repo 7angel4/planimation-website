@@ -1,7 +1,7 @@
-import { addData } from "./gallery-block-template.mjs";
-import { enableCollapsible } from "./gallery-block-template.mjs";
+import { addData } from "./gallery-block-template.js";
+import { enableCollapsible } from "./gallery-block-template.js";
 import { hideHeaderAboveTitle, createAnchor } from "./util.js";
-import { fetchDocFromCollection, loadDocumentContent, DB } from "./fetch-data.js";
+import { fetchDocFromCollection, loadDocumentContent } from "./fetch-data.js";
 
 const GALLERY_DIV = document.querySelector("div.gallery");
 const ANIMATION_COLLECTION = "animation";
