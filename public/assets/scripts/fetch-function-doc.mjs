@@ -22,7 +22,7 @@ import {
 
 const TABLE_CONTENT_CLASS = ".doc-table-content";
 const PAGE_CONTENT_CLASS = ".page-content";
-const FUNCTION_COLLECTION = "functions";
+const FUNCTION_COLLECTION = "function";
 const CUSTOM_PROPERTY_COLLECTION = "customisedProperty";
 const CUSTOM_PROPERTY_ID = "custom-properties";
 const VISUAL_PROPERTY_COLLECTION = "visualProperty";
@@ -92,20 +92,23 @@ const getTableMatchingCategory = (category) => {
 
 /**
  * Loads the content of a function's document.
- * @param event: the event to be handled
  */
-function loadFunctionDocContent(event) {
+function loadFunctionDocContent() {
     loadDocumentContent(
-        event, FUNCTION_COLLECTION, 'function', 'functionName',
+        FUNCTION_COLLECTION, 'function', 'functionName',
         (doc) => {
             loadFunctionDoc(doc);
             loadParams(doc.id);
         });
 }
 
-
+/**
+ * Loads the document for each function (i.e. creates the individual function's page)
+ * @param doc: document containing data for the function
+ */
 function loadFunctionDoc(doc) {
-    const functionDocTemplate =
+    // Swap the content div
+    PAGE_CONTENT_DIV.innerHTML =
         `
         <h1 id="function-name"></h1>
         <!-- General description -->
@@ -129,9 +132,7 @@ function loadFunctionDoc(doc) {
             <p id="video-explanation"></p>
         </div>
         <button class="btn return" onclick="window.location.href='/documentation.html'" type='button'>Return</button>
-    `
-    // Swap the content div
-    PAGE_CONTENT_DIV.innerHTML = functionDocTemplate;
+        `;
     document.body.onLoad = addData(doc);
     hideHeaderAboveTitle(PAGE_CONTENT_DIV);
 }

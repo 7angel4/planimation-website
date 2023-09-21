@@ -64,18 +64,13 @@ export function fetchDocFromSubCollection(parentCollection, childCollection, doc
 
 /**
  * Loads the document content dynamically from the database.
- * @param event: the event to be handled
  * @param collection: string representing the name of the collection, from which data is to be retrieved
  * @param dataType: string representing the type of data to retrieve
  * @param identifierAttribute: string representing the attribute used to identify/select the document
  * @param action: function taking the document as a parameter;
  *                represents the action to perform on the retrieved document
  */
-export function loadDocumentContent(event, collection, dataType, identifierAttribute, action) {
-    // Check if the clicked link is of the correct type
-    if (event && event.target.dataset.type !== dataType) {
-        return;
-    }
+export function loadDocumentContent(collection, dataType, identifierAttribute, action) {
     // Extract the functionName from the URL path
     const pathSegments = window.location.pathname.split('/');
     const identifierValue = pathSegments[pathSegments.length - 1]; // Assuming the last segment is the functionName

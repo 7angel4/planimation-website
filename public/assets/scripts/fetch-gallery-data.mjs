@@ -56,10 +56,9 @@ function createGalleryItem(domainDoc) {
 
 /**
  * Loads the content of a domain's document.
- * @param event: the event to be handled
  */
-function loadDomainDocContent(event) {
-    loadDocumentContent(event, ANIMATION_COLLECTION, 'domain', 'name',
+function loadDomainDocContent() {
+    loadDocumentContent(ANIMATION_COLLECTION, 'domain', 'name',
         (doc) => {
             loadDomainPage(doc);
             changePageDisplay();
