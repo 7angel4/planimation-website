@@ -17,10 +17,10 @@ function filterItems(userInput) {
     const context = this.getAttribute(SEARCH_CONTEXT_ATTRIBUTE);
 
     switch (context) {
-        case "documentation":
+        case DOC_CONTEXT:
             filterFunctionDocs(query);
             break;
-        case "gallery":
+        case GALLERY_CONTEXT:
             filterGalleryItems(query);
             break;
         default:
