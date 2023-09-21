@@ -1,4 +1,4 @@
-import {formatString, createLiWithText} from "./util.js";
+import {formatString, createLiWithText} from "./general-util.js";
 
 /**
  * Adds the data types from the query snapshot to the provided list element.

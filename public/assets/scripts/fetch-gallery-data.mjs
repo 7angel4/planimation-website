@@ -1,6 +1,6 @@
-import { addData } from "./gallery-block-template.js";
-import { enableCollapsible } from "./gallery-block-template.js";
-import { hideHeaderAboveTitle, createAnchor } from "./util.js";
+import { addData } from "./gallery-item-util.js";
+import { enableCollapsible } from "./gallery-item-util.js";
+import { hideHeaderAboveTitle, createAnchor } from "./general-util.js";
 import { fetchDocFromCollection, loadDocumentContent } from "./fetch-data.js";
 
 const GALLERY_DIV = document.querySelector("div.gallery");

@@ -1,5 +1,5 @@
-import { addData, addParams } from "./function-doc-template.js";
-import { addDataTypesToList, addCustomProperties } from "./properties-doc-template.js";
+import { addData, addParams } from "./function-doc-util.js";
+import { addDataTypesToList, addCustomProperties } from "./properties-doc-util.js";
 import {
     fetchDocFromCollection,
     loadDocumentContent,
@@ -15,7 +15,7 @@ import {
     createLiWithCodeAndText,
     convertToMarkdown,
     hideHeaderAboveTitle
-} from "./util.js";
+} from "./general-util.js";
 
 
 const PAGE_CONTENT_CLASS = ".page-content";

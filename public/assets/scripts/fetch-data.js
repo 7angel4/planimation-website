@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-app.js";
-import { capitaliseFirstLetter, convertToMarkdown } from "./util.js";
+import { capitaliseFirstLetter, convertToMarkdown } from "./general-util.js";
 
 const FIREBASE_CONFIG = {
     apiKey: "AIzaSyDf--XeJ2-pkwKkjGO1RLxzjwzJZUy_e0s",

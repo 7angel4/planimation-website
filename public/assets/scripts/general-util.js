@@ -153,6 +153,21 @@ export function createAnchor(ref, text) {
 }
 
 /**
+ * Creates an image with the given source, alt text, and class name.
+ * @param src: string representing the image's source
+ * @param alt: string representing the alternative info (alt text) for the image
+ * @param className: string representing the class name of the element
+ * @returns {HTMLImageElement}: the created image element
+ */
+export function createImage(src, alt, className) {
+    const img = document.createElement('img');
+    img.src = src;
+    img.alt = alt;
+    img.classList.add(className);
+    return img;
+}
+
+/**
  * Capitalise the first letter of the given string.
  * @param text: string to be formatted
  * @returns {string}: the formatted string

@@ -1,4 +1,4 @@
-import { createButton } from './util.js'
+import { createButton } from './general-util.js'
 
 const DOMAIN_NAME_ID = "domain-name";
 const DOMAIN_DESC_ID = "domain-desc";
