@@ -1,5 +1,8 @@
-const WEBPAGE_PATH = "/assets/"
+const ASSETS_PATH = "/assets/"
 
+/**
+ * Custom HTML Element representing a navigation bar.
+ */
 class NavBar extends HTMLElement {
     connectedCallback() {
         this.innerHTML = `
@@ -39,11 +42,14 @@ class NavBar extends HTMLElement {
     }
 }
 
+/**
+ * Custom HTML Element representing the main footer (featuring the logo and copyright symbol).
+ */
 class MainFooter extends HTMLElement {
     connectedCallback() {
         this.innerHTML =
             `<footer class="page-footer">
-                <img src="${WEBPAGE_PATH}resources/logo.png" alt="Planimation logo" width="40px" height="40px"/>
+                <img src="${ASSETS_PATH}resources/logo.png" alt="Planimation logo" width="40px" height="40px"/>
                 <div class="copyright">Copyright &copy; Team AAAAS</div>
                 <style>
                     .page-footer {
@@ -63,13 +69,15 @@ class MainFooter extends HTMLElement {
     }
 }
 
-
+/**
+ * Custom HTML Element representing a search bar, which can filter items according to the query.
+ */
 class SearchBar extends HTMLElement {
     connectedCallback() {
         this.innerHTML =
             `
             <div class="search-bar">
-                <button class="search-btn"><img src="${WEBPAGE_PATH}resources/icons/magnifying-glass.png" width="30px" height="30px"></button>
+                <button class="search-btn"><img src="${ASSETS_PATH}resources/icons/magnifying-glass.png" width="30px" height="30px"></button>
                 <input type="text" id="searchInput">
                 <style>
                     #searchInput {
@@ -165,6 +173,9 @@ class SearchBar extends HTMLElement {
     }
 }
 
+/**
+ * Custom HTML Element representing a formatted code block.
+ */
 class CodeBlock extends HTMLElement {
     connectedCallback() {
         this.innerHTML =
@@ -194,6 +205,9 @@ class CodeBlock extends HTMLElement {
     }
 }
 
+/**
+ * Custom HTML Element representing a head banner, optionally featuring a tagline and button.
+ */
 class HeadBanner extends HTMLElement {
     connectedCallback() {
         this.innerHTML =
@@ -247,13 +261,16 @@ class HeadBanner extends HTMLElement {
     }
 }
 
+/**
+ * Custom HTML Element representing the web logo, which is linked to the home page.
+ */
 class WebLogo extends HTMLElement {
     connectedCallback() {
         this.innerHTML =
             `
             <div class="logo">
                 <a href="/index.html" class="to-home">
-                    <img src="${WEBPAGE_PATH}resources/logo.png" alt="Planimation logo" width='40px' height='40px' class="logo-img">
+                    <img src="${ASSETS_PATH}resources/logo.png" alt="Planimation logo" width='40px' height='40px' class="logo-img">
                     <label class="web-name">Planiwiki</label>
                 </a>
             </div>
@@ -283,7 +300,7 @@ class WebLogo extends HTMLElement {
 }
 
 
-
+// Define all the custom elements
 customElements.define('nav-bar', NavBar);
 customElements.define('main-footer', MainFooter);
 customElements.define('search-bar', SearchBar);

@@ -152,7 +152,7 @@ function loadParams(docId) {
  * @returns {Promise<unknown>}
  */
 function loadDataTypes(docId, list) {
-    fetchDocFromSubCollection(VISUAL_PROPERTY_COLLECTION, "dataType", docId,
+    fetchDocFromSubCollection(VISUAL_PROPERTY_COLLECTION, 'dataType', docId,
         (querySnapshot) => { addDataTypesToList(querySnapshot, list); }
     );
 }
