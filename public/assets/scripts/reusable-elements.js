@@ -96,8 +96,12 @@ class CodeBlock extends HTMLElement {
             `
     }
 
-    setTextContent(content) {
-        this.children[0].children[0].textContent = content;
+    /**
+     * Sets the text content of the main heading.
+     * @param text: string to be displayed as the main heading.
+     */
+    setTextContent(text) {
+        this.querySelector('.formatted-code').textContent = text;
     }
 }
 
@@ -151,13 +155,17 @@ class HeadBanner extends HTMLElement {
         header.appendChild(btn);
     }
 
+    /**
+     * Adds a tagline to the head banner.
+     * @param text: string to be displayed as the tagline.
+     */
     addTagLine(text) {
         const header = this.children[0];
         const tagLine = document.createElement("h2");
         tagLine.textContent = text;
         tagLine.style["font-size"] = "20px";
         tagLine.style["font-weight"] = "600";
-        tagLine.style["textTransform"] = "uppercase";
+        tagLine.style["text-transform"] = "uppercase";
         header.appendChild(tagLine);
     }
 }

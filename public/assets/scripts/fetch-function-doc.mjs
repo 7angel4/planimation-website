@@ -34,7 +34,7 @@ const CHILD_DIR = "/documentation/";
 const PAGE_CONTENT_DIV = document.querySelector(PAGE_CONTENT_CLASS);
 const EMPTY_TD_COLOR = '#ecf2f6';  /* gray out color for empty table cells */
 const FORMAT_DEFAULT_VAL = "Default value: ";
-const DOC_TABLE_KEYWORD = "table-keyword";
+const FUNCTION_TABLE_KEYWORD = "function-table-keyword";
 
 
 fetchDocFromCollection(FUNCTION_COLLECTION, createFunctionRef);
@@ -60,7 +60,7 @@ function createFunctionRef(doc) {
     a.class = "reference internal";
     a.dataset.type = "function";
     const code =  wrapTextInCode(functionName);
-    code.className = DOC_TABLE_KEYWORD;
+    code.className = FUNCTION_TABLE_KEYWORD;
     code.dataset.docId = doc.id;  // Store the document ID as a data attribute
     a.appendChild(code);
     p.appendChild(a);
@@ -167,7 +167,7 @@ function createVisualPropertyRow(doc) {
     const contentParent = document.querySelector(VISUAL_PROPERTIES_TABLE);
 
     // row header
-    const tr = document.createElement('tr', 'table-keyword');
+    const tr = document.createElement('tr', FUNCTION_TABLE_KEYWORD);
     const nameTd = createTdWithCode(docData.name);
 
     // row body

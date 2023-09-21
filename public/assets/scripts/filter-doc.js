@@ -5,7 +5,7 @@ const GALLERY_CONTEXT = 'gallery';
 const DOC_CONTEXT = 'documentation';
 const GALLERY_ITEM = '.gallery-item';
 const GALLERY_ITEM_CAPTION = '.caption';
-const DOC_TABLE_KEYWORD = '.table-keyword';
+const DOC_TABLE_KEYWORD = '.function-table-keyword';
 const DOC_TABLE_CONTENT = ".doc-table-content";
 
 /**
