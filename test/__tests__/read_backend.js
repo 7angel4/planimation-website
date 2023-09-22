@@ -6,7 +6,7 @@ import { TEST_FUNCTIONS_VALID, FIREBASE_CONFIG } from './test_data_constants';
 
 describe('Read from database', () => {
     let db;
-    const FUNCTION_COLLECTION = "functions";
+    const FUNCTION_COLLECTION = "function";
     const PARAMETER_COLLECTION = "parameters";
   
 

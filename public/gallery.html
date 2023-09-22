@@ -5,12 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <title>Planimation Animations</title>
+    <link rel="icon" type="image/x-icon" href="/assets/resources/logo.png">
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
     <link rel="stylesheet" type="text/css" href="/assets/stylesheets/master.css"/>
     <link rel="stylesheet" type="text/css" href="/assets/stylesheets/gallery-style.css"/>
-    <script type="module" src="/assets/scripts/fetch-gallery-data.mjs"></script>
     <script src="/assets/scripts/reusable-elements.js"></script>
+    <script src="/assets/scripts/filter-doc.js"></script>
+    <script type="module" src="/assets/scripts/fetch-gallery-data.mjs"></script>
 </head>
 <nav-bar></nav-bar>
 <head-banner></head-banner>
@@ -20,7 +22,7 @@
         const headBanner = document.querySelector("head-banner");
         headBanner.setTextContent("Animation gallery");
         headBanner.addTagLine("A collection of animations for various PDDL domains")
-        headBanner.addButton("View source code of animation profiles", "https://github.com/planimation/documentation/tree/master/AnimationProfiles");
+        headBanner.addButton("View source code of animation profiles", "https://github.com/planimation/documentation/tree/master/AnimationProfiles", "view-ap-src-code");
 
         const searchBar = document.querySelector("search-bar");
         searchBar.setTextContent("Search for a domain");

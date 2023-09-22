@@ -1,5 +1,8 @@
-const WEBPAGE_PATH = "/assets/"
+const ASSETS_PATH = "/assets/";
 
+/**
+ * Custom HTML Element representing a navigation bar.
+ */
 class NavBar extends HTMLElement {
     connectedCallback() {
         this.innerHTML = `
@@ -7,11 +10,11 @@ class NavBar extends HTMLElement {
                 <div class="top-nav-bar">
                     <official-logo></official-logo>
                     <nav><ul class="nav-list">
-                        <li><a href="/index.html">Home</a></li>
-                        <li><a href="/documentation.html">Documentation</a></li>
-                        <li><a href="/gallery.html">Gallery</a></li>
-                        <li><a href="/references.html">References</a></li>
-                        <li><a href="/suggestions.html">Suggestions</a></li>
+                        <li><a href="/index.html" class="to-home">Home</a></li>
+                        <li><a href="/documentation.html" class="to-documentation">Documentation</a></li>
+                        <li><a href="/gallery.html" class="to-gallery">Gallery</a></li>
+                        <li><a href="/references.html" class="to-references">References</a></li>
+                        <li><a href="/suggestions.html" class="to-suggestions">Suggestions</a></li>
                     </ul></nav>
                 </div>
                 <style>
@@ -39,11 +42,14 @@ class NavBar extends HTMLElement {
     }
 }
 
+/**
+ * Custom HTML Element representing the main footer (featuring the logo and copyright symbol).
+ */
 class MainFooter extends HTMLElement {
     connectedCallback() {
         this.innerHTML =
             `<footer class="page-footer">
-                <img src="${WEBPAGE_PATH}resources/logo.png" alt="Planimation logo" width="40px" height="40px"/>
+                <img src="${ASSETS_PATH}resources/logo.png" alt="Planimation logo" width="40px" height="40px"/>
                 <div class="copyright">Copyright &copy; Team AAAAS</div>
                 <style>
                     .page-footer {
@@ -63,105 +69,9 @@ class MainFooter extends HTMLElement {
     }
 }
 
-
-class SearchBar extends HTMLElement {
-    connectedCallback() {
-        this.innerHTML =
-            `
-            <div class="search-bar">
-                <button class="search-btn"><img src="${WEBPAGE_PATH}resources/icons/magnifying-glass.png" width="30px" height="30px"></button>
-                <input type="text" id="searchInput">
-                <style>
-                    #searchInput {
-                        width: 40vw;
-                        text-align: center;
-                        background-color: #D9D9D9;
-                        border-width: 1.5px;
-                        border-radius: 25px;
-                    }
-                    .search-bar {
-                        display: flex;
-                        justify-content: center;
-                    }
-                    .search-btn {
-                        background: transparent;
-                        border: none;
-                    }
-                </style>
-            </div>
-            `
-        const input = this.querySelector("#searchInput");
-
-        // Determine the context and set it as a data attribute
-        if (window.location.pathname.includes("gallery.html")) {
-            this.setAttribute("data-context", "gallery");
-        } else {
-            this.setAttribute("data-context", "documentation");
-        }
-        input.addEventListener("keyup", this.filterItems.bind(this));
-    }
-
-    setTextContent(text) {
-        const input = document.querySelector(".search-bar > input");
-        input.placeholder = text;
-    }
-
-    setOnClick(searchFunction) {
-        const btn = document.querySelector(".search-bar > button");
-        btn.onClick = searchFunction;
-    }
-
-    filterItems(e) {
-        const query = e.target.value.toLowerCase();
-        const context = this.getAttribute("data-context");
-
-        if (context === "documentation") {
-            this.filterDocs(query);
-        } else if (context === "gallery") {
-            this.filterGallery(query);
-        }
-    }
-
-    filterDocs(query) {
-        const tables = document.querySelectorAll(".doc-table-content");
-
-        tables.forEach(table => {
-            const functionRows = table.querySelectorAll('tr');
-            const anyVisible = this.filterItemsByQuery(functionRows, query, row => row.querySelector(".table-keyword").textContent);
-
-            // Determine the associated .no-match-message for this table.
-            const section = table.closest('section');
-            this.toggleNoMatchMessage(section, anyVisible);
-        });
-    }
-
-    filterGallery(query) {
-        const galleryItems = document.querySelectorAll(".gallery-item .caption");
-        const anyVisible = this.filterItemsByQuery(galleryItems, query, item => item.textContent);
-
-        // If none are visible, show the message
-        this.toggleNoMatchMessage(document, anyVisible);
-    }
-
-    filterItemsByQuery(items, query, extractTextCallback) {
-        let anyVisible = false;
-
-        items.forEach(item => {
-            const textContent = extractTextCallback(item).toLowerCase();
-            const isVisible = textContent.includes(query);
-            item.style.display = isVisible ? "" : "none";
-            anyVisible = anyVisible || isVisible;
-        });
-
-        return anyVisible;
-    }
-
-    toggleNoMatchMessage(parentElement, anyVisible) {
-        const messageElement = parentElement.querySelector('.no-match-message');
-        messageElement.style.display = anyVisible ? 'none' : 'block';
-    }
-}
-
+/**
+ * Custom HTML Element representing a formatted code block.
+ */
 class CodeBlock extends HTMLElement {
     connectedCallback() {
         this.innerHTML =
@@ -186,11 +96,18 @@ class CodeBlock extends HTMLElement {
             `
     }
 
-    setTextContent(content) {
-        this.children[0].children[0].textContent = content;
+    /**
+     * Sets the text content of the main heading.
+     * @param text: string to be displayed as the main heading.
+     */
+    setTextContent(text) {
+        this.querySelector('.formatted-code').textContent = text;
     }
 }
 
+/**
+ * Custom HTML Element representing a head banner, optionally featuring a tagline and button.
+ */
 class HeadBanner extends HTMLElement {
     connectedCallback() {
         this.innerHTML =
@@ -215,42 +132,55 @@ class HeadBanner extends HTMLElement {
             `
     }
 
-    setTextContent(content) {
-        this.children[0].children[0].textContent = content;
+    /**
+     * Sets the text content of the main heading.
+     * @param text: string to be displayed as the main heading.
+     */
+    setTextContent(text) {
+        let heading = this.querySelector('h1');
+        heading.textContent = text;
     }
 
-    addButton(text, ref) {
+    addButton(text, ref, className) {
         const header = this.children[0];
         const btn = document.createElement('button');
-        btn.setAttribute("class", "btn");
-        btn.addEventListener('click', function(event) {
+        btn.setAttribute('class', 'btn');
+        btn.addEventListener('click', function() {
             window.location.href = ref;
         });
 
         btn.type = 'button';
         btn.textContent = text;
+        btn.classList.add(className);
         header.appendChild(btn);
     }
 
+    /**
+     * Adds a tagline to the head banner.
+     * @param text: string to be displayed as the tagline.
+     */
     addTagLine(text) {
         const header = this.children[0];
         const tagLine = document.createElement("h2");
         tagLine.textContent = text;
         tagLine.style["font-size"] = "20px";
         tagLine.style["font-weight"] = "600";
-        tagLine.style["textTransform"] = "uppercase";
+        tagLine.style["text-transform"] = "uppercase";
         header.appendChild(tagLine);
     }
 }
 
+/**
+ * Custom HTML Element representing the web logo, which is linked to the home page.
+ */
 class WebLogo extends HTMLElement {
     connectedCallback() {
         this.innerHTML =
             `
             <div class="logo">
-                <a href="/index.html">
-                    <img src="${WEBPAGE_PATH}resources/logo.png" alt="Planimation logo" width='40px' height='40px' class="logo-img">
-                    <label class="web-name">Planiwiki</label>
+                <a href="/index.html" class="to-home">
+                    <img src="${ASSETS_PATH}resources/logo.png" alt="Planimation logo" width='40px' height='40px' class="logo-img">
+                    <p class="web-name">Planiwiki</p>
                 </a>
             </div>
             <style>
@@ -269,6 +199,7 @@ class WebLogo extends HTMLElement {
                     font-size: 40px;
                     margin-left: 10px;
                     color: black;
+                    display: inline;
                 }
                 .logo > a:hover {
                     text-decoration: none;
@@ -279,12 +210,9 @@ class WebLogo extends HTMLElement {
 }
 
 
-
+// Define all the custom elements
 customElements.define('nav-bar', NavBar);
 customElements.define('main-footer', MainFooter);
-customElements.define('search-bar', SearchBar);
 customElements.define('code-block', CodeBlock);
 customElements.define('head-banner', HeadBanner);
 customElements.define('official-logo', WebLogo);
-
-

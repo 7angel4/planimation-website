@@ -8,7 +8,7 @@ export const TEST_FUNCTIONS_VALID = [
         videoCode: '(:predicate boarded\n     :parameters (?person lift)\n     :custom lift\n     :effect(\n         (equal (?person y) (lift y))\n         (equal (?person x) (function align_middle (objects ?person lift)))\n     )\n)',
         videoExplanation: 'The function is used in the elevator domain when a passenger boards the lift. The passenger stands in the middle of the lift.'
     }],
-    
+
     [{
         functionName: 'distributey',
         briefDescription: 'This function distributes objects along a vertical plane.',
@@ -25,6 +25,7 @@ export const TEST_FUNCTIONS_VALID = [
     }
     ]
 ];
+
 
 export const FIREBASE_CONFIG = {
     apiKey: "AIzaSyDf--XeJ2-pkwKkjGO1RLxzjwzJZUy_e0s",

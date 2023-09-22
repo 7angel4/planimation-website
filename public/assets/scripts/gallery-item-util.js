@@ -1,32 +1,54 @@
+import { createButton } from './general-util.js'
+
 const DOMAIN_NAME_ID = "domain-name";
 const DOMAIN_DESC_ID = "domain-desc";
 const EDITOR_ID = "pddl-editor";
-const GITHUB_BTN_ID = "view-source-code";
-const PLANIMATION_BTN = "#planimationMenuItem > a";
+const GITHUB_BTN_ID = "view-src-code";
 
+/**
+ * Fills in the title element with the given domain name.
+ * @param domainName: string representing the domain name, to be displayed as the title
+ */
 function addTitle(domainName) {
     const title = document.getElementById(DOMAIN_NAME_ID);
     title.textContent = domainName;
 }
 
+/**
+ * Fills in the description element with the given string.
+ * @param domainDesc: string holding the domain description
+ */
 function addDescription(domainDesc) {
     const desc = document.getElementById(DOMAIN_DESC_ID);
     desc.textContent = domainDesc;
 }
 
+/**
+ * Links the frame element with the provided session link as its source.
+ * @param sessionLink: link to a PDDL editor session, which can display the animation.
+ */
 function addAnimation(sessionLink) {
     const editor = document.getElementById(EDITOR_ID);
     editor.src = sessionLink;
 }
 
+/**
+ * Adds the properties to the chosen button.
+ * @param id: the button element's id
+ * @param text: text to be displayed by the button.
+ * @param ref: location url of the button.
+ */
 function addButton(id, text, ref) {
     const btn = document.getElementById(id);
-    const link = document.createElement('a');
-    link.href = ref;
-    link.textContent = text;
-    btn.appendChild(link);
+    btn.type = 'button';
+    btn.addEventListener('click', () => { window.location.href = ref; });
+    btn.textContent = text;
 }
 
+/**
+ * Adds all data from the document to their corresponding HTML placeholders.
+ * @param doc: document containing the data.
+ */
 export function addData(doc) {
     const docData = doc.data();
     addTitle(docData.name);
@@ -35,25 +57,32 @@ export function addData(doc) {
     addButton(GITHUB_BTN_ID, "View source code", docData.githubLink);
 }
 
-function insertContent(contentDiv, contentType, content, colour="black") {
-    var element = null
+/**
+ * Wrap the content in an element, and appends it to the specified content division.
+ * @param contentDiv: the HTML `div` element to hold the content wrapper element
+ * @param contentType: the type of HTML element to wrap the content
+ * @param content: string representing the content to be inserted
+ * @param color: color in which the content will be rendered
+ */
+function insertContent(contentDiv, contentType, content, color="black") {
+    let element = null;
     switch (contentType) {
         case "p":
             element = document.createElement("p");
             element.textContent = content;
-            element.style.color = colour;
+            element.style.color = color;
             break;
         case "ol":
             element = document.createElement("ol");
             content.forEach(function(content) {
-                var li = document.createElement("li");
+                let li = document.createElement("li");
 
-                var desc = document.createElement("p");
+                let desc = document.createElement("p");
                 desc.textContent = content.text;
                 desc.style.fontSize = "14px";
-                desc.style.color = colour;
+                desc.style.color = color;
 
-                var image = document.createElement("img");
+                let image = document.createElement("img");
                 image.src = content.imageSrc;
                 image.alt = content.alt;
                 image.width = content.width;
@@ -68,14 +97,14 @@ function insertContent(contentDiv, contentType, content, colour="black") {
     contentDiv.appendChild(element);
 }
 
+/**
+ * Creates a collapsible button.
+ */
 function createCollapsibleButton() {
-    var button = document.createElement("button");
-    button.type = "button";
-    button.className = "collapsible";
-    button.innerHTML = "&darr; How to animate";
+    let button = createButton('collapsible', "&darr; How to animate");
 
-    var contentDiv = document.createElement("div");
-    contentDiv.className = "content";
+    let contentDiv = document.createElement("div");
+    contentDiv.className = "collapsible-content";
     contentDiv.style.display = "none";
 
     // Insert guide content
@@ -106,25 +135,28 @@ function createCollapsibleButton() {
     insertContent(contentDiv, "ol", steps);
     insertContent(contentDiv, "p", "If any files fail to load, refresh the browser or directly access the PDDL editor.", "red");
 
-    var container = document.getElementById("animation-guide");
+    let container = document.getElementById("animation-guide");
     container.appendChild(button);
     container.appendChild(contentDiv);
 }
 
+/**
+ * Enables the collapsible functionality (expand and collapse content).
+ */
 export function enableCollapsible() {
     createCollapsibleButton();
 
-    var coll = document.getElementsByClassName("collapsible");
-    for (var i = 0; i < coll.length; i++) {
-        coll[i].addEventListener("click", function() {
-        this.classList.toggle("active");
-        var content = this.nextElementSibling;
+    let collapsible = document.getElementsByClassName("collapsible");
+    for (let i = 0; i < collapsible.length; i++) {
+        collapsible[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            let content = this.nextElementSibling;
 
-        if (content.style.display === "block") {
-            content.style.display = "none";
-        } else {
-            content.style.display = "block";
-        }
+            if (content.style.display === "block") {
+                content.style.display = "none";
+            } else {
+                content.style.display = "block";
+            }
         });
     }
 }

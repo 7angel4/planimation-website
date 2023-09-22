@@ -47,29 +47,25 @@ div.domain-desc {
     padding-bottom: 15px;
 }
 
-#view-source-code.btn {
+#view-src-code.btn {
     float: right;
     background-color: white;
     border-radius: 25px;
     border: 6px solid #43B9AA;
-    /*width: 250px;*/
-    /*height: 55px;*/
-}
 
-#view-source-code > a {
     color: black;
     font-weight: 700;
-    margin: 7px;
 }
 
-#view-source-code::after {
+#view-src-code::after {
     clear: both;
 }
 
 .animation-container {
-    width: 80%;
-    height: 70vw;
+    width: 100%;
+    height: 40vw;
 }
+
 
 .collapsible {
     background-color: white;
@@ -78,6 +74,7 @@ div.domain-desc {
     color: black;
     cursor: pointer;
     font-family: 'Raleway';
+
     padding: 18px;
     width: 100%;
     text-align: left;
@@ -90,7 +87,7 @@ div.domain-desc {
     border: 5px solid #43B9AA;
 }
 
-.content {
+.collapsible-content {
     padding: 0 18px;
     display: none;
     overflow: hidden;
