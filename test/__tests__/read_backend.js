@@ -26,7 +26,6 @@ describe('Read from database', () => {
                 await setDoc(docRef, validFunction[0]);
                 // write function parameters
                 if (validFunction.length > 1) {
-                    console.log("properties!");
                     const subcollectionRef = collection(docRef, PARAMETER_COLLECTION);
                     for (let i=1; i < validFunction.length; i++) {
                         await setDoc(doc(subcollectionRef, validFunction[i].parameterName), validFunction[i]);
@@ -39,11 +38,11 @@ describe('Read from database', () => {
     });
 
     it('can read from database', async () => {
+        // checks that functions stored in database can be read
         for (const validFunction of TEST_FUNCTIONS_VALID) {
             const q = query(collection(db, FUNCTION_COLLECTION), where('functionName', '==', validFunction[0].functionName));
             let nMatch;
 
-            // Use getDocs to fetch documents that match the query
             await getDocs(q)
             .then((querySnapshot) => {
                 nMatch = querySnapshot.size;
