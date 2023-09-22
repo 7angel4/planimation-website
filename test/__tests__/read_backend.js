@@ -26,7 +26,6 @@ describe('Read from database', () => {
                 await setDoc(docRef, validFunction[0]);
                 // write function parameters
                 if (validFunction.length > 1) {
-                    console.log("properties!");
                     const subcollectionRef = collection(docRef, PARAMETER_COLLECTION);
                     for (let i=1; i < validFunction.length; i++) {
                         await setDoc(doc(subcollectionRef, validFunction[i].parameterName), validFunction[i]);
