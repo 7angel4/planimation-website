@@ -5,7 +5,7 @@ const assert = require('assert');
 const {expect} = require('@playwright/test');
 const { clickAndVerify, getRandomElem, clickAndVerifyLocation } = require("./playwright-test-util.js");
 
-const INDEX_URL = "http://localhost:5004/";
+const INDEX_URL = "http://127.0.0.1:5004/";
 const DOC_URL = INDEX_URL + "documentation";
 const GALLERY_URL = INDEX_URL + "gallery";
 const REF_URL = INDEX_URL + "references";
@@ -185,6 +185,7 @@ async function testDoc(page) {
     // click into a random function's documentation page
     let chosenFunction = getRandomElem(FUNCTION_DOC_IDS);
     let expectedFunctionUrl = DOC_URL + "/" + chosenFunction.functionName;
+    console.log(expectedFunctionUrl);
     await clickAndVerify(page, `[data-doc-id='${chosenFunction.docId}']`, chosenFunction.functionName, expectedFunctionUrl);
     // play video
     await testYoutubeFrame(page);

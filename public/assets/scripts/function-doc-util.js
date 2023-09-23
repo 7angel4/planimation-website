@@ -16,7 +16,10 @@ const VIDEO_EXPLANATION_ELEM = "video-explanation";
 const FUNC_DEMO_DIV = '.demo';
 const FUNC_PARAMS_DIV = '.params';
 const PAGE_CONTENT_CLASS = ".page-content";
+/* For the not functioning warning */
 const NOT_AVAILABLE = "Currently unavailable.";
+const NF_WARNING_CLASS = 'non-functioning-warning';
+const NF_WARNING_CONTAINER_CLASS = 'not-functioning-warning-container';
 
 /**
  * Adds a title to the page, which is the provided function name.
@@ -164,13 +167,13 @@ function addNotFunctioningWarning() {
 function createNotFunctioningWarning() {
     // wrapper div
     let warningDiv = document.createElement('div');
-    warningDiv.className = 'non-functioning-warning';
+    warningDiv.className = NF_WARNING_CLASS;
 
     // background image
     warningDiv.appendChild(createImage(
         "/assets/resources/not-functioning-warning-container.png",
-        'not-functioning-warning-container',
-        'not-functioning-msg-container')
+        NF_WARNING_CONTAINER_CLASS,
+        NF_WARNING_CONTAINER_CLASS)
     );
 
     // warning message

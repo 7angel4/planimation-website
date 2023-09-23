@@ -17,6 +17,7 @@ async function clickAndVerifyLocation(page, btnSelector, expectedLocation) {
 async function clickAndVerify(page, btnSelector, expectedText, expectedLocation) {
     // check text display
     let locator = page.locator(btnSelector);
+    console.log(await locator.innerText());
     assert.equal(await locator.innerText(), expectedText);
     // check redirection
     await locator.click();
