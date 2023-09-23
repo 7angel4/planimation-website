@@ -1,4 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-app.js";
+import { getFirestore, connectFirestoreEmulator, collection, getDocs, doc, query, where} from "https://www.gstatic.com/firebasejs/10.3.1/firebase-firestore.js";
 import { capitaliseFirstLetter, convertToMarkdown } from "./general-util.js";
 
 const FIREBASE_CONFIG = {
@@ -18,11 +19,16 @@ export const DB = initializeFirestore();
  * @returns {*}: a reference to an instance of Cloud Firestore.
  */
 export function initializeFirestore() {
-    initializeApp(FIREBASE_CONFIG);
+    const app = initializeApp(FIREBASE_CONFIG);
     // Initialize Firebase
-    firebase.initializeApp(FIREBASE_CONFIG);
+    const db = getFirestore(app);
+    // Using emulator firestore when ran locally for testing
+    // use '127.0.0.1' as hostname instead if want to connect to production firestore
+    if (location.hostname === 'localhost') {
+        connectFirestoreEmulator(db, "localhost", 8080);
+    }
     // Initialize Firestore
-    return firebase.firestore();
+    return db;
 }
 
 /**
@@ -33,7 +39,8 @@ export function initializeFirestore() {
  *                representing the action to be performed on the documents
  */
 export function fetchDocFromCollection(collectionName, action) {
-    DB.collection(collectionName).get().then((querySnapshot) => {
+    const q = query(collection(DB, collectionName));
+    getDocs(q).then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
             action(doc);
             convertToMarkdown();
@@ -54,7 +61,9 @@ export function fetchDocFromCollection(collectionName, action) {
  *                representing the action to be performed on the query snapshot
  */
 export function fetchDocFromSubCollection(parentCollection, childCollection, docId, action) {
-    DB.collection(parentCollection).doc(docId).collection(childCollection).get().then((querySnapshot) => {
+    const subCollectionRef = collection(doc(DB, parentCollection, docId), childCollection);
+    const q = query(subCollectionRef);
+    getDocs(q).then((querySnapshot) => {
         action(querySnapshot);
     }).catch((error) => {
         console.error(`Error fetching ${childCollection}: `, error);
@@ -69,12 +78,13 @@ export function fetchDocFromSubCollection(parentCollection, childCollection, doc
  * @param action: function taking the document as a parameter;
  *                represents the action to perform on the retrieved document
  */
-export function loadDocumentContent(collection, dataType, identifierAttribute, action) {
+export function loadDocumentContent(collectionName, dataType, identifierAttribute, action) {
     // Extract the functionName from the URL path
     const pathSegments = window.location.pathname.split('/');
     const identifierValue = pathSegments[pathSegments.length - 1]; // Assuming the last segment is the functionName
     // Fetch the function content from Firestore
-    DB.collection(collection).where(identifierAttribute, "==", identifierValue).get().then((querySnapshot) => {
+    const q = query(collection(DB, collectionName), where(identifierAttribute, '==', identifierValue));
+    getDocs(q).then((querySnapshot) => {
         if (!querySnapshot.empty) {
             const doc = querySnapshot.docs[0];
             action(doc);
