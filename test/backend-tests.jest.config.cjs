@@ -3,7 +3,7 @@ module.exports = {
     {
       displayName: "backend-tests",
       testEnvironment: 'node',
-      testRegex: "(/__tests__/.*backend|(\\.|/)(test|spec))\\.(jsx?|js?|tsx?|ts?)$",
+      testRegex: "(/__tests__/.*backend|(\\.|/)(frontend-test|spec))\\.(jsx?|js?|tsx?|ts?)$",
       transform: {
         "^.+\\.jsx?$": "babel-jest",
         "^.+\\.mjs$": "babel-jest",

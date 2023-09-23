@@ -43,7 +43,7 @@ describe('Display function stored in database', ()=> {
                 return elements.map((element) => element.textContent);
             });
             
-            // check whether the test data is displayed in the correct category
+            // check whether the frontend-test data is displayed in the correct category
             expect(displayedFunctions.includes(validFunctions[0].functionName)).toBe(true);
         }
     })

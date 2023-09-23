@@ -3,7 +3,7 @@ module.exports = {
       {
         displayName: "E2E-tests", 
         preset: "jest-playwright-preset",
-        testRegex: "(/__tests__/.*e2e|(\\.|/)(test|spec))\\.(jsx?|js?|tsx?|ts?)$",
+        testRegex: "(/__tests__/.*e2e|(\\.|/)(frontend-test|spec))\\.(jsx?|js?|tsx?|ts?)$",
         transform: {
           "^.+\\.jsx?$": "babel-jest",
           "^.+\\.mjs$": "babel-jest",

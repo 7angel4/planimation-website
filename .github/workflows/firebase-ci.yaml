@@ -20,4 +20,4 @@ jobs:
         run: npm install
         working-directory: functions
       - name: Run all the tests
-        run: firebase emulators:exec --project planimation-staging-181bc 'npm test'
+        run: firebase emulators:exec --project planimation-staging-181bc 'npm frontend-test'
