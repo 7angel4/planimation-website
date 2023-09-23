@@ -185,7 +185,6 @@ async function testDoc(page) {
     // click into a random function's documentation page
     let chosenFunction = getRandomElem(FUNCTION_DOC_IDS);
     let expectedFunctionUrl = DOC_URL + "/" + chosenFunction.functionName;
-    console.log(expectedFunctionUrl);
     await clickAndVerify(page, `[data-doc-id='${chosenFunction.docId}']`, chosenFunction.functionName, expectedFunctionUrl);
     // play video
     await testYoutubeFrame(page);
