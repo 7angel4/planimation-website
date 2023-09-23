@@ -1,9 +1,9 @@
 .container {
     margin: 5% auto 0;
     position: relative;
-    bottom: 8rem;  /* offset from bottom of the screen */
+    bottom: 10rem;  /* offset from bottom of the screen */
     width: 50%;
-    height: 75vh;
+    height: 83vh;
     text-align: center;
 
     background-image: url("/assets/resources/square-speech-bubble.png");
@@ -13,7 +13,7 @@
 h1 {
     color: #4051B0;
     font-weight: 700;
-    padding-top: 4rem;
+    padding-top: 3rem;
     font-size: 15rem;
     margin-bottom: 0;
 }
@@ -21,8 +21,8 @@ h1 {
 h2.warning {
     text-transform: uppercase;
     font-size: 2.5rem;
-    width: 60%;
-    margin: 2rem auto;
+    width: 80%;
+    margin: 1rem auto;
     line-height: 1.4;
 }
 
@@ -38,5 +38,5 @@ h2.warning {
     width: 21vh;
     height: auto;
     left: 15%;
-    bottom: 8%;
+    bottom: 7%;
 }
