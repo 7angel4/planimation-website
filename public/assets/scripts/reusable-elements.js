@@ -189,7 +189,7 @@ class WebLogo extends HTMLElement {
                     top: 1%; 
                     left: 0.5%; 
                 } 
-                .logo-img {
+                .robot-img {
                     float: left;
                 }
                 

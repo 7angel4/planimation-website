@@ -3,7 +3,7 @@
     position: relative;
     bottom: 10rem;  /* offset from bottom of the screen */
     width: 50%;
-    height: 83vh;
+    height: 84vh;
     text-align: center;
 
     background-image: url("/assets/resources/square-speech-bubble.png");
@@ -32,11 +32,11 @@ h2.warning {
     font-weight: 600;
 }
 
-.logo-img {
+.robot-img {
     position: absolute;
     z-index: 1;
     width: 21vh;
     height: auto;
-    left: 15%;
+    left: 13%;
     bottom: 7%;
 }
