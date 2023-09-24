@@ -24,6 +24,8 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.38.0",
+    "jest-playwright-preset": "^3.0.1",
+    "@babel/preset-env": "^7.22.20",
     "@types/node": "^20.6.2",
     "babel-jest": "^29.7.0",
     "firebase-functions-test": "^3.1.0"
