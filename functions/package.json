@@ -15,6 +15,7 @@
   "main": "index.js",
   "dependencies": {
     "chai": "^4.3.8",
+    "firebase": "^10.4.0",
     "chromedriver": "^116.0.0",
     "firebase-admin": "^11.8.0",
     "firebase-functions": "^4.3.1",

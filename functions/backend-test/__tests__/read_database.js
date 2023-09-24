@@ -1,6 +1,4 @@
-// Import Firebase Firestore (replace with your actual import path)
 const { initializeApp } = require('firebase/app');
-//const {initializeApp} = require("https://www.gstatic.com/firebasejs/10.3.1/firebase-app.js");
 const { getFirestore, connectFirestoreEmulator,collection, doc, getDocs, query, where, setDoc, deleteDoc, getDoc} = require('firebase/firestore');
 import { TEST_FUNCTIONS_VALID, FIREBASE_CONFIG } from './test_data_constants';
 
