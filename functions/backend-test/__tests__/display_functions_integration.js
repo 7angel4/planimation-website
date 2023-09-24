@@ -31,7 +31,7 @@ describe('Display function stored in database', ()=> {
         }
     })
 
-    it('(4b.1) lists stored valid functions in the correct category', async() => {
+    it('(3b.1) lists stored valid functions in the correct category', async() => {
         for (const validFunctions of TEST_FUNCTIONS_VALID) {
             // check function category
             const category = validFunctions[0].category;
