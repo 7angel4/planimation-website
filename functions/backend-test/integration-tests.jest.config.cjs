@@ -1,9 +1,9 @@
 module.exports = {
     projects: [
       {
-        displayName: "E2E-tests", 
+        displayName: "integration-tests", 
         preset: "jest-playwright-preset",
-        testRegex: "(/__tests__/.*e2e|(\\.|/)(frontend-test|spec))\\.(jsx?|js?|tsx?|ts?)$",
+        testRegex: "(/__tests__/.*integration|(\\.|/)(frontend-test|spec))\\.(jsx?|js?|tsx?|ts?)$",
         transform: {
           "^.+\\.jsx?$": "babel-jest",
           "^.+\\.mjs$": "babel-jest",

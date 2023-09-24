@@ -19,5 +19,8 @@ jobs:
       - name: Install dependencies
         run: npm install
         working-directory: functions
-      - name: Run all the tests
-        run: firebase emulators:exec --project planimation-staging-181bc 'npm frontend-test'
+      - name: Run frontend tests
+        run: node "functions/frontend-test/playwright-test.js"
+      - name: Run backend tests
+        run: firebase emulators:exec --project planimation-staging-181bc 'node ./functions/backend-test/test-runner.cjs'
+      
