@@ -209,7 +209,6 @@ class WebLogo extends HTMLElement {
     }
 }
 
-
 // Define all the custom elements
 customElements.define('nav-bar', NavBar);
 customElements.define('main-footer', MainFooter);

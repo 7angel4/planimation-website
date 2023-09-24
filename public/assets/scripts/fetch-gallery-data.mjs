@@ -11,7 +11,6 @@ const CHILD_DIR = "/gallery/";
 // Fetch the animation documents from Firestore, and creates a gallery 'item' for each.
 fetchDocFromCollection(ANIMATION_COLLECTION, createGalleryItem);
 
-
 /**
  * Returns the path of the thumbnail for the given domain.
  * @param domainName: a string representing the name of a domain
@@ -51,8 +50,6 @@ function createGalleryItem(domainDoc) {
     galleryItem.appendChild(link);
     GALLERY_DIV.appendChild(galleryItem);
 }
-
-
 
 /**
  * Loads the content of a domain's document.

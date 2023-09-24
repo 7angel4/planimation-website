@@ -38,7 +38,11 @@ Planiwiki serves as an extension to the [Planimation Documentation Page](https:/
 - [Deployment View](docs/deployment_view.pdf)
 
 ### Test Cases
-
+- [Acceptance Criteria & Acceptance Testing Plan](docs/testing/acceptance_criteria_testing_plan.pdf)
+- [Frontend High Level Testing Plan](docs/testing/frontend_high_level_testing_plan.pdf)
+  - [Frontend Elaborated Test Cases](docs/testing/frontend_elaborated_test_cases.pdf)
+- [Backend High Level Testing Plan](docs/testing/backend_high_level_testing_plan.pdf)
+  - [Backend Elaborated Test Cases](docs/testing/backend_elaborated_test_cases.pdf)
 ## Technical Details
 ### System requirements
 - Node.js (v18.16.0)

@@ -8,7 +8,6 @@ describe('Read from database', () => {
     let db;
     const FUNCTION_COLLECTION = "function";
     const PARAMETER_COLLECTION = "parameters";
-  
 
     // Initialize Firestore Emulator
     beforeAll(async () => {

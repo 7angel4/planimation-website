@@ -18,7 +18,6 @@ describe('Display function stored in database', ()=> {
         page = await browser.newPage();
     });
 
-
     it('has a documentation list page', async() => {
         try {
             await page.goto('http://localhost:5004/documentation')
