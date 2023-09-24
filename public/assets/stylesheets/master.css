@@ -38,7 +38,6 @@ h2.page-tagline {
     font-weight: 400;
 }
 
-
 code {
     font-family: monospace, monospace;
     font-size: 1em;
@@ -72,7 +71,6 @@ button.btn {
     display: inline-block;
     transition: color 0.2s, background-color 0.2s, border-color 0.2s;
 }
-
 
 .btn:hover {
     color: white;
@@ -110,7 +108,6 @@ button.btn {
         padding: 2rem 1rem
     }
 }
-
 
 /** General page structure **/
 div.page-content {

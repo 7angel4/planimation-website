@@ -17,25 +17,21 @@ import {
     hideHeaderAboveTitle
 } from "./general-util.js";
 
-
 const PAGE_CONTENT_CLASS = ".page-content";
 const DOC_TABLE_CONTENT = ".doc-table-content";
 const FUNCTION_COLLECTION = "function";
 const CUSTOM_PROPERTY_COLLECTION = "customisedProperty";
-const CUSTOM_PROPERTY_ID = "custom-properties";
 const VISUAL_PROPERTY_COLLECTION = "visualProperty";
 const DISTRIBUTE_FUNCTIONS_TABLE = "#distribute-functions " + DOC_TABLE_CONTENT;
 const OTHER_FUNCTIONS_TABLE = "#other-functions " + DOC_TABLE_CONTENT;
 const VISUAL_PROPERTY_ID = "visual-properties";
 const VISUAL_PROPERTIES_TABLE = "#" + VISUAL_PROPERTY_ID + " " + DOC_TABLE_CONTENT;
 const DISTRIBUTE_FUNCTION_CATEGORY = "distribute";
-const OTHER_FUNCTION_CATEGORY = "others";
 const CHILD_DIR = "/documentation/";
 const PAGE_CONTENT_DIV = document.querySelector(PAGE_CONTENT_CLASS);
 const EMPTY_TD_COLOR = '#ecf2f6';  /* gray out color for empty table cells */
 const FORMAT_DEFAULT_VAL = "Default value: ";
 const FUNCTION_TABLE_KEYWORD = "function-table-keyword";
-
 
 fetchDocFromCollection(FUNCTION_COLLECTION, createFunctionRef);
 fetchDocFromCollection(VISUAL_PROPERTY_COLLECTION, createVisualPropertyRow);
@@ -137,7 +133,6 @@ function loadFunctionDoc(doc) {
     convertToMarkdown();
 }
 
-
 /**
  * Loads information from the parameters document.
  * @param docId: ID of the document to be fetched
@@ -182,7 +177,6 @@ function createVisualPropertyRow(doc) {
     const additionalList = document.createElement('ul');
     const additionalTd = createTdWithElem(additionalList);
 
-    let note, defaultVal = null;
     if (docData.note === undefined && docData.defaultValue === undefined) {
         additionalTd.style['background-color'] = EMPTY_TD_COLOR;
     } else if (docData.note === undefined && docData.defaultValue !== undefined) {
@@ -206,7 +200,6 @@ function createVisualPropertyRow(doc) {
 
     contentParent.appendChild(tr);
 }
-
 
 window.onload = function() {
     // Check if the URL path contains "/documentation/"

@@ -15,5 +15,3 @@ module.exports = {
   ],
   testSequencer: './testSequencer.cjs'
 };
-
-

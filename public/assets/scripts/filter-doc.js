@@ -97,7 +97,6 @@ function filterGalleryItems(query) {
     this.toggleNoMatchMessage(document, anyVisible);
 }
 
-
 /**
  * Custom HTML Element representing a search bar, which can filter items according to the query.
  */
