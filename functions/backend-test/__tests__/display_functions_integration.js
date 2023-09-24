@@ -42,7 +42,6 @@ describe('Display function stored in database', ()=> {
             displayedFunctions = await page.$$eval(`${selector} code.${FUNCTION_TABLE_KEYWORD}`, (elements) => {
                 return elements.map((element) => element.textContent);
             });
-            console.log(displayedFunctions);
             
             // check whether the frontend-test data is displayed in the correct category
             expect(displayedFunctions.includes(validFunctions[0].functionName)).toBe(true);

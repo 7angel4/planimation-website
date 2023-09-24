@@ -1,6 +1,6 @@
 export const TEST_FUNCTIONS_VALID = [
     [{
-        functionName: 'helloWorld',
+        functionName: 'align_middle',
         briefDescription: 'This function aligns `obj1` to the middle of `obj2`.',
         category: 'other',
         example: '(equal (?obj1 x) (function align_middle (objects ?obj1 ?obj2)))',
