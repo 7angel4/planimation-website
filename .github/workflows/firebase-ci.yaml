@@ -20,7 +20,7 @@ jobs:
         run: npm install
         working-directory: functions
       - name: Run frontend tests
-        run: node "functions/frontend-test/playwright-test.js"
+        run: firebase emulators:exec --project planimation-staging-181bc 'node ./functions/frontend-test/playwright-test.js'
       - name: Run backend tests
         run: firebase emulators:exec --project planimation-staging-181bc 'node ./functions/backend-test/test-runner.cjs'
       
