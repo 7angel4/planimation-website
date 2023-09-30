@@ -1,5 +1,6 @@
-import { TEST_FUNCTIONS_VALID, DISTRIBUTE_FUNCTION_CATEGORY, OTHER_FUNCTION_CATEGORY, getAllFunc, getCategoryFunc} from "./test_data_constants";
-import { readFuncInCategory } from "./backend-test-util";
+import { TEST_FUNCTIONS_VALID, DISTRIBUTE_FUNCTION_CATEGORY, OTHER_FUNCTION_CATEGORY, getAllFunc, getCategoryFunc, TEST_VISUAL_PROPERTY} from "./test_data_constants";
+import { readFuncInCategory, readVisualProperty } from "./backend-test-util";
+import { beforeEach } from "node:test";
 const { chromium } = require('playwright');
 
 
@@ -13,21 +14,21 @@ describe('Display function stored in database', ()=> {
     beforeAll(async() => {
         browser = await chromium.launch({ headless: true }); //headless:false to see the window
         page = await browser.newPage();
-    });
-
-    it('has a documentation list page', async() => {
         try {
-            await page.goto('http://localhost:5004/documentation')
-            .then(() => {
-                expect(true).toBe(true);
-            })
+            await page.goto('http://localhost:5004/documentation');
         } catch (error) {
             console.error('Access webpage:', error);
-            expect(false).toBe(true);
         }
-    })
+        await page.evaluate(() => {
+            const searchInput = document.querySelector(SEARCH_INPUT); // Replace with your selector
+            searchInput.addEventListener('input', (event) => {
+              console.log('Input event:', event.target.value);
+            });
+        });
+    });
 
-    it('(3b.1) lists stored valid functions in the correct category', async() => {
+
+    it('(3b.1) lists stored valid functions under the correct section', async() => {
         for (const validFunctions of getAllFunc(TEST_FUNCTIONS_VALID, true)) {
             // check function category
             const category = validFunctions.category;
@@ -39,7 +40,7 @@ describe('Display function stored in database', ()=> {
     })
 
 
-    it('(3b.3) search valid functions', async() => {
+    it('(3b.3) can search valid functions', async() => {
         // get testing values
         const distributeValidFunctions = getCategoryFunc(TEST_FUNCTIONS_VALID, DISTRIBUTE_FUNCTION_CATEGORY, true);
         const otherValidFunctions = getCategoryFunc(TEST_FUNCTIONS_VALID, OTHER_FUNCTION_CATEGORY, true);
@@ -74,10 +75,9 @@ describe('Display function stored in database', ()=> {
             // clear anything in the search bar
             await page.fill(SEARCH_INPUT, '');
         }
-
     })
 
-    it('(3b.4) search non-existing functions', async() => {
+    it('(3b.4) display no functions when searching non-existing functions', async() => {
         const TEST_DATA = 'asdfghjkl';
         // type in test value
         await page.type(SEARCH_INPUT, TEST_DATA);
@@ -89,6 +89,15 @@ describe('Display function stored in database', ()=> {
         // clear anything in the search bar
         await page.fill(SEARCH_INPUT, '');
         
+    })
+
+    it('(3b.5) view visual properties', async() => {
+        for (const visualProperty of TEST_VISUAL_PROPERTY) {
+            // check function category
+            const displayedProperties = await readVisualProperty(page);
+            // check whether the frontend-test data is displayed in the correct category
+            expect(displayedProperties.includes(visualProperty.desc.name)).toBe(true);
+        }
     })
 
     afterAll(async () => {

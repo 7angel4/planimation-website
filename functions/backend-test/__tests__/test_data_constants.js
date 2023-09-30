@@ -1,35 +1,6 @@
 export const DISTRIBUTE_FUNCTION_CATEGORY = "distribute";
 export const OTHER_FUNCTION_CATEGORY = "other";
-const FUNCTION_DESC_INDEX = 0;
-
-export const TEST_FUNCTIONS_VALID = [
-    [{
-        functionName: 'align_middle',
-        briefDescription: 'This function aligns `obj1` to the middle of `obj2`.',
-        category: 'other',
-        example: '(equal (?obj1 x) (function align_middle (objects ?obj1 ?obj2)))',
-        youtubeEmbeddingLink: 'https://www.youtube.com/embed/ziTAKykPj40?si=95t4ekKNAFpaOsAn',
-        videoCode: '(:predicate boarded\n     :parameters (?person lift)\n     :custom lift\n     :effect(\n         (equal (?person y) (lift y))\n         (equal (?person x) (function align_middle (objects ?person lift)))\n     )\n)',
-        videoExplanation: 'The function is used in the elevator domain when a passenger boards the lift. The passenger stands in the middle of the lift.'
-    }],
-
-    [{
-        functionName: 'distributey',
-        briefDescription: 'This function distributes objects along a vertical plane.',
-        category: 'distribute',
-        example: '(assign (?obj y) (function distributey (objects ?obj)))',
-        youtubeEmbeddingLink: 'https://www.youtube.com/embed/XY5dVhz6cO4?si=zk0K9a7xo04tS5R3',
-        videoCode: '(:predicate city\n :parameters (?city)\n :effect(\n (assign (?city y) (function distributey (objects ?city) (settings (initial 1))\n )\n)',
-        videoExplanation: 'The function is used in the logistics domain when initiating positions of the cities. The 6 cities are distributed vertically.'
-    },
-    {
-        defaultValue: 0,
-        explanation: "governs the space between objects.",
-        parameterName: "spacebtw"
-    }
-    ]
-];
-
+export const FUNCTION_DESC_INDEX = 0;
 
 export const FIREBASE_CONFIG = {
     apiKey: "AIzaSyDf--XeJ2-pkwKkjGO1RLxzjwzJZUy_e0s",
@@ -43,6 +14,41 @@ export const FIREBASE_CONFIG = {
 };
 
 
+export const TEST_FUNCTIONS_VALID = [
+    {
+        desc:{
+            functionName: 'align_middle',
+            briefDescription: 'This function aligns `obj1` to the middle of `obj2`.',
+            category: 'other',
+            example: '(equal (?obj1 x) (function align_middle (objects ?obj1 ?obj2)))',
+            youtubeEmbeddingLink: 'https://www.youtube.com/embed/ziTAKykPj40?si=95t4ekKNAFpaOsAn',
+            videoCode: '(:predicate boarded\n     :parameters (?person lift)\n     :custom lift\n     :effect(\n         (equal (?person y) (lift y))\n         (equal (?person x) (function align_middle (objects ?person lift)))\n     )\n)',
+            videoExplanation: 'The function is used in the elevator domain when a passenger boards the lift. The passenger stands in the middle of the lift.'
+        },
+        properties:[]
+    },
+
+    {
+        desc:{
+            functionName: 'distributey',
+            briefDescription: 'This function distributes objects along a vertical plane.',
+            category: 'distribute',
+            example: '(assign (?obj y) (function distributey (objects ?obj)))',
+            youtubeEmbeddingLink: 'https://www.youtube.com/embed/XY5dVhz6cO4?si=zk0K9a7xo04tS5R3',
+            videoCode: '(:predicate city\n :parameters (?city)\n :effect(\n (assign (?city y) (function distributey (objects ?city) (settings (initial 1))\n )\n)',
+            videoExplanation: 'The function is used in the logistics domain when initiating positions of the cities. The 6 cities are distributed vertically.'
+        },
+        properties:[
+            {
+                defaultValue: 0,
+                explanation: "governs the space between objects.",
+                parameterName: "spacebtw"
+            }
+        ]
+    }
+];
+
+
 /**
  * Get functions stored in a list of a specified category
  * @param functions: list of functions to retrieve functions from
@@ -52,9 +58,9 @@ export const FIREBASE_CONFIG = {
  */
 export function getCategoryFunc(functions, category, descOnly = false) {
     const categoryFuncs = functions
-                .filter(func => func[FUNCTION_DESC_INDEX].category === category);
+                .filter(func => func.desc.category === category);
     if (descOnly) {
-        return categoryFuncs.map(func => func[FUNCTION_DESC_INDEX]);
+        return categoryFuncs.map(func => func.desc);
     }
     return categoryFuncs;
 }
@@ -67,7 +73,22 @@ export function getCategoryFunc(functions, category, descOnly = false) {
  */
 export function getAllFunc(functions, descOnly = false) {
     if (descOnly) {
-        return functions.map(func => func[FUNCTION_DESC_INDEX]);
+        return functions.map(func => func.desc);
     }
     return functions;
 }
+
+
+export const TEST_VISUAL_PROPERTY = [
+    {
+        desc:{
+            name: 'x',
+            type: 'compulsory',
+            description: 'horizontal position of the object on screen'
+        }, 
+        dataTypes:[
+            {dataType:'Integer'},
+            {dataType:'NULL'}
+        ]
+    }
+];
