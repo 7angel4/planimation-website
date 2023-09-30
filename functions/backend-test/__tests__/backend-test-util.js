@@ -27,6 +27,24 @@ export async function readFuncInCategory(page, category) {
 }
 
 /**
+ * Create a new documentation page
+ * @param browser: browser to open the page in
+ * @returns a new documentation page
+ */
+export async function newDocumentationPage(browser) {
+    // create a new webpage and go to the documentation page
+    const page = await browser.newPage();
+    try {
+        await page.goto('http://localhost:5004/documentation');
+    } catch (error) {
+        console.error('Access webpage:', error);
+    }
+    // wait for dynamic contents to be display before any actions are performed
+    await page.waitForSelector(`${DISTRIBUTE_FUNCTIONS_TABLE} code.${FUNCTION_TABLE_KEYWORD}`, { timeout: 1000 });
+    return page;
+}
+
+/**
  * Read visual properties displayed on the webpage
  * @param page: the page to interact with
  * @returns {string[]}

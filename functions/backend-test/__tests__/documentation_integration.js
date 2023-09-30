@@ -1,46 +1,35 @@
 import { TEST_FUNCTIONS_VALID, DISTRIBUTE_FUNCTION_CATEGORY, OTHER_FUNCTION_CATEGORY, getAllFunc, getCategoryFunc, TEST_VISUAL_PROPERTY} from "./test_data_constants";
-import { readFuncInCategory, readVisualProperty } from "./backend-test-util";
-import { beforeEach } from "node:test";
+import { readFuncInCategory, readVisualProperty, newDocumentationPage } from "./backend-test-util";
 const { chromium } = require('playwright');
 
 
 const SEARCH_INPUT = '#search-input';
 
-describe('Display function stored in database', ()=> {
+describe('Documentation page', ()=> {
     let browser;
-    let page;
 
     // set up the browser and webpage
     beforeAll(async() => {
         browser = await chromium.launch({ headless: true }); //headless:false to see the window
-        page = await browser.newPage();
-        try {
-            await page.goto('http://localhost:5004/documentation');
-        } catch (error) {
-            console.error('Access webpage:', error);
-        }
-        await page.evaluate(() => {
-            const searchInput = document.querySelector(SEARCH_INPUT); // Replace with your selector
-            searchInput.addEventListener('input', (event) => {
-              console.log('Input event:', event.target.value);
-            });
-        });
     });
 
 
-    it('(3b.1) lists stored valid functions under the correct section', async() => {
+    it('(3b.1) displays valid functions correctly', async() => {
+        const page1 = await newDocumentationPage(browser);
         for (const validFunctions of getAllFunc(TEST_FUNCTIONS_VALID, true)) {
             // check function category
             const category = validFunctions.category;
-            const displayedFunctions = await readFuncInCategory(page, category);
+            const displayedFunctions = await readFuncInCategory(page1, category);
             
             // check whether the frontend-test data is displayed in the correct category
             expect(displayedFunctions.includes(validFunctions.functionName)).toBe(true);
         }
+        await page1.close()
     })
 
 
-    it('(3b.3) can search valid functions', async() => {
+    it('(3b.3) handles search of valid functions', async() => {
+        const page3 = await newDocumentationPage(browser);
         // get testing values
         const distributeValidFunctions = getCategoryFunc(TEST_FUNCTIONS_VALID, DISTRIBUTE_FUNCTION_CATEGORY, true);
         const otherValidFunctions = getCategoryFunc(TEST_FUNCTIONS_VALID, OTHER_FUNCTION_CATEGORY, true);
@@ -68,36 +57,40 @@ describe('Display function stored in database', ()=> {
                 continue;
             }
             // type in test value
-            await page.type(SEARCH_INPUT, testValues[i]);
+            await page3.type(SEARCH_INPUT, testValues[i]);
             // check the function is listed
-            let displayedFunctions = await readFuncInCategory(page, testFunctions[i].category);
+            let displayedFunctions = await readFuncInCategory(page3, testFunctions[i].category);
             expect(displayedFunctions.includes(testFunctions[i].functionName)).toBe(true);
             // clear anything in the search bar
-            await page.fill(SEARCH_INPUT, '');
+            await page3.fill(SEARCH_INPUT, '');
         }
+        await page3.close();
     })
 
-    it('(3b.4) display no functions when searching non-existing functions', async() => {
+    it('(3b.4) handles search non-existing functions', async() => {
+        const page4 = await newDocumentationPage(browser);
         const TEST_DATA = 'asdfghjkl';
         // type in test value
-        await page.type(SEARCH_INPUT, TEST_DATA);
+        await page4.type(SEARCH_INPUT, TEST_DATA);
         // ensure both categories have no functions displayed
         for (const category of [DISTRIBUTE_FUNCTION_CATEGORY, OTHER_FUNCTION_CATEGORY]) {
-            let displayedFunctions = await readFuncInCategory(page, category);
+            let displayedFunctions = await readFuncInCategory(page4, category);
             expect(displayedFunctions.length).toEqual(0);
         }
         // clear anything in the search bar
-        await page.fill(SEARCH_INPUT, '');
-        
+        await page4.fill(SEARCH_INPUT, '');
+        await page4.close();
     })
 
     it('(3b.5) view visual properties', async() => {
+        const page5 = await newDocumentationPage(browser);
         for (const visualProperty of TEST_VISUAL_PROPERTY) {
             // check function category
-            const displayedProperties = await readVisualProperty(page);
+            const displayedProperties = await readVisualProperty(page5);
             // check whether the frontend-test data is displayed in the correct category
             expect(displayedProperties.includes(visualProperty.desc.name)).toBe(true);
         }
+        await page5.close();
     })
 
     afterAll(async () => {
