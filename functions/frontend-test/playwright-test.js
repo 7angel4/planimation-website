@@ -45,7 +45,6 @@ const FUNCTION_DOC_IDS = [
 
 const DOMAINS = ["Family-and-fisherman", "Visitall", "Grid"];
 
-
 (async () => {
     const browser = await chromium.launch({
         headless: true

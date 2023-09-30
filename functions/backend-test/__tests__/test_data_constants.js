@@ -1,3 +1,7 @@
+export const DISTRIBUTE_FUNCTION_CATEGORY = "distribute";
+export const OTHER_FUNCTION_CATEGORY = "other";
+const FUNCTION_DESC_INDEX = 0;
+
 export const TEST_FUNCTIONS_VALID = [
     [{
         functionName: 'align_middle',
@@ -37,3 +41,33 @@ export const FIREBASE_CONFIG = {
     measurementId: "G-XYNE4FJ1CF",
     databaseURL: "http://localhost:8080"
 };
+
+
+/**
+ * Get functions stored in a list of a specified category
+ * @param functions: list of functions to retrieve functions from
+ * @param category: category of functions to be retrieved
+ * @param descOnly: if true, return description of the function only, discard property definitions
+ * @returns list of functions retrieved
+ */
+export function getCategoryFunc(functions, category, descOnly = false) {
+    const categoryFuncs = functions
+                .filter(func => func[FUNCTION_DESC_INDEX].category === category);
+    if (descOnly) {
+        return categoryFuncs.map(func => func[FUNCTION_DESC_INDEX]);
+    }
+    return categoryFuncs;
+}
+
+/**
+ * Get all functions stored in a list
+ * @param functions: list of functions to retrieve functions from
+ * @param descOnly: if true, return description of the function only, discard property definitions
+ * @returns list of functions retrieved
+ */
+export function getAllFunc(functions, descOnly = false) {
+    if (descOnly) {
+        return functions.map(func => func[FUNCTION_DESC_INDEX]);
+    }
+    return functions;
+}
