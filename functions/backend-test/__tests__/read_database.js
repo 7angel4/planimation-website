@@ -24,11 +24,11 @@ describe('Read from database', () => {
                 let docRef = doc(db, FUNCTION_COLLECTION, validFunction.desc.functionName); 
                 await setDoc(docRef, validFunction.desc);
                 // write function parameters
-                let properties = validFunction.properties;
-                if (properties.length > 0) {
+                let parameters = validFunction.parameters;
+                if (parameters.length > 0) {
                     const subcollectionRef = collection(docRef, PARAMETER_COLLECTION);
-                    for (let i=0; i < properties.length; i++) {
-                        await setDoc(doc(subcollectionRef, properties[i].parameterName), properties[i]);
+                    for (let i=0; i < parameters.length; i++) {
+                        await setDoc(doc(subcollectionRef, parameters[i].parameterName), parameters[i]);
                     }
                 }
             }

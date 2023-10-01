@@ -1,4 +1,4 @@
-import { TEST_FUNCTIONS_VALID, DISTRIBUTE_FUNCTION_CATEGORY, OTHER_FUNCTION_CATEGORY, getAllFunc, getCategoryFunc, TEST_VISUAL_PROPERTY} from "./test_data_constants";
+import { TEST_FUNCTIONS_VALID, DISTRIBUTE_FUNCTION_CATEGORY, OTHER_FUNCTION_CATEGORY, getAllFunc, getCategoryFunc, TEST_VISUAL_PROPERTY, TEST_NON_EXIST_FUNCTION} from "./test_data_constants";
 import { readFuncInCategory, readVisualProperty, newDocumentationPage } from "./backend-test-util";
 const { chromium } = require('playwright');
 
@@ -69,9 +69,8 @@ describe('Documentation page', ()=> {
 
     it('(3b.4) handles search non-existing functions', async() => {
         const page4 = await newDocumentationPage(browser);
-        const TEST_DATA = 'asdfghjkl';
         // type in test value
-        await page4.type(SEARCH_INPUT, TEST_DATA);
+        await page4.type(SEARCH_INPUT, TEST_NON_EXIST_FUNCTION);
         // ensure both categories have no functions displayed
         for (const category of [DISTRIBUTE_FUNCTION_CATEGORY, OTHER_FUNCTION_CATEGORY]) {
             let displayedFunctions = await readFuncInCategory(page4, category);

@@ -13,6 +13,7 @@ export const FIREBASE_CONFIG = {
     databaseURL: "http://localhost:8080"
 };
 
+export const TEST_NON_EXIST_FUNCTION = 'asdfghjkl';
 
 export const TEST_FUNCTIONS_VALID = [
     {
@@ -23,9 +24,10 @@ export const TEST_FUNCTIONS_VALID = [
             example: '(equal (?obj1 x) (function align_middle (objects ?obj1 ?obj2)))',
             youtubeEmbeddingLink: 'https://www.youtube.com/embed/ziTAKykPj40?si=95t4ekKNAFpaOsAn',
             videoCode: '(:predicate boarded\n     :parameters (?person lift)\n     :custom lift\n     :effect(\n         (equal (?person y) (lift y))\n         (equal (?person x) (function align_middle (objects ?person lift)))\n     )\n)',
-            videoExplanation: 'The function is used in the elevator domain when a passenger boards the lift. The passenger stands in the middle of the lift.'
+            videoExplanation: 'The function is used in the elevator domain when a passenger boards the lift. The passenger stands in the middle of the lift.',
+            notFunctioning: true
         },
-        properties:[]
+        parameters:[]
     },
 
     {
@@ -38,7 +40,7 @@ export const TEST_FUNCTIONS_VALID = [
             videoCode: '(:predicate city\n :parameters (?city)\n :effect(\n (assign (?city y) (function distributey (objects ?city) (settings (initial 1))\n )\n)',
             videoExplanation: 'The function is used in the logistics domain when initiating positions of the cities. The 6 cities are distributed vertically.'
         },
-        properties:[
+        parameters:[
             {
                 defaultValue: 0,
                 explanation: "governs the space between objects.",
@@ -53,7 +55,7 @@ export const TEST_FUNCTIONS_VALID = [
  * Get functions stored in a list of a specified category
  * @param functions: list of functions to retrieve functions from
  * @param category: category of functions to be retrieved
- * @param descOnly: if true, return description of the function only, discard property definitions
+ * @param descOnly: if true, return description of the function only, discard parameter definitions
  * @returns list of functions retrieved
  */
 export function getCategoryFunc(functions, category, descOnly = false) {
@@ -68,7 +70,7 @@ export function getCategoryFunc(functions, category, descOnly = false) {
 /**
  * Get all functions stored in a list
  * @param functions: list of functions to retrieve functions from
- * @param descOnly: if true, return description of the function only, discard property definitions
+ * @param descOnly: if true, return description of the function only, discard parameter definitions
  * @returns list of functions retrieved
  */
 export function getAllFunc(functions, descOnly = false) {
