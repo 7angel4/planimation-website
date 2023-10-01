@@ -87,8 +87,8 @@ export const TEST_VISUAL_PROPERTY = [
 
 
 /**
- * Get functions stored in a list of a specified category
- * @param functions: list of functions to retrieve functions from
+ * Get functions stored in an array of a specified category
+ * @param functions: array of functions to retrieve functions from
  * @param category: category of functions to be retrieved
  * @param descOnly: if true, return description of the function only, discard parameter definitions
  * @returns list of functions retrieved
@@ -103,8 +103,8 @@ export function getCategoryFunc(functions, category, descOnly = false) {
 }
 
 /**
- * Get all functions stored in a list
- * @param functions: list of functions to retrieve functions from
+ * Get all functions stored in an array
+ * @param functions: array of functions to retrieve functions from
  * @param descOnly: if true, return description of the function only, discard parameter definitions
  * @returns list of functions retrieved
  */

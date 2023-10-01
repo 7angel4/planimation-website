@@ -1,5 +1,5 @@
 import { TEST_DOMAIN_VALID, TEST_NON_EXIST_NAME } from "./test_data_constants";
-import { GALLERY_URL, NOT_FOUND_URL, readDomainName, newGalleryPage, enterSearchBox, clearSearchBox} from "./backend-test-util";
+import { readDomain, newGalleryPage, enterSearchBox, clearSearchBox} from "./backend-test-util";
 const { chromium } = require('playwright');
 
 
@@ -13,7 +13,7 @@ describe('Gallery page', ()=> {
 
     it('(2b.1) displays valid domains', async() => {
         const page1 = await newGalleryPage(browser);
-        const displayedDomains = await readDomainName(page1);
+        const displayedDomains = await readDomain(page1);
         for (const domain of TEST_DOMAIN_VALID) {
             // check whether the frontend-test data is displayed in the correct category
             expect(displayedDomains.includes(domain.name)).toBe(true);
@@ -51,7 +51,7 @@ describe('Gallery page', ()=> {
             // type in test value
             await enterSearchBox(page3, testValues[i]);
             // check the function is listed
-            let displayedDomains = await readDomainName(page3);
+            let displayedDomains = await readDomain(page3);
             expect(displayedDomains.includes(testDomains[i].name)).toBe(true);
             // clear anything in the search bar
             await clearSearchBox(page3);
@@ -64,7 +64,7 @@ describe('Gallery page', ()=> {
         // type in test value
         await enterSearchBox(page4, TEST_NON_EXIST_NAME);
         // ensure no domain is displayed
-        const displayedDomains = await readDomainName(page4);
+        const displayedDomains = await readDomain(page4);
         expect(displayedDomains.length).toEqual(0);
         // clear anything in the search bar
         await clearSearchBox;

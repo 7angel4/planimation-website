@@ -2,25 +2,28 @@ import {DISTRIBUTE_FUNCTION_CATEGORY} from "./test_data_constants";
 const INDEX_URL = 'http://localhost:5004/';
 export const DOCUMENTATION_URL = INDEX_URL + 'documentation'
 export const GALLERY_URL = INDEX_URL + 'gallery'
+export const NOT_FOUND_URL = INDEX_URL + '404'
 
 const SEARCH_INPUT = '#search-input';
-
 const DOC_TABLE_CONTENT = ".doc-table-content";
+
 const DISTRIBUTE_FUNCTIONS_TABLE = "#distribute-functions " + DOC_TABLE_CONTENT;
 const OTHER_FUNCTIONS_TABLE = "#other-functions " + DOC_TABLE_CONTENT;
 const FUNCTION_TABLE_KEYWORD = "function-table-keyword";
+const FUNC_NAME = '#function-name';
+const FUNC_YOUTUBE_EMBED = '.youtube-demo';
+const FUNC_PARAMETER_NAME = '#parameters code'
+const FUNC_DESCRIPTION = '#description'
+
 const VISUAL_PROPERTY_ID = "visual-properties";
 const VISUAL_PROPERTIES_TABLE = "#" + VISUAL_PROPERTY_ID + " " + DOC_TABLE_CONTENT;
-const FUNCTION_NAME = '#function-name';
-const YOUTUBE_EMBED = '.youtube-demo';
 const PROPERTY_NAME = VISUAL_PROPERTIES_TABLE + ' td:first-child';
-const PARAMETER_NAME = '#parameters code'
-const DESCRIPTION = '#description'
 
-const DOMAIN_NAME = '.gallery .caption'
+const DOMAIN = '.gallery .caption'
+const DOMAIN_NAME = '#domain-name'
+const DOMAIN_PDDL = '#pddl-editor'
+const DOMAIN_DESCRIPTION = '#domain-desc'
 
-
-export const NOT_FOUND_URL = INDEX_URL + '404'
 
 const getTextContent = (element) => element.textContent.trim();
 const getArrayTextContent = (elements) => elements.map((element) => element.textContent.trim());
@@ -57,7 +60,7 @@ export async function newGalleryPage(browser) {
         console.error('Access webpage:', error);
     }
     // wait for a domain to be displayed before any actions are performed
-    await waitSectionAppear(page, DOMAIN_NAME);
+    await waitSectionAppear(page, DOMAIN);
     return page;
 }
 
@@ -105,7 +108,7 @@ export async function readVisualProperty(page) {
  * @returns {string}
  */
 export async function readVideoLink(page) {
-    return await getContent(page, YOUTUBE_EMBED, (iframe) => iframe.getAttribute('src'));
+    return await getContent(page, FUNC_YOUTUBE_EMBED, (iframe) => iframe.getAttribute('src'));
 }
 
 /**
@@ -114,7 +117,7 @@ export async function readVideoLink(page) {
  * @returns {string}
  */
 export async function readFunctionName(page) {
-    return await getContent(page, FUNCTION_NAME, getTextContent);
+    return await getContent(page, FUNC_NAME, getTextContent);
 }
 
 /**
@@ -123,7 +126,7 @@ export async function readFunctionName(page) {
  * @returns {string[]}
  */
 export async function readParameterName(page) {
-    return await getContent(page, PARAMETER_NAME, getArrayTextContent,true);
+    return await getContent(page, FUNC_PARAMETER_NAME, getArrayTextContent,true);
 }
 
 /**
@@ -131,18 +134,46 @@ export async function readParameterName(page) {
  * @param page: the page to interact with
  * @returns {string}
  */
-export async function readDescription(page) {
-    return await getContent(page, DESCRIPTION, getTextContent);
+export async function readFuncDescription(page) {
+    return await getContent(page, FUNC_DESCRIPTION, getTextContent);
 }
 
 /**
- * Read the domain names displayed on the webpage
+ * Read the domain listed on the gallery webpage
+ * @param page: the page to interact with
+ * @returns {string}
+ */
+export async function readDomain(page) {
+    return await getContent(page, DOMAIN, getArrayTextContent, true);
+}
+
+/**
+ * Read the domain names displayed on the individual domain page
  * @param page: the page to interact with
  * @returns {string}
  */
 export async function readDomainName(page) {
-    return await getContent(page, DOMAIN_NAME, getArrayTextContent, true);
+    return await getContent(page, DOMAIN_NAME, getTextContent);
 }
+
+/**
+ * Read the domain description displayed on the individual domain page
+ * @param page: the page to interact with
+ * @returns {string}
+ */
+export async function readDomainDesc(page) {
+    return await getContent(page, DOMAIN_DESCRIPTION, getTextContent);
+}
+
+/**
+ * Read the domain pddl editor link on the individual domain page
+ * @param page: the page to interact with
+ * @returns {string}
+ */
+export async function readDomainPDDL(page) {
+    return await getContent(page, DOMAIN_PDDL, (iframe) => iframe.getAttribute('src'));
+}
+
 
 /**
  * Get contents from a webpage

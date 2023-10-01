@@ -1,5 +1,5 @@
 import { TEST_FUNCTIONS_VALID, getAllFunc, TEST_NON_EXIST_NAME } from "./test_data_constants";
-import { readVideoLink, readFunctionName, readParameterName, readDescription, waitSectionAppear, DOCUMENTATION_URL, NOT_FOUND_URL} from "./backend-test-util";
+import { readVideoLink, readFunctionName, readParameterName, readFuncDescription, waitSectionAppear, DOCUMENTATION_URL, NOT_FOUND_URL} from "./backend-test-util";
 const { chromium } = require('playwright');
 const NOT_FUNCTIONING = '.non-functioning-warning';
 
@@ -42,7 +42,7 @@ describe('Function page', ()=> {
             // function name
             expect(await readFunctionName(page1)).toBe(validFunction.desc.functionName); 
             // description: backticks should be removed
-            expect(await readDescription(page1)).toBe(validFunction.desc.briefDescription.replace(/`/g, ''));
+            expect(await readFuncDescription(page1)).toBe(validFunction.desc.briefDescription.replace(/`/g, ''));
         }
         await page1.close();
     })
