@@ -1,4 +1,4 @@
-import { TEST_FUNCTIONS_VALID, getAllFunc, TEST_NON_EXIST_FUNCTION } from "./test_data_constants";
+import { TEST_FUNCTIONS_VALID, getAllFunc, TEST_NON_EXIST_NAME } from "./test_data_constants";
 import { readVideoLink, readFunctionName, readParameterName, readDescription, waitSectionAppear, DOCUMENTATION_URL, NOT_FOUND_URL} from "./backend-test-util";
 const { chromium } = require('playwright');
 const NOT_FUNCTIONING = '.non-functioning-warning';
@@ -49,7 +49,7 @@ describe('Function page', ()=> {
 
     it('(5b.2) handles non-existing function page', async() => {
         const page2 = await browser.newPage();
-        await page2.goto(`${DOCUMENTATION_URL}/${TEST_NON_EXIST_FUNCTION}`);
+        await page2.goto(`${DOCUMENTATION_URL}/${TEST_NON_EXIST_NAME}`);
         try {
             await page2.waitForURL(NOT_FOUND_URL, {timeout:1000});
             expect(true).toBe(true);

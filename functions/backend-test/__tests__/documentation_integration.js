@@ -1,9 +1,7 @@
-import { TEST_FUNCTIONS_VALID, DISTRIBUTE_FUNCTION_CATEGORY, OTHER_FUNCTION_CATEGORY, getAllFunc, getCategoryFunc, TEST_VISUAL_PROPERTY, TEST_NON_EXIST_FUNCTION} from "./test_data_constants";
-import { readFuncInCategory, readVisualProperty, newDocumentationPage } from "./backend-test-util";
+import { TEST_FUNCTIONS_VALID, DISTRIBUTE_FUNCTION_CATEGORY, OTHER_FUNCTION_CATEGORY, getAllFunc, getCategoryFunc, TEST_VISUAL_PROPERTY, TEST_NON_EXIST_NAME} from "./test_data_constants";
+import { readFuncInCategory, readVisualProperty, newDocumentationPage, enterSearchBox, clearSearchBox } from "./backend-test-util";
 const { chromium } = require('playwright');
 
-
-const SEARCH_INPUT = '#search-input';
 
 describe('Documentation page', ()=> {
     let browser;
@@ -57,12 +55,12 @@ describe('Documentation page', ()=> {
                 continue;
             }
             // type in test value
-            await page3.type(SEARCH_INPUT, testValues[i]);
+            await enterSearchBox(page3, testValues[i]);
             // check the function is listed
             let displayedFunctions = await readFuncInCategory(page3, testFunctions[i].category);
             expect(displayedFunctions.includes(testFunctions[i].functionName)).toBe(true);
             // clear anything in the search bar
-            await page3.fill(SEARCH_INPUT, '');
+            await clearSearchBox(page3);
         }
         await page3.close();
     })
@@ -70,14 +68,14 @@ describe('Documentation page', ()=> {
     it('(3b.4) handles search non-existing functions', async() => {
         const page4 = await newDocumentationPage(browser);
         // type in test value
-        await page4.type(SEARCH_INPUT, TEST_NON_EXIST_FUNCTION);
+        await enterSearchBox(page4, TEST_NON_EXIST_NAME);
         // ensure both categories have no functions displayed
         for (const category of [DISTRIBUTE_FUNCTION_CATEGORY, OTHER_FUNCTION_CATEGORY]) {
             let displayedFunctions = await readFuncInCategory(page4, category);
             expect(displayedFunctions.length).toEqual(0);
         }
         // clear anything in the search bar
-        await page4.fill(SEARCH_INPUT, '');
+        await clearSearchBox;
         await page4.close();
     })
 

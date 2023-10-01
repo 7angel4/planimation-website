@@ -1,5 +1,10 @@
 import {DISTRIBUTE_FUNCTION_CATEGORY} from "./test_data_constants";
 const INDEX_URL = 'http://localhost:5004/';
+export const DOCUMENTATION_URL = INDEX_URL + 'documentation'
+export const GALLERY_URL = INDEX_URL + 'gallery'
+
+const SEARCH_INPUT = '#search-input';
+
 const DOC_TABLE_CONTENT = ".doc-table-content";
 const DISTRIBUTE_FUNCTIONS_TABLE = "#distribute-functions " + DOC_TABLE_CONTENT;
 const OTHER_FUNCTIONS_TABLE = "#other-functions " + DOC_TABLE_CONTENT;
@@ -11,7 +16,10 @@ const YOUTUBE_EMBED = '.youtube-demo';
 const PROPERTY_NAME = VISUAL_PROPERTIES_TABLE + ' td:first-child';
 const PARAMETER_NAME = '#parameters code'
 const DESCRIPTION = '#description'
-export const DOCUMENTATION_URL = INDEX_URL + 'documentation'
+
+const DOMAIN_NAME = '.gallery .caption'
+
+
 export const NOT_FOUND_URL = INDEX_URL + '404'
 
 const getTextContent = (element) => element.textContent.trim();
@@ -31,11 +39,44 @@ export async function newDocumentationPage(browser) {
     } catch (error) {
         console.error('Access webpage:', error);
     }
-    // wait for dynamic contents to be display before any actions are performed
+    // wait for a distribute function to be display before any actions are performed
     await waitSectionAppear(page, `${DISTRIBUTE_FUNCTIONS_TABLE} code.${FUNCTION_TABLE_KEYWORD}`);
     return page;
 }
 
+/**
+ * Create a new gallery page
+ * @param browser: browser to open the page in
+ * @returns a new gallery page
+ */
+export async function newGalleryPage(browser) {
+    const page = await browser.newPage();
+    try {
+        await page.goto(GALLERY_URL);
+    } catch (error) {
+        console.error('Access webpage:', error);
+    }
+    // wait for a domain to be displayed before any actions are performed
+    await waitSectionAppear(page, DOMAIN_NAME);
+    return page;
+}
+
+/**
+ * Enter an input into the search box on a page
+ * @param page: the page to interact with
+ * @param input: input to enter into the search box
+ */
+export async function enterSearchBox(page, input) {
+    await page.type(SEARCH_INPUT, input);
+}
+
+/**
+ * Clear text in search box on a page
+ * @param page: the page to interact with
+ */
+export async function clearSearchBox(page) {
+    await page.fill(SEARCH_INPUT, '');
+}
 
 /**
      * Read all function names displayed on the webpage in a particular category
@@ -92,6 +133,15 @@ export async function readParameterName(page) {
  */
 export async function readDescription(page) {
     return await getContent(page, DESCRIPTION, getTextContent);
+}
+
+/**
+ * Read the domain names displayed on the webpage
+ * @param page: the page to interact with
+ * @returns {string}
+ */
+export async function readDomainName(page) {
+    return await getContent(page, DOMAIN_NAME, getArrayTextContent, true);
 }
 
 /**

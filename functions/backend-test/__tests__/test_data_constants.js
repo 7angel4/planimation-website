@@ -1,6 +1,5 @@
 export const DISTRIBUTE_FUNCTION_CATEGORY = "distribute";
 export const OTHER_FUNCTION_CATEGORY = "other";
-export const FUNCTION_DESC_INDEX = 0;
 
 export const FIREBASE_CONFIG = {
     apiKey: "AIzaSyDf--XeJ2-pkwKkjGO1RLxzjwzJZUy_e0s",
@@ -13,8 +12,10 @@ export const FIREBASE_CONFIG = {
     databaseURL: "http://localhost:8080"
 };
 
-export const TEST_NON_EXIST_FUNCTION = 'asdfghjkl';
+// a substring which none of the functions and domains should contain
+export const TEST_NON_EXIST_NAME = 'asdfghjkl';
 
+// test data for valid functions
 export const TEST_FUNCTIONS_VALID = [
     {
         desc:{
@@ -60,6 +61,30 @@ export const TEST_FUNCTIONS_VALID = [
     }
 ];
 
+// test data for valid domains
+export const TEST_DOMAIN_VALID = [
+    {
+        name: 'Gripper',
+        sessionLink: 'https://editor.planning.domains/#read_session=HCF6kxmEZU',
+        description: 'There is a robot with two grippers. It can carry a ball in each. The goal is to take N balls from one room to another.'
+    }
+]
+
+// test data for visual properties
+export const TEST_VISUAL_PROPERTY = [
+    {
+        desc:{
+            name: 'x',
+            type: 'compulsory',
+            description: 'horizontal position of the object on screen'
+        }, 
+        dataTypes:[
+            {dataType:'Integer'},
+            {dataType:'NULL'}
+        ]
+    }
+];
+
 
 /**
  * Get functions stored in a list of a specified category
@@ -89,18 +114,3 @@ export function getAllFunc(functions, descOnly = false) {
     }
     return functions;
 }
-
-
-export const TEST_VISUAL_PROPERTY = [
-    {
-        desc:{
-            name: 'x',
-            type: 'compulsory',
-            description: 'horizontal position of the object on screen'
-        }, 
-        dataTypes:[
-            {dataType:'Integer'},
-            {dataType:'NULL'}
-        ]
-    }
-];
