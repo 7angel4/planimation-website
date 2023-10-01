@@ -24,8 +24,7 @@ export const TEST_FUNCTIONS_VALID = [
             example: '(equal (?obj1 x) (function align_middle (objects ?obj1 ?obj2)))',
             youtubeEmbeddingLink: 'https://www.youtube.com/embed/ziTAKykPj40?si=95t4ekKNAFpaOsAn',
             videoCode: '(:predicate boarded\n     :parameters (?person lift)\n     :custom lift\n     :effect(\n         (equal (?person y) (lift y))\n         (equal (?person x) (function align_middle (objects ?person lift)))\n     )\n)',
-            videoExplanation: 'The function is used in the elevator domain when a passenger boards the lift. The passenger stands in the middle of the lift.',
-            notFunctioning: true
+            videoExplanation: 'The function is used in the elevator domain when a passenger boards the lift. The passenger stands in the middle of the lift.'
         },
         parameters:[]
     },
@@ -47,6 +46,17 @@ export const TEST_FUNCTIONS_VALID = [
                 parameterName: "spacebtw"
             }
         ]
+    }, 
+
+    {
+        desc:{
+            functionName: 'not_functoining',
+            briefDescription: 'Demo not functioning function.',
+            category: 'other',
+            example: "I'm not functioning :(",
+            notFunctioning: true
+        },
+        parameters:[]
     }
 ];
 
