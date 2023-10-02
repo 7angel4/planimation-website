@@ -1,4 +1,4 @@
-const serviceAccount = process.env.FIREBASE_SERVICE_ACCOUNT_KEY; // comment to run tests locally
+const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_KEY); // comment to run tests locally
 //const serviceAccount = require('../../adminsdk.json');   // uncomment to run tests locally
 
 const { initializeApp } = require('firebase/app');
