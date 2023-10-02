@@ -1,14 +1,17 @@
+const serviceAccount = process.env.FIREBASE_SERVICE_ACCOUNT_KEY; // comment to run tests locally
+//const serviceAccount = require('../../adminsdk.json');   // uncomment to run tests locally
+
 const { initializeApp } = require('firebase/app');
 const admin = require('firebase-admin');
-const { Firestore, getFirestore, connectFirestoreEmulator,collection, doc, getDocs, query, where, setDoc, deleteDoc, getDoc} = require('firebase/firestore');
-import { TEST_FUNCTIONS_VALID, FIREBASE_CONFIG, getAllFunc, TEST_VISUAL_PROPERTY, TEST_DOMAIN_VALID} from './test_data_constants';
+const { getFirestore, connectFirestoreEmulator,collection, doc, getDocs, query, where, 
+    setDoc } = require('firebase/firestore');
+import { TEST_FUNCTIONS_VALID, FIREBASE_CONFIG, getAllFunc, TEST_VISUAL_PROPERTY, 
+    TEST_DOMAIN_VALID} from './test_data_constants';
 const FUNCTION_COLLECTION = "function";
 const PARAMETER_COLLECTION = "parameters";
 const DOMAIN_COLLECTION = "animation";
 const VISUAL_PROPERTY_COLLECTION = "visualProperty";
 const DATATYPE_COLLECTION = "dataType";
-
-const serviceAccount = process.env.FIREBASE_SERVICE_ACCOUNT_KEY;
 
 describe('Read from database', () => {
     let db;
@@ -39,7 +42,7 @@ describe('Read from database', () => {
         }
     });
 
-    it('allow nobody to write to database', async () => {
+    it('disallow anyone to write to database', async () => {
         // attempt to write functions
         try{
             for (const func of getAllFunc(TEST_FUNCTIONS_VALID,true)) {
@@ -137,8 +140,8 @@ async function storeDomain(domains, db) {
  */
 async function loadTestData() {
     try {
+        // Initialize admin Firebase with the emulator configuration
         process.env.FIRESTORE_EMULATOR_HOST = 'localhost:8080'; 
-        // Initialize Firebase with the emulator configuration
         const app = admin.initializeApp({
             credential: admin.credential.cert(serviceAccount),
         });
