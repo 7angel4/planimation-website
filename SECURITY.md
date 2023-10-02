@@ -11,7 +11,7 @@ Instead, please send an email to angelh1@student.unimelb.edu.au.
 When reporting issues, please provide as much of the following information as possible, in order to help us better understand and resolve the issue:
 
 * The type of issue (e.g., buffer overflow, SQL injection, or cross-site scripting)
-* * A summary of the security vulnerability and impact (e.g. how an attacker might exploit the issue)
+* A summary of the security vulnerability and impact (e.g. how an attacker might exploit the issue)
 * Full paths of source file(s) related to the manifestation of the issue
 * The location of the affected source code (tag/branch/commit or direct URL)
 * Component(s) affected
