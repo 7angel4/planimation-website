@@ -4,7 +4,7 @@ If you believe you have found a security vulnerability in any GitHub-owned repos
 
 Please do not report security vulnerabilities through public GitHub issues, discussions, or pull requests.
 
-Instead, please send an email to angelh1[@]student.unimelb.edu.au.
+Instead, please send an email to angelh1@student.unimelb.edu.au.
 
 ## Reporting Potential Security Issues / Vulnerabilities
 
