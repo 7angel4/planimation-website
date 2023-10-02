@@ -22,5 +22,7 @@ jobs:
       - name: Run frontend tests
         run: firebase emulators:exec --project planimation-staging-181bc 'node ./functions/frontend-test/playwright-test.js'
       - name: Run backend tests
+        env:
+          FIREBASE_SERVICE_ACCOUNT_KEY: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY }}
         run: firebase emulators:exec --project planimation-staging-181bc 'node ./functions/backend-test/test-runner.cjs'
       

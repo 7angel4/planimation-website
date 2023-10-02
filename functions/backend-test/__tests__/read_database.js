@@ -1,5 +1,6 @@
 const { initializeApp } = require('firebase/app');
-const { getFirestore, connectFirestoreEmulator,collection, doc, getDocs, query, where, setDoc, deleteDoc, getDoc} = require('firebase/firestore');
+const admin = require('firebase-admin');
+const { Firestore, getFirestore, connectFirestoreEmulator,collection, doc, getDocs, query, where, setDoc, deleteDoc, getDoc} = require('firebase/firestore');
 import { TEST_FUNCTIONS_VALID, FIREBASE_CONFIG, getAllFunc, TEST_VISUAL_PROPERTY, TEST_DOMAIN_VALID} from './test_data_constants';
 const FUNCTION_COLLECTION = "function";
 const PARAMETER_COLLECTION = "parameters";
@@ -7,29 +8,21 @@ const DOMAIN_COLLECTION = "animation";
 const VISUAL_PROPERTY_COLLECTION = "visualProperty";
 const DATATYPE_COLLECTION = "dataType";
 
+const serviceAccount = process.env.FIREBASE_SERVICE_ACCOUNT_KEY;
+
 describe('Read from database', () => {
     let db;
-    // Initialize Firestore Emulator, load test data
-    beforeAll(async () => {
-        try {
-            // Initialize Firebase with the emulator configuration
-            const app = initializeApp(FIREBASE_CONFIG);
-            
-            // Get a Firestore instance from Firebase
-            db = getFirestore(app);
-            connectFirestoreEmulator(db, 'localhost', 8080);
-            
-            // write test data into database
-            await storeFunc(TEST_FUNCTIONS_VALID, db);
-            await storeProperties(TEST_VISUAL_PROPERTY, db);
-            await storeDomain(TEST_DOMAIN_VALID, db);
 
-        } catch (error) {
-            console.error('Firestore Error:', error);
-        }
+    beforeAll(async () => {
+        // load test data
+        await loadTestData();
+        // initialise client emulator firestore
+        const app = initializeApp(FIREBASE_CONFIG);
+        db = getFirestore(app);
+        connectFirestoreEmulator(db, 'localhost', 8080);
     });
 
-    it('can read from database', async () => {
+    it('allow anyone to read from database', async () => {
         // checks that functions stored in database can be read
         for (const validFunction of getAllFunc(TEST_FUNCTIONS_VALID, true)) {
             const q = query(collection(db, FUNCTION_COLLECTION), where('functionName', '==', validFunction.functionName));
@@ -46,6 +39,21 @@ describe('Read from database', () => {
         }
     });
 
+    it('allow nobody to write to database', async () => {
+        // attempt to write functions
+        try{
+            for (const func of getAllFunc(TEST_FUNCTIONS_VALID,true)) {
+                let docRef = doc(db, FUNCTION_COLLECTION, func.functionName); 
+                await setDoc(docRef, func);
+            }
+            // write allowed -> fail
+            expect(false).toBe(true);
+        } catch(error) {
+            // write denied -> pass
+            expect(true).toBe(true);
+        }
+    });
+
 });
 
 /**
@@ -55,15 +63,24 @@ describe('Read from database', () => {
  */
 async function storeFunc(functions, db) {
     for (const func of getAllFunc(functions,false)) {
-        let docRef = doc(db, FUNCTION_COLLECTION, func.desc.functionName); 
-        await setDoc(docRef, func.desc);
-        // write function parameters
-        let parameters = func.parameters;
-        if (parameters.length > 0) {
-            const subcollectionRef = collection(docRef, PARAMETER_COLLECTION);
-            for (let i=0; i < parameters.length; i++) {
-                await setDoc(doc(subcollectionRef, parameters[i].parameterName), parameters[i]);
-            }
+        // store functions
+        const docRef = db.collection(FUNCTION_COLLECTION).doc(func.desc.functionName);
+        await docRef
+        .set(func.desc)
+        .catch((error) => {
+            console.error('Error adding document: ', error);
+        });
+        
+        // store parameters
+        for (const param of func.parameters) {
+            await db.collection(FUNCTION_COLLECTION)
+            .doc(func.desc.functionName)
+            .collection(PARAMETER_COLLECTION)
+            .doc(param.parameterName)
+            .set(param)
+            .catch((error) => {
+                console.error('Error adding document to subcollection: ', error);
+            });
         }
     }
 }
@@ -75,15 +92,24 @@ async function storeFunc(functions, db) {
  */
 async function storeProperties(properties, db) {
     for (const visualProperty of properties) {
-        let docRef = doc(db, VISUAL_PROPERTY_COLLECTION, visualProperty.desc.name); 
-        await setDoc(docRef, visualProperty.desc);
-        // write dataTypes
-        let dataTypes = visualProperty.dataTypes;
-        if (dataTypes.length > 0) {
-            const subcollectionRef = collection(docRef, DATATYPE_COLLECTION);
-            for (let i=0; i < dataTypes.length; i++) {
-                await setDoc(doc(subcollectionRef, dataTypes[i].dataType), dataTypes[i]);
-            }
+        // store visual properties
+        const docRef = db.collection(VISUAL_PROPERTY_COLLECTION).doc(visualProperty.desc.name);
+        await docRef
+        .set(visualProperty.desc)
+        .catch((error) => {
+            console.error('Error adding document: ', error);
+        });
+        
+        // store data types
+        for (const type of visualProperty.dataTypes) {
+            await db.collection(VISUAL_PROPERTY_COLLECTION)
+            .doc(docRef.id)
+            .collection(DATATYPE_COLLECTION)
+            .doc(type.dataType)
+            .set(type)
+            .catch((error) => {
+                console.error('Error adding document to subcollection: ', error);
+            });
         }
     }
 }
@@ -95,7 +121,40 @@ async function storeProperties(properties, db) {
  */
 async function storeDomain(domains, db) {
     for (const domain of domains) {
-        let docRef = doc(db, DOMAIN_COLLECTION, domain.name); 
-        await setDoc(docRef, domain);
+        // store visual properties
+        const docRef = db.collection(DOMAIN_COLLECTION).doc(domain.name);
+        await docRef
+        .set(domain)
+        .catch((error) => {
+            console.error('Error adding document: ', error);
+        });
+    }
+}
+
+
+/**
+ * This function load test data into the emulator firestore using admin SDK
+ */
+async function loadTestData() {
+    try {
+        process.env.FIRESTORE_EMULATOR_HOST = 'localhost:8080'; 
+        // Initialize Firebase with the emulator configuration
+        const app = admin.initializeApp({
+            credential: admin.credential.cert(serviceAccount),
+        });
+        
+        // Get a Firestore instance from Firebase
+        const db = admin.firestore(app);
+        
+        // write test data into database
+        await storeFunc(TEST_FUNCTIONS_VALID, db);
+        await storeProperties(TEST_VISUAL_PROPERTY, db);
+        await storeDomain(TEST_DOMAIN_VALID, db);
+        
+        // close the admin app and firestore
+        delete process.env.FIRESTORE_EMULATOR_HOST;
+        admin.app().delete();
+    } catch (error) {
+        console.error('Admin firestore Error:', error);
     }
 }
