@@ -1,5 +1,6 @@
 # https://github.com/firebase/emulators-codelab/blob/master/.github/workflows/firebase-ci.yaml
 
+name: Frontend and Backend Testing
 on: [push, pull_request]
 jobs:
   emulator_test:
@@ -23,6 +24,7 @@ jobs:
         run: firebase emulators:exec --project planimation-staging-181bc 'node ./functions/frontend-test/playwright-test.js'
       - name: Run backend tests
         env:
+          STATUS: 'testing'
           FIREBASE_SERVICE_ACCOUNT_KEY: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY }}
         run: firebase emulators:exec --project planimation-staging-181bc 'node ./functions/backend-test/test-runner.cjs'
       
