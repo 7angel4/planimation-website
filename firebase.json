@@ -21,17 +21,6 @@
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
-    ],
-    "cleanUrls": true,
-    "rewrites": [
-      {
-        "source": "/documentation/**",
-        "destination": "/documentation.html"
-      },
-      {
-        "source": "/gallery/**",
-        "destination": "/gallery.html"
-      }
     ]
   },
   "emulators": {
