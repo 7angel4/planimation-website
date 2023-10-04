@@ -8,7 +8,7 @@ const { getFirestore, connectFirestoreEmulator,collection, doc, getDocs, query, 
 import { TEST_FUNCTIONS_VALID, FIREBASE_CONFIG, getAllFunc, TEST_VISUAL_PROPERTY, 
     TEST_DOMAIN_VALID} from './test_data_constants';
 const FUNCTION_COLLECTION = "function";
-const PARAMETER_COLLECTION = "parameters";
+const PARAMETER_COLLECTION = "parameter";
 const DOMAIN_COLLECTION = "animation";
 const VISUAL_PROPERTY_COLLECTION = "visualProperty";
 const DATATYPE_COLLECTION = "dataType";

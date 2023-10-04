@@ -138,7 +138,7 @@ function loadFunctionDoc(doc) {
  * @param docId: ID of the document to be fetched
  */
 function loadParams(docId) {
-    fetchDocFromSubCollection(FUNCTION_COLLECTION, "parameters", docId, addParams);
+    fetchDocFromSubCollection(FUNCTION_COLLECTION, "parameter", docId, addParams);
 }
 
 /**
