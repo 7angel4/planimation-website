@@ -1,6 +1,3 @@
-const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_KEY); // comment to run tests locally
-//const serviceAccount = require('../../adminsdk.json');   // uncomment to run tests locally
-
 const { initializeApp } = require('firebase/app');
 const admin = require('firebase-admin');
 const { getFirestore, connectFirestoreEmulator,collection, doc, getDocs, query, where, 
@@ -12,6 +9,9 @@ const PARAMETER_COLLECTION = "parameter";
 const DOMAIN_COLLECTION = "animation";
 const VISUAL_PROPERTY_COLLECTION = "visualProperty";
 const DATATYPE_COLLECTION = "dataType";
+const CI_ADMIN_CREDENTIAL = process.env.FIREBASE_SERVICE_ACCOUNT_KEY;
+const LOCAL_ADMIN_CREDENTIAL = '../../adminsdk.json';
+
 
 describe('Read from database', () => {
     let db;
@@ -140,6 +140,16 @@ async function storeDomain(domains, db) {
  */
 async function loadTestData() {
     try {
+        // retrieve service Account
+        let serviceAccount;
+        // running tests locally -> need to download a Firebase Admin SDK credential
+        if ( CI_ADMIN_CREDENTIAL === undefined) {
+            serviceAccount = require(LOCAL_ADMIN_CREDENTIAL); 
+        } else {
+            // running tests through CI
+            serviceAccount = JSON.parse(CI_ADMIN_CREDENTIAL);
+        }
+
         // Initialize admin Firebase with the emulator configuration
         process.env.FIRESTORE_EMULATOR_HOST = 'localhost:8080'; 
         const app = admin.initializeApp({
