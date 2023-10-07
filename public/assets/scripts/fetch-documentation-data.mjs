@@ -20,6 +20,8 @@ import {
 const PAGE_CONTENT_CLASS = ".page-content";
 const DOC_TABLE_CONTENT = ".doc-table-content";
 const FUNCTION_COLLECTION = "function";
+const PARAM_COLLECTION = "parameter";
+const DATA_TYPE_COLLECTION = "dataType";
 const CUSTOM_PROPERTY_COLLECTION = "customisedProperty";
 const VISUAL_PROPERTY_COLLECTION = "visualProperty";
 const DISTRIBUTE_FUNCTIONS_TABLE = "#distribute-functions " + DOC_TABLE_CONTENT;
@@ -111,7 +113,7 @@ function loadFunctionDoc(doc) {
         <!-- Parameters -->
         <div class="params">
             <h3>Parameters</h3>
-            <ul id="parameters"></ul>
+            <ul id="parameter"></ul>
         </div>
         <!-- Example usage -->
         <div class="example">
@@ -134,11 +136,11 @@ function loadFunctionDoc(doc) {
 }
 
 /**
- * Loads information from the parameters document.
+ * Loads information from the parameter document.
  * @param docId: ID of the document to be fetched
  */
 function loadParams(docId) {
-    fetchDocFromSubCollection(FUNCTION_COLLECTION, "parameter", docId, addParams);
+    fetchDocFromSubCollection(FUNCTION_COLLECTION, PARAM_COLLECTION, docId, addParams);
 }
 
 /**
@@ -148,7 +150,7 @@ function loadParams(docId) {
  * @returns {Promise<unknown>}
  */
 function loadDataTypes(docId, list) {
-    fetchDocFromSubCollection(VISUAL_PROPERTY_COLLECTION, 'dataType', docId,
+    fetchDocFromSubCollection(VISUAL_PROPERTY_COLLECTION, DATA_TYPE_COLLECTION, docId,
         (querySnapshot) => { addDataTypesToList(querySnapshot, list); }
     );
 }

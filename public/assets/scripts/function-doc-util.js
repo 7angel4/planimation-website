@@ -8,7 +8,7 @@ import {
 
 const FUNC_NAME_ELEM = "function-name";
 const FUNC_DESC_ELEM = "description";
-const FUNC_PARAMS_ELEM = "parameters";
+const FUNC_PARAMS_ELEM = "parameter";
 const FUNC_EG_ELEM = "example";
 const VIDEO_DEMO_ELEM = ".video-demo-container";
 const CODE_DEMO_ELEM = "code-demo";
@@ -46,9 +46,9 @@ function addDescription(desc) {
  * @param querySnapshot: an array of Parameter objects, returned from the DB query
  */
 export function addParams(querySnapshot) {
-    const parameters = document.getElementById(FUNC_PARAMS_ELEM);
+    const parameterElem = document.getElementById(FUNC_PARAMS_ELEM);
     if (querySnapshot == null) {
-        parameters.textContent = NOT_AVAILABLE;
+        parameterElem.textContent = NOT_AVAILABLE;
         return;
     }
 
@@ -65,7 +65,7 @@ export function addParams(querySnapshot) {
         li.appendChild(paramDefaultVal);
         li.appendChild(paramDesc);
 
-        parameters.appendChild(li);
+        parameterElem.appendChild(li);
     });
 }
 
@@ -153,7 +153,7 @@ function addNotFunctioningWarning() {
     let paramsDiv = document.querySelector(FUNC_PARAMS_DIV);
     parentDiv.insertBefore(createNotFunctioningWarning(), paramsDiv);
 
-    // set parameters and demo as N/A
+    // set parameter and demo as N/A
     let demoDiv = document.querySelector(FUNC_DEMO_DIV);
     demoDiv.appendChild(wrapTextInParagraph(NOT_AVAILABLE));
     document.getElementById(CODE_DEMO_ELEM).hidden = true;
