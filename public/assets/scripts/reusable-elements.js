@@ -84,12 +84,8 @@ class CodeBlock extends HTMLElement {
                   display: block;
                   padding: 20px;
                   border-radius: 0.5rem;
-                  /*word-wrap: break-word;*/
                   white-space: pre-wrap;
-                  white-space: -moz-pre-wrap;
-                  white-space: -o-pre-wrap;
                   overflow-wrap: break-word;
-                  /*word-break: break-all;*/
                   inline-size: 100%;
                 }
             </style>

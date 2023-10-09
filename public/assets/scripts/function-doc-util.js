@@ -98,7 +98,7 @@ function addCodeDemo(code) {
     const codeBlock = document.getElementById(CODE_DEMO_ELEM);
     codeBlock.setTextContent(formatString(code));
     codeBlock.style['display'] = 'inline-block';
-    codeBlock.style['max-width'] = '50%';
+    codeBlock.style['max-width'] = '47%';
     return codeBlock;
 }
 

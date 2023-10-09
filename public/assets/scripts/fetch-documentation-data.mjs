@@ -31,7 +31,7 @@ const VISUAL_PROPERTIES_TABLE = "#" + VISUAL_PROPERTY_ID + " " + DOC_TABLE_CONTE
 const DISTRIBUTE_FUNCTION_CATEGORY = "distribute";
 const CHILD_DIR = "/documentation/";
 const PAGE_CONTENT_DIV = document.querySelector(PAGE_CONTENT_CLASS);
-const EMPTY_TD_COLOR = '#ecf2f6';  /* gray out color for empty table cells */
+const EMPTY_TD_COLOR = '#ECF2F6';  /* gray out color for empty table cells */
 const FORMAT_DEFAULT_VAL = "Default value: ";
 const FUNCTION_TABLE_KEYWORD = "function-table-keyword";
 
@@ -164,7 +164,7 @@ function createVisualPropertyRow(doc) {
     const contentParent = document.querySelector(VISUAL_PROPERTIES_TABLE);
 
     // row header
-    const tr = document.createElement('tr', FUNCTION_TABLE_KEYWORD);
+    const tr = document.createElement('tr');
     const nameTd = createTdWithCode(docData.name);
 
     // row body
