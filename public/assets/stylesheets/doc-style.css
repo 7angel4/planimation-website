@@ -6,8 +6,8 @@ table.doc-table-summary {
 
 table.doc-table-summary td,
 table.doc-table-summary th {
-    border-top: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
+    border-top: 1px solid #DDD;
+    border-bottom: 1px solid #DDD;
     padding-right: 0.5rem;
 }
 
@@ -41,8 +41,10 @@ td > ul > li {
     margin: 0 auto;
 }
 
-img.not-functioning-msg-container {
-    width: 110%;
+img.not-functioning-warning-container {
+    width: 150%;
+    right: 20%;
+    position: relative;
 }
 
 .non-functioning-warning > p {
@@ -51,7 +53,7 @@ img.not-functioning-msg-container {
     margin: 0;
     left: 10%;
     top: 15%;
-    width: 100%;
+    width: 110%;
     font-size: 1.5rem;
     font-weight: 700;
     z-index: 1;

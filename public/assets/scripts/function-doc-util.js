@@ -20,6 +20,8 @@ const PAGE_CONTENT_CLASS = ".page-content";
 const NOT_AVAILABLE = "Currently unavailable.";
 const NF_WARNING_CLASS = 'non-functioning-warning';
 const NF_WARNING_CONTAINER_CLASS = 'not-functioning-warning-container';
+const NF_WARNING_CONTAINER_IMG = "/assets/resources/not-functioning-warning-container.png";
+const NF_WARNING_MSG = "&#9888; This function is currently not functioning.";
 
 /**
  * Adds a title to the page, which is the provided function name.
@@ -171,14 +173,14 @@ function createNotFunctioningWarning() {
 
     // background image
     warningDiv.appendChild(createImage(
-        "/assets/resources/not-functioning-warning-container.png",
+        NF_WARNING_CONTAINER_IMG,
         NF_WARNING_CONTAINER_CLASS,
-        NF_WARNING_CONTAINER_CLASS)
-    );
+        NF_WARNING_CONTAINER_CLASS
+    ));
 
     // warning message
     let msg = document.createElement('p');
-    msg.innerHTML = "&#9888; This function is currently not functioning.";
+    msg.innerHTML = NF_WARNING_MSG;
 
     warningDiv.appendChild(msg);
     return warningDiv;
