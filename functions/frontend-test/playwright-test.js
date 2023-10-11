@@ -1,5 +1,3 @@
-"use strict";
-
 const { chromium } = require('playwright');
 const assert = require('assert');
 const {expect} = require('@playwright/test');
