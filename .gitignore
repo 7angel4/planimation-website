@@ -1,7 +1,7 @@
-.DS_Store
 *-debug.log
 node_modules
 package-lock.json
 *.cache
 functions/adminsdk.json
 .idea
+.DS_Store
