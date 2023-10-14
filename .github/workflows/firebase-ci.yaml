@@ -11,15 +11,15 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: "latest"
+      - name: Install dependencies
+        run: npm install
+        working-directory: functions
       - name: Install Firebase Emulator Suite
         run: npm install -g firebase-tools
       - name: Install Jest
         run: npm install --save-dev jest
       - name: Install playwright
         run: npx playwright install
-      - name: Install dependencies
-        run: npm install
-        working-directory: functions
       - name: Run frontend tests
         run: firebase emulators:exec --project planimation-staging-181bc 'node ./functions/frontend-test/playwright-test.js'
       - name: Run backend tests
