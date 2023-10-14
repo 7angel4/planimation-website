@@ -1,20 +1,23 @@
-import { TEST_DOMAIN_VALID, TEST_NON_EXIST_NAME } from "./test_data_constants";
-import { readDomain, newGalleryPage, enterSearchBox, clearSearchBox} from "./backend-test-util";
+import { readDomain, newGalleryPage, enterSearchBox, clearSearchBox, readDomainsFromDB, TEST_NON_EXIST_NAME, getFirestoreEmulator} from "./backend-test-util";
 const { chromium } = require('playwright');
 
 
 describe('Gallery page', ()=> {
     let browser;
+    let db;
+    let databaseDomains;
 
     // set up the browser and webpage
     beforeAll(async() => {
+        db = await getFirestoreEmulator();
+        databaseDomains = await readDomainsFromDB(db);
         browser = await chromium.launch({ headless: true }); //headless:false to see the window
     });
 
     it('(2b.1) displays valid domains', async() => {
         const page1 = await newGalleryPage(browser);
         const displayedDomains = await readDomain(page1);
-        for (const domain of TEST_DOMAIN_VALID) {
+        for (const domain of databaseDomains) {
             // check whether the frontend-test data is displayed in the correct category
             expect(displayedDomains.includes(domain.name)).toBe(true);
         }
@@ -24,10 +27,10 @@ describe('Gallery page', ()=> {
     it('(2b.3) handles search of valid domains', async() => {
         const page3 = await newGalleryPage(browser);
         // get testing values
-        let testDomains = [TEST_DOMAIN_VALID[0], undefined, TEST_DOMAIN_VALID[0], TEST_DOMAIN_VALID[0]];
+        let testDomains = [databaseDomains[0], undefined, databaseDomains[0], databaseDomains[0]];
         // discard the first and last letter, to test whether partial name can be searched
         let testPartialName;
-        for (const domain of TEST_DOMAIN_VALID) {
+        for (const domain of databaseDomains) {
             testPartialName = domain.name;
             if (testPartialName.length >= 3) {
                 testPartialName = testPartialName.slice(-(testPartialName.length-1));
