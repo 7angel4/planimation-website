@@ -1,21 +1,24 @@
-import { TEST_FUNCTIONS_VALID, getAllFunc, TEST_NON_EXIST_NAME } from "./test_data_constants";
-import { readVideoLink, readFunctionName, readParameterName, readFuncDescription, waitSectionAppear, DOCUMENTATION_URL, NOT_FOUND_URL} from "./backend-test-util";
+import { readVideoLink, readFunctionName, readParameterName, readFuncDescription, waitSectionAppear, DOCUMENTATION_URL, NOT_FOUND_URL, readFunctionsFromDB, getFirestoreEmulator, getAllFunc, TEST_NON_EXIST_NAME } from "./backend-test-util";
 const { chromium } = require('playwright');
 const NOT_FUNCTIONING = '.non-functioning-warning';
 
 
 describe('Function page', ()=> {
     let browser;
+    let db;
+    let databaseFunctions;
 
     // set up the browser and webpage
     beforeAll(async() => {
+        db = await getFirestoreEmulator();
+        databaseFunctions = await readFunctionsFromDB(db);
         browser = await chromium.launch({ headless: true }); //headless:false to see the window
     });
 
     it('(5b.1) correctly displays individual function page', async() => {
         const page1 = await browser.newPage();
 
-        for (const validFunction of getAllFunc(TEST_FUNCTIONS_VALID, false)) {
+        for (const validFunction of getAllFunc(databaseFunctions, false)) {
             await page1.goto(`${DOCUMENTATION_URL}/${validFunction.desc.functionName}`);
             
             // verify some contents
@@ -34,8 +37,8 @@ describe('Function page', ()=> {
                 expect(await readVideoLink(page1)).toBe(validFunction.desc.youtubeEmbeddingLink);
                 // parameters
                 const parameters = await readParameterName(page1);
-                expect(parameters.length).toBe(validFunction.parameters.length);
-                for (const param of validFunction.parameters) {
+                expect(parameters.length).toBe(validFunction.parameter.length);
+                for (const param of validFunction.parameter) {
                     expect(parameters.includes(param.parameterName)).toBe(true);
                 }
             }

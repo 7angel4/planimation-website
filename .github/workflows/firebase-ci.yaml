@@ -11,20 +11,20 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: "latest"
-      - name: Install Firebase Emulator Suite
-        run: npm install -g firebase-tools
-      - name: Install Jest
-        run: npm install --save-dev jest
-      - name: Install playwright
-        run: npx playwright install
       - name: Install dependencies
         run: npm install
+        working-directory: functions
+      - name: Install Firebase Emulator Suite
+        run: npm install -g firebase-tools
+        working-directory: functions
+      - name: Install Jest
+        run: npm install --save-dev jest
+        working-directory: functions
+      - name: Install playwright
+        run: npx playwright install
         working-directory: functions
       - name: Run frontend tests
         run: firebase emulators:exec --project planimation-staging-181bc 'node ./functions/frontend-test/playwright-test.js'
       - name: Run backend tests
-        env:
-          STATUS: 'testing'
-          FIREBASE_SERVICE_ACCOUNT_KEY: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY }}
-        run: firebase emulators:exec --project planimation-staging-181bc 'node ./functions/backend-test/test-runner.cjs'
+        run: firebase emulators:exec --project planimation-staging-181bc --import=./functions/backend-test/__tests__/test_data 'node ./functions/backend-test/test-runner.cjs'
       

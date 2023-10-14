@@ -1,20 +1,25 @@
-import { TEST_FUNCTIONS_VALID, DISTRIBUTE_FUNCTION_CATEGORY, OTHER_FUNCTION_CATEGORY, getAllFunc, getCategoryFunc, TEST_VISUAL_PROPERTY, TEST_NON_EXIST_NAME} from "./test_data_constants";
+import { getFirestoreEmulator, readFunctionsFromDB, readVisualPropertyFromDB, DISTRIBUTE_FUNCTION_CATEGORY, OTHER_FUNCTION_CATEGORY, getAllFunc, getCategoryFunc, TEST_NON_EXIST_NAME } from "./backend-test-util";
 import { readFuncInCategory, readVisualProperty, newDocumentationPage, enterSearchBox, clearSearchBox } from "./backend-test-util";
 const { chromium } = require('playwright');
 
-
 describe('Documentation page', ()=> {
     let browser;
+    let db;
+    let databaseFunctions;
+    let databaseVisualProperties;
 
-    // set up the browser and webpage
+    // set up the firestore, test data, browser and webpage
     beforeAll(async() => {
+        db = await getFirestoreEmulator();
+        databaseFunctions = await readFunctionsFromDB(db);
+        databaseVisualProperties = await readVisualPropertyFromDB(db);
         browser = await chromium.launch({ headless: true }); //headless:false to see the window
     });
 
 
     it('(3b.1) displays valid functions correctly', async() => {
         const page1 = await newDocumentationPage(browser);
-        for (const validFunctions of getAllFunc(TEST_FUNCTIONS_VALID, true)) {
+        for (const validFunctions of getAllFunc(databaseFunctions, true)) {
             // check function category
             const category = validFunctions.category;
             const displayedFunctions = await readFuncInCategory(page1, category);
@@ -29,8 +34,8 @@ describe('Documentation page', ()=> {
     it('(3b.3) handles search of valid functions', async() => {
         const page3 = await newDocumentationPage(browser);
         // get testing values
-        const distributeValidFunctions = getCategoryFunc(TEST_FUNCTIONS_VALID, DISTRIBUTE_FUNCTION_CATEGORY, true);
-        const otherValidFunctions = getCategoryFunc(TEST_FUNCTIONS_VALID, OTHER_FUNCTION_CATEGORY, true);
+        const distributeValidFunctions = getCategoryFunc(databaseFunctions, DISTRIBUTE_FUNCTION_CATEGORY, true);
+        const otherValidFunctions = getCategoryFunc(databaseFunctions, OTHER_FUNCTION_CATEGORY, true);
         let testFunctions = [distributeValidFunctions[0], undefined, distributeValidFunctions[0]];
         // discard the first and last letter, to test whether partial name can be searched
         let testPartialName;
@@ -81,7 +86,7 @@ describe('Documentation page', ()=> {
 
     it('(3b.5) view visual properties', async() => {
         const page5 = await newDocumentationPage(browser);
-        for (const visualProperty of TEST_VISUAL_PROPERTY) {
+        for (const visualProperty of databaseVisualProperties) {
             // check function category
             const displayedProperties = await readVisualProperty(page5);
             // check whether the frontend-test data is displayed in the correct category

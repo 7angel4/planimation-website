@@ -1,9 +1,32 @@
-import {DISTRIBUTE_FUNCTION_CATEGORY} from "./test_data_constants";
+const { initializeApp } = require('firebase/app');
+const { getFirestore, connectFirestoreEmulator, collection, getDocs, query } = require('firebase/firestore');
+
+// constants for retrieving data from database
+export const DISTRIBUTE_FUNCTION_CATEGORY = "distribute";
+export const OTHER_FUNCTION_CATEGORY = "other";
+// a substring which none of the functions and domains should contain
+export const TEST_NON_EXIST_NAME = 'asdfghjkl';
+const FIREBASE_CONFIG = {
+    apiKey: "AIzaSyDf--XeJ2-pkwKkjGO1RLxzjwzJZUy_e0s",
+    authDomain: "planimation-staging-181bc.firebaseapp.com",
+    projectId: "planimation-staging-181bc",
+    storageBucket: "planimation-staging-181bc.appspot.com",
+    messagingSenderId: "914707935474",
+    appId: "1:914707935474:web:ba4d0f22fa93687482206b",
+    measurementId: "G-XYNE4FJ1CF",
+    databaseURL: "http://localhost:8080"
+};
+const FUNCTION_COLLECTION = "function";
+const PARAMETER_COLLECTION = "parameter";
+const DOMAIN_COLLECTION = "animation";
+const VISUAL_PROPERTY_COLLECTION = "visualProperty";
+const DATATYPE_COLLECTION = "dataType";
+
+// constants for retrieving data from webpage
 const INDEX_URL = 'http://localhost:5004/';
 export const DOCUMENTATION_URL = INDEX_URL + 'documentation'
 export const GALLERY_URL = INDEX_URL + 'gallery'
 export const NOT_FOUND_URL = INDEX_URL + '404'
-
 const SEARCH_INPUT = '#search-input';
 const DOC_TABLE_CONTENT = ".doc-table-content";
 
@@ -12,7 +35,7 @@ const OTHER_FUNCTIONS_TABLE = "#other-functions " + DOC_TABLE_CONTENT;
 const FUNCTION_TABLE_KEYWORD = "function-table-keyword";
 const FUNC_NAME = '#function-name';
 const FUNC_YOUTUBE_EMBED = '.youtube-demo';
-const FUNC_PARAMETER_NAME = '#parameters code'
+const FUNC_PARAMETER_NAME = '#parameter code'
 const FUNC_DESCRIPTION = '#description'
 
 const VISUAL_PROPERTY_ID = "visual-properties";
@@ -24,7 +47,7 @@ const DOMAIN_NAME = '#domain-name'
 const DOMAIN_PDDL = '#pddl-editor'
 const DOMAIN_DESCRIPTION = '#domain-desc'
 
-
+// functions to retrieve contents from webpage
 const getTextContent = (element) => element.textContent.trim();
 const getArrayTextContent = (elements) => elements.map((element) => element.textContent.trim());
 
@@ -181,7 +204,7 @@ export async function readDomainPDDL(page) {
  * @param selector: selector that reference the section on the webpage
  * @param action: action to be performed on the retrieved content
  * @param isArray: whether an array is to be retrieved
- * @returns 
+ * @returns contents to be retrieved
  */
 async function getContent(page, selector, action, isArray=false) {
     try {
@@ -203,4 +226,120 @@ async function getContent(page, selector, action, isArray=false) {
  */
 export async function waitSectionAppear(page, selector) {
     await page.waitForSelector(selector, {timeout:1000});
+}
+
+/**
+ * Read a collection that contains may contain a subcollection from database
+ * @param db: the database to interact with
+ * @param mainCollection: the name of the mainCollection
+ * @param subCollection: the name of the subCollection
+ * @returns a list of data to be retrieved
+ */
+async function readFromDB(db, mainCollection, subCollection) {
+    let mainDatas = []
+    // Query the "function" collection to retrieve all functions
+    const mainCollectionRef = collection(db, mainCollection);
+    const mainQuery = query(mainCollectionRef);
+  
+    const mainSnapshot = await getDocs(mainQuery);
+  
+    // Iterate through documents in main collection
+    for (const mainDoc of mainSnapshot.docs) {
+        const mainData = mainDoc.data();
+        if (subCollection == undefined) {
+            mainDatas.push(mainData);
+            continue;
+        }
+
+        let subDatas = [];
+        // Query the subcollection for the current document
+        const subCollectionRef = collection(mainDoc.ref, subCollection);
+        const subQuery = query(subCollectionRef);
+    
+        const subSnapshot = await getDocs(subQuery);
+    
+        // Iterate through parameter documents
+        subSnapshot.forEach((subDoc) => {
+            const subData = subDoc.data();
+            subDatas.push(subData);
+        });
+
+        mainDatas.push(
+            {
+                desc:mainData,
+                [subCollection]:subDatas
+            })
+    }
+    return mainDatas;
+}
+
+/**
+ * Read functions and parameters from database
+ * @param db: the database to interact with
+ * @returns a list of functions, and related parameters if any
+ */
+export async function readFunctionsFromDB(db) {
+    return await readFromDB(db, FUNCTION_COLLECTION, PARAMETER_COLLECTION);
+}
+
+/**
+ * Get functions stored in an array of a specified category
+ * @param functions: array of functions to retrieve functions from
+ * @param category: category of functions to be retrieved
+ * @param descOnly: if true, return description of the function only, discard parameter definitions
+ * @returns list of functions retrieved
+ */
+export function getCategoryFunc(functions, category, descOnly = false) {
+    const categoryFuncs = functions
+                .filter(func => func.desc.category === category);
+    if (descOnly) {
+        return categoryFuncs.map(func => func.desc);
+    }
+    return categoryFuncs;
+}
+
+/**
+ * Get all functions stored in an array
+ * @param functions: array of functions to retrieve functions from
+ * @param descOnly: if true, return description of the function only, discard parameter definitions
+ * @returns list of functions retrieved
+ */
+export function getAllFunc(functions, descOnly = false) {
+    if (descOnly) {
+        return functions.map(func => func.desc);
+    }
+    return functions;
+}
+
+
+/**
+ * Read visual properties and data types from database
+ * @param db: the database to interact with
+ * @returns a list of visual properties, and related data types if any
+ */
+export async function readVisualPropertyFromDB(db) {
+    return await readFromDB(db, VISUAL_PROPERTY_COLLECTION, DATATYPE_COLLECTION);
+}
+
+/**
+ * Read domains from database
+ * @param db: the database to interact with
+ * @returns a list of domains
+ */
+export async function readDomainsFromDB(db) {
+    return await readFromDB(db, DOMAIN_COLLECTION, undefined);
+}
+
+/**
+ * Get a firestore emulator object
+ * @returns firestore emulator object
+ */
+export async function getFirestoreEmulator() {
+    // load test data
+    //await loadTestData();
+    // initialise client emulator firestore
+    const app = initializeApp(FIREBASE_CONFIG);
+    const db = getFirestore(app);
+    connectFirestoreEmulator(db, 'localhost', 8080);
+    return db;
 }

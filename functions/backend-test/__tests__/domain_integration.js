@@ -1,19 +1,22 @@
-import { TEST_DOMAIN_VALID, TEST_NON_EXIST_NAME } from "./test_data_constants";
-import { GALLERY_URL, NOT_FOUND_URL, readDomainName, readDomainPDDL, readDomainDesc} from "./backend-test-util";
+import { GALLERY_URL, NOT_FOUND_URL, readDomainName, readDomainPDDL, readDomainDesc, getFirestoreEmulator, readDomainsFromDB, TEST_NON_EXIST_NAME} from "./backend-test-util";
 const { chromium } = require('playwright');
 
 describe('Domain page', ()=> {
     let browser;
+    let db;
+    let databaseDomains;
 
     // set up the browser and webpage
     beforeAll(async() => {
+        db = await getFirestoreEmulator();
+        databaseDomains = await readDomainsFromDB(db);
         browser = await chromium.launch({ headless: true }); //headless:false to see the window
     });
 
     it('(4b.1) correctly displays individual domain page', async() => {
         const page1 = await browser.newPage();
 
-        for (const validDomain of TEST_DOMAIN_VALID) {
+        for (const validDomain of databaseDomains) {
             await page1.goto(`${GALLERY_URL}/${validDomain.name}`);
             
             // verify some contents
