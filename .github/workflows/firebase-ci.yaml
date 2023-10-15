@@ -26,5 +26,5 @@ jobs:
       - name: Run frontend tests
         run: firebase emulators:exec --project planimation-staging-181bc 'node ./functions/frontend-test/playwright-test.js'
       - name: Run backend tests
-        run: firebase emulators:exec --project planimation-staging-181bc --import=./functions/backend-test/__tests__/test_data 'node ./functions/backend-test/test-runner.cjs' 2>&1 | grep -v "i  hosting:\ 127.0.0.1"
+        run: firebase emulators:exec --project planimation-staging-181bc --import=./functions/backend-test/__tests__/test_data 'node ./functions/backend-test/test-runner.cjs'
       
