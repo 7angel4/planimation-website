@@ -24,8 +24,8 @@ describe('Gallery page', ()=> {
         await page1.close()
     })
 
-    it('(2b.3) handles search of valid domains', async() => {
-        const page3 = await newGalleryPage(browser);
+    it('(2b.2) handles search of valid domains', async() => {
+        const page2 = await newGalleryPage(browser);
         // get testing values
         let testDomains = [databaseDomains[0], undefined, databaseDomains[0], databaseDomains[0]];
         // discard the first and last letter, to test whether partial name can be searched
@@ -52,26 +52,26 @@ describe('Gallery page', ()=> {
                 continue;
             }
             // type in test value
-            await enterSearchBox(page3, testValues[i]);
+            await enterSearchBox(page2, testValues[i]);
             // check the function is listed
-            let displayedDomains = await readDomain(page3);
+            let displayedDomains = await readDomain(page2);
             expect(displayedDomains.includes(testDomains[i].name)).toBe(true);
             // clear anything in the search bar
-            await clearSearchBox(page3);
+            await clearSearchBox(page2);
         }
-        await page3.close();
+        await page2.close();
     })
 
-    it('(2b.4) handles search non-existing domain', async() => {
-        const page4 = await newGalleryPage(browser);
+    it('(2b.3) handles search non-existing domain', async() => {
+        const page3 = await newGalleryPage(browser);
         // type in test value
-        await enterSearchBox(page4, TEST_NON_EXIST_NAME);
+        await enterSearchBox(page3, TEST_NON_EXIST_NAME);
         // ensure no domain is displayed
-        const displayedDomains = await readDomain(page4);
+        const displayedDomains = await readDomain(page3);
         expect(displayedDomains.length).toEqual(0);
         // clear anything in the search bar
         await clearSearchBox;
-        await page4.close();
+        await page3.close();
     })
 
     afterAll(async () => {

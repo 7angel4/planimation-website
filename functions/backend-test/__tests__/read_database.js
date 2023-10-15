@@ -1,5 +1,6 @@
 import { readFunctionsFromDB, getFirestoreEmulator, readVisualPropertyFromDB, readDomainsFromDB} from './backend-test-util';
-
+const {doc, setDoc} = require('firebase/firestore');
+const PERMISSION_DENIED = 'permission-denied';
 
 describe('Read from database', () => {
     let db;
@@ -27,7 +28,7 @@ describe('Read from database', () => {
             expect(false).toBe(true);
         } catch(error) {
             // write denied -> pass
-            expect(true).toBe(true);
+            expect(error.code).toBe(PERMISSION_DENIED);
         }
     });
 

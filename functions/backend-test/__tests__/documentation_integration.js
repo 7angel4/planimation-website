@@ -31,8 +31,8 @@ describe('Documentation page', ()=> {
     })
 
 
-    it('(3b.3) handles search of valid functions', async() => {
-        const page3 = await newDocumentationPage(browser);
+    it('(3b.2) handles search of valid functions', async() => {
+        const page2 = await newDocumentationPage(browser);
         // get testing values
         const distributeValidFunctions = getCategoryFunc(databaseFunctions, DISTRIBUTE_FUNCTION_CATEGORY, true);
         const otherValidFunctions = getCategoryFunc(databaseFunctions, OTHER_FUNCTION_CATEGORY, true);
@@ -60,28 +60,28 @@ describe('Documentation page', ()=> {
                 continue;
             }
             // type in test value
-            await enterSearchBox(page3, testValues[i]);
+            await enterSearchBox(page2, testValues[i]);
             // check the function is listed
-            let displayedFunctions = await readFuncInCategory(page3, testFunctions[i].category);
+            let displayedFunctions = await readFuncInCategory(page2, testFunctions[i].category);
             expect(displayedFunctions.includes(testFunctions[i].functionName)).toBe(true);
             // clear anything in the search bar
-            await clearSearchBox(page3);
+            await clearSearchBox(page2);
         }
-        await page3.close();
+        await page2.close();
     })
 
-    it('(3b.4) handles search non-existing functions', async() => {
-        const page4 = await newDocumentationPage(browser);
+    it('(3b.3) handles search non-existing functions', async() => {
+        const page3 = await newDocumentationPage(browser);
         // type in test value
-        await enterSearchBox(page4, TEST_NON_EXIST_NAME);
+        await enterSearchBox(page3, TEST_NON_EXIST_NAME);
         // ensure both categories have no functions displayed
         for (const category of [DISTRIBUTE_FUNCTION_CATEGORY, OTHER_FUNCTION_CATEGORY]) {
-            let displayedFunctions = await readFuncInCategory(page4, category);
+            let displayedFunctions = await readFuncInCategory(page3, category);
             expect(displayedFunctions.length).toEqual(0);
         }
         // clear anything in the search bar
         await clearSearchBox;
-        await page4.close();
+        await page3.close();
     })
 
     it('(3b.5) view visual properties', async() => {
