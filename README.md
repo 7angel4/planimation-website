@@ -38,6 +38,7 @@ Planiwiki serves as an extension to the [Planimation Documentation Page](https:/
 - [Deployment View](docs/deployment_view.pdf)
 
 ### Test Cases
+- [Test Report](docs/testing/test_report.pdf)
 - [Acceptance Criteria & Acceptance Testing Plan](docs/testing/acceptance_criteria_testing_plan.pdf)
 - [Frontend High Level Testing Plan](docs/testing/frontend_high_level_testing_plan.pdf)
   - [Frontend Elaborated Test Cases](docs/testing/frontend_elaborated_test_cases.pdf)
