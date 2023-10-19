@@ -4,7 +4,7 @@ const {expect} = require('@playwright/test');
 const { clickAndVerify, getRandomElem, clickAndVerifyLocation } = require("./playwright-test-util.js");
 
 const INDEX_URL = "http://127.0.0.1:5004/";
-const DOC_URL = INDEX_URL + "documentation";
+const DOC_URL = INDEX_URL + "animation-language";
 const GALLERY_URL = INDEX_URL + "gallery";
 const REF_URL = INDEX_URL + "references";
 const SUGGESTIONS_URL = INDEX_URL + "suggestions";

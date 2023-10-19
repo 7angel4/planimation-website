@@ -24,7 +24,7 @@ const DATATYPE_COLLECTION = "dataType";
 
 // constants for retrieving data from webpage
 const INDEX_URL = 'http://localhost:5004/';
-export const DOCUMENTATION_URL = INDEX_URL + 'documentation'
+export const DOCUMENTATION_URL = INDEX_URL + 'animation-language'
 export const GALLERY_URL = INDEX_URL + 'gallery'
 export const NOT_FOUND_URL = INDEX_URL + '404'
 const SEARCH_INPUT = '#search-input';
