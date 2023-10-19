@@ -11,7 +11,7 @@ class NavBar extends HTMLElement {
                     <official-logo></official-logo>
                     <nav><ul class="nav-list">
                         <li><a href="/index.html" class="to-home">Home</a></li>
-                        <li><a href="/documentation.html" class="to-documentation">Documentation</a></li>
+                        <li><a href="/animation-language.html" class="to-documentation">Animation Language</a></li>
                         <li><a href="/gallery.html" class="to-gallery">Gallery</a></li>
                         <li><a href="/references.html" class="to-references">References</a></li>
                         <li><a href="/suggestions.html" class="to-suggestions">Suggestions</a></li>

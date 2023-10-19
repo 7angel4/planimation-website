@@ -25,8 +25,8 @@
     "cleanUrls": true,
     "rewrites": [
       {
-        "source": "/documentation/**",
-        "destination": "/documentation.html"
+        "source": "/animation-language/**",
+        "destination": "/animation-language.html"
       },
       {
         "source": "/gallery/**",

@@ -29,7 +29,7 @@ const OTHER_FUNCTIONS_TABLE = "#other-functions " + DOC_TABLE_CONTENT;
 const VISUAL_PROPERTY_ID = "visual-properties";
 const VISUAL_PROPERTIES_TABLE = "#" + VISUAL_PROPERTY_ID + " " + DOC_TABLE_CONTENT;
 const DISTRIBUTE_FUNCTION_CATEGORY = "distribute";
-const CHILD_DIR = "/documentation/";
+const CHILD_DIR = "/animation-language/";
 const PAGE_CONTENT_DIV = document.querySelector(PAGE_CONTENT_CLASS);
 const EMPTY_TD_COLOR = '#ECF2F6';  /* gray out color for empty table cells */
 const FORMAT_DEFAULT_VAL = "Default value: ";
@@ -128,7 +128,7 @@ function loadFunctionDoc(doc) {
             <code-block id="code-demo"></code-block>
             <p id="video-explanation"></p>
         </div>
-        <button class="btn return" onclick="window.location.href='/documentation.html'" type='button'>Return</button>
+        <button class="btn return" onclick="window.location.href='/animation-language.html'" type='button'>Return</button>
         `;
     document.body.onLoad = addData(doc);
     hideHeaderAboveTitle(PAGE_CONTENT_DIV);
