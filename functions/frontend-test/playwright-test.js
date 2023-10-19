@@ -174,7 +174,7 @@ async function testIndex(page) {
  * @returns {Promise<void>}
  */
 async function testDoc(page) {
-    await clickAndVerify(page, NAV_DOC, "Documentation", DOC_URL);
+    await clickAndVerify(page, NAV_DOC, "Animation Language", DOC_URL);
     // click "View original GitHub documentation" button in head-banner
     await clickAndVerify(page, VIEW_GITHUB_DOC_BTN, "View original GitHub documentation", GITHUB_DOC_REPO_URL);
     // return to documentation page
