@@ -101,6 +101,20 @@ class CodeBlock extends HTMLElement {
     }
 }
 
+const MAIN_TAGLINE_STYLE = {
+    'font-size': '20px',
+    'font-style': 'normal',
+    'font-weight': '600',
+    'text-transform': 'uppercase'
+};
+
+const SUB_TAGLINE_STYLE = {
+    'font-size': '18px',
+    'font-style': 'italic',
+    'font-weight': '500',
+    'text-transform': 'none'
+};
+
 /**
  * Custom HTML Element representing a head banner, optionally featuring a tagline and button.
  */
@@ -154,15 +168,33 @@ class HeadBanner extends HTMLElement {
     /**
      * Adds a tagline to the head banner.
      * @param text: string to be displayed as the tagline.
+     * @param fontStyles: css style for the text to be displayed.
      */
-    addTagLine(text) {
+    addTagLine(text, fontStyles) {
         const header = this.children[0];
         const tagLine = document.createElement("h2");
         tagLine.textContent = text;
-        tagLine.style["font-size"] = "20px";
-        tagLine.style["font-weight"] = "600";
-        tagLine.style["text-transform"] = "uppercase";
+        tagLine.style['font-size'] = fontStyles['font-size'];
+        tagLine.style['font-style'] = fontStyles['font-style'];
+        tagLine.style['font-weight'] = fontStyles['font-weight'];
+        tagLine.style['text-transform'] = fontStyles['text-transform'];
         header.appendChild(tagLine);
+    }
+
+    /**
+     * Adds the main tagline to the head banner.
+     * @param text: string to be displayed as the tagline.
+     */
+    addMainTagLine(text) {
+        this.addTagLine(text, MAIN_TAGLINE_STYLE);
+    }
+
+    /**
+     * Adds the sub tagline to the head banner.
+     * @param text: string to be displayed as the tagline.
+     */
+    addSubTagLine(text) {
+        this.addTagLine(text, SUB_TAGLINE_STYLE);
     }
 }
 
