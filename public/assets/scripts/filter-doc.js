@@ -105,7 +105,6 @@ class SearchBar extends HTMLElement {
         this.innerHTML =
             `
             <div class="search-bar">
-                <img class='search-icon' alt='search-icon' src="${ASSETS_PATH}resources/icons/magnifying-glass.png" width="30px" height="30px">
                 <input type="text" id="search-input">
             </div>
             <style>
@@ -119,6 +118,7 @@ class SearchBar extends HTMLElement {
                 .search-bar {
                     display: flex;
                     justify-content: center;
+                    height: 30px;
                 }
                 .search-btn {
                     background: transparent;
