@@ -50,7 +50,7 @@ class MainFooter extends HTMLElement {
         this.innerHTML =
             `<footer class="page-footer">
                 <img src="${ASSETS_PATH}resources/logo.png" alt="Planimation logo" width="40px" height="40px"/>
-                <div class="copyright">Copyright &copy; Team AAAAS</div>
+                <div class="copyright">By Team AAAAS</div>
                 <style>
                     .page-footer {
                         display: flex;
