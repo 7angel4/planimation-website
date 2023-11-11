@@ -32,7 +32,7 @@ const REFERENCES = [
     {text: "An introduction to the planning domain definition language", url: "https://link.springer.com/book/10.1007/978-3-031-01584-7"},
     {text: "Planimation Visualiser", url: "https://planimation.planning.domains/problem"},
     {text: "Planimation Documentation on GitHub", url: "https://planimation.github.io/documentation/"},
-    {text: "Planning.Domains", url: "http://api.planning.domains/"},
+    {text: "Planning.Domains", url: "https://api.planning.domains/"},
     {text: "Planning.Wiki", url: "https://planning.wiki/"}
 ];
 
