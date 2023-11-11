@@ -28,10 +28,12 @@ const LOGO_IMG = ".logo-img";
 const COLLAPSIBLE_BTN = ".collapsible";
 
 const REFERENCES = [
+    {text: "PDDL Editor", url: "https://editor.planning.domains/"},
+    {text: "An introduction to the planning domain definition language", url: "https://link.springer.com/book/10.1007/978-3-031-01584-7"},
+    {text: "Planimation Visualiser", url: "https://planimation.planning.domains/problem"},
     {text: "Planimation Documentation on GitHub", url: "https://planimation.github.io/documentation/"},
-    {text: "Planning.Domains", url: "http://api.planning.domains/"},
-    {text: "Planning.Wiki", url: "https://planning.wiki/"},
-    {text: "Planimation Visualiser", url: "https://planimation.planning.domains/problem"}
+    {text: "Planning.Domains", url: "https://api.planning.domains/"},
+    {text: "Planning.Wiki", url: "https://planning.wiki/"}
 ];
 
 const FUNCTION_DOC_IDS = [
