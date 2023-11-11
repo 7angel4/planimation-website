@@ -1,4 +1,4 @@
-import { createButton } from './general-util.js'
+import { createButton } from './general-util.js';
 
 const DOMAIN_NAME_ID = "domain-name";
 const DOMAIN_DESC_ID = "domain-desc";
@@ -103,7 +103,7 @@ function insertContent(contentDiv, contentType, content, color="black") {
 function createCollapsibleButton() {
     let button = createButton('collapsible', "&darr; How to animate");
 
-    let contentDiv = document.createElement("div");
+    let contentDiv = document.createElement('div');
     contentDiv.className = "collapsible-content";
     contentDiv.style.display = "none";
 

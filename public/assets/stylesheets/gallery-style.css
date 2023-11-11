@@ -1,7 +1,7 @@
 .gallery {
     display: grid;
-    grid-template-columns: 50% 50%;
-    grid-template-rows: repeat(7, 20vw);
+    grid-template-columns: 25% 25% 25% 25%;
+    grid-template-rows: repeat(5, 10vw);
     grid-row-gap: 20px;
     margin: 30px auto 30px;
     width: 140vh;
@@ -39,8 +39,15 @@ div.gallery-item:hover {
 .caption {
     display: block;
     font-weight: 700;
-    font-size: 1.5rem;
+    font-size: 100%;
     color: black;
+    margin-bottom: 2%;
+
+    /* to center overflow text */
+    white-space: nowrap;
+    text-align: center;
+    margin-left: -100%;
+    margin-right: -100%;
 }
 
 div.domain-desc {
