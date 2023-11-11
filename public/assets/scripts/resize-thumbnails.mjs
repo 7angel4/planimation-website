@@ -5,12 +5,15 @@ const RESIZE_BTNS_CONTAINER = document.querySelector('.resize-btns-container');
 const GRID = document.querySelector('.gallery');
 const CAPTIONS = document.querySelectorAll('.caption');
 const CAPTION_SIZE_INC = 0.02;
+const RESIZE_BTN_CLASSNAME = 'resize-btn';
 
 function addResizeButtons() {
     let plusBtn = createButton('btn', '+');
+    plusBtn.classList.add(RESIZE_BTN_CLASSNAME);
     plusBtn.onclick = increaseSize;
     let minusBtn = createButton('btn', '-');
     minusBtn.onclick = decreaseSize;
+    minusBtn.classList.add(RESIZE_BTN_CLASSNAME);
 
     RESIZE_BTNS_CONTAINER.appendChild(plusBtn);
     RESIZE_BTNS_CONTAINER.appendChild(minusBtn);
@@ -50,6 +53,11 @@ const parseGridColumns = (nCols) => {
     return value;
 }
 
+/**
+ * 
+ * @param {*} nRows 
+ * @param {*} nCols 
+ */
 function updateGridProperties(nRows, nCols) {
     let colFraction = 100 / nCols;
     GRID.style['grid-template-columns'] = parseGridColumns(nCols);
